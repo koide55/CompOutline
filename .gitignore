@@ -1,0 +1,17 @@
+# --- 大容量の元ファイル（GitHub の 100MB 制限を超えるため追跡しない）---
+# 軽量化した slides/ 配下の成果物のみをコミットする方針。
+CompOutline2024.pptx
+network2026.pptx
+
+# PowerPoint / macOS の作業ファイル
+~$*.pptx
+~$*.ppt
+.DS_Store
+._*
+
+# 作業用の中間生成物
+build/
+work/
+*.pdf
+*-thumbs*.jpg
+slide-*.jpg
