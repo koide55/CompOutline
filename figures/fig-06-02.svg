@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 380" width="700" height="380" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="380" class="bg"/><text x="350" y="30" text-anchor="middle" dominant-baseline="middle" class="b">OS から見た論理ブロック番号</text><rect x="80" y="46" width="45" height="34" class="tint s"/><text x="102" y="63" text-anchor="middle" dominant-baseline="middle" class="t-xs">0</text><rect x="125" y="46" width="45" height="34" class="tint s"/><text x="147" y="63" text-anchor="middle" dominant-baseline="middle" class="t-xs">1</text><rect x="170" y="46" width="45" height="34" class="tint s"/><text x="192" y="63" text-anchor="middle" dominant-baseline="middle" class="t-xs">2</text><rect x="215" y="46" width="45" height="34" class="tint s"/><text x="237" y="63" text-anchor="middle" dominant-baseline="middle" class="t-xs">3</text><rect x="260" y="46" width="45" height="34" class="tint s"/><text x="282" y="63" text-anchor="middle" dominant-baseline="middle" class="t-xs">4</text><rect x="305" y="46" width="45" height="34" class="tint s"/><text x="327" y="63" text-anchor="middle" dominant-baseline="middle" class="t-xs">5</text><rect x="350" y="46" width="45" height="34" class="tint s"/><text x="372" y="63" text-anchor="middle" dominant-baseline="middle" class="t-xs">6</text><rect x="395" y="46" width="45" height="34" class="tint s"/><text x="417" y="63" text-anchor="middle" dominant-baseline="middle" class="t-xs">7</text><rect x="440" y="46" width="45" height="34" class="tint s"/><text x="462" y="63" text-anchor="middle" dominant-baseline="middle" class="t-xs">8</text><rect x="485" y="46" width="45" height="34" class="tint s"/><text x="507" y="63" text-anchor="middle" dominant-baseline="middle" class="t-xs">9</text><rect x="530" y="46" width="45" height="34" class="tint s"/><text x="552" y="63" text-anchor="middle" dominant-baseline="middle" class="t-xs">10</text><rect x="575" y="46" width="45" height="34" class="tint s"/><text x="597" y="63" text-anchor="middle" dominant-baseline="middle" class="t-xs">11</text><rect x="280" y="128" width="140" height="44" class="accT s"/><text x="350.0" y="150.0" text-anchor="middle" dominant-baseline="middle" class="t-s">対応表</text><text x="350" y="186" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">SSD のコントローラが持ち替え続ける</text><text x="350" y="224" text-anchor="middle" dominant-baseline="middle" class="b">物理的な NAND ブロック</text><rect x="80" y="240" width="45" height="34" class="tint2 s"/><text x="102" y="257" text-anchor="middle" dominant-baseline="middle" class="t-xs">3</text><rect x="125" y="240" width="45" height="34" class="tint2 s"/><text x="147" y="257" text-anchor="middle" dominant-baseline="middle" class="t-xs">7</text><rect x="170" y="240" width="45" height="34" class="bg s"/><rect x="215" y="240" width="45" height="34" class="tint2 s"/><text x="237" y="257" text-anchor="middle" dominant-baseline="middle" class="t-xs">0</text><rect x="260" y="240" width="45" height="34" class="bg s"/><rect x="305" y="240" width="45" height="34" class="tint2 s"/><text x="327" y="257" text-anchor="middle" dominant-baseline="middle" class="t-xs">9</text><rect x="350" y="240" width="45" height="34" class="tint2 s"/><text x="372" y="257" text-anchor="middle" dominant-baseline="middle" class="t-xs">1</text><rect x="395" y="240" width="45" height="34" class="none s dash"/><text x="417" y="257" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">無効</text><rect x="440" y="240" width="45" height="34" class="tint2 s"/><text x="462" y="257" text-anchor="middle" dominant-baseline="middle" class="t-xs">5</text><rect x="485" y="240" width="45" height="34" class="bg s"/><rect x="530" y="240" width="45" height="34" class="tint2 s"/><text x="552" y="257" text-anchor="middle" dominant-baseline="middle" class="t-xs">2</text><rect x="575" y="240" width="45" height="34" class="none s dash"/><text x="597" y="257" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">無効</text><path d="M147,80 C147,120 372,200 372,236" class="sm" marker-end="url(#am)"/><path d="M237,80 C237,120 552,200 552,236" class="sm" marker-end="url(#am)"/><path d="M417,80 C417,120 102,200 102,236" class="sm" marker-end="url(#am)"/><path d="M507,80 C507,120 327,200 327,236" class="sm" marker-end="url(#am)"/><path d="M327,80 C327,120 462,200 462,236" class="sm" marker-end="url(#am)"/><text x="350" y="300" text-anchor="middle" dominant-baseline="middle" class="t-s b">上書きせず、常に新しい場所へ書いて対応表を張り替える</text><text x="350" y="322" text-anchor="middle" dominant-baseline="middle" class="t-s lbl">古いページは無効印を付け、あとでブロックごとまとめて消去する</text><text x="350" y="352" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">摩耗を散らす（ウェアレベリング）／消去はブロック単位</text></svg>

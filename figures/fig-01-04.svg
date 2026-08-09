@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" width="560" height="360" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="560" height="360" class="bg"/><text x="163.0" y="56" text-anchor="middle" dominant-baseline="middle" class="t-s lbl">x₁</text><text x="229.0" y="56" text-anchor="middle" dominant-baseline="middle" class="t-s lbl">x₂</text><text x="295.0" y="56" text-anchor="middle" dominant-baseline="middle" class="t-s lbl">x₃</text><text x="361.0" y="56" text-anchor="middle" dominant-baseline="middle" class="t-s lbl">x₄</text><text x="427.0" y="56" text-anchor="middle" dominant-baseline="middle" class="t-s lbl">…</text><text x="114" y="90" text-anchor="end" dominant-baseline="middle" class="t-s lbl">P₁</text><text x="114" y="130" text-anchor="end" dominant-baseline="middle" class="t-s lbl">P₂</text><text x="114" y="170" text-anchor="end" dominant-baseline="middle" class="t-s lbl">P₃</text><text x="114" y="210" text-anchor="end" dominant-baseline="middle" class="t-s lbl">P₄</text><text x="114" y="250" text-anchor="end" dominant-baseline="middle" class="t-s lbl">⋮</text><rect x="130" y="70" width="66" height="40" class="accT s"/><text x="163.0" y="90" text-anchor="middle" dominant-baseline="middle" class="t-s b acc">停</text><rect x="196" y="70" width="66" height="40" class="bg s"/><text x="229.0" y="90" text-anchor="middle" dominant-baseline="middle" class="t-s">止</text><rect x="262" y="70" width="66" height="40" class="bg s"/><text x="295.0" y="90" text-anchor="middle" dominant-baseline="middle" class="t-s">停</text><rect x="328" y="70" width="66" height="40" class="bg s"/><text x="361.0" y="90" text-anchor="middle" dominant-baseline="middle" class="t-s">止</text><rect x="130" y="110" width="66" height="40" class="bg s"/><text x="163.0" y="130" text-anchor="middle" dominant-baseline="middle" class="t-s">止</text><rect x="196" y="110" width="66" height="40" class="accT s"/><text x="229.0" y="130" text-anchor="middle" dominant-baseline="middle" class="t-s b acc">止</text><rect x="262" y="110" width="66" height="40" class="bg s"/><text x="295.0" y="130" text-anchor="middle" dominant-baseline="middle" class="t-s">停</text><rect x="328" y="110" width="66" height="40" class="bg s"/><text x="361.0" y="130" text-anchor="middle" dominant-baseline="middle" class="t-s">停</text><rect x="130" y="150" width="66" height="40" class="bg s"/><text x="163.0" y="170" text-anchor="middle" dominant-baseline="middle" class="t-s">停</text><rect x="196" y="150" width="66" height="40" class="bg s"/><text x="229.0" y="170" text-anchor="middle" dominant-baseline="middle" class="t-s">停</text><rect x="262" y="150" width="66" height="40" class="accT s"/><text x="295.0" y="170" text-anchor="middle" dominant-baseline="middle" class="t-s b acc">止</text><rect x="328" y="150" width="66" height="40" class="bg s"/><text x="361.0" y="170" text-anchor="middle" dominant-baseline="middle" class="t-s">停</text><rect x="130" y="190" width="66" height="40" class="bg s"/><text x="163.0" y="210" text-anchor="middle" dominant-baseline="middle" class="t-s">止</text><rect x="196" y="190" width="66" height="40" class="bg s"/><text x="229.0" y="210" text-anchor="middle" dominant-baseline="middle" class="t-s">停</text><rect x="262" y="190" width="66" height="40" class="bg s"/><text x="295.0" y="210" text-anchor="middle" dominant-baseline="middle" class="t-s">停</text><rect x="328" y="190" width="66" height="40" class="accT s"/><text x="361.0" y="210" text-anchor="middle" dominant-baseline="middle" class="t-s b acc">止</text><text x="416" y="150" text-anchor="middle" dominant-baseline="middle" class="lbl">…</text><text x="262" y="248" text-anchor="middle" dominant-baseline="middle" class="lbl">⋮</text><rect x="130" y="260" width="264" height="40" class="tint2 s"/><text x="114" y="280" text-anchor="end" dominant-baseline="middle" class="t-s b">trouble</text><text x="163.0" y="280" text-anchor="middle" dominant-baseline="middle" class="t-s b">止</text><text x="229.0" y="280" text-anchor="middle" dominant-baseline="middle" class="t-s b">停</text><text x="295.0" y="280" text-anchor="middle" dominant-baseline="middle" class="t-s b">停</text><text x="361.0" y="280" text-anchor="middle" dominant-baseline="middle" class="t-s b">止</text><text x="262" y="320" text-anchor="middle" dominant-baseline="middle" class="t-s">対角線をすべて反転させたもの</text><text x="262" y="338" text-anchor="middle" dominant-baseline="middle" class="t-s b">どの行とも1マス以上食い違う → 表のどこにも存在しない</text><path d="M163.0,112 L163.0,256" class="sa dot" marker-end="url(#aa)"/><path d="M229.0,152 L229.0,256" class="sa dot" marker-end="url(#aa)"/><path d="M295.0,192 L295.0,256" class="sa dot" marker-end="url(#aa)"/><path d="M361.0,232 L361.0,256" class="sa dot" marker-end="url(#aa)"/></svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 420" width="700" height="420" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="420" class="bg"/><text x="120" y="330" text-anchor="middle" dominant-baseline="middle" class="t-s b">入力層</text><text x="260" y="330" text-anchor="middle" dominant-baseline="middle" class="t-s b">隠れ層1</text><text x="400" y="330" text-anchor="middle" dominant-baseline="middle" class="t-s b">隠れ層2</text><text x="540" y="330" text-anchor="middle" dominant-baseline="middle" class="t-s b">出力層</text><line x1="131" y1="133.0" x2="249" y2="103.0" class="sm"/><line x1="131" y1="133.0" x2="249" y2="133.0" class="sm"/><line x1="131" y1="133.0" x2="249" y2="163.0" class="sm"/><line x1="131" y1="133.0" x2="249" y2="193.0" class="sm"/><line x1="131" y1="133.0" x2="249" y2="223.0" class="sm"/><line x1="131" y1="133.0" x2="249" y2="253.0" class="sm"/><line x1="131" y1="163.0" x2="249" y2="103.0" class="sm"/><line x1="131" y1="163.0" x2="249" y2="133.0" class="sm"/><line x1="131" y1="163.0" x2="249" y2="163.0" class="sm"/><line x1="131" y1="163.0" x2="249" y2="193.0" class="sm"/><line x1="131" y1="163.0" x2="249" y2="223.0" class="sm"/><line x1="131" y1="163.0" x2="249" y2="253.0" class="sm"/><line x1="131" y1="193.0" x2="249" y2="103.0" class="sm"/><line x1="131" y1="193.0" x2="249" y2="133.0" class="sm"/><line x1="131" y1="193.0" x2="249" y2="163.0" class="sm"/><line x1="131" y1="193.0" x2="249" y2="193.0" class="sm"/><line x1="131" y1="193.0" x2="249" y2="223.0" class="sm"/><line x1="131" y1="193.0" x2="249" y2="253.0" class="sm"/><line x1="131" y1="223.0" x2="249" y2="103.0" class="sm"/><line x1="131" y1="223.0" x2="249" y2="133.0" class="sm"/><line x1="131" y1="223.0" x2="249" y2="163.0" class="sm"/><line x1="131" y1="223.0" x2="249" y2="193.0" class="sm"/><line x1="131" y1="223.0" x2="249" y2="223.0" class="sm"/><line x1="131" y1="223.0" x2="249" y2="253.0" class="sm"/><line x1="271" y1="103.0" x2="389" y2="103.0" class="sm"/><line x1="271" y1="103.0" x2="389" y2="133.0" class="sm"/><line x1="271" y1="103.0" x2="389" y2="163.0" class="sm"/><line x1="271" y1="103.0" x2="389" y2="193.0" class="sm"/><line x1="271" y1="103.0" x2="389" y2="223.0" class="sm"/><line x1="271" y1="103.0" x2="389" y2="253.0" class="sm"/><line x1="271" y1="133.0" x2="389" y2="103.0" class="sm"/><line x1="271" y1="133.0" x2="389" y2="133.0" class="sm"/><line x1="271" y1="133.0" x2="389" y2="163.0" class="sm"/><line x1="271" y1="133.0" x2="389" y2="193.0" class="sm"/><line x1="271" y1="133.0" x2="389" y2="223.0" class="sm"/><line x1="271" y1="133.0" x2="389" y2="253.0" class="sm"/><line x1="271" y1="163.0" x2="389" y2="103.0" class="sm"/><line x1="271" y1="163.0" x2="389" y2="133.0" class="sm"/><line x1="271" y1="163.0" x2="389" y2="163.0" class="sm"/><line x1="271" y1="163.0" x2="389" y2="193.0" class="sm"/><line x1="271" y1="163.0" x2="389" y2="223.0" class="sm"/><line x1="271" y1="163.0" x2="389" y2="253.0" class="sm"/><line x1="271" y1="193.0" x2="389" y2="103.0" class="sm"/><line x1="271" y1="193.0" x2="389" y2="133.0" class="sm"/><line x1="271" y1="193.0" x2="389" y2="163.0" class="sm"/><line x1="271" y1="193.0" x2="389" y2="193.0" class="sm"/><line x1="271" y1="193.0" x2="389" y2="223.0" class="sm"/><line x1="271" y1="193.0" x2="389" y2="253.0" class="sm"/><line x1="271" y1="223.0" x2="389" y2="103.0" class="sm"/><line x1="271" y1="223.0" x2="389" y2="133.0" class="sm"/><line x1="271" y1="223.0" x2="389" y2="163.0" class="sm"/><line x1="271" y1="223.0" x2="389" y2="193.0" class="sm"/><line x1="271" y1="223.0" x2="389" y2="223.0" class="sm"/><line x1="271" y1="223.0" x2="389" y2="253.0" class="sm"/><line x1="271" y1="253.0" x2="389" y2="103.0" class="sm"/><line x1="271" y1="253.0" x2="389" y2="133.0" class="sm"/><line x1="271" y1="253.0" x2="389" y2="163.0" class="sm"/><line x1="271" y1="253.0" x2="389" y2="193.0" class="sm"/><line x1="271" y1="253.0" x2="389" y2="223.0" class="sm"/><line x1="271" y1="253.0" x2="389" y2="253.0" class="sm"/><line x1="411" y1="103.0" x2="529" y2="148.0" class="sm"/><line x1="411" y1="103.0" x2="529" y2="178.0" class="sm"/><line x1="411" y1="103.0" x2="529" y2="208.0" class="sm"/><line x1="411" y1="133.0" x2="529" y2="148.0" class="sm"/><line x1="411" y1="133.0" x2="529" y2="178.0" class="sm"/><line x1="411" y1="133.0" x2="529" y2="208.0" class="sm"/><line x1="411" y1="163.0" x2="529" y2="148.0" class="sm"/><line x1="411" y1="163.0" x2="529" y2="178.0" class="sm"/><line x1="411" y1="163.0" x2="529" y2="208.0" class="sm"/><line x1="411" y1="193.0" x2="529" y2="148.0" class="sm"/><line x1="411" y1="193.0" x2="529" y2="178.0" class="sm"/><line x1="411" y1="193.0" x2="529" y2="208.0" class="sm"/><line x1="411" y1="223.0" x2="529" y2="148.0" class="sm"/><line x1="411" y1="223.0" x2="529" y2="178.0" class="sm"/><line x1="411" y1="223.0" x2="529" y2="208.0" class="sm"/><line x1="411" y1="253.0" x2="529" y2="148.0" class="sm"/><line x1="411" y1="253.0" x2="529" y2="178.0" class="sm"/><line x1="411" y1="253.0" x2="529" y2="208.0" class="sm"/><circle cx="120" cy="133.0" r="11" class="accT s"/><circle cx="120" cy="163.0" r="11" class="accT s"/><circle cx="120" cy="193.0" r="11" class="accT s"/><circle cx="120" cy="223.0" r="11" class="accT s"/><circle cx="260" cy="103.0" r="11" class="tint s"/><circle cx="260" cy="133.0" r="11" class="tint s"/><circle cx="260" cy="163.0" r="11" class="tint s"/><circle cx="260" cy="193.0" r="11" class="tint s"/><circle cx="260" cy="223.0" r="11" class="tint s"/><circle cx="260" cy="253.0" r="11" class="tint s"/><circle cx="400" cy="103.0" r="11" class="tint s"/><circle cx="400" cy="133.0" r="11" class="tint s"/><circle cx="400" cy="163.0" r="11" class="tint s"/><circle cx="400" cy="193.0" r="11" class="tint s"/><circle cx="400" cy="223.0" r="11" class="tint s"/><circle cx="400" cy="253.0" r="11" class="tint s"/><circle cx="540" cy="148.0" r="11" class="tint s"/><circle cx="540" cy="178.0" r="11" class="tint s"/><circle cx="540" cy="208.0" r="11" class="tint s"/><text x="180" y="80" text-anchor="middle" dominant-baseline="middle" class="t-xs acc b">重み w</text><line x1="176" y1="88" x2="168" y2="116" class="sa"/><rect x="430" y="40" width="250" height="96" rx="6" class="none sm dash"/><text x="555" y="58" text-anchor="middle" dominant-baseline="middle" class="t-s b">1つのユニットの中身</text><text x="555" y="82" text-anchor="middle" dominant-baseline="middle" class="t-xs">入力の重み付き和</text><line x1="555" y1="92" x2="555" y2="104" class="sm" marker-end="url(#am)"/><text x="555" y="118" text-anchor="middle" dominant-baseline="middle" class="t-xs">活性化関数（非線形）→ 出力</text><text x="350" y="366" text-anchor="middle" dominant-baseline="middle" class="t-s b">非線形の活性化関数がないと、何層重ねても1つの線形変換にしかならない</text><text x="350" y="392" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">重みを少しずつ動かして誤差を小さくしていく（勾配降下法）</text><line x1="560" y1="292" x2="120" y2="292" class="sa dash" marker-end="url(#a)"/><text x="340" y="308" text-anchor="middle" dominant-baseline="middle" class="t-xs acc b">誤差逆伝播（出力側から逆にたどる）</text></svg>

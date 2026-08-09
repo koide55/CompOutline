@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 460" width="700" height="460" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="460" class="bg"/><text x="58" y="76" text-anchor="start" dominant-baseline="middle" class="b">RAID 0</text><text x="58" y="98" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">冗長性なし。1台でも壊れると全滅</text><rect x="250" y="54" width="64" height="44" class="tint s"/><ellipse cx="282.0" cy="98" rx="32.0" ry="7" class="tint s"/><ellipse cx="282.0" cy="54" rx="32.0" ry="7" class="tint s"/><text x="282" y="76" text-anchor="middle" dominant-baseline="middle" class="t-s b">A1</text><text x="282" y="38" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">ディスク1</text><rect x="342" y="54" width="64" height="44" class="tint s"/><ellipse cx="374.0" cy="98" rx="32.0" ry="7" class="tint s"/><ellipse cx="374.0" cy="54" rx="32.0" ry="7" class="tint s"/><text x="374" y="76" text-anchor="middle" dominant-baseline="middle" class="t-s b">A2</text><text x="374" y="38" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">ディスク2</text><rect x="434" y="54" width="64" height="44" class="tint s"/><ellipse cx="466.0" cy="98" rx="32.0" ry="7" class="tint s"/><ellipse cx="466.0" cy="54" rx="32.0" ry="7" class="tint s"/><text x="466" y="76" text-anchor="middle" dominant-baseline="middle" class="t-s b">A3</text><text x="466" y="38" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">ディスク3</text><rect x="526" y="54" width="64" height="44" class="tint s"/><ellipse cx="558.0" cy="98" rx="32.0" ry="7" class="tint s"/><ellipse cx="558.0" cy="54" rx="32.0" ry="7" class="tint s"/><text x="558" y="76" text-anchor="middle" dominant-baseline="middle" class="t-s b">A4</text><text x="558" y="38" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">ディスク4</text><text x="58" y="176" text-anchor="start" dominant-baseline="middle" class="b">RAID 1</text><text x="58" y="198" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">同じものを2台に。容量効率 50%</text><rect x="250" y="154" width="64" height="44" class="tint s"/><ellipse cx="282.0" cy="198" rx="32.0" ry="7" class="tint s"/><ellipse cx="282.0" cy="154" rx="32.0" ry="7" class="tint s"/><text x="282" y="176" text-anchor="middle" dominant-baseline="middle" class="t-s b">A1</text><rect x="342" y="154" width="64" height="44" class="tint s"/><ellipse cx="374.0" cy="198" rx="32.0" ry="7" class="tint s"/><ellipse cx="374.0" cy="154" rx="32.0" ry="7" class="tint s"/><text x="374" y="176" text-anchor="middle" dominant-baseline="middle" class="t-s b">A1</text><rect x="434" y="154" width="64" height="44" class="tint s"/><ellipse cx="466.0" cy="198" rx="32.0" ry="7" class="tint s"/><ellipse cx="466.0" cy="154" rx="32.0" ry="7" class="tint s"/><text x="466" y="176" text-anchor="middle" dominant-baseline="middle" class="t-s b">A2</text><rect x="526" y="154" width="64" height="44" class="tint s"/><ellipse cx="558.0" cy="198" rx="32.0" ry="7" class="tint s"/><ellipse cx="558.0" cy="154" rx="32.0" ry="7" class="tint s"/><text x="558" y="176" text-anchor="middle" dominant-baseline="middle" class="t-s b">A2</text><text x="58" y="276" text-anchor="start" dominant-baseline="middle" class="b">RAID 5</text><text x="58" y="298" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">パリティを分散。1台の故障に耐える</text><rect x="250" y="254" width="64" height="44" class="tint s"/><ellipse cx="282.0" cy="298" rx="32.0" ry="7" class="tint s"/><ellipse cx="282.0" cy="254" rx="32.0" ry="7" class="tint s"/><text x="282" y="276" text-anchor="middle" dominant-baseline="middle" class="t-s b">A1</text><rect x="342" y="254" width="64" height="44" class="tint s"/><ellipse cx="374.0" cy="298" rx="32.0" ry="7" class="tint s"/><ellipse cx="374.0" cy="254" rx="32.0" ry="7" class="tint s"/><text x="374" y="276" text-anchor="middle" dominant-baseline="middle" class="t-s b">A2</text><rect x="434" y="254" width="64" height="44" class="tint s"/><ellipse cx="466.0" cy="298" rx="32.0" ry="7" class="tint s"/><ellipse cx="466.0" cy="254" rx="32.0" ry="7" class="tint s"/><text x="466" y="276" text-anchor="middle" dominant-baseline="middle" class="t-s b">A3</text><rect x="526" y="254" width="64" height="44" class="accT s"/><ellipse cx="558.0" cy="298" rx="32.0" ry="7" class="accT s"/><ellipse cx="558.0" cy="254" rx="32.0" ry="7" class="accT s"/><text x="558" y="276" text-anchor="middle" dominant-baseline="middle" class="t-s b">Ap</text><text x="624" y="276" text-anchor="start" dominant-baseline="middle" class="t-xs acc b">P</text><text x="58" y="376" text-anchor="start" dominant-baseline="middle" class="b">RAID 6</text><text x="58" y="398" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">パリティ2種類。2台の故障に耐える</text><rect x="250" y="354" width="64" height="44" class="tint s"/><ellipse cx="282.0" cy="398" rx="32.0" ry="7" class="tint s"/><ellipse cx="282.0" cy="354" rx="32.0" ry="7" class="tint s"/><text x="282" y="376" text-anchor="middle" dominant-baseline="middle" class="t-s b">A1</text><rect x="342" y="354" width="64" height="44" class="tint s"/><ellipse cx="374.0" cy="398" rx="32.0" ry="7" class="tint s"/><ellipse cx="374.0" cy="354" rx="32.0" ry="7" class="tint s"/><text x="374" y="376" text-anchor="middle" dominant-baseline="middle" class="t-s b">A2</text><rect x="434" y="354" width="64" height="44" class="accT s"/><ellipse cx="466.0" cy="398" rx="32.0" ry="7" class="accT s"/><ellipse cx="466.0" cy="354" rx="32.0" ry="7" class="accT s"/><text x="466" y="376" text-anchor="middle" dominant-baseline="middle" class="t-s b">Ap</text><rect x="526" y="354" width="64" height="44" class="accT s"/><ellipse cx="558.0" cy="398" rx="32.0" ry="7" class="accT s"/><ellipse cx="558.0" cy="354" rx="32.0" ry="7" class="accT s"/><text x="558" y="376" text-anchor="middle" dominant-baseline="middle" class="t-s b">Aq</text><text x="624" y="376" text-anchor="start" dominant-baseline="middle" class="t-xs acc b">P</text><text x="350" y="436" text-anchor="middle" dominant-baseline="middle" class="t-s b">パリティは XOR。 A ⊕ P ⊕ C = B のように、残りから復元できる</text></svg>

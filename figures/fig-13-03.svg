@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400" width="720" height="400" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="720" height="400" class="bg"/><rect x="40" y="260" width="52" height="34" class="tint s"/><text x="66.0" y="277" text-anchor="middle" dominant-baseline="middle" class="t-xs">昨日</text><rect x="98" y="260" width="67" height="34" class="tint s"/><text x="131.5" y="277" text-anchor="middle" dominant-baseline="middle" class="t-xs">買った</text><rect x="171" y="260" width="37" height="34" class="tint s"/><text x="189.5" y="277" text-anchor="middle" dominant-baseline="middle" class="t-xs">本</text><rect x="214" y="260" width="37" height="34" class="tint s"/><text x="232.5" y="277" text-anchor="middle" dominant-baseline="middle" class="t-xs">を</text><rect x="257" y="260" width="67" height="34" class="tint s"/><text x="290.5" y="277" text-anchor="middle" dominant-baseline="middle" class="t-xs">図書館</text><rect x="330" y="260" width="37" height="34" class="tint s"/><text x="348.5" y="277" text-anchor="middle" dominant-baseline="middle" class="t-xs">で</text><rect x="373" y="260" width="67" height="34" class="tint s"/><text x="406.5" y="277" text-anchor="middle" dominant-baseline="middle" class="t-xs">借りた</text><rect x="446" y="260" width="52" height="34" class="tint s"/><text x="472.0" y="277" text-anchor="middle" dominant-baseline="middle" class="t-xs">資料</text><rect x="504" y="260" width="37" height="34" class="tint s"/><text x="522.5" y="277" text-anchor="middle" dominant-baseline="middle" class="t-xs">と</text><rect x="547" y="260" width="67" height="34" class="tint s"/><text x="580.5" y="277" text-anchor="middle" dominant-baseline="middle" class="t-xs">一緒に</text><rect x="620" y="260" width="67" height="34" class="accT s"/><text x="653.5" y="277" text-anchor="middle" dominant-baseline="middle" class="t-xs">返した</text><path d="M653.5,260 C653.5,194.0 66.0,194.0 66.0,260" class="sm" stroke-width="1.0" stroke-opacity="0.33"/><path d="M653.5,260 C653.5,188.0 131.5,188.0 131.5,260" class="sm" stroke-width="1.5" stroke-opacity="0.4"/><path d="M653.5,260 C653.5,146.0 189.5,146.0 189.5,260" class="sa" stroke-width="4.6" stroke-opacity="0.93"/><path d="M653.5,260 C653.5,191.0 232.5,191.0 232.5,260" class="sm" stroke-width="1.3" stroke-opacity="0.36"/><path d="M653.5,260 C653.5,185.0 290.5,185.0 290.5,260" class="sm" stroke-width="1.7" stroke-opacity="0.44"/><path d="M653.5,260 C653.5,197.0 348.5,197.0 348.5,260" class="sm" stroke-width="0.8" stroke-opacity="0.29"/><path d="M653.5,260 C653.5,176.0 406.5,176.0 406.5,260" class="sm" stroke-width="2.4" stroke-opacity="0.55"/><path d="M653.5,260 C653.5,149.0 472.0,149.0 472.0,260" class="sa" stroke-width="4.3" stroke-opacity="0.89"/><path d="M653.5,260 C653.5,194.0 522.5,194.0 522.5,260" class="sm" stroke-width="1.0" stroke-opacity="0.33"/><path d="M653.5,260 C653.5,188.0 580.5,188.0 580.5,260" class="sm" stroke-width="1.5" stroke-opacity="0.4"/><text x="360" y="46" text-anchor="middle" dominant-baseline="middle" class="b">「返した」が、文中のどの語にどれだけ注目するか</text><text x="360" y="70" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">線の太さが注意の重み</text><text x="189.5" y="312" text-anchor="middle" dominant-baseline="middle" class="t-xs acc b">↑ 強い</text><text x="472.0" y="312" text-anchor="middle" dominant-baseline="middle" class="t-xs acc b">↑ 強い</text><text x="360" y="338" text-anchor="middle" dominant-baseline="middle" class="t-s b">すべての語の関係を一度に計算するので、GPU で完全に並列化できる</text><text x="360" y="362" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">RNN のように前から順に処理する必要がない。これが大規模化を可能にした</text><text x="360" y="386" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">（順序の情報は位置エンコーディングで別に与える）</text></svg>

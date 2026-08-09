@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 400" width="620" height="400" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="620" height="400" class="bg"/><rect x="180" y="40" width="200" height="62" class="tint2 s"/><text x="280.0" y="71.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">スタック</text><text x="398" y="71.0" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">局所変数・戻り番地・引数</text><rect x="180" y="102" width="200" height="96" class="none sm dash"/><text x="280.0" y="150.0" text-anchor="middle" dominant-baseline="middle" class="t-s lbl">（空き）</text><rect x="180" y="198" width="200" height="62" class="tint2 s"/><text x="280.0" y="229.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">ヒープ</text><text x="398" y="229.0" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">malloc などで確保</text><rect x="180" y="260" width="200" height="34" class="tint s"/><text x="280.0" y="277.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">BSS</text><text x="398" y="277.0" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">初期値のない大域変数</text><rect x="180" y="294" width="200" height="34" class="tint s"/><text x="280.0" y="311.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">データ</text><text x="398" y="311.0" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">初期値のある大域変数</text><rect x="180" y="328" width="200" height="40" class="accT s"/><text x="280.0" y="348.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">テキスト</text><text x="398" y="348.0" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">機械語の命令列（書込み禁止）</text><line x1="280.0" y1="190" x2="280.0" y2="152" class="sa" marker-end="url(#a)"/><line x1="280.0" y1="110" x2="280.0" y2="148" class="sa" marker-end="url(#a)"/><text x="164" y="66" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">高位番地</text><text x="164" y="344" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">低位番地</text><line x1="170" y1="40" x2="170" y2="368" class="sm" marker-end="url(#am)"/><text x="310" y="386" text-anchor="middle" dominant-baseline="middle" class="t-s b">ヒープとスタックは互いに向かって伸びる</text></svg>

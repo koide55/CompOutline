@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 340" width="700" height="340" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="340" class="bg"/><rect x="330.0" y="56" width="200" height="38" class="accT s"/><text x="430.0" y="75" text-anchor="middle" dominant-baseline="middle" class="t-xs">HTTP メッセージ</text><text x="160" y="75" text-anchor="end" dominant-baseline="middle" class="t-s b">アプリケーション層</text><rect x="288.0" y="118" width="84" height="38" class="tint s"/><text x="330.0" y="137" text-anchor="middle" dominant-baseline="middle" class="t-xs">TCP ヘッダ</text><rect x="372.0" y="118" width="200" height="38" class="accT s"/><text x="472.0" y="137" text-anchor="middle" dominant-baseline="middle" class="t-xs">HTTP メッセージ</text><text x="160" y="137" text-anchor="end" dominant-baseline="middle" class="t-s b">トランスポート層</text><line x1="170" y1="102" x2="170" y2="116" class="sm" marker-end="url(#am)"/><rect x="250.0" y="180" width="76" height="38" class="tint s"/><text x="288.0" y="199" text-anchor="middle" dominant-baseline="middle" class="t-xs">IP ヘッダ</text><rect x="326.0" y="180" width="84" height="38" class="tint s"/><text x="368.0" y="199" text-anchor="middle" dominant-baseline="middle" class="t-xs">TCP ヘッダ</text><rect x="410.0" y="180" width="200" height="38" class="accT s"/><text x="510.0" y="199" text-anchor="middle" dominant-baseline="middle" class="t-xs">HTTP メッセージ</text><text x="160" y="199" text-anchor="end" dominant-baseline="middle" class="t-s b">インターネット層</text><line x1="170" y1="164" x2="170" y2="178" class="sm" marker-end="url(#am)"/><rect x="176.0" y="242" width="104" height="38" class="tint s"/><text x="228.0" y="261" text-anchor="middle" dominant-baseline="middle" class="t-xs">Ethernet ヘッダ</text><rect x="280.0" y="242" width="76" height="38" class="tint s"/><text x="318.0" y="261" text-anchor="middle" dominant-baseline="middle" class="t-xs">IP ヘッダ</text><rect x="356.0" y="242" width="84" height="38" class="tint s"/><text x="398.0" y="261" text-anchor="middle" dominant-baseline="middle" class="t-xs">TCP ヘッダ</text><rect x="440.0" y="242" width="200" height="38" class="accT s"/><text x="540.0" y="261" text-anchor="middle" dominant-baseline="middle" class="t-xs">HTTP メッセージ</text><rect x="640.0" y="242" width="44" height="38" class="tint s"/><text x="662.0" y="261" text-anchor="middle" dominant-baseline="middle" class="t-xs">FCS</text><text x="160" y="261" text-anchor="end" dominant-baseline="middle" class="t-s b">データリンク層</text><line x1="170" y1="226" x2="170" y2="240" class="sm" marker-end="url(#am)"/><text x="400" y="306" text-anchor="middle" dominant-baseline="middle" class="t-s b">層を降りるごとに、その層のヘッダで包まれる。受信側では逆順に剥がす</text><text x="400" y="328" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">各層は自分のヘッダしか見ない</text></svg>

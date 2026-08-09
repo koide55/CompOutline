@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 340" width="680" height="340" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="680" height="340" class="bg"/><text x="340" y="34" text-anchor="middle" dominant-baseline="middle" class="b">従来のプログラミング</text><rect x="40" y="56" width="190" height="38" class="tint s"/><text x="135.0" y="75.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">規則（人間が書く）</text><line x1="230" y1="75" x2="286" y2="98" class="sm" marker-end="url(#am)"/><rect x="40" y="102" width="190" height="38" class="tint s"/><text x="135.0" y="121.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">入力データ</text><line x1="230" y1="121" x2="286" y2="98" class="sm" marker-end="url(#am)"/><rect x="290" y="76" width="120" height="44" class="tint2 s"/><text x="350.0" y="98.0" text-anchor="middle" dominant-baseline="middle" class="t-s">計算機</text><line x1="410" y1="98" x2="466" y2="98" class="sa" marker-end="url(#a)"/><rect x="470" y="76" width="180" height="44" class="accT s"/><text x="560.0" y="98.0" text-anchor="middle" dominant-baseline="middle" class="t-s">答え</text><text x="340" y="174" text-anchor="middle" dominant-baseline="middle" class="b">機械学習</text><rect x="40" y="196" width="190" height="38" class="tint s"/><text x="135.0" y="215.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">入力データ</text><line x1="230" y1="215" x2="286" y2="238" class="sm" marker-end="url(#am)"/><rect x="40" y="242" width="190" height="38" class="tint s"/><text x="135.0" y="261.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">答え（正解ラベル）</text><line x1="230" y1="261" x2="286" y2="238" class="sm" marker-end="url(#am)"/><rect x="290" y="216" width="120" height="44" class="tint2 s"/><text x="350.0" y="238.0" text-anchor="middle" dominant-baseline="middle" class="t-s">計算機</text><line x1="410" y1="238" x2="466" y2="238" class="sa" marker-end="url(#a)"/><rect x="470" y="216" width="180" height="44" class="accT s"/><text x="560.0" y="238.0" text-anchor="middle" dominant-baseline="middle" class="t-s">規則（モデル）</text><text x="340" y="322" text-anchor="middle" dominant-baseline="middle" class="t-s b">与えるものと出てくるものが入れ替わっている</text></svg>

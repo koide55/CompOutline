@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 410" width="700" height="410" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="410" class="bg"/><text x="90" y="34" text-anchor="middle" dominant-baseline="middle" class="t-s b">プロセス A</text><rect x="40" y="50" width="100" height="34" class="tint s"/><text x="90" y="67" text-anchor="middle" dominant-baseline="middle" class="t-xs">ページ 0</text><rect x="40" y="84" width="100" height="34" class="tint s"/><text x="90" y="101" text-anchor="middle" dominant-baseline="middle" class="t-xs">ページ 1</text><rect x="40" y="118" width="100" height="34" class="tint s"/><text x="90" y="135" text-anchor="middle" dominant-baseline="middle" class="t-xs">ページ 2</text><rect x="40" y="152" width="100" height="34" class="tint s"/><text x="90" y="169" text-anchor="middle" dominant-baseline="middle" class="t-xs">ページ 3</text><rect x="40" y="186" width="100" height="34" class="tint s"/><text x="90" y="203" text-anchor="middle" dominant-baseline="middle" class="t-xs">ページ 4</text><rect x="40" y="220" width="100" height="34" class="tint s"/><text x="90" y="237" text-anchor="middle" dominant-baseline="middle" class="t-xs">ページ 5</text><text x="90" y="272" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">仮想アドレス空間</text><text x="240" y="34" text-anchor="middle" dominant-baseline="middle" class="t-s b">プロセス B</text><rect x="190" y="50" width="100" height="34" class="tint s"/><text x="240" y="67" text-anchor="middle" dominant-baseline="middle" class="t-xs">ページ 0</text><rect x="190" y="84" width="100" height="34" class="tint s"/><text x="240" y="101" text-anchor="middle" dominant-baseline="middle" class="t-xs">ページ 1</text><rect x="190" y="118" width="100" height="34" class="tint s"/><text x="240" y="135" text-anchor="middle" dominant-baseline="middle" class="t-xs">ページ 2</text><rect x="190" y="152" width="100" height="34" class="tint s"/><text x="240" y="169" text-anchor="middle" dominant-baseline="middle" class="t-xs">ページ 3</text><rect x="190" y="186" width="100" height="34" class="tint s"/><text x="240" y="203" text-anchor="middle" dominant-baseline="middle" class="t-xs">ページ 4</text><rect x="190" y="220" width="100" height="34" class="tint s"/><text x="240" y="237" text-anchor="middle" dominant-baseline="middle" class="t-xs">ページ 5</text><text x="240" y="272" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">仮想アドレス空間</text><rect x="300" y="300" width="170" height="40" class="accT s"/><text x="385.0" y="320.0" text-anchor="middle" dominant-baseline="middle" class="t-s">ページテーブル</text><text x="385" y="358" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">OS が管理し、MMU がこれを引く</text><text x="560" y="34" text-anchor="middle" dominant-baseline="middle" class="t-s b">物理メモリ</text><text x="560" y="274" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">物理的には飛び飛びでよい</text><rect x="510" y="50" width="100" height="30" class="tint2 s"/><text x="560" y="65" text-anchor="middle" dominant-baseline="middle" class="t-xs">B0</text><rect x="510" y="80" width="100" height="30" class="bg s"/><rect x="510" y="110" width="100" height="30" class="tint2 s"/><text x="560" y="125" text-anchor="middle" dominant-baseline="middle" class="t-xs">A0</text><rect x="510" y="140" width="100" height="30" class="tint2 s"/><text x="560" y="155" text-anchor="middle" dominant-baseline="middle" class="t-xs">A2</text><rect x="510" y="170" width="100" height="30" class="bg s"/><rect x="510" y="200" width="100" height="30" class="tint2 s"/><text x="560" y="215" text-anchor="middle" dominant-baseline="middle" class="t-xs">B1</text><rect x="510" y="230" width="100" height="30" class="tint2 s"/><text x="560" y="245" text-anchor="middle" dominant-baseline="middle" class="t-xs">A1</text><rect x="510" y="260" width="100" height="30" class="bg s"/><path d="M144,67 C340,67 440,125 506,125" class="sm" marker-end="url(#am)"/><path d="M144,101 C340,101 440,245 506,245" class="sm" marker-end="url(#am)"/><path d="M144,135 C340,135 440,155 506,155" class="sm" marker-end="url(#am)"/><path d="M294,67 C340,67 440,65 506,65" class="sm" marker-end="url(#am)"/><path d="M294,101 C340,101 440,215 506,215" class="sm" marker-end="url(#am)"/><rect x="510" y="296" width="100" height="36" class="none s dash"/><text x="560.0" y="314.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">スワップ領域</text><path d="M290,203 C420,203 470,314 506,314" class="sa dash" marker-end="url(#aa)"/><text x="560" y="344" text-anchor="middle" dominant-baseline="middle" class="t-xs acc">主記憶にないページは SSD へ</text><text x="350" y="392" text-anchor="middle" dominant-baseline="middle" class="t-s b">対応表を1枚挟むだけで、保護・連続性・容量の拡張がまとめて得られる</text></svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 330" width="680" height="330" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="680" height="330" class="bg"/><circle cx="150" cy="180" r="56" class="tint s"/><text x="150" y="172" text-anchor="middle" dominant-baseline="middle" class="b">実行可能</text><text x="150" y="192" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">Ready</text><circle cx="400" cy="100" r="56" class="accT s"/><text x="400" y="92" text-anchor="middle" dominant-baseline="middle" class="b">実行中</text><text x="400" y="112" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">Running</text><circle cx="400" cy="260" r="56" class="tint s"/><text x="400" y="252" text-anchor="middle" dominant-baseline="middle" class="b">待機中</text><text x="400" y="272" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">Blocked</text><line x1="198" y1="162" x2="348" y2="112" class="s" marker-end="url(#a)"/><text x="250" y="118" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">ディスパッチ</text><text x="250" y="134" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">（スケジューラが選ぶ）</text><path d="M356,128 C280,180 250,190 198,196" class="s" marker-end="url(#a)"/><text x="286" y="200" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">タイムスライス終了・横取り</text><line x1="400" y1="156" x2="400" y2="202" class="s" marker-end="url(#a)"/><text x="412" y="180" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">入出力を要求</text><path d="M348,244 C260,230 240,222 198,214" class="s" marker-end="url(#a)"/><text x="268" y="250" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">入出力が完了</text><rect x="474" y="218" width="176" height="84" rx="6" class="none sm dash"/><text x="562" y="238" text-anchor="middle" dominant-baseline="middle" class="t-s b">待機が明けても</text><text x="562" y="258" text-anchor="middle" dominant-baseline="middle" class="t-xs">直接 Running には戻らない。</text><text x="562" y="276" text-anchor="middle" dominant-baseline="middle" class="t-xs">いったん順番待ちの列に並ぶ</text><text x="330" y="320" text-anchor="middle" dominant-baseline="middle" class="t-s b">コア数を超えたプロセスは Ready の列で待つ</text></svg>

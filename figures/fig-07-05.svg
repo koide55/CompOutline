@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 350" width="680" height="350" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="680" height="350" class="bg"/><text x="170" y="34" text-anchor="middle" dominant-baseline="middle" class="b">循環待ちがある（デッドロック）</text><circle cx="90" cy="110" r="30" class="tint s"/><text x="90" y="110" text-anchor="middle" dominant-baseline="middle" class="b">A</text><circle cx="90" cy="230" r="30" class="tint s"/><text x="90" y="230" text-anchor="middle" dominant-baseline="middle" class="b">B</text><rect x="230" y="84" width="52" height="52" class="accT s"/><text x="256" y="110" text-anchor="middle" dominant-baseline="middle" class="b">X</text><rect x="230" y="204" width="52" height="52" class="accT s"/><text x="256" y="230" text-anchor="middle" dominant-baseline="middle" class="b">Y</text><line x1="230" y1="104" x2="122" y2="104" class="s" marker-end="url(#a)"/><line x1="106" y1="138" x2="236" y2="208" class="sa" marker-end="url(#a)"/><line x1="230" y1="240" x2="122" y2="240" class="s" marker-end="url(#a)"/><line x1="106" y1="202" x2="236" y2="132" class="sa" marker-end="url(#a)"/><text x="170" y="288" text-anchor="middle" dominant-baseline="middle" class="t-s b acc">待ちの関係が閉路をなす</text><text x="510" y="34" text-anchor="middle" dominant-baseline="middle" class="b">取得順序を統一した（起きない）</text><circle cx="430" cy="110" r="30" class="tint s"/><text x="430" y="110" text-anchor="middle" dominant-baseline="middle" class="b">A</text><circle cx="430" cy="230" r="30" class="tint s"/><text x="430" y="230" text-anchor="middle" dominant-baseline="middle" class="b">B</text><rect x="570" y="84" width="52" height="52" class="accT s"/><text x="596" y="110" text-anchor="middle" dominant-baseline="middle" class="b">X</text><rect x="570" y="204" width="52" height="52" class="accT s"/><text x="596" y="230" text-anchor="middle" dominant-baseline="middle" class="b">Y</text><line x1="570" y1="104" x2="462" y2="104" class="s" marker-end="url(#a)"/><line x1="446" y1="138" x2="576" y2="208" class="sa" marker-end="url(#a)"/><line x1="446" y1="218" x2="566" y2="120" class="sm dash" marker-end="url(#a)"/><text x="510" y="282" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">B も X を先に要求するので</text><text x="510" y="298" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">「A が X、B が Y」の状態にならない</text><text x="340" y="334" text-anchor="middle" dominant-baseline="middle" class="t-s b">実線＝保持、太線＝要求。閉路ができなければデッドロックしない</text></svg>

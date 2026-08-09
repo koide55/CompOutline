@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 350" width="700" height="350" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="350" class="bg"/><line x1="330" y1="40" x2="330" y2="320" class="sm dash"/><text x="240" y="34" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">← 実行前（開発時）</text><text x="420" y="34" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">実行時 →</text><text x="40" y="76" text-anchor="start" dominant-baseline="middle" class="b">コンパイラ方式</text><rect x="60" y="92" width="84" height="36" class="tint s"/><text x="102.0" y="110.0" text-anchor="middle" dominant-baseline="middle" class="t-s">ソース</text><rect x="150" y="92" width="84" height="36" class="tint s"/><text x="192.0" y="110.0" text-anchor="middle" dominant-baseline="middle" class="t-s">コンパイラ</text><line x1="150" y1="110" x2="144" y2="110" class="sm" marker-end="url(#am)"/><rect x="260" y="92" width="84" height="36" class="tint s"/><text x="302.0" y="110.0" text-anchor="middle" dominant-baseline="middle" class="t-s">機械語</text><line x1="240" y1="110" x2="254" y2="110" class="sm" marker-end="url(#am)"/><rect x="400" y="92" width="84" height="36" class="accT s"/><text x="442.0" y="110.0" text-anchor="middle" dominant-baseline="middle" class="t-s">実行</text><line x1="350" y1="110" x2="394" y2="110" class="sm" marker-end="url(#am)"/><text x="40" y="156" text-anchor="start" dominant-baseline="middle" class="b">インタプリタ方式</text><rect x="60" y="172" width="84" height="36" class="tint s"/><text x="102.0" y="190.0" text-anchor="middle" dominant-baseline="middle" class="t-s">ソース</text><rect x="360" y="172" width="190" height="36" class="accT s"/><text x="455.0" y="190.0" text-anchor="middle" dominant-baseline="middle" class="t-s">インタプリタが読みながら実行</text><line x1="150" y1="190" x2="354" y2="190" class="sm" marker-end="url(#am)"/><text x="40" y="236" text-anchor="start" dominant-baseline="middle" class="b">仮想機械方式</text><rect x="60" y="252" width="84" height="36" class="tint s"/><text x="102.0" y="270.0" text-anchor="middle" dominant-baseline="middle" class="t-s">ソース</text><rect x="150" y="252" width="84" height="36" class="tint s"/><text x="192.0" y="270.0" text-anchor="middle" dominant-baseline="middle" class="t-s">コンパイラ</text><line x1="150" y1="270" x2="144" y2="270" class="sm" marker-end="url(#am)"/><rect x="260" y="252" width="84" height="36" class="tint s"/><text x="302.0" y="270.0" text-anchor="middle" dominant-baseline="middle" class="t-s">中間表現</text><line x1="240" y1="270" x2="254" y2="270" class="sm" marker-end="url(#am)"/><rect x="400" y="252" width="84" height="36" class="accT s"/><text x="442.0" y="270.0" text-anchor="middle" dominant-baseline="middle" class="t-s">VM が実行</text><line x1="350" y1="270" x2="394" y2="270" class="sm" marker-end="url(#am)"/><text x="350" y="328" text-anchor="middle" dominant-baseline="middle" class="t-s b">どこまでを実行前に済ませるかが違う。JIT は実行中に熱い箇所だけ翻訳する</text></svg>

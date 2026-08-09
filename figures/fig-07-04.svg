@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="800" height="400" class="bg"/><text x="400" y="34" text-anchor="middle" dominant-baseline="middle" class="b">正しく動く場合</text><text x="70" y="76" text-anchor="end" dominant-baseline="middle" class="t-s">スレッド A</text><text x="70" y="114" text-anchor="end" dominant-baseline="middle" class="t-s">スレッド B</text><line x1="80" y1="60" x2="620" y2="60" class="sm"/><line x1="80" y1="96" x2="620" y2="96" class="sm"/><line x1="80" y1="132" x2="620" y2="132" class="sm"/><rect x="86" y="64" width="76" height="28" class="tint s"/><text x="124" y="78" text-anchor="middle" dominant-baseline="middle" class="t-xs m b">LOAD</text><text x="124" y="156" text-anchor="middle" dominant-baseline="middle" class="t-xs m">5</text><rect x="174" y="64" width="76" height="28" class="tint s"/><text x="212" y="78" text-anchor="middle" dominant-baseline="middle" class="t-xs m b">ADD</text><text x="212" y="156" text-anchor="middle" dominant-baseline="middle" class="t-xs m">5</text><rect x="262" y="64" width="76" height="28" class="tint s"/><text x="300" y="78" text-anchor="middle" dominant-baseline="middle" class="t-xs m b">STORE</text><text x="300" y="156" text-anchor="middle" dominant-baseline="middle" class="t-xs m">6</text><rect x="350" y="100" width="76" height="28" class="accT s"/><text x="388" y="114" text-anchor="middle" dominant-baseline="middle" class="t-xs m b">LOAD</text><text x="388" y="156" text-anchor="middle" dominant-baseline="middle" class="t-xs m">6</text><rect x="438" y="100" width="76" height="28" class="accT s"/><text x="476" y="114" text-anchor="middle" dominant-baseline="middle" class="t-xs m b">ADD</text><text x="476" y="156" text-anchor="middle" dominant-baseline="middle" class="t-xs m">6</text><rect x="526" y="100" width="76" height="28" class="accT s"/><text x="564" y="114" text-anchor="middle" dominant-baseline="middle" class="t-xs m b">STORE</text><text x="564" y="156" text-anchor="middle" dominant-baseline="middle" class="t-xs m">7</text><text x="70" y="156" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">count</text><text x="626" y="156" text-anchor="start" dominant-baseline="middle" class="t-s b">→ 7（正しい）</text><text x="400" y="194" text-anchor="middle" dominant-baseline="middle" class="b">壊れる場合</text><text x="70" y="236" text-anchor="end" dominant-baseline="middle" class="t-s">スレッド A</text><text x="70" y="274" text-anchor="end" dominant-baseline="middle" class="t-s">スレッド B</text><line x1="80" y1="220" x2="620" y2="220" class="sm"/><line x1="80" y1="256" x2="620" y2="256" class="sm"/><line x1="80" y1="292" x2="620" y2="292" class="sm"/><rect x="86" y="224" width="76" height="28" class="tint s"/><text x="124" y="238" text-anchor="middle" dominant-baseline="middle" class="t-xs m b">LOAD</text><text x="124" y="316" text-anchor="middle" dominant-baseline="middle" class="t-xs m">5</text><rect x="174" y="260" width="76" height="28" class="accT s"/><text x="212" y="274" text-anchor="middle" dominant-baseline="middle" class="t-xs m b">LOAD</text><text x="212" y="316" text-anchor="middle" dominant-baseline="middle" class="t-xs m">5</text><rect x="262" y="224" width="76" height="28" class="tint s"/><text x="300" y="238" text-anchor="middle" dominant-baseline="middle" class="t-xs m b">ADD</text><text x="300" y="316" text-anchor="middle" dominant-baseline="middle" class="t-xs m">5</text><rect x="350" y="260" width="76" height="28" class="accT s"/><text x="388" y="274" text-anchor="middle" dominant-baseline="middle" class="t-xs m b">ADD</text><text x="388" y="316" text-anchor="middle" dominant-baseline="middle" class="t-xs m">5</text><rect x="438" y="224" width="76" height="28" class="tint s"/><text x="476" y="238" text-anchor="middle" dominant-baseline="middle" class="t-xs m b">STORE</text><text x="476" y="316" text-anchor="middle" dominant-baseline="middle" class="t-xs m">6</text><rect x="526" y="260" width="76" height="28" class="accT s"/><text x="564" y="274" text-anchor="middle" dominant-baseline="middle" class="t-xs m b">STORE</text><text x="564" y="316" text-anchor="middle" dominant-baseline="middle" class="t-xs m">6</text><text x="70" y="316" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">count</text><text x="626" y="316" text-anchor="start" dominant-baseline="middle" class="t-s b acc">→ 6（更新が1つ失われた）</text><text x="400" y="378" text-anchor="middle" dominant-baseline="middle" class="t-s b">同じコードでも、命令の食い違い方で結果が変わる</text></svg>

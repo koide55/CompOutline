@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 330" width="700" height="330" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="330" class="bg"/><rect x="40" y="200" width="26" height="46" class="bg s"/><rect x="66" y="200" width="26" height="46" class="bg s"/><rect x="92" y="200" width="26" height="46" class="bg s"/><rect x="118" y="200" width="26" height="46" class="bg s"/><rect x="144" y="200" width="26" height="46" class="bg s"/><rect x="170" y="200" width="26" height="46" class="bg s"/><rect x="196" y="200" width="26" height="46" class="bg s"/><rect x="222" y="200" width="26" height="46" class="bg s"/><rect x="248" y="200" width="26" height="46" class="bg s"/><rect x="274" y="200" width="26" height="46" class="bg s"/><rect x="300" y="200" width="26" height="46" class="bg s"/><rect x="326" y="200" width="26" height="46" class="bg s"/><rect x="352" y="200" width="26" height="46" class="bg s"/><rect x="378" y="200" width="26" height="46" class="bg s"/><rect x="404" y="200" width="26" height="46" class="bg s"/><rect x="430" y="200" width="26" height="46" class="bg s"/><rect x="456" y="200" width="26" height="46" class="bg s"/><rect x="482" y="200" width="26" height="46" class="bg s"/><rect x="508" y="200" width="26" height="46" class="bg s"/><rect x="534" y="200" width="26" height="46" class="bg s"/><rect x="560" y="200" width="26" height="46" class="bg s"/><rect x="586" y="200" width="26" height="46" class="bg s"/><text x="183.0" y="223" text-anchor="middle" dominant-baseline="middle" class="t-s m">1</text><text x="209.0" y="223" text-anchor="middle" dominant-baseline="middle" class="t-s m">0</text><text x="235.0" y="223" text-anchor="middle" dominant-baseline="middle" class="t-s m">1</text><text x="261.0" y="223" text-anchor="middle" dominant-baseline="middle" class="t-s m">1</text><text x="287.0" y="223" text-anchor="middle" dominant-baseline="middle" class="t-s m">1</text><text x="313.0" y="223" text-anchor="middle" dominant-baseline="middle" class="t-s m">0</text><text x="339.0" y="223" text-anchor="middle" dominant-baseline="middle" class="t-s m">1</text><text x="365.0" y="223" text-anchor="middle" dominant-baseline="middle" class="t-s m">1</text><text x="391.0" y="223" text-anchor="middle" dominant-baseline="middle" class="t-s m">0</text><text x="417.0" y="223" text-anchor="middle" dominant-baseline="middle" class="t-s m">0</text><text x="443.0" y="223" text-anchor="middle" dominant-baseline="middle" class="t-s m">0</text><text x="469.0" y="223" text-anchor="middle" dominant-baseline="middle" class="t-s m">1</text><text x="26" y="223" text-anchor="end" dominant-baseline="middle" class="lbl">…</text><text x="626" y="223" text-anchor="start" dominant-baseline="middle" class="lbl">…</text><text x="326.0" y="270" text-anchor="middle" dominant-baseline="middle" class="t-s lbl">無限に長いテープ</text><polygon points="313.0,192 304.0,176 322.0,176" class="ink"/><line x1="313.0" y1="176" x2="313.0" y2="144" class="s"/><rect x="228.0" y="72" width="170" height="72" rx="8" class="tint s"/><text x="313.0" y="92" text-anchor="middle" dominant-baseline="middle" class="b">有限制御部</text><text x="313.0" y="114" text-anchor="middle" dominant-baseline="middle" class="t-s m">現在の状態  q</text><text x="313.0" y="132" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">（状態は有限個）</text><path d="M279.0,144 L279.0,170" class="sa" marker-end="url(#aa)"/><path d="M347.0,170 L347.0,144" class="sa" marker-end="url(#aa)"/><text x="269.0" y="156" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">書く記号</text><text x="357.0" y="156" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">読んだ記号</text><rect x="430" y="30" width="250" height="92" rx="6" class="none sm dash"/><text x="555" y="46" text-anchor="middle" dominant-baseline="middle" class="t-s b">1ステップですること</text><text x="444" y="64" text-anchor="start" dominant-baseline="middle" class="t-xs">① ヘッドの下の記号を読む</text><text x="444" y="80" text-anchor="start" dominant-baseline="middle" class="t-xs">② そこに記号を書く</text><text x="444" y="96" text-anchor="start" dominant-baseline="middle" class="t-xs">③ ヘッドを左か右に1マス動かす</text><text x="444" y="112" text-anchor="start" dominant-baseline="middle" class="t-xs">④ 状態を変える</text><text x="326.0" y="296" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">ヘッドは左右に1マスずつ動ける</text></svg>

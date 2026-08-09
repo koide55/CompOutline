@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 220" width="680" height="220" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="680" height="220" class="bg"/><line x1="40" y1="130" x2="650" y2="130" class="s" marker-end="url(#a)"/><text x="650" y="152" text-anchor="end" dominant-baseline="middle" class="t-s lbl">実数</text><line x1="60" y1="118" x2="60" y2="142" class="sm"/><line x1="63.0" y1="118" x2="63.0" y2="142" class="sm"/><line x1="66.165" y1="118" x2="66.165" y2="142" class="sm"/><line x1="69.504075" y1="118" x2="69.504075" y2="142" class="sm"/><line x1="73.026799125" y1="118" x2="73.026799125" y2="142" class="sm"/><line x1="76.743273076875" y1="118" x2="76.743273076875" y2="142" class="sm"/><line x1="80.66415309610312" y1="118" x2="80.66415309610312" y2="142" class="sm"/><line x1="84.80068151638879" y1="118" x2="84.80068151638879" y2="142" class="sm"/><line x1="89.16471899979017" y1="118" x2="89.16471899979017" y2="142" class="sm"/><line x1="93.76877854477863" y1="118" x2="93.76877854477863" y2="142" class="sm"/><line x1="98.62606136474145" y1="118" x2="98.62606136474145" y2="142" class="sm"/><line x1="103.75049473980222" y1="118" x2="103.75049473980222" y2="142" class="sm"/><line x1="109.15677195049135" y1="118" x2="109.15677195049135" y2="142" class="sm"/><line x1="114.86039440776837" y1="118" x2="114.86039440776837" y2="142" class="sm"/><line x1="120.87771610019563" y1="118" x2="120.87771610019563" y2="142" class="sm"/><line x1="127.22599048570638" y1="118" x2="127.22599048570638" y2="142" class="sm"/><line x1="133.9234199624202" y1="118" x2="133.9234199624202" y2="142" class="sm"/><line x1="140.98920806035332" y1="118" x2="140.98920806035332" y2="142" class="sm"/><line x1="148.44361450367276" y1="118" x2="148.44361450367276" y2="142" class="sm"/><line x1="156.30801330137476" y1="118" x2="156.30801330137476" y2="142" class="sm"/><line x1="164.60495403295036" y1="118" x2="164.60495403295036" y2="142" class="sm"/><line x1="173.35822650476263" y1="118" x2="173.35822650476263" y2="142" class="sm"/><line x1="182.59292896252455" y1="118" x2="182.59292896252455" y2="142" class="sm"/><line x1="192.3355400554634" y1="118" x2="192.3355400554634" y2="142" class="sm"/><line x1="202.61399475851388" y1="118" x2="202.61399475851388" y2="142" class="sm"/><line x1="213.45776447023215" y1="118" x2="213.45776447023215" y2="142" class="sm"/><line x1="224.8979415160949" y1="118" x2="224.8979415160949" y2="142" class="sm"/><line x1="236.9673282994801" y1="118" x2="236.9673282994801" y2="142" class="sm"/><line x1="249.7005313559515" y1="118" x2="249.7005313559515" y2="142" class="sm"/><line x1="263.13406058052885" y1="118" x2="263.13406058052885" y2="142" class="sm"/><line x1="277.3064339124579" y1="118" x2="277.3064339124579" y2="142" class="sm"/><line x1="292.2582877776431" y1="118" x2="292.2582877776431" y2="142" class="sm"/><line x1="308.03249360541344" y1="118" x2="308.03249360541344" y2="142" class="sm"/><line x1="324.6742807537112" y1="118" x2="324.6742807537112" y2="142" class="sm"/><line x1="342.23136619516526" y1="118" x2="342.23136619516526" y2="142" class="sm"/><line x1="360.7540913358993" y1="118" x2="360.7540913358993" y2="142" class="sm"/><line x1="380.29556635937377" y1="118" x2="380.29556635937377" y2="142" class="sm"/><line x1="400.9118225091393" y1="118" x2="400.9118225091393" y2="142" class="sm"/><line x1="422.66197274714193" y1="118" x2="422.66197274714193" y2="142" class="sm"/><line x1="445.6083812482347" y1="118" x2="445.6083812482347" y2="142" class="sm"/><line x1="469.8168422168876" y1="118" x2="469.8168422168876" y2="142" class="sm"/><line x1="495.3567685388164" y1="118" x2="495.3567685388164" y2="142" class="sm"/><line x1="522.3013908084513" y1="118" x2="522.3013908084513" y2="142" class="sm"/><line x1="550.7279673029161" y1="118" x2="550.7279673029161" y2="142" class="sm"/><line x1="580.7180055045765" y1="118" x2="580.7180055045765" y2="142" class="sm"/><line x1="612.3574958073282" y1="118" x2="612.3574958073282" y2="142" class="sm"/><text x="60" y="170" text-anchor="middle" dominant-baseline="middle" class="t-s">0 の近く</text><text x="600" y="170" text-anchor="middle" dominant-baseline="middle" class="t-s">大きな値</text><text x="150" y="90" text-anchor="middle" dominant-baseline="middle" class="t-s">密：表せる数が細かい</text><text x="520" y="90" text-anchor="middle" dominant-baseline="middle" class="t-s">疎：とびとびになる</text><line x1="150" y1="102" x2="110" y2="114" class="sm" marker-end="url(#am)"/><line x1="520" y1="102" x2="560" y2="114" class="sm" marker-end="url(#am)"/><text x="340" y="40" text-anchor="middle" dominant-baseline="middle" class="b">指数が1増えるごとに、隣どうしの間隔が2倍になる</text><text x="340" y="190" text-anchor="middle" dominant-baseline="middle" class="t-s">0.1 は2進数では循環小数 → 有限ビットでは表しきれない</text></svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 400" width="700" height="400" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="400" class="bg"/><text x="140.0" y="46" text-anchor="middle" dominant-baseline="middle" class="t-s b">履修</text><rect x="40" y="60" width="72" height="26" class="tint2 s"/><text x="76.0" y="73.0" text-anchor="middle" dominant-baseline="middle" class="t-xs b">学籍番号</text><rect x="112" y="60" width="76" height="26" class="tint2 s"/><text x="150.0" y="73.0" text-anchor="middle" dominant-baseline="middle" class="t-xs b">科目コード</text><rect x="188" y="60" width="52" height="26" class="tint2 s"/><text x="214.0" y="73.0" text-anchor="middle" dominant-baseline="middle" class="t-xs b">成績</text><rect x="40" y="86" width="72" height="26" class="bg s"/><text x="76.0" y="99.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">2S001</text><rect x="112" y="86" width="76" height="26" class="bg s"/><text x="150.0" y="99.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">C001</text><rect x="188" y="86" width="52" height="26" class="bg s"/><text x="214.0" y="99.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">85</text><rect x="40" y="112" width="72" height="26" class="bg s"/><text x="76.0" y="125.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">2S001</text><rect x="112" y="112" width="76" height="26" class="bg s"/><text x="150.0" y="125.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">C002</text><rect x="188" y="112" width="52" height="26" class="bg s"/><text x="214.0" y="125.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">90</text><rect x="40" y="138" width="72" height="26" class="bg s"/><text x="76.0" y="151.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">2S002</text><rect x="112" y="138" width="76" height="26" class="bg s"/><text x="150.0" y="151.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">C001</text><rect x="188" y="138" width="52" height="26" class="bg s"/><text x="214.0" y="151.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">78</text><rect x="40" y="164" width="72" height="26" class="bg s"/><text x="76.0" y="177.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">2S009</text><rect x="112" y="164" width="76" height="26" class="bg s"/><text x="150.0" y="177.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">C001</text><rect x="188" y="164" width="52" height="26" class="bg s"/><text x="214.0" y="177.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">60</text><text x="418.0" y="46" text-anchor="middle" dominant-baseline="middle" class="t-s b">学生</text><rect x="320" y="60" width="72" height="26" class="tint2 s"/><text x="356.0" y="73.0" text-anchor="middle" dominant-baseline="middle" class="t-xs b">学籍番号</text><rect x="392" y="60" width="56" height="26" class="tint2 s"/><text x="420.0" y="73.0" text-anchor="middle" dominant-baseline="middle" class="t-xs b">氏名</text><rect x="448" y="60" width="68" height="26" class="tint2 s"/><text x="482.0" y="73.0" text-anchor="middle" dominant-baseline="middle" class="t-xs b">学部</text><rect x="320" y="86" width="72" height="26" class="bg s"/><text x="356.0" y="99.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">2S001</text><rect x="392" y="86" width="56" height="26" class="bg s"/><text x="420.0" y="99.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">山田</text><rect x="448" y="86" width="68" height="26" class="bg s"/><text x="482.0" y="99.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">工学部</text><rect x="320" y="112" width="72" height="26" class="bg s"/><text x="356.0" y="125.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">2S002</text><rect x="392" y="112" width="56" height="26" class="bg s"/><text x="420.0" y="125.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">田中</text><rect x="448" y="112" width="68" height="26" class="bg s"/><text x="482.0" y="125.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">理学部</text><path d="M240,99 C280,99 290,99 318,99" class="sm" marker-end="url(#am)"/><path d="M240,125 C280,125 290,99 318,99" class="sm" marker-end="url(#am)"/><path d="M240,151 C280,151 290,125 318,125" class="sm" marker-end="url(#am)"/><text x="268" y="190" text-anchor="middle" dominant-baseline="middle" class="b acc">×</text><text x="268" y="208" text-anchor="middle" dominant-baseline="middle" class="t-xs acc">相手がいない</text><line x1="240" y1="177" x2="258" y2="186" class="sa dot"/><text x="302.0" y="248" text-anchor="middle" dominant-baseline="middle" class="t-s b">結合の結果</text><rect x="190" y="262" width="76" height="26" class="tint2 s"/><text x="228.0" y="275.0" text-anchor="middle" dominant-baseline="middle" class="t-xs b">氏名</text><rect x="266" y="262" width="88" height="26" class="tint2 s"/><text x="310.0" y="275.0" text-anchor="middle" dominant-baseline="middle" class="t-xs b">科目コード</text><rect x="354" y="262" width="60" height="26" class="tint2 s"/><text x="384.0" y="275.0" text-anchor="middle" dominant-baseline="middle" class="t-xs b">成績</text><rect x="190" y="288" width="76" height="26" class="bg s"/><text x="228.0" y="301.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">山田</text><rect x="266" y="288" width="88" height="26" class="bg s"/><text x="310.0" y="301.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">C001</text><rect x="354" y="288" width="60" height="26" class="bg s"/><text x="384.0" y="301.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">85</text><rect x="190" y="314" width="76" height="26" class="bg s"/><text x="228.0" y="327.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">山田</text><rect x="266" y="314" width="88" height="26" class="bg s"/><text x="310.0" y="327.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">C002</text><rect x="354" y="314" width="60" height="26" class="bg s"/><text x="384.0" y="327.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">90</text><rect x="190" y="340" width="76" height="26" class="bg s"/><text x="228.0" y="353.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">田中</text><rect x="266" y="340" width="88" height="26" class="bg s"/><text x="310.0" y="353.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">C001</text><rect x="354" y="340" width="60" height="26" class="bg s"/><text x="384.0" y="353.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">78</text><text x="350" y="380" text-anchor="middle" dominant-baseline="middle" class="t-s b">内部結合では、一致する相手がない行（2S009）は結果に現れない</text></svg>

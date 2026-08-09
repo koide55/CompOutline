@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 330" width="660" height="330" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="660" height="330" class="bg"/><text x="46" y="62" text-anchor="start" dominant-baseline="middle" class="b">NOT</text><text x="46" y="84" text-anchor="start" dominant-baseline="middle" class="t-xs m lbl">NAND(A, A)</text><path d="M180,40 L207.0,40 A20.0,20.0 0 0 1 207.0,80 L180,80 Z" class="bg s"/><circle cx="230" cy="60.0" r="5" class="bg s"/><path d="M150,50 L180,50" class="s"/><path d="M150,70 L180,70" class="s"/><path d="M150,50 L150,70" class="s"/><text x="140" y="60" text-anchor="end" dominant-baseline="middle" class="t-s">A</text><line x1="250" y1="60" x2="300" y2="60" class="s"/><text x="310" y="60" text-anchor="start" dominant-baseline="middle" class="t-s">¬A</text><text x="560" y="60" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">NAND だけで作れる</text><text x="46" y="158" text-anchor="start" dominant-baseline="middle" class="b">AND</text><text x="46" y="180" text-anchor="start" dominant-baseline="middle" class="t-xs m lbl">NOT(NAND(A, B))</text><path d="M180,136 L207.0,136 A20.0,20.0 0 0 1 207.0,176 L180,176 Z" class="bg s"/><circle cx="230" cy="156.0" r="5" class="bg s"/><path d="M300,136 L327.0,136 A20.0,20.0 0 0 1 327.0,176 L300,176 Z" class="bg s"/><circle cx="350" cy="156.0" r="5" class="bg s"/><text x="160" y="146" text-anchor="end" dominant-baseline="middle" class="t-s">A</text><text x="160" y="166" text-anchor="end" dominant-baseline="middle" class="t-s">B</text><line x1="166" y1="146" x2="180" y2="146" class="s"/><line x1="166" y1="166" x2="180" y2="166" class="s"/><path d="M250,156 L276,156 L276,146 L300,146" class="s"/><path d="M276,156 L276,166 L300,166" class="s"/><line x1="370" y1="156" x2="410" y2="156" class="s"/><text x="420" y="156" text-anchor="start" dominant-baseline="middle" class="t-s">A·B</text><text x="560" y="156" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">NAND だけで作れる</text><text x="46" y="254" text-anchor="start" dominant-baseline="middle" class="b">OR</text><text x="46" y="276" text-anchor="start" dominant-baseline="middle" class="t-xs m lbl">NAND(¬A, ¬B)</text><path d="M180,220 L202.0,220 A14.0,14.0 0 0 1 202.0,248 L180,248 Z" class="bg s"/><circle cx="220" cy="234.0" r="5" class="bg s"/><path d="M180,258 L202.0,258 A14.0,14.0 0 0 1 202.0,286 L180,286 Z" class="bg s"/><circle cx="220" cy="272.0" r="5" class="bg s"/><path d="M300,232 L327.0,232 A20.0,20.0 0 0 1 327.0,272 L300,272 Z" class="bg s"/><circle cx="350" cy="252.0" r="5" class="bg s"/><text x="160" y="234" text-anchor="end" dominant-baseline="middle" class="t-s">A</text><text x="160" y="272" text-anchor="end" dominant-baseline="middle" class="t-s">B</text><line x1="166" y1="226" x2="180" y2="226" class="s"/><line x1="166" y1="234" x2="180" y2="234" class="s"/><line x1="166" y1="264" x2="180" y2="264" class="s"/><line x1="166" y1="272" x2="180" y2="272" class="s"/><line x1="236" y1="234" x2="300" y2="242" class="s"/><line x1="236" y1="272" x2="300" y2="262" class="s"/><line x1="370" y1="252" x2="410" y2="252" class="s"/><text x="420" y="252" text-anchor="start" dominant-baseline="middle" class="t-s">A+B</text><text x="560" y="252" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">NAND だけで作れる</text><text x="330" y="316" text-anchor="middle" dominant-baseline="middle" class="t-s b">すべての論理関数が NAND 1種類で構成できる（NAND完全性）</text></svg>

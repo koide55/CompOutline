@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 360" width="700" height="360" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="360" class="bg"/><text x="130" y="34" text-anchor="middle" dominant-baseline="middle" class="b">内部ネットワーク</text><rect x="40" y="70" width="190" height="44" class="tint s"/><text x="135.0" y="92.0" text-anchor="middle" dominant-baseline="middle" class="t-xs m">192.168.1.10 : 50001</text><line x1="230" y1="92" x2="288" y2="92" class="sa" marker-end="url(#a)"/><rect x="40" y="150" width="190" height="44" class="tint s"/><text x="135.0" y="172.0" text-anchor="middle" dominant-baseline="middle" class="t-xs m">192.168.1.11 : 50002</text><line x1="230" y1="172" x2="288" y2="172" class="sa" marker-end="url(#a)"/><rect x="290" y="56" width="140" height="152" class="tint2 s"/><text x="360" y="72" text-anchor="middle" dominant-baseline="middle" class="t-s b">NAT ルータ</text><rect x="300" y="86" width="120" height="96" class="bg s"/><text x="360" y="102" text-anchor="middle" dominant-baseline="middle" class="t-xs b">変換表</text><text x="360" y="124" text-anchor="middle" dominant-baseline="middle" class="t-xs m">50001 ↔ 40001</text><text x="360" y="142" text-anchor="middle" dominant-baseline="middle" class="t-xs m">50002 ↔ 40002</text><text x="360" y="166" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">（ポートで区別）</text><line x1="430" y1="96" x2="496" y2="96" class="sa" marker-end="url(#a)"/><text x="463" y="74" text-anchor="middle" dominant-baseline="middle" class="t-xs m lbl">203.0.113.7 : 40001</text><line x1="496" y1="160" x2="430" y2="160" class="sa" marker-end="url(#a)"/><text x="496" y="186" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">戻りは表を逆引きする</text><rect x="500" y="92" width="160" height="76" class="tint s"/><text x="580.0" y="121.0" text-anchor="middle" dominant-baseline="middle" class="t-s">インターネット上</text><text x="580.0" y="139.0" text-anchor="middle" dominant-baseline="middle" class="t-s">のサーバ</text><text x="355" y="236" text-anchor="middle" dominant-baseline="middle" class="t-s b">グローバルアドレス1個を、多数の機器で共有できる</text><rect x="90" y="264" width="520" height="74" rx="6" class="none sm dash"/><text x="350" y="284" text-anchor="middle" dominant-baseline="middle" class="t-s b">副作用</text><text x="350" y="304" text-anchor="middle" dominant-baseline="middle" class="t-xs">外部から内部の機器に接続を「開始」できない。内部から出た通信の戻りしか通せない</text><text x="350" y="322" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">簡易なファイアウォールとして働く一方、P2P や直接通信を難しくした</text></svg>

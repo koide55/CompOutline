@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 400" width="700" height="400" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="400" class="bg"/><text x="134.0" y="40" text-anchor="middle" dominant-baseline="middle" class="b">オンプレミス</text><rect x="60" y="58" width="148" height="30" class="accT s"/><text x="134.0" y="73.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">アプリケーション</text><rect x="60" y="88" width="148" height="30" class="accT s"/><text x="134.0" y="103.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">データ</text><rect x="60" y="118" width="148" height="30" class="accT s"/><text x="134.0" y="133.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">ランタイム</text><rect x="60" y="148" width="148" height="30" class="accT s"/><text x="134.0" y="163.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">ミドルウェア</text><rect x="60" y="178" width="148" height="30" class="accT s"/><text x="134.0" y="193.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">OS</text><rect x="60" y="208" width="148" height="30" class="accT s"/><text x="134.0" y="223.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">仮想化</text><rect x="60" y="238" width="148" height="30" class="accT s"/><text x="134.0" y="253.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">サーバ</text><rect x="60" y="268" width="148" height="30" class="accT s"/><text x="134.0" y="283.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">ストレージ</text><rect x="60" y="298" width="148" height="30" class="accT s"/><text x="134.0" y="313.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">ネットワーク</text><rect x="60" y="328" width="148" height="30" class="accT s"/><text x="134.0" y="343.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">施設</text><line x1="56" y1="358" x2="212" y2="358" class="s2"/><text x="296.0" y="40" text-anchor="middle" dominant-baseline="middle" class="b">IaaS</text><rect x="222" y="58" width="148" height="30" class="accT s"/><rect x="222" y="88" width="148" height="30" class="accT s"/><rect x="222" y="118" width="148" height="30" class="accT s"/><rect x="222" y="148" width="148" height="30" class="accT s"/><rect x="222" y="178" width="148" height="30" class="accT s"/><rect x="222" y="208" width="148" height="30" class="tint s"/><rect x="222" y="238" width="148" height="30" class="tint s"/><rect x="222" y="268" width="148" height="30" class="tint s"/><rect x="222" y="298" width="148" height="30" class="tint s"/><rect x="222" y="328" width="148" height="30" class="tint s"/><line x1="218" y1="208" x2="374" y2="208" class="s2"/><text x="458.0" y="40" text-anchor="middle" dominant-baseline="middle" class="b">PaaS</text><rect x="384" y="58" width="148" height="30" class="accT s"/><rect x="384" y="88" width="148" height="30" class="accT s"/><rect x="384" y="118" width="148" height="30" class="tint s"/><rect x="384" y="148" width="148" height="30" class="tint s"/><rect x="384" y="178" width="148" height="30" class="tint s"/><rect x="384" y="208" width="148" height="30" class="tint s"/><rect x="384" y="238" width="148" height="30" class="tint s"/><rect x="384" y="268" width="148" height="30" class="tint s"/><rect x="384" y="298" width="148" height="30" class="tint s"/><rect x="384" y="328" width="148" height="30" class="tint s"/><line x1="380" y1="118" x2="536" y2="118" class="s2"/><text x="620.0" y="40" text-anchor="middle" dominant-baseline="middle" class="b">SaaS</text><rect x="546" y="58" width="148" height="30" class="tint s"/><rect x="546" y="88" width="148" height="30" class="tint s"/><rect x="546" y="118" width="148" height="30" class="tint s"/><rect x="546" y="148" width="148" height="30" class="tint s"/><rect x="546" y="178" width="148" height="30" class="tint s"/><rect x="546" y="208" width="148" height="30" class="tint s"/><rect x="546" y="238" width="148" height="30" class="tint s"/><rect x="546" y="268" width="148" height="30" class="tint s"/><rect x="546" y="298" width="148" height="30" class="tint s"/><rect x="546" y="328" width="148" height="30" class="tint s"/><rect x="60" y="368" width="20" height="14" class="accT s"/><text x="88" y="375" text-anchor="start" dominant-baseline="middle" class="t-xs">利用者の責任</text><rect x="190" y="368" width="20" height="14" class="tint s"/><text x="218" y="375" text-anchor="start" dominant-baseline="middle" class="t-xs">事業者の責任</text><text x="500" y="375" text-anchor="middle" dominant-baseline="middle" class="t-xs b">境界が上がるほど任せる範囲が広い</text></svg>

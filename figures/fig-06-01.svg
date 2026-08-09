@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 400" width="700" height="400" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="400" class="bg"/><text x="160" y="32" text-anchor="middle" dominant-baseline="middle" class="b">上から見た図</text><circle cx="160" cy="165" r="100" class="tint s"/><circle cx="160" cy="165" r="86" class="none sm"/><circle cx="160" cy="165" r="70" class="none sm"/><circle cx="160" cy="165" r="54" class="none sm"/><circle cx="160" cy="165" r="38" class="none sm"/><circle cx="160" cy="165" r="16" class="bg s"/><line x1="176.0" y1="165.0" x2="260.0" y2="165.0" class="sm"/><line x1="173.85640646055103" y1="173.0" x2="246.60254037844388" y2="215.0" class="sm"/><line x1="168.0" y1="178.85640646055103" x2="210.0" y2="251.60254037844385" class="sm"/><line x1="160.0" y1="181.0" x2="160.0" y2="265.0" class="sm"/><line x1="152.0" y1="178.85640646055103" x2="110.00000000000001" y2="251.60254037844388" class="sm"/><line x1="146.14359353944897" y1="173.0" x2="73.39745962155612" y2="215.0" class="sm"/><line x1="144.0" y1="165.0" x2="60.0" y2="165.0" class="sm"/><line x1="146.14359353944897" y1="157.0" x2="73.39745962155614" y2="114.99999999999999" class="sm"/><line x1="152.0" y1="151.143593539449" x2="109.99999999999996" y2="78.39745962155617" class="sm"/><line x1="160.0" y1="149.0" x2="159.99999999999997" y2="65.0" class="sm"/><line x1="168.0" y1="151.14359353944897" x2="210.0" y2="78.39745962155614" class="sm"/><line x1="173.856406460551" y1="157.0" x2="246.60254037844385" y2="114.99999999999996" class="sm"/><path d="M220.6,130.0 A70,70 0 0 1 230.0,165.0 L246.0,165.0 A86,86 0 0 0 234.5,122.0 Z" class="accT sa"/><text x="42" y="99" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">トラック</text><line x1="46" y1="103" x2="98" y2="103" class="sm"/><text x="42" y="139" text-anchor="end" dominant-baseline="middle" class="t-xs acc b">セクタ</text><line x1="46" y1="143" x2="86" y2="143" class="sa"/><line x1="86" y1="143" x2="234" y2="117" class="sa dot"/><path d="M310,257 L200,191" class="s2"/><circle cx="310" cy="257" r="8" class="tint2 s"/><text x="490" y="32" text-anchor="middle" dominant-baseline="middle" class="b">横から見た図</text><ellipse cx="490" cy="80" rx="110" ry="12" class="tint s"/><rect x="380" y="80" width="220" height="6" class="tint2"/><ellipse cx="490" cy="80" rx="110" ry="12" class="none s"/><rect x="420" y="68" width="14" height="7" class="ink"/><rect x="420" y="86" width="14" height="7" class="ink"/><ellipse cx="490" cy="122" rx="110" ry="12" class="tint s"/><rect x="380" y="122" width="220" height="6" class="tint2"/><ellipse cx="490" cy="122" rx="110" ry="12" class="none s"/><rect x="420" y="110" width="14" height="7" class="ink"/><rect x="420" y="128" width="14" height="7" class="ink"/><ellipse cx="490" cy="164" rx="110" ry="12" class="tint s"/><rect x="380" y="164" width="220" height="6" class="tint2"/><ellipse cx="490" cy="164" rx="110" ry="12" class="none s"/><rect x="420" y="152" width="14" height="7" class="ink"/><rect x="420" y="170" width="14" height="7" class="ink"/><ellipse cx="490" cy="206" rx="110" ry="12" class="tint s"/><rect x="380" y="206" width="220" height="6" class="tint2"/><ellipse cx="490" cy="206" rx="110" ry="12" class="none s"/><rect x="420" y="194" width="14" height="7" class="ink"/><rect x="420" y="212" width="14" height="7" class="ink"/><rect x="484" y="60" width="12" height="188" class="tint2 s"/><text x="490" y="48" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">スピンドル</text><rect x="406" y="64" width="8" height="168" class="accT sa"/><text x="394" y="274" text-anchor="middle" dominant-baseline="middle" class="t-xs acc b">アクセスアーム</text><text x="394" y="290" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">（全ヘッド一体）</text><rect x="530" y="58" width="30" height="192" class="none s2 dash"/><text x="545" y="274" text-anchor="middle" dominant-baseline="middle" class="t-xs b">シリンダ</text><line x1="490" y1="54" x2="490" y2="68" class="sm"/><text x="350" y="372" text-anchor="middle" dominant-baseline="middle" class="t-s b">ヘッドが一体で動くので、同じシリンダ内なら腕を動かさずに読める</text></svg>

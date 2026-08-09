@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 300" width="700" height="300" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="300" class="bg"/><text x="122" y="34" text-anchor="middle" dominant-baseline="middle" class="t-s b">1行目を通電</text><line x1="40" y1="66" x2="204" y2="66" class="sa"/><text x="32" y="66" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">行1</text><line x1="40" y1="112" x2="204" y2="112" class="sm"/><text x="32" y="112" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">行2</text><line x1="40" y1="158" x2="204" y2="158" class="sm"/><text x="32" y="158" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">行3</text><line x1="56" y1="52" x2="56" y2="180" class="sm"/><text x="56" y="260" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">列1</text><line x1="100" y1="52" x2="100" y2="180" class="sm"/><text x="100" y="260" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">列2</text><line x1="144" y1="52" x2="144" y2="180" class="sm"/><text x="144" y="260" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">列3</text><line x1="188" y1="52" x2="188" y2="180" class="sm"/><text x="188" y="260" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">列4</text><circle cx="56" cy="66" r="5" class="bg s"/><circle cx="100" cy="66" r="5" class="bg s"/><circle cx="144" cy="66" r="5" class="bg s"/><circle cx="188" cy="66" r="5" class="bg s"/><circle cx="56" cy="112" r="5" class="bg s"/><circle cx="100" cy="112" r="5" class="bg s"/><circle cx="144" cy="112" r="5" class="ink"/><circle cx="188" cy="112" r="5" class="bg s"/><circle cx="56" cy="158" r="5" class="bg s"/><circle cx="100" cy="158" r="5" class="bg s"/><circle cx="144" cy="158" r="5" class="bg s"/><circle cx="188" cy="158" r="5" class="bg s"/><text x="347" y="34" text-anchor="middle" dominant-baseline="middle" class="t-s b">2行目を通電</text><line x1="265" y1="66" x2="429" y2="66" class="sm"/><text x="257" y="66" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">行1</text><line x1="265" y1="112" x2="429" y2="112" class="sa"/><text x="257" y="112" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">行2</text><line x1="265" y1="158" x2="429" y2="158" class="sm"/><text x="257" y="158" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">行3</text><line x1="281" y1="52" x2="281" y2="180" class="sm"/><line x1="325" y1="52" x2="325" y2="180" class="sm"/><line x1="369" y1="52" x2="369" y2="180" class="sm"/><line x1="413" y1="52" x2="413" y2="180" class="sm"/><circle cx="281" cy="66" r="5" class="bg s"/><circle cx="325" cy="66" r="5" class="bg s"/><circle cx="369" cy="66" r="5" class="bg s"/><circle cx="413" cy="66" r="5" class="bg s"/><circle cx="281" cy="112" r="5" class="bg s"/><circle cx="325" cy="112" r="5" class="bg s"/><circle cx="369" cy="112" r="5" class="ink"/><circle cx="413" cy="112" r="5" class="bg s"/><circle cx="281" cy="158" r="5" class="bg s"/><circle cx="325" cy="158" r="5" class="bg s"/><circle cx="369" cy="158" r="5" class="bg s"/><circle cx="413" cy="158" r="5" class="bg s"/><line x1="369" y1="112" x2="369" y2="180" class="sa"/><text x="369" y="244" text-anchor="middle" dominant-baseline="middle" class="t-xs acc b">電流あり</text><text x="572" y="34" text-anchor="middle" dominant-baseline="middle" class="t-s b">3行目を通電</text><line x1="490" y1="66" x2="654" y2="66" class="sm"/><text x="482" y="66" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">行1</text><line x1="490" y1="112" x2="654" y2="112" class="sm"/><text x="482" y="112" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">行2</text><line x1="490" y1="158" x2="654" y2="158" class="sa"/><text x="482" y="158" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">行3</text><line x1="506" y1="52" x2="506" y2="180" class="sm"/><line x1="550" y1="52" x2="550" y2="180" class="sm"/><line x1="594" y1="52" x2="594" y2="180" class="sm"/><line x1="638" y1="52" x2="638" y2="180" class="sm"/><circle cx="506" cy="66" r="5" class="bg s"/><circle cx="550" cy="66" r="5" class="bg s"/><circle cx="594" cy="66" r="5" class="bg s"/><circle cx="638" cy="66" r="5" class="bg s"/><circle cx="506" cy="112" r="5" class="bg s"/><circle cx="550" cy="112" r="5" class="bg s"/><circle cx="594" cy="112" r="5" class="ink"/><circle cx="638" cy="112" r="5" class="bg s"/><circle cx="506" cy="158" r="5" class="bg s"/><circle cx="550" cy="158" r="5" class="bg s"/><circle cx="594" cy="158" r="5" class="bg s"/><circle cx="638" cy="158" r="5" class="bg s"/><text x="350" y="286" text-anchor="middle" dominant-baseline="middle" class="t-s b">104個のキーを 8×13 に並べれば、配線は 104本ではなく21本で済む</text></svg>

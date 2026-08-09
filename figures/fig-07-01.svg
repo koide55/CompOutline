@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 410" width="680" height="410" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="680" height="410" class="bg"/><circle cx="300" cy="200" r="176" class="tint s"/><circle cx="300" cy="200" r="104" class="accT s"/><text x="300" y="122" text-anchor="middle" dominant-baseline="middle" class="t-s b">カーネル（特権モード）</text><rect x="208" y="156" width="80" height="28" class="bg s"/><text x="248.0" y="170.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">CPU</text><rect x="312" y="156" width="80" height="28" class="bg s"/><text x="352.0" y="170.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">メモリ</text><rect x="208" y="210" width="80" height="28" class="bg s"/><text x="248.0" y="224.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">ストレージ</text><rect x="312" y="210" width="80" height="28" class="bg s"/><text x="352.0" y="224.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">装置</text><text x="300" y="266" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">ハードウェア資源</text><text x="300" y="6" text-anchor="middle" dominant-baseline="middle" class="t-s b">ユーザプロセス（非特権モード）</text><rect x="258" y="296" width="84" height="22" class="bg s2"/><text x="300" y="307" text-anchor="middle" dominant-baseline="middle" class="t-xs b">システムコール</text><line x1="300" y1="350" x2="300" y2="322" class="sa" marker-end="url(#a)"/><text x="396" y="307" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">引数を検査してから実行</text><line x1="142.1316397079674" y1="142.54061592128767" x2="194.75442647197826" y2="161.6937439475251" class="sm" marker-end="url(#am)"/><text x="200.39258219669372" y="163.7458648074791" text-anchor="middle" dominant-baseline="middle" class="t-s b">×</text><line x1="242.54061592128767" y1="42.131639707967395" x2="261.69374394752515" y2="94.75442647197826" class="sm" marker-end="url(#am)"/><text x="263.74586480747917" y="100.39258219669371" text-anchor="middle" dominant-baseline="middle" class="t-s b">×</text><line x1="384.0" y1="54.5077321642143" x2="356.0" y2="103.00515477614287" class="sm" marker-end="url(#am)"/><text x="353.0" y="108.2013071988495" text-anchor="middle" dominant-baseline="middle" class="t-s b">×</text><line x1="457.8683602920326" y1="142.54061592128767" x2="405.24557352802174" y2="161.69374394752512" class="sm" marker-end="url(#am)"/><text x="399.6074178033063" y="163.74586480747914" text-anchor="middle" dominant-baseline="middle" class="t-s b">×</text><text x="310" y="392" text-anchor="middle" dominant-baseline="middle" class="t-s b">入口が1つしかなく、そこで必ず検査される</text></svg>

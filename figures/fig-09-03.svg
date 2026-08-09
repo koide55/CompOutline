@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 380" width="700" height="380" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="380" class="bg"/><text x="98" y="76" text-anchor="middle" dominant-baseline="middle" class="b">ホスト</text><rect x="40" y="96" width="116" height="38" class="tint s"/><text x="98" y="115.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">アプリケーション層</text><rect x="40" y="134" width="116" height="38" class="tint s"/><text x="98" y="153.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">トランスポート層</text><rect x="40" y="172" width="116" height="38" class="tint s"/><text x="98" y="191.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">インターネット層</text><rect x="40" y="210" width="116" height="38" class="tint s"/><text x="98" y="229.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">データリンク層</text><rect x="40" y="248" width="116" height="38" class="tint s"/><text x="98" y="267.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">物理層</text><text x="266" y="76" text-anchor="middle" dominant-baseline="middle" class="b">ルータ</text><rect x="208" y="172" width="116" height="38" class="tint2 s"/><text x="266" y="191.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">インターネット層</text><rect x="208" y="210" width="116" height="38" class="tint2 s"/><text x="266" y="229.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">データリンク層</text><rect x="208" y="248" width="116" height="38" class="tint2 s"/><text x="266" y="267.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">物理層</text><text x="266" y="149.2" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">下から3層だけ</text><text x="434" y="76" text-anchor="middle" dominant-baseline="middle" class="b">ルータ</text><rect x="376" y="172" width="116" height="38" class="tint2 s"/><text x="434" y="191.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">インターネット層</text><rect x="376" y="210" width="116" height="38" class="tint2 s"/><text x="434" y="229.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">データリンク層</text><rect x="376" y="248" width="116" height="38" class="tint2 s"/><text x="434" y="267.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">物理層</text><text x="434" y="149.2" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">下から3層だけ</text><text x="602" y="76" text-anchor="middle" dominant-baseline="middle" class="b">ホスト</text><rect x="544" y="96" width="116" height="38" class="tint s"/><text x="602" y="115.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">アプリケーション層</text><rect x="544" y="134" width="116" height="38" class="tint s"/><text x="602" y="153.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">トランスポート層</text><rect x="544" y="172" width="116" height="38" class="tint s"/><text x="602" y="191.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">インターネット層</text><rect x="544" y="210" width="116" height="38" class="tint s"/><text x="602" y="229.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">データリンク層</text><rect x="544" y="248" width="116" height="38" class="tint s"/><text x="602" y="267.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">物理層</text><path d="M156,115.0 L544,115.0" class="sm dot"/><text x="350" y="60" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">論理的には、同じ層どうしが会話しているように見える</text><path d="M30,115.0 L30,294 L152,294" class="sa" marker-end="url(#aa)"/><text x="30" y="92" text-anchor="middle" dominant-baseline="middle" class="t-xs acc b">降りる</text><line x1="156" y1="294" x2="208" y2="294" class="sa"/><line x1="324" y1="294" x2="376" y2="294" class="sa"/><line x1="492" y1="294" x2="544" y2="294" class="sa"/><path d="M556,294 L670,294 L670,115.0" class="sa" marker-end="url(#aa)"/><text x="670" y="92" text-anchor="middle" dominant-baseline="middle" class="t-xs acc b">上がる</text><path d="M266,294 L266,210" class="sa dash" marker-end="url(#aa)"/><path d="M434,294 L434,210" class="sa dash" marker-end="url(#aa)"/><text x="350" y="332" text-anchor="middle" dominant-baseline="middle" class="t-s b">スイッチは L2、ルータは L3 までしか上がらない。だから中継は速い</text><text x="350" y="358" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">（旧スライドの構成をそのまま引き継いだ）</text></svg>

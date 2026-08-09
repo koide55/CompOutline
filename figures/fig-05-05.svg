@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 350" width="800" height="350" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="800" height="350" class="bg"/><text x="167.0" y="54" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">1</text><text x="241.0" y="54" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">2</text><text x="315.0" y="54" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">3</text><text x="389.0" y="54" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">4</text><text x="463.0" y="54" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">5</text><text x="537.0" y="54" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">6</text><text x="611.0" y="54" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">7</text><text x="685.0" y="54" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">8</text><text x="759.0" y="54" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">9</text><text x="463.0" y="32" text-anchor="middle" dominant-baseline="middle" class="t-s lbl">クロックサイクル</text><text x="116" y="87.0" text-anchor="end" dominant-baseline="middle" class="t-s">命令 I1</text><rect x="130" y="70" width="74" height="34" class="tint s"/><text x="167.0" y="87.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">F</text><rect x="204" y="70" width="74" height="34" class="tint s"/><text x="241.0" y="87.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">D</text><rect x="278" y="70" width="74" height="34" class="accT s"/><text x="315.0" y="87.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">E</text><rect x="352" y="70" width="74" height="34" class="tint s"/><text x="389.0" y="87.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">M</text><rect x="426" y="70" width="74" height="34" class="tint s"/><text x="463.0" y="87.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">W</text><text x="116" y="121.0" text-anchor="end" dominant-baseline="middle" class="t-s">命令 I2</text><rect x="204" y="104" width="74" height="34" class="tint s"/><text x="241.0" y="121.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">F</text><rect x="278" y="104" width="74" height="34" class="tint s"/><text x="315.0" y="121.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">D</text><rect x="352" y="104" width="74" height="34" class="accT s"/><text x="389.0" y="121.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">E</text><rect x="426" y="104" width="74" height="34" class="tint s"/><text x="463.0" y="121.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">M</text><rect x="500" y="104" width="74" height="34" class="tint s"/><text x="537.0" y="121.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">W</text><text x="116" y="155.0" text-anchor="end" dominant-baseline="middle" class="t-s">命令 I3</text><rect x="278" y="138" width="74" height="34" class="tint s"/><text x="315.0" y="155.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">F</text><rect x="352" y="138" width="74" height="34" class="tint s"/><text x="389.0" y="155.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">D</text><rect x="426" y="138" width="74" height="34" class="accT s"/><text x="463.0" y="155.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">E</text><rect x="500" y="138" width="74" height="34" class="tint s"/><text x="537.0" y="155.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">M</text><rect x="574" y="138" width="74" height="34" class="tint s"/><text x="611.0" y="155.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">W</text><text x="116" y="189.0" text-anchor="end" dominant-baseline="middle" class="t-s">命令 I4</text><rect x="352" y="172" width="74" height="34" class="tint s"/><text x="389.0" y="189.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">F</text><rect x="426" y="172" width="74" height="34" class="tint s"/><text x="463.0" y="189.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">D</text><rect x="500" y="172" width="74" height="34" class="accT s"/><text x="537.0" y="189.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">E</text><rect x="574" y="172" width="74" height="34" class="tint s"/><text x="611.0" y="189.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">M</text><rect x="648" y="172" width="74" height="34" class="tint s"/><text x="685.0" y="189.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">W</text><text x="116" y="223.0" text-anchor="end" dominant-baseline="middle" class="t-s">命令 I5</text><rect x="426" y="206" width="74" height="34" class="tint s"/><text x="463.0" y="223.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">F</text><rect x="500" y="206" width="74" height="34" class="tint s"/><text x="537.0" y="223.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">D</text><rect x="574" y="206" width="74" height="34" class="accT s"/><text x="611.0" y="223.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">E</text><rect x="648" y="206" width="74" height="34" class="tint s"/><text x="685.0" y="223.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">M</text><rect x="722" y="206" width="74" height="34" class="tint s"/><text x="759.0" y="223.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">W</text><line x1="426" y1="64" x2="426" y2="250" class="sm dash"/><text x="426" y="266" text-anchor="middle" dominant-baseline="middle" class="t-s b">ここから毎サイクル1命令が完了する</text><text x="426" y="288" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">F フェッチ　D デコード　E 実行　M メモリ　W 書き戻し</text><text x="430" y="318" text-anchor="middle" dominant-baseline="middle" class="t-s b">1命令の所要時間は変わらないが、単位時間あたりの完了数が5倍になる</text></svg>

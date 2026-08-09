@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 400" width="680" height="400" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="680" height="400" class="bg"/><line x1="80" y1="320" x2="600" y2="320" class="s" marker-end="url(#a)"/><line x1="80" y1="320" x2="80" y2="50" class="s" marker-end="url(#a)"/><line x1="80.0" y1="320" x2="80.0" y2="325" class="sm"/><text x="80.0" y="338" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">1970</text><line x1="166.66666666666666" y1="320" x2="166.66666666666666" y2="325" class="sm"/><text x="166.66666666666666" y="338" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">1980</text><line x1="253.33333333333331" y1="320" x2="253.33333333333331" y2="325" class="sm"/><text x="253.33333333333331" y="338" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">1990</text><line x1="340.0" y1="320" x2="340.0" y2="325" class="sm"/><text x="340.0" y="338" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">2000</text><line x1="426.66666666666663" y1="320" x2="426.66666666666663" y2="325" class="sm"/><text x="426.66666666666663" y="338" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">2010</text><line x1="513.3333333333334" y1="320" x2="513.3333333333334" y2="325" class="sm"/><text x="513.3333333333334" y="338" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">2020</text><line x1="600.0" y1="320" x2="600.0" y2="325" class="sm"/><text x="600.0" y="338" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">2030</text><text x="24" y="44" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">対数目盛</text><path d="M80.0,320.0 L88.7,315.8 L97.3,311.5 L106.0,307.3 L114.7,303.1 L123.3,298.9 L132.0,294.6 L140.7,290.4 L149.3,286.2 L158.0,281.9 L166.7,277.7 L175.3,273.5 L184.0,269.2 L192.7,265.0 L201.3,260.8 L210.0,256.6 L218.7,252.3 L227.3,248.1 L236.0,243.9 L244.7,239.6 L253.3,235.4 L262.0,231.2 L270.7,226.9 L279.3,222.7 L288.0,218.5 L296.7,214.2 L305.3,210.0 L314.0,205.8 L322.7,201.6 L331.3,197.3 L340.0,193.1 L348.7,188.9 L357.3,184.6 L366.0,180.4 L374.7,176.2 L383.3,171.9 L392.0,167.7 L400.7,163.5 L409.3,159.3 L418.0,155.0 L426.7,150.8 L435.3,146.6 L444.0,142.3 L452.7,138.1 L461.3,133.9 L470.0,129.7 L478.7,127.0 L487.3,124.4 L496.0,121.7 L504.7,119.1 L513.3,116.4 L522.0,113.8 L530.7,111.1 L539.3,108.5 L548.0,105.9 L556.7,103.2 L565.3,100.6 L574.0,97.9 L582.7,95.3 L591.3,92.6 L600.0,90.0" class="s2"/><text x="461.3333333333333" y="119.88000000000002" text-anchor="middle" dominant-baseline="middle" class="t-xs b">トランジスタ数</text><path d="M80.0,320.0 L88.7,315.2 L97.3,310.4 L106.0,305.7 L114.7,300.9 L123.3,296.1 L132.0,291.3 L140.7,286.5 L149.3,281.7 L158.0,277.0 L166.7,272.2 L175.3,267.4 L184.0,262.6 L192.7,257.8 L201.3,253.0 L210.0,248.3 L218.7,243.5 L227.3,238.7 L236.0,233.9 L244.7,229.1 L253.3,224.3 L262.0,219.6 L270.7,214.8 L279.3,210.0 L288.0,205.2 L296.7,200.4 L305.3,195.6 L314.0,190.9 L322.7,186.1 L331.3,181.3 L340.0,176.5 L348.7,171.7 L357.3,166.9 L366.0,162.2 L374.7,157.4 L383.3,152.6 L392.0,152.2 L400.7,151.8 L409.3,151.4 L418.0,151.0 L426.7,150.6 L435.3,150.2 L444.0,149.8 L452.7,149.4 L461.3,149.0 L470.0,148.6 L478.7,148.1 L487.3,147.7 L496.0,147.3 L504.7,146.9 L513.3,146.5 L522.0,146.1 L530.7,145.7 L539.3,145.3 L548.0,144.9 L556.7,144.5 L565.3,144.1 L574.0,143.7 L582.7,143.3 L591.3,142.9 L600.0,142.5" class="sa"/><text x="530.6666666666667" y="161.715" text-anchor="middle" dominant-baseline="middle" class="t-xs b">クロック周波数</text><path d="M80.0,303.8 L88.7,303.8 L97.3,303.8 L106.0,303.8 L114.7,303.8 L123.3,303.8 L132.0,303.8 L140.7,303.8 L149.3,303.8 L158.0,303.8 L166.7,303.8 L175.3,303.8 L184.0,303.8 L192.7,303.8 L201.3,303.8 L210.0,303.8 L218.7,303.8 L227.3,303.8 L236.0,303.8 L244.7,303.8 L253.3,303.8 L262.0,303.8 L270.7,303.8 L279.3,303.8 L288.0,303.8 L296.7,303.8 L305.3,303.8 L314.0,303.8 L322.7,303.8 L331.3,303.8 L340.0,303.8 L348.7,303.8 L357.3,303.8 L366.0,303.8 L374.7,303.8 L383.3,284.4 L392.0,272.7 L400.7,264.3 L409.3,257.7 L418.0,252.3 L426.7,247.8 L435.3,243.8 L444.0,240.3 L452.7,237.1 L461.3,234.3 L470.0,231.7 L478.7,229.3 L487.3,227.1 L496.0,225.0 L504.7,223.1 L513.3,221.3 L522.0,219.5 L530.7,217.9 L539.3,216.4 L548.0,214.9 L556.7,213.5 L565.3,212.2 L574.0,210.9 L582.7,209.7 L591.3,208.5 L600.0,207.4" class="s dash"/><text x="530.6666666666667" y="203.91675539337666" text-anchor="middle" dominant-baseline="middle" class="t-xs b">コア数</text><line x1="383.33333333333337" y1="50" x2="383.33333333333337" y2="320" class="sm dash"/><text x="383.33333333333337" y="36" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">2005年ごろ</text><text x="340" y="366" text-anchor="middle" dominant-baseline="middle" class="t-s b">クロックは電力の壁で頭打ちになり、代わりにコア数が増えた</text><text x="340" y="386" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">（公開されている仕様値をもとに描いた模式図）</text></svg>

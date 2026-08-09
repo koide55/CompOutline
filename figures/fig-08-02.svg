@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420" width="680" height="420" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="680" height="420" class="bg"/><text x="340" y="34" text-anchor="middle" dominant-baseline="middle" class="b">CPU が転送する</text><rect x="60" y="60" width="100" height="52" class="tint s"/><text x="110.0" y="86.0" text-anchor="middle" dominant-baseline="middle" class="t-s">装置</text><rect x="290" y="60" width="100" height="52" class="accT s"/><text x="340.0" y="86.0" text-anchor="middle" dominant-baseline="middle" class="t-s">CPU</text><rect x="520" y="60" width="100" height="52" class="tint s"/><text x="570.0" y="86.0" text-anchor="middle" dominant-baseline="middle" class="t-s">主記憶</text><line x1="160" y1="86" x2="286" y2="86" class="s" marker-end="url(#a)"/><line x1="390" y1="86" x2="516" y2="86" class="s" marker-end="url(#a)"/><text x="340" y="134" text-anchor="middle" dominant-baseline="middle" class="t-xs acc b">CPU は転送で占有され、他のことができない</text><line x1="40" y1="176" x2="640" y2="176" class="sm dot"/><text x="340" y="210" text-anchor="middle" dominant-baseline="middle" class="b">DMA コントローラに任せる</text><rect x="290" y="236" width="100" height="40" class="bg s dash"/><text x="340.0" y="256.0" text-anchor="middle" dominant-baseline="middle" class="t-s">CPU</text><text x="400" y="256" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">別の処理に戻っている</text><rect x="60" y="306" width="100" height="52" class="tint s"/><text x="110.0" y="332.0" text-anchor="middle" dominant-baseline="middle" class="t-s">装置</text><rect x="520" y="306" width="100" height="52" class="tint s"/><text x="570.0" y="332.0" text-anchor="middle" dominant-baseline="middle" class="t-s">主記憶</text><line x1="160" y1="332" x2="516" y2="332" class="sa" marker-end="url(#a)"/><text x="300" y="320" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">直接運ぶ</text><rect x="276" y="268" width="128" height="34" class="tint2 s"/><text x="340.0" y="285.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">DMA コントローラ</text><line x1="340" y1="276" x2="340" y2="268" class="sm dash"/><line x1="340" y1="302" x2="340" y2="330" class="sm dash"/><text x="340" y="396" text-anchor="middle" dominant-baseline="middle" class="t-xs acc b">CPU が関与するのは、最初の指示と最後の通知だけ</text></svg>

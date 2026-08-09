@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 250" width="560" height="250" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="560" height="250" class="bg"/><circle cx="160" cy="130" r="46" class="tint s"/><text x="160" y="130" text-anchor="middle" dominant-baseline="middle" class="b">carry</text><circle cx="400" cy="130" r="46" class="bg s"/><circle cx="400" cy="130" r="40" class="none s"/><text x="400" y="130" text-anchor="middle" dominant-baseline="middle" class="b">halt</text><line x1="60" y1="130" x2="112" y2="130" class="s" marker-end="url(#a)"/><text x="60" y="112" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">開始</text><path d="M136,90 C120,40 200,40 184,90" class="s" marker-end="url(#a)"/><text x="160" y="40" text-anchor="middle" dominant-baseline="middle" class="t-s m">1 / 0, 左へ</text><line x1="206" y1="118" x2="354" y2="118" class="s" marker-end="url(#a)"/><text x="280.0" y="110.0" text-anchor="middle" dominant-baseline="middle" class="t-s m">0 / 1, 停止</text><line x1="206" y1="146" x2="354" y2="146" class="s" marker-end="url(#a)"/><text x="280.0" y="164.0" text-anchor="middle" dominant-baseline="middle" class="t-s m">␣ / 1, 停止</text><text x="280" y="215" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">読んだ記号 / 書く記号, 動作</text></svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 320" width="700" height="320" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="320" class="bg"/><rect x="46" y="130" width="104" height="52" class="tint s"/><text x="98.0" y="156.0" text-anchor="middle" dominant-baseline="middle" class="t-s">前処理</text><text x="98" y="196" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">#include を展開</text><rect x="178" y="130" width="104" height="52" class="tint s"/><text x="230.0" y="156.0" text-anchor="middle" dominant-baseline="middle" class="t-s">コンパイル</text><text x="230" y="196" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">.s を出力</text><line x1="152" y1="156" x2="174" y2="156" class="s" marker-end="url(#a)"/><rect x="310" y="130" width="104" height="52" class="tint s"/><text x="362.0" y="156.0" text-anchor="middle" dominant-baseline="middle" class="t-s">アセンブル</text><text x="362" y="196" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">.o を出力</text><line x1="284" y1="156" x2="306" y2="156" class="s" marker-end="url(#a)"/><rect x="442" y="130" width="104" height="52" class="tint s"/><text x="494.0" y="156.0" text-anchor="middle" dominant-baseline="middle" class="t-s">リンク</text><text x="494" y="196" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">実行ファイル</text><line x1="416" y1="156" x2="438" y2="156" class="s" marker-end="url(#a)"/><rect x="574" y="130" width="104" height="52" class="tint s"/><text x="626.0" y="156.0" text-anchor="middle" dominant-baseline="middle" class="t-s">ロード</text><text x="626" y="196" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">メモリ上へ</text><line x1="548" y1="156" x2="570" y2="156" class="s" marker-end="url(#a)"/><rect x="46" y="40" width="104" height="32" class="bg s"/><text x="98.0" y="56.0" text-anchor="middle" dominant-baseline="middle" class="t-xs m">main.c</text><rect x="46" y="82" width="104" height="32" class="bg s"/><text x="98.0" y="98.0" text-anchor="middle" dominant-baseline="middle" class="t-xs m">util.c</text><line x1="98" y1="74" x2="98" y2="126" class="sm" marker-end="url(#am)"/><rect x="430" y="40" width="130" height="32" class="bg s"/><text x="495.0" y="56.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">ライブラリ</text><path d="M495,72 L495,100 L494,126" class="sm" marker-end="url(#am)"/><text x="494" y="112" text-anchor="middle" dominant-baseline="middle" class="t-xs"></text><text x="350" y="246" text-anchor="middle" dominant-baseline="middle" class="t-s b">リンクの段階で、複数の .o とライブラリが1つに合流する</text><text x="350" y="274" text-anchor="middle" dominant-baseline="middle" class="t-s lbl">未解決だった関数の番地が、ここで初めて埋まる</text></svg>

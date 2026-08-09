@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 400" width="700" height="400" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="400" class="bg"/><rect x="40" y="90" width="130" height="60" class="tint s"/><text x="105.0" y="120.0" text-anchor="middle" dominant-baseline="middle" class="t-s">送信者</text><rect x="530" y="90" width="130" height="60" class="tint s"/><text x="595.0" y="120.0" text-anchor="middle" dominant-baseline="middle" class="t-s">受信者</text><line x1="526" y1="76" x2="174" y2="76" class="sm" marker-end="url(#am)"/><text x="350" y="58" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">① 公開鍵を配る（盗まれてよい）</text><rect x="337" y="84" width="26" height="22" rx="3" class="accT s"/><path d="M342,84 L342,75 A8,8 0 0 1 358,75 L358,79" class="s"/><rect x="210" y="172" width="110" height="34" class="bg s"/><text x="265" y="189" text-anchor="middle" dominant-baseline="middle" class="t-xs">平文</text><line x1="170" y1="120" x2="206" y2="168" class="sa" marker-end="url(#a)"/><text x="150" y="168" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">② 公開鍵で</text><text x="150" y="184" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">   暗号化</text><rect x="380" y="172" width="110" height="34" class="tint2 s"/><text x="435" y="189" text-anchor="middle" dominant-baseline="middle" class="t-xs">暗号文</text><rect x="337" y="178" width="26" height="22" rx="3" class="accT s"/><path d="M342,178 L342,169 A8,8 0 0 1 358,169 L358,178" class="s"/><line x1="320" y1="189" x2="376" y2="189" class="sa" marker-end="url(#a)"/><line x1="490" y1="189" x2="526" y2="148" class="sa" marker-end="url(#a)"/><text x="560" y="178" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">④ 秘密鍵で復号</text><rect x="300" y="250" width="130" height="46" class="none s dash"/><text x="365.0" y="273.0" text-anchor="middle" dominant-baseline="middle" class="t-s">盗聴者</text><line x1="400" y1="214" x2="400" y2="246" class="sm" marker-end="url(#am)"/><text x="446" y="274" text-anchor="start" dominant-baseline="middle" class="t-xs acc b">暗号文は読めるが、秘密鍵がないので復号できない</text><text x="350" y="336" text-anchor="middle" dominant-baseline="middle" class="t-s b">錠は誰でも掛けられるが、開けられるのは鍵を持つ本人だけ</text><text x="350" y="360" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">n 人が通信するのに必要な鍵は 2n 個（共通鍵なら n(n−1)/2 個）</text><text x="350" y="384" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">公開鍵暗号は遅いので、実際は共通鍵を渡すのに使う（ハイブリッド方式）</text></svg>

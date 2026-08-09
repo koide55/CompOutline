@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 400" width="700" height="400" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="400" class="bg"/><text x="350" y="34" text-anchor="middle" dominant-baseline="middle" class="b">レプリケーション</text><rect x="80" y="56" width="120" height="50" class="accT s"/><text x="140.0" y="81.0" text-anchor="middle" dominant-baseline="middle" class="t-s">プライマリ</text><rect x="300" y="56" width="110" height="50" class="tint s"/><text x="355.0" y="81.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">レプリカ1</text><path d="M200,74 C240,40 280,34 355,52" class="sm" marker-end="url(#am)"/><rect x="430" y="56" width="110" height="50" class="tint s"/><text x="485.0" y="81.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">レプリカ2</text><path d="M200,74 C260,34 410,34 485,52" class="sm" marker-end="url(#am)"/><rect x="560" y="56" width="110" height="50" class="tint s"/><text x="615.0" y="81.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">レプリカ3</text><path d="M200,74 C280,28 540,34 615,52" class="sm" marker-end="url(#am)"/><text x="140" y="126" text-anchor="middle" dominant-baseline="middle" class="t-xs acc b">書き込みはここだけ</text><text x="455" y="126" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">読み出しはどこからでも</text><text x="350" y="150" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">読み出しは分散できるが、書き込みは分散しない。複製には遅れが生じる</text><line x1="40" y1="180" x2="660" y2="180" class="sm dot"/><text x="350" y="212" text-anchor="middle" dominant-baseline="middle" class="b">シャーディング</text><rect x="60" y="236" width="140" height="56" class="tint s"/><text x="130.0" y="256.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">学籍番号</text><text x="130.0" y="272.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">1〜999</text><rect x="80" y="306" width="100" height="36" class="tint2 s"/><text x="130.0" y="324.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">サーバ1</text><line x1="130" y1="292" x2="130" y2="304" class="sm"/><rect x="215" y="236" width="140" height="56" class="tint s"/><text x="285.0" y="256.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">学籍番号</text><text x="285.0" y="272.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">1000〜1999</text><rect x="235" y="306" width="100" height="36" class="tint2 s"/><text x="285.0" y="324.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">サーバ2</text><line x1="285" y1="292" x2="285" y2="304" class="sm"/><rect x="370" y="236" width="140" height="56" class="tint s"/><text x="440.0" y="256.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">学籍番号</text><text x="440.0" y="272.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">2000〜2999</text><rect x="390" y="306" width="100" height="36" class="tint2 s"/><text x="440.0" y="324.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">サーバ3</text><line x1="440" y1="292" x2="440" y2="304" class="sm"/><rect x="525" y="236" width="140" height="56" class="tint s"/><text x="595.0" y="256.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">学籍番号</text><text x="595.0" y="272.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">3000〜3999</text><rect x="545" y="306" width="100" height="36" class="tint2 s"/><text x="595.0" y="324.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">サーバ4</text><line x1="595" y1="292" x2="595" y2="304" class="sm"/><text x="350" y="366" text-anchor="middle" dominant-baseline="middle" class="t-s b">書き込みも分散できる。ただし複数シャードにまたがる結合と</text><text x="350" y="388" text-anchor="middle" dominant-baseline="middle" class="t-s b">トランザクションが難しくなる</text></svg>

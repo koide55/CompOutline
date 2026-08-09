@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 420" width="700" height="420" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="420" class="bg"/><rect x="180" y="300" width="240" height="62" class="tint s"/><text x="300.0" y="321.0" text-anchor="middle" dominant-baseline="middle" class="t-s">サーバ証明書</text><text x="300.0" y="341.0" text-anchor="middle" dominant-baseline="middle" class="t-s">www.example.com</text><rect x="180" y="200" width="240" height="62" class="tint s"/><text x="300.0" y="221.0" text-anchor="middle" dominant-baseline="middle" class="t-s">中間 CA 証明書</text><text x="300.0" y="241.0" text-anchor="middle" dominant-baseline="middle" class="t-s">中間認証局</text><rect x="180" y="100" width="240" height="62" class="accT s"/><text x="300.0" y="121.0" text-anchor="middle" dominant-baseline="middle" class="t-s">ルート CA 証明書</text><text x="300.0" y="141.0" text-anchor="middle" dominant-baseline="middle" class="t-s">ルート認証局（自己署名）</text><line x1="300" y1="300" x2="300" y2="262" class="sa" marker-end="url(#a)"/><text x="316" y="280" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">上の秘密鍵で署名されている</text><line x1="300" y1="200" x2="300" y2="162" class="sa" marker-end="url(#a)"/><text x="316" y="180" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">上の秘密鍵で署名されている</text><path d="M180,120 C140,120 140,160 180,150" class="sa" marker-end="url(#aa)"/><text x="126" y="136" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">自己署名</text><rect x="150" y="74" width="300" height="114" rx="8" class="none s dash"/><text x="300" y="62" text-anchor="middle" dominant-baseline="middle" class="t-s b">ブラウザ／OS に組み込まれたトラストストア</text><text x="300" y="386" text-anchor="middle" dominant-baseline="middle" class="t-s b">最終的な信頼の根拠は「ブラウザや OS の開発元がこの CA を信頼した」こと</text><rect x="470" y="200" width="200" height="150" rx="6" class="none sm"/><text x="570" y="222" text-anchor="middle" dominant-baseline="middle" class="t-s b">検証は下から上へ</text><text x="486" y="246" text-anchor="start" dominant-baseline="middle" class="t-xs">① 名前がアクセス先と一致するか</text><text x="486" y="265" text-anchor="start" dominant-baseline="middle" class="t-xs">② 有効期限内か</text><text x="486" y="284" text-anchor="start" dominant-baseline="middle" class="t-xs">③ 発行者の署名が正しいか</text><text x="486" y="303" text-anchor="start" dominant-baseline="middle" class="t-xs">④ 失効していないか</text><text x="486" y="322" text-anchor="start" dominant-baseline="middle" class="t-xs">⑤ トラストストアに到達したか</text><text x="570" y="366" text-anchor="middle" dominant-baseline="middle" class="t-xs acc b">どれか1つでも欠ければ警告</text><text x="300" y="410" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">起点が数百の CA に分散していることが、この仕組みの弱点でもある</text></svg>

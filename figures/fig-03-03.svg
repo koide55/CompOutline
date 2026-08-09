@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 400" width="700" height="400" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="400" class="bg"/><text x="190" y="28" text-anchor="middle" dominant-baseline="middle" class="b">全加算器の内部</text><rect x="120" y="46" width="90" height="46" class="tint s"/><text x="165.0" y="69.0" text-anchor="middle" dominant-baseline="middle" class="t-s">半加算器</text><rect x="250" y="46" width="90" height="46" class="tint s"/><text x="295.0" y="69.0" text-anchor="middle" dominant-baseline="middle" class="t-s">半加算器</text><path d="M380,52 Q399.8,69.0 380,86 Q404.2,86 424,69.0 Q404.2,52 380,52 Z" class="bg s"/><text x="104" y="58" text-anchor="end" dominant-baseline="middle" class="t-s">A</text><text x="104" y="80" text-anchor="end" dominant-baseline="middle" class="t-s">B</text><line x1="110" y1="58" x2="120" y2="58" class="s"/><line x1="110" y1="80" x2="120" y2="80" class="s"/><text x="234" y="104" text-anchor="end" dominant-baseline="middle" class="t-s">Cin</text><path d="M240,104 L250,104 L250,80" class="s"/><line x1="210" y1="58" x2="250" y2="58" class="s"/><line x1="340" y1="58" x2="470" y2="58" class="s"/><text x="480" y="58" text-anchor="start" dominant-baseline="middle" class="t-s b">S</text><path d="M340,80 L360,80 L360,62 L380,62" class="s"/><path d="M210,80 L226,80 L226,140 L360,140 L360,78 L380,78" class="s"/><path d="M430,70 L452,70 L452,96 L470,96" class="s"/><text x="480" y="96" text-anchor="start" dominant-baseline="middle" class="t-s b">Cout</text><text x="350" y="200" text-anchor="middle" dominant-baseline="middle" class="b">全加算器を4個つないだ4ビット加算器</text><rect x="500" y="224" width="96" height="66" class="bg s"/><text x="548.0" y="249.5" text-anchor="middle" dominant-baseline="middle" class="t-s">全加算器</text><text x="548.0" y="264.5" text-anchor="middle" dominant-baseline="middle" class="t-s">第0桁</text><text x="522" y="212" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">A0</text><text x="572" y="212" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">B0</text><line x1="522" y1="216" x2="522" y2="224" class="s"/><line x1="572" y1="216" x2="572" y2="224" class="s"/><line x1="548" y1="290" x2="548" y2="316" class="s"/><text x="548" y="328" text-anchor="middle" dominant-baseline="middle" class="t-s b">S0</text><line x1="500" y1="258" x2="466" y2="258" class="sa" marker-end="url(#a)"/><rect x="370" y="224" width="96" height="66" class="bg s"/><text x="418.0" y="249.5" text-anchor="middle" dominant-baseline="middle" class="t-s">全加算器</text><text x="418.0" y="264.5" text-anchor="middle" dominant-baseline="middle" class="t-s">第1桁</text><text x="392" y="212" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">A1</text><text x="442" y="212" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">B1</text><line x1="392" y1="216" x2="392" y2="224" class="s"/><line x1="442" y1="216" x2="442" y2="224" class="s"/><line x1="418" y1="290" x2="418" y2="316" class="s"/><text x="418" y="328" text-anchor="middle" dominant-baseline="middle" class="t-s b">S1</text><line x1="370" y1="258" x2="336" y2="258" class="sa" marker-end="url(#a)"/><rect x="240" y="224" width="96" height="66" class="bg s"/><text x="288.0" y="249.5" text-anchor="middle" dominant-baseline="middle" class="t-s">全加算器</text><text x="288.0" y="264.5" text-anchor="middle" dominant-baseline="middle" class="t-s">第2桁</text><text x="262" y="212" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">A2</text><text x="312" y="212" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">B2</text><line x1="262" y1="216" x2="262" y2="224" class="s"/><line x1="312" y1="216" x2="312" y2="224" class="s"/><line x1="288" y1="290" x2="288" y2="316" class="s"/><text x="288" y="328" text-anchor="middle" dominant-baseline="middle" class="t-s b">S2</text><line x1="240" y1="258" x2="206" y2="258" class="sa" marker-end="url(#a)"/><rect x="110" y="224" width="96" height="66" class="bg s"/><text x="158.0" y="249.5" text-anchor="middle" dominant-baseline="middle" class="t-s">全加算器</text><text x="158.0" y="264.5" text-anchor="middle" dominant-baseline="middle" class="t-s">第3桁</text><text x="132" y="212" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">A3</text><text x="182" y="212" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">B3</text><line x1="132" y1="216" x2="132" y2="224" class="s"/><line x1="182" y1="216" x2="182" y2="224" class="s"/><line x1="158" y1="290" x2="158" y2="316" class="s"/><text x="158" y="328" text-anchor="middle" dominant-baseline="middle" class="t-s b">S3</text><text x="596" y="258" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">Cin=0</text><line x1="560" y1="258" x2="596" y2="258" class="s"/><line x1="110" y1="258" x2="76" y2="258" class="sa" marker-end="url(#a)"/><text x="70" y="258" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">Cout</text><text x="350" y="366" text-anchor="middle" dominant-baseline="middle" class="t-s">桁上がりが右から左へ順に伝わる（この伝播が遅延になる）</text></svg>

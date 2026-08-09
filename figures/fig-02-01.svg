@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 340" width="620" height="340" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="620" height="340" class="bg"/><text x="150" y="34" text-anchor="middle" dominant-baseline="middle" class="b">10段階に区切る</text><rect x="80" y="60" width="140" height="240" class="none s"/><line x1="80" y1="60" x2="220" y2="60" class="sm"/><text x="72" y="72" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">9</text><line x1="80" y1="84" x2="220" y2="84" class="sm"/><text x="72" y="96" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">8</text><line x1="80" y1="108" x2="220" y2="108" class="sm"/><text x="72" y="120" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">7</text><line x1="80" y1="132" x2="220" y2="132" class="sm"/><text x="72" y="144" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">6</text><line x1="80" y1="156" x2="220" y2="156" class="sm"/><text x="72" y="168" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">5</text><line x1="80" y1="180" x2="220" y2="180" class="sm"/><text x="72" y="192" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">4</text><line x1="80" y1="204" x2="220" y2="204" class="sm"/><text x="72" y="216" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">3</text><line x1="80" y1="228" x2="220" y2="228" class="sm"/><text x="72" y="240" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">2</text><line x1="80" y1="252" x2="220" y2="252" class="sm"/><text x="72" y="264" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">1</text><line x1="80" y1="276" x2="220" y2="276" class="sm"/><text x="72" y="288" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">0</text><rect x="110" y="74" width="14" height="52" class="accT sa"/><rect x="144" y="146" width="14" height="52" class="accT sa"/><rect x="178" y="218" width="14" height="52" class="accT sa"/><text x="150" y="320" text-anchor="middle" dominant-baseline="middle" class="t-xs acc">ばらつきが隣の段階にはみ出す</text><text x="450" y="34" text-anchor="middle" dominant-baseline="middle" class="b">2段階にする</text><rect x="380" y="60" width="140" height="240" class="none s"/><rect x="380" y="60" width="140" height="84" class="tint s"/><text x="450" y="102" text-anchor="middle" dominant-baseline="middle" class="t-s">1 の領域</text><rect x="380" y="144" width="140" height="72" class="none sm dash"/><text x="450" y="180" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">不定</text><rect x="380" y="216" width="140" height="84" class="tint s"/><text x="450" y="258" text-anchor="middle" dominant-baseline="middle" class="t-s">0 の領域</text><rect x="420" y="74" width="14" height="52" class="accT sa"/><rect x="460" y="232" width="14" height="52" class="accT sa"/><text x="450" y="320" text-anchor="middle" dominant-baseline="middle" class="t-xs acc">同じばらつきが領域内に収まる</text><text x="30" y="180" text-anchor="middle" dominant-baseline="middle" class="t-s lbl">電圧</text><line x1="52" y1="300" x2="52" y2="60" class="sm" marker-end="url(#am)"/><text x="50" y="46" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">3.3V</text><text x="50" y="306" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">0V</text></svg>

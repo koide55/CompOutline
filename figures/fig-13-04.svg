@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" width="720" height="440" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="720" height="440" class="bg"/><circle cx="280.0" cy="102.0" r="44" class="tint s"/><text x="280.0" y="102.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">観測</text><circle cx="386.3592373253185" cy="191.2459968119715" r="44" class="tint s"/><text x="386.3592373253185" y="191.2459968119715" text-anchor="middle" dominant-baseline="middle" class="t-s b">計画</text><circle cx="280.0" cy="318.0" r="44" class="tint s"/><text x="280.0" y="318.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">行動</text><circle cx="173.64076267468153" cy="191.2459968119715" r="44" class="tint s"/><text x="173.64076267468153" y="191.2459968119715" text-anchor="middle" dominant-baseline="middle" class="t-s b">結果を見る</text><path d="M327.3,112.9 A108,108 0 0 1 367.4,146.5" class="sa" marker-end="url(#aa)"/><path d="M383.8,239.8 A108,108 0 0 1 327.3,307.1" class="sa" marker-end="url(#aa)"/><path d="M232.7,307.1 A108,108 0 0 1 176.2,239.8" class="sa" marker-end="url(#aa)"/><path d="M192.6,146.5 A108,108 0 0 1 232.7,112.9" class="sa" marker-end="url(#aa)"/><circle cx="280" cy="210" r="40" class="accT s"/><text x="280" y="210" text-anchor="middle" dominant-baseline="middle" class="b">LLM</text><rect x="500" y="70" width="150" height="40" class="tint2 s"/><text x="575.0" y="90.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">検索</text><line x1="396" y1="250" x2="496" y2="90" class="sm" marker-end="url(#am)"/><rect x="500" y="126" width="150" height="40" class="tint2 s"/><text x="575.0" y="146.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">コード実行</text><line x1="396" y1="250" x2="496" y2="146" class="sm" marker-end="url(#am)"/><rect x="500" y="182" width="150" height="40" class="tint2 s"/><text x="575.0" y="202.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">ファイル操作</text><line x1="396" y1="250" x2="496" y2="202" class="sm" marker-end="url(#am)"/><rect x="500" y="238" width="150" height="40" class="tint2 s"/><text x="575.0" y="258.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">API 呼び出し</text><line x1="396" y1="250" x2="496" y2="258" class="sm" marker-end="url(#am)"/><text x="575" y="46" text-anchor="middle" dominant-baseline="middle" class="t-s b">ツール</text><rect x="40" y="180" width="110" height="56" class="tint s"/><text x="95.0" y="208.0" text-anchor="middle" dominant-baseline="middle" class="t-s">記憶</text><line x1="150" y1="200" x2="166" y2="200" class="sm" marker-end="url(#am)"/><line x1="166" y1="220" x2="150" y2="220" class="sm" marker-end="url(#am)"/><rect x="180" y="348" width="340" height="42" rx="6" class="accT s"/><text x="350" y="369" text-anchor="middle" dominant-baseline="middle" class="t-s b">人間による承認（不可逆な操作の前に必ず）</text><line x1="280" y1="322" x2="280" y2="344" class="sa" marker-end="url(#a)"/><text x="360" y="416" text-anchor="middle" dominant-baseline="middle" class="t-xs b">ツール利用が LLM の弱点を補う。ただし行動するがゆえに、誤りが取り返しのつかない結果になりうる</text></svg>

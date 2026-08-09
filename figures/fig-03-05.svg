@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 420" width="700" height="420" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="420" class="bg"/><rect x="230" y="36" width="250" height="172" rx="10" class="tint s"/><text x="355" y="52" text-anchor="middle" dominant-baseline="middle" class="b">中央処理装置（CPU）</text><rect x="268" y="74" width="174" height="40" class="bg s"/><text x="355.0" y="94.0" text-anchor="middle" dominant-baseline="middle" class="t-s">制御装置</text><rect x="268" y="148" width="174" height="40" class="bg s"/><text x="355.0" y="168.0" text-anchor="middle" dominant-baseline="middle" class="t-s">演算装置（ALU）</text><rect x="268" y="114" width="174" height="30" class="none sm dash"/><text x="355.0" y="129.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">レジスタ  PC / IR / 汎用</text><rect x="250" y="258" width="210" height="56" class="bg s"/><text x="355.0" y="286.0" text-anchor="middle" dominant-baseline="middle" class="">主記憶装置</text><text x="60" y="330" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">命令とデータを区別せず、同じ番地空間に置く</text><rect x="210" y="358" width="290" height="46" class="bg s"/><text x="355.0" y="381.0" text-anchor="middle" dominant-baseline="middle" class="">二次記憶装置</text><rect x="24" y="258" width="150" height="56" class="bg s"/><text x="99.0" y="286.0" text-anchor="middle" dominant-baseline="middle" class="">入力装置</text><rect x="536" y="258" width="150" height="56" class="bg s"/><text x="611.0" y="286.0" text-anchor="middle" dominant-baseline="middle" class="">出力装置</text><line x1="324" y1="208" x2="324" y2="254" class="sa" marker-end="url(#a)"/><text x="324.0" y="235.0" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">データ</text><line x1="400" y1="254" x2="400" y2="208" class="sa" marker-end="url(#a)"/><text x="400.0" y="235.0" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">命令</text><line x1="174" y1="286" x2="246" y2="286" class="sa" marker-end="url(#a)"/><line x1="536" y1="286" x2="464" y2="286" class="sa" marker-end="url(#a)"/><line x1="324" y1="318" x2="324" y2="354" class="sa" marker-end="url(#a)"/><line x1="400" y1="354" x2="400" y2="318" class="sa" marker-end="url(#a)"/><text x="210" y="274" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">データ</text><text x="500" y="274" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">データ</text><text x="362" y="340" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">データ</text></svg>

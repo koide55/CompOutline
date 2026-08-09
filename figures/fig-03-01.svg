@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 310" width="740" height="310" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="740" height="310" class="bg"/><text x="74" y="32" text-anchor="middle" dominant-baseline="middle" class="b">NOT</text><polygon points="50,44 96,64.0 50,84" class="bg s"/><circle cx="100" cy="64.0" r="5" class="bg s"/><line x1="28" y1="64" x2="50" y2="64" class="s"/><line x1="110" y1="64" x2="132" y2="64" class="s"/><text x="144" y="48" text-anchor="start" dominant-baseline="middle" class="t-xs">A → 出力</text><text x="144" y="63" text-anchor="start" dominant-baseline="middle" class="t-xs">0 → 1</text><text x="144" y="78" text-anchor="start" dominant-baseline="middle" class="t-xs">1 → 0</text><text x="308" y="32" text-anchor="middle" dominant-baseline="middle" class="b">AND</text><path d="M284,44 L311.0,44 A20.0,20.0 0 0 1 311.0,84 L284,84 Z" class="bg s"/><line x1="262" y1="54" x2="284" y2="54" class="s"/><line x1="262" y1="74" x2="284" y2="74" class="s"/><line x1="344" y1="64" x2="366" y2="64" class="s"/><text x="378" y="48" text-anchor="start" dominant-baseline="middle" class="t-xs">両方1のとき1</text><text x="378" y="63" text-anchor="start" dominant-baseline="middle" class="t-xs">00→0 ／ 01→0</text><text x="378" y="78" text-anchor="start" dominant-baseline="middle" class="t-xs">10→0 ／ 11→1</text><text x="542" y="32" text-anchor="middle" dominant-baseline="middle" class="b">OR</text><path d="M518,44 Q542.3,64.0 518,84 Q547.7,84 572,64.0 Q547.7,44 518,44 Z" class="bg s"/><line x1="496" y1="54" x2="518" y2="54" class="s"/><line x1="496" y1="74" x2="518" y2="74" class="s"/><line x1="578" y1="64" x2="600" y2="64" class="s"/><text x="612" y="48" text-anchor="start" dominant-baseline="middle" class="t-xs">どちらか1なら1</text><text x="612" y="63" text-anchor="start" dominant-baseline="middle" class="t-xs">00→0 ／ 01→1</text><text x="612" y="78" text-anchor="start" dominant-baseline="middle" class="t-xs">10→1 ／ 11→1</text><text x="74" y="172" text-anchor="middle" dominant-baseline="middle" class="b">XOR</text><path d="M50,184 Q74.3,204.0 50,224 Q79.7,224 104,204.0 Q79.7,184 50,184 Z" class="bg s"/><path d="M42,184 Q69.98,204.0 42,224" class="s"/><line x1="28" y1="194" x2="50" y2="194" class="s"/><line x1="28" y1="214" x2="50" y2="214" class="s"/><line x1="110" y1="204" x2="132" y2="204" class="s"/><text x="144" y="188" text-anchor="start" dominant-baseline="middle" class="t-xs">異なるとき1</text><text x="144" y="203" text-anchor="start" dominant-baseline="middle" class="t-xs">00→0 ／ 01→1</text><text x="144" y="218" text-anchor="start" dominant-baseline="middle" class="t-xs">10→1 ／ 11→0</text><text x="308" y="172" text-anchor="middle" dominant-baseline="middle" class="b">NAND</text><path d="M284,184 L311.0,184 A20.0,20.0 0 0 1 311.0,224 L284,224 Z" class="bg s"/><circle cx="334" cy="204.0" r="5" class="bg s"/><line x1="262" y1="194" x2="284" y2="194" class="s"/><line x1="262" y1="214" x2="284" y2="214" class="s"/><line x1="344" y1="204" x2="366" y2="204" class="s"/><text x="378" y="188" text-anchor="start" dominant-baseline="middle" class="t-xs">AND の否定</text><text x="378" y="203" text-anchor="start" dominant-baseline="middle" class="t-xs">00→1 ／ 01→1</text><text x="378" y="218" text-anchor="start" dominant-baseline="middle" class="t-xs">10→1 ／ 11→0</text><text x="542" y="172" text-anchor="middle" dominant-baseline="middle" class="b">NOR</text><path d="M518,184 Q542.3,204.0 518,224 Q547.7,224 572,204.0 Q547.7,184 518,184 Z" class="bg s"/><circle cx="568" cy="204.0" r="5" class="bg s"/><line x1="496" y1="194" x2="518" y2="194" class="s"/><line x1="496" y1="214" x2="518" y2="214" class="s"/><line x1="578" y1="204" x2="600" y2="204" class="s"/><text x="612" y="188" text-anchor="start" dominant-baseline="middle" class="t-xs">OR の否定</text><text x="612" y="203" text-anchor="start" dominant-baseline="middle" class="t-xs">00→1 ／ 01→0</text><text x="612" y="218" text-anchor="start" dominant-baseline="middle" class="t-xs">10→0 ／ 11→0</text><text x="370" y="300" text-anchor="middle" dominant-baseline="middle" class="t-s lbl">出力側の小円が「否定」を表す。AND に付けると NAND になる</text></svg>

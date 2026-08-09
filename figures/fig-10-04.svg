@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 420" width="700" height="420" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="420" class="bg"/><rect x="40" y="150" width="110" height="56" class="tint s"/><text x="95.0" y="178.0" text-anchor="middle" dominant-baseline="middle" class="t-s">クライアント</text><rect x="220" y="150" width="130" height="56" class="accT s"/><text x="285.0" y="170.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">キャッシュ</text><text x="285.0" y="186.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">DNS サーバ</text><line x1="150" y1="168" x2="216" y2="168" class="sa" marker-end="url(#a)"/><text x="183.0" y="161.0" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">① 問い合わせ</text><line x1="216" y1="192" x2="152" y2="192" class="sa" marker-end="url(#a)"/><text x="184.0" y="208.0" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">⑤ 203.0.113.42</text><rect x="452" y="46" width="200" height="42" class="tint s"/><text x="552.0" y="67.0" text-anchor="middle" dominant-baseline="middle" class="t-s">ルート DNS</text><line x1="354" y1="172" x2="448" y2="60" class="sm" marker-end="url(#am)"/><path d="M448,76 L354,182" class="sm" marker-end="url(#am)"/><text x="552" y="104" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">② 「.com はあちらに聞け」</text><rect x="452" y="136" width="200" height="42" class="tint s"/><text x="552.0" y="157.0" text-anchor="middle" dominant-baseline="middle" class="t-s">.com の DNS</text><line x1="354" y1="172" x2="448" y2="150" class="sm" marker-end="url(#am)"/><path d="M448,166 L354,182" class="sm" marker-end="url(#am)"/><text x="552" y="194" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">③ 「example.com はあちらに聞け」</text><rect x="452" y="226" width="200" height="42" class="tint s"/><text x="552.0" y="247.0" text-anchor="middle" dominant-baseline="middle" class="t-s">example.com の DNS</text><line x1="354" y1="172" x2="448" y2="240" class="sm" marker-end="url(#am)"/><path d="M448,256 L354,182" class="sm" marker-end="url(#am)"/><text x="552" y="284" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">④ 「www は 203.0.113.42」</text><text x="285" y="236" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">TTL の間キャッシュする</text><text x="350" y="348" text-anchor="middle" dominant-baseline="middle" class="t-s b">誰も全体を知らないが、階層をたどれば必ず答えに着く</text><text x="350" y="374" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">キャッシュがあるので、実際はほとんどが1〜2段階で終わる</text><text x="350" y="400" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">名前とアドレスを分けたので、サーバを移しても同じ名前で届く</text></svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 320" width="700" height="320" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="320" class="bg"/><text x="160" y="34" text-anchor="middle" dominant-baseline="middle" class="b">アセンブリ言語</text><text x="400" y="34" text-anchor="middle" dominant-baseline="middle" class="t-s b">番地</text><text x="560" y="34" text-anchor="middle" dominant-baseline="middle" class="b">機械語（主記憶の中身）</text><rect x="40" y="60" width="250" height="32" class="accT s"/><text x="52" y="76" text-anchor="start" dominant-baseline="middle" class="t-s m">loop:</text><rect x="40" y="100" width="250" height="32" class="tint s"/><text x="52" y="116" text-anchor="start" dominant-baseline="middle" class="t-s m">  mov  rax, 5</text><text x="400" y="116" text-anchor="middle" dominant-baseline="middle" class="t-xs m lbl">0100</text><rect x="440" y="100" width="240" height="32" class="bg s"/><text x="452" y="116" text-anchor="start" dominant-baseline="middle" class="t-xs m">48 C7 C0 05 00 00 00</text><line x1="292" y1="116" x2="372" y2="116" class="sm" marker-end="url(#am)"/><rect x="40" y="140" width="250" height="32" class="tint s"/><text x="52" y="156" text-anchor="start" dominant-baseline="middle" class="t-s m">  add  rax, rbx</text><text x="400" y="156" text-anchor="middle" dominant-baseline="middle" class="t-xs m lbl">0107</text><rect x="440" y="140" width="240" height="32" class="bg s"/><text x="452" y="156" text-anchor="start" dominant-baseline="middle" class="t-xs m">48 01 D8</text><line x1="292" y1="156" x2="372" y2="156" class="sm" marker-end="url(#am)"/><rect x="40" y="180" width="250" height="32" class="tint s"/><text x="52" y="196" text-anchor="start" dominant-baseline="middle" class="t-s m">  jne  loop</text><text x="400" y="196" text-anchor="middle" dominant-baseline="middle" class="t-xs m lbl">010A</text><rect x="440" y="180" width="240" height="32" class="bg s"/><text x="452" y="196" text-anchor="start" dominant-baseline="middle" class="t-xs m">75 F4</text><line x1="292" y1="196" x2="372" y2="196" class="sm" marker-end="url(#am)"/><rect x="40" y="220" width="250" height="32" class="tint s"/><text x="52" y="236" text-anchor="start" dominant-baseline="middle" class="t-s m">  ret</text><text x="400" y="236" text-anchor="middle" dominant-baseline="middle" class="t-xs m lbl">010C</text><rect x="440" y="220" width="240" height="32" class="bg s"/><text x="452" y="236" text-anchor="start" dominant-baseline="middle" class="t-xs m">C3</text><line x1="292" y1="236" x2="372" y2="236" class="sm" marker-end="url(#am)"/><text x="120" y="292" text-anchor="start" dominant-baseline="middle" class="t-xs acc b">ラベル</text><path d="M116,284 L84,96" class="sa dot" marker-end="url(#aa)"/><path d="M180,292 C300,292 380,240 398,196" class="sa dot" marker-end="url(#aa)"/><text x="300" y="306" text-anchor="start" dominant-baseline="middle" class="t-xs acc b">アセンブラが番地に直す</text><text x="690" y="292" text-anchor="end" dominant-baseline="middle" class="t-s">命令を挿入しても、人間が番地を</text><text x="690" y="310" text-anchor="end" dominant-baseline="middle" class="t-s">付け替えなくてよい</text></svg>

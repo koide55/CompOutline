@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 340" width="700" height="340" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="340" class="bg"/><text x="60" y="110" text-anchor="end" dominant-baseline="middle" class="t-s b">CPU</text><rect x="74" y="90" width="190" height="40" class="tint s"/><text x="169.0" y="110" text-anchor="middle" dominant-baseline="middle" class="t-xs">プロセス A を実行</text><rect x="264" y="90" width="50" height="40" class="tint2 s"/><text x="289.0" y="110" text-anchor="middle" dominant-baseline="middle" class="t-xs">退避</text><rect x="314" y="90" width="96" height="40" class="accT s"/><text x="362.0" y="110" text-anchor="middle" dominant-baseline="middle" class="t-xs">ハンドラ</text><rect x="410" y="90" width="50" height="40" class="tint2 s"/><text x="435.0" y="110" text-anchor="middle" dominant-baseline="middle" class="t-xs">復元</text><rect x="460" y="90" width="150" height="40" class="tint s"/><text x="535.0" y="110" text-anchor="middle" dominant-baseline="middle" class="t-xs">プロセス A を再開</text><text x="60" y="236" text-anchor="end" dominant-baseline="middle" class="t-s b">周辺装置</text><rect x="150" y="216" width="264" height="40" class="tint s"/><text x="282" y="236" text-anchor="middle" dominant-baseline="middle" class="t-xs">装置が独立に動作している</text><line x1="150" y1="216" x2="150" y2="134" class="sm" marker-end="url(#am)"/><text x="146" y="202" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">入出力を依頼</text><line x1="414" y1="216" x2="414" y2="134" class="sa" marker-end="url(#a)"/><text x="420" y="202" text-anchor="start" dominant-baseline="middle" class="t-xs acc b">完了 → 割り込み信号</text><rect x="74" y="34" width="540" height="34" rx="6" class="none sm dash"/><text x="344" y="51" text-anchor="middle" dominant-baseline="middle" class="t-s b">この間 CPU と装置が同時に動いている</text><text x="74" y="290" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">① 現在の命令を完了する　② PC・レジスタ・フラグを退避する　③ 特権モードに切り替わる</text><text x="74" y="308" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">④ 割り込みベクタ表からハンドラの番地を得る　⑤ ハンドラを実行　⑥ 復元して中断箇所へ戻る</text><text x="350" y="330" text-anchor="middle" dominant-baseline="middle" class="t-s b">割り込まれたプログラムは、中断されたことに気づかない</text></svg>

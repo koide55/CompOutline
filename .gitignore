@@ -15,3 +15,8 @@ work/
 *.pdf
 *-thumbs*.jpg
 slide-*.jpg
+
+# 図の下書き（自動生成）
+figures/_draft/
+.preview/
+.venv/

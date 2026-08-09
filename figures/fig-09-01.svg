@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 440" width="700" height="440" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="440" class="bg"/><text x="250" y="34" text-anchor="middle" dominant-baseline="middle" class="b">回線交換</text><line x1="80" y1="120" x2="200" y2="80" class="sm"/><line x1="80" y1="120" x2="200" y2="170" class="sm"/><line x1="200" y1="80" x2="320" y2="120" class="sm"/><line x1="200" y1="170" x2="320" y2="120" class="sm"/><line x1="200" y1="170" x2="320" y2="210" class="sm"/><line x1="320" y1="120" x2="440" y2="150" class="sm"/><line x1="320" y1="210" x2="440" y2="150" class="sm"/><line x1="200" y1="80" x2="200" y2="170" class="sm"/><path d="M80,120 L200,80 L320,120 L440,150" class="sa" stroke-width="7"/><circle cx="80" cy="120" r="13" class="tint s"/><circle cx="200" cy="80" r="13" class="tint s"/><circle cx="200" cy="170" r="13" class="tint s"/><circle cx="320" cy="120" r="13" class="tint s"/><circle cx="320" cy="210" r="13" class="tint s"/><circle cx="440" cy="150" r="13" class="tint s"/><text x="80" y="94" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">送信元</text><text x="440" y="178" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">宛先</text><text x="500" y="106" text-anchor="start" dominant-baseline="middle" class="t-xs acc b">経路を確保して占有する</text><text x="500" y="126" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">他の通信はこの線を使えない</text><text x="500" y="146" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">話していない間も空けられない</text><text x="250" y="244" text-anchor="middle" dominant-baseline="middle" class="b">パケット交換</text><line x1="80" y1="330" x2="200" y2="290" class="sm"/><line x1="80" y1="330" x2="200" y2="380" class="sm"/><line x1="200" y1="290" x2="320" y2="330" class="sm"/><line x1="200" y1="380" x2="320" y2="330" class="sm"/><line x1="200" y1="380" x2="320" y2="420" class="sm"/><line x1="320" y1="330" x2="440" y2="360" class="sm"/><line x1="320" y1="420" x2="440" y2="360" class="sm"/><line x1="200" y1="290" x2="200" y2="380" class="sm"/><path d="M80,324 L200,284 L320,324 L440,354" class="sa" marker-end="url(#aa)"/><path d="M80,330 L200,380 L320,330 L440,360" class="sa dash" marker-end="url(#aa)"/><path d="M80,336 L200,386 L320,426 L440,366" class="sa dash" marker-end="url(#aa)"/><rect x="120" y="294" width="20" height="15" class="accT sa"/><text x="130" y="302" text-anchor="middle" dominant-baseline="middle" class="t-xs">1</text><rect x="230" y="382" width="20" height="15" class="accT sa"/><text x="240" y="390" text-anchor="middle" dominant-baseline="middle" class="t-xs">2</text><rect x="350" y="300" width="20" height="15" class="accT sa"/><text x="360" y="308" text-anchor="middle" dominant-baseline="middle" class="t-xs">3</text><circle cx="80" cy="330" r="13" class="tint s"/><circle cx="200" cy="290" r="13" class="tint s"/><circle cx="200" cy="380" r="13" class="tint s"/><circle cx="320" cy="330" r="13" class="tint s"/><circle cx="320" cy="420" r="13" class="tint s"/><circle cx="440" cy="360" r="13" class="tint s"/><text x="80" y="304" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">送信元</text><text x="440" y="388" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">宛先</text><text x="500" y="316" text-anchor="start" dominant-baseline="middle" class="t-xs acc b">パケットが別々の経路を通る</text><text x="500" y="336" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">同じ線を多数の通信で共有できる</text><text x="500" y="356" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">宛先で番号順に並べ直す</text><line x1="40" y1="250" x2="660" y2="250" class="sm dot"/></svg>

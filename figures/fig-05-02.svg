@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 400" width="700" height="400" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="700" height="400" class="bg"/><polygon points="225.0,40 375.0,40 407.0,88 193.0,88" class="accT s"/><text x="300" y="56.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">レジスタ</text><text x="300" y="73.0" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">数百 B   /   0.3 ns</text><text x="561.0" y="64.0" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">コンパイラ</text><polygon points="193.0,88 407.0,88 439.0,136 161.0,136" class="accT s"/><text x="300" y="104.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">L1 キャッシュ</text><text x="300" y="121.0" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">数十 KB   /   1 ns</text><text x="561.0" y="112.0" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">ハードウェア</text><polygon points="161.0,136 439.0,136 471.0,184 129.0,184" class="accT s"/><text x="300" y="152.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">L2 / L3 キャッシュ</text><text x="300" y="169.0" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">数 MB〜数十 MB   /   4〜15 ns</text><text x="561.0" y="160.0" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">ハードウェア</text><polygon points="129.0,184 471.0,184 503.0,232 97.0,232" class="tint s"/><text x="300" y="200.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">主記憶 (DRAM)</text><text x="300" y="217.0" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">数 GB〜数百 GB   /   80 ns</text><text x="561.0" y="208.0" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">OS</text><polygon points="97.0,232 503.0,232 535.0,280 65.0,280" class="tint s"/><text x="300" y="248.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">SSD</text><text x="300" y="265.0" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">数百 GB〜数十 TB   /   20 µs</text><text x="561.0" y="256.0" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">OS</text><polygon points="65.0,280 535.0,280 567.0,328 33.0,328" class="tint s"/><text x="300" y="296.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">ネットワーク上</text><text x="300" y="313.0" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">事実上無限   /   数十 ms〜</text><text x="561.0" y="304.0" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">アプリケーション</text><text x="561.0" y="26" text-anchor="start" dominant-baseline="middle" class="t-xs b">管理する主体</text><line x1="70" y1="44" x2="70" y2="324" class="sm" marker-end="url(#am)"/><text x="64" y="60" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">速い・高い・小さい</text><text x="64" y="300" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">遅い・安い・大きい</text><text x="350" y="368" text-anchor="middle" dominant-baseline="middle" class="t-s b">段をまたぐごとに、速度も容量も桁が変わる</text><text x="350" y="388" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">（2026年時点の代表的な桁。世代で変わるが、桁の差は変わらない）</text></svg>

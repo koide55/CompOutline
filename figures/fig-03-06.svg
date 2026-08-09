@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 360" width="660" height="360" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="660" height="360" class="bg"/><circle cx="200.0" cy="72.0" r="46" class="tint s"/><text x="200.0" y="72.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">フェッチ</text><circle cx="293.5307436087194" cy="234.0" r="46" class="tint s"/><text x="293.5307436087194" y="234.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">デコード</text><circle cx="106.46925639128062" cy="234.0" r="46" class="tint s"/><text x="106.46925639128062" y="234.0" text-anchor="middle" dominant-baseline="middle" class="t-s b">実行</text><path d="M247.3,82.9 A108,108 0 0 1 307.7,187.5" class="sa" marker-end="url(#aa)"/><path d="M260.4,269.5 A108,108 0 0 1 139.6,269.5" class="sa" marker-end="url(#aa)"/><path d="M92.3,187.5 A108,108 0 0 1 152.7,82.9" class="sa" marker-end="url(#aa)"/><text x="200" y="180" text-anchor="middle" dominant-baseline="middle" class="t-s lbl">くり返す</text><rect x="390" y="56" width="250" height="250" rx="6" class="none sm"/><text x="515" y="76" text-anchor="middle" dominant-baseline="middle" class="t-s b">そのとき動く部品</text><text x="408" y="106" text-anchor="start" dominant-baseline="middle" class="t-s b">フェッチ</text><text x="408" y="126" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">PC → 主記憶 → 命令レジスタ</text><text x="408" y="164" text-anchor="start" dominant-baseline="middle" class="t-s b">デコード</text><text x="408" y="184" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">制御装置が命令を解読</text><text x="408" y="222" text-anchor="start" dominant-baseline="middle" class="t-s b">実行</text><text x="408" y="242" text-anchor="start" dominant-baseline="middle" class="t-xs lbl">ALU・レジスタ・主記憶</text><text x="330" y="336" text-anchor="middle" dominant-baseline="middle" class="t-s b">CPU がしているのは「読む・計算する・書く・PC を進める」だけ</text></svg>
