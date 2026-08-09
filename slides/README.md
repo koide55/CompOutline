@@ -1,15 +1,18 @@
 # スライド
 
 講義ノート（`lectures/`）と図（`figures/`）から `.pptx` を組み立てる。
+**全13回・311枚**。すべて PowerPoint に描かせて1枚ずつ確認済み。
 
-**現在は第1回のみの見本である。** 体裁を決めてから残り12回に展開する。
-
-| ファイル | 内容 |
+| パス | 内容 |
 | --- | --- |
-| `第01回_計算とは何か.pptx` | 見本（22枚） |
-| `tools/lec01.js` | その生成スクリプト |
+| `第NN回_*.pptx` | 各回のスライド |
+| `decks/lecNN.js` | 各回の内容（何を並べるか） |
+| `tools/kit.js` | 体裁（どう並べるか）。13回ぶんの見た目をここ1箇所で決める |
+| `tools/build.js` | 組み立て |
 | `tools/figs2png.sh` | 図の SVG を貼り付け用の PNG にする |
 | `tools/render.sh` | PowerPoint で開いて1枚ずつの画像にする |
+
+内容と体裁を分けてあるので、**体裁の変更は `kit.js` を1箇所直せば全13回に効く。**
 
 ## 作り直す
 
@@ -19,13 +22,30 @@ cd slides && npm install pptxgenjs                                # 最初の1�
 ```
 
 ```bash
-slides/tools/figs2png.sh 01                        # 図を PNG に
-node slides/tools/lec01.js                         # pptx を組む
-slides/tools/render.sh 第01回_計算とは何か.pptx      # 画像にして確認
+slides/tools/figs2png.sh              # 図59点を PNG に
+node slides/tools/build.js            # 全13回を組む（回番号を渡せばその回だけ）
+slides/tools/render.sh 第01回_計算とは何か.pptx   # 画像にして確認
 ```
 
-図を SVG のまま貼らないのは、PowerPoint が確実に描いてくれないため。
-3倍解像度の PNG にしてから貼る。書き出した確認用の画像は `slides/preview/` に入る。
+`build.js` は組みながら**文字の溢れを見積もって警告する**。
+実際に描くまで分からないのが本当だが、明らかな溢れはここで捕まる。
+
+## スライドの型
+
+`decks/lecNN.js` には、回の情報と `slides` 配列を書く。
+表紙・今回の問い・到達目標・演習・まとめは、データから自動で組まれる。
+
+| kind | 使いどころ |
+| --- | --- |
+| `section` | 節の区切り（濃色） |
+| `cards` | 並列な要素をカードで。`callout` で囲みを添えられる |
+| `bullets` | 箇条書き |
+| `figure` | 図1点＋説明。縦横比を保って自動で収める |
+| `table` | 表。`callout` と `sub` を添えられる |
+| `code` | コード片。`side` で右に解説を置ける |
+| `split` | 左右2段。各段に code / table / items / body を置ける |
+| `statement` | 主張の囲み＋「A → B」の対応 |
+| `steps` | 番号つきの手順を横に並べる |
 
 ## 体裁
 
@@ -43,9 +63,9 @@ slides/tools/render.sh 第01回_計算とは何か.pptx      # 画像にして�
 補足の文字を2色持っているのは、明色用の灰色を濃色スライドに使うと読めないため。
 実際に第1回でその失敗をした。
 
-- **濃色と明色を挟む** — タイトル・節の区切り・まとめを濃色、本文を明色にする
-- **意匠はテープのマス目** — 濃色スライドの下端に、チューリングマシンのテープを模した
-  マス目を並べ、1マスだけ塗る。回ごとに意匠は変える
+- **濃色と明色を挟む** — 表紙・今回の問い・節の区切り・まとめを濃色、本文を明色に
+- **意匠はマス目** — 濃色スライドの下端にマス目を並べ、回ごとに違う位置を塗る。
+  第1回のチューリングマシンのテープに由来する
 - **見出しの下に飾り線を引かない** — 余白と地色で区切る
 - 書体は `Yu Gothic`。Windows 8.1+ に標準で入っており、
   macOS では PowerPoint が同梱している（`PowerPoint.app/Contents/Resources/DFonts/`）。
@@ -57,9 +77,10 @@ slides/tools/render.sh 第01回_計算とは何か.pptx      # 画像にして�
 
 | 何を | どうやって |
 | --- | --- |
+| 溢れの見積もり | `build.js` が組みながら警告する |
 | 構造 | pptx スキルの `scripts/office/validate.py` |
 | 座標 | `tools/pptx_shapes.py` で枠外へのはみ出しと重なりを検出 |
-| **見た目** | `slides/tools/render.sh` で PowerPoint に描かせて1枚ずつ見る |
+| **見た目** | `tools/render.sh` で PowerPoint に描かせて1枚ずつ見る |
 
 **見た目の確認がいちばん効く。** 座標が正しくても、
 日本語が折り返して箱からあふれるのは、実際に描いてみないと分からない。

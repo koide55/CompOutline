@@ -27,3 +27,4 @@ slides/png/
 slides/preview/
 slides/.render-*
 .venv/
+.venv

@@ -39,6 +39,7 @@
 | `docs/findings.md` | 旧版 `CompOutline2024.pptx`（663枚）の調査結果 |
 | `docs/inventory.md` | 旧版のセクション別スライド一覧 |
 | `docs/legacy-slides-2024.json` | 旧版の全文（タイトル・本文・ノート）の控え |
+| `slides/` | 全13回の pptx（311枚）とその生成スクリプト |
 | `tools/` | 下記のツール群 |
 
 ## ツール
@@ -100,6 +101,19 @@ python3 -m venv .venv && .venv/bin/pip install cairosvg pillow
 旧版 `CompOutline2024.pptx`（663枚 / 24セクション / 148MB）は、
 GitHub の100MB制限を超えるため `.gitignore` に入れており、追跡していない。
 調査結果は [docs/findings.md](docs/findings.md) を参照。
+
+## スライド
+
+[slides/](slides/) に全13回の `.pptx` がある（311枚）。
+内容は `slides/decks/lecNN.js`、体裁は `slides/tools/kit.js` に分けてあるので、
+体裁の変更は1箇所直せば全13回に効く。
+
+```bash
+node slides/tools/build.js                        # 全13回を組む
+slides/tools/render.sh 第01回_計算とは何か.pptx     # PowerPoint で描かせて確認
+```
+
+詳しくは [slides/README.md](slides/README.md) を参照。
 
 ## 公開前チェック
 
