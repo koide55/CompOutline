@@ -679,3 +679,64 @@ FIGURES = {
     '07-01': f0701, '07-02': f0702, '07-03': f0703, '07-04': f0704, '07-05': f0705,
     '08-01': f0801, '08-02': f0802, '08-03': f0803, '08-04': f0804, '08-05': f0805,
 }
+
+
+def f0706():
+    """[旧 network2026 slide 545] パイプによるプロセス間通信"""
+    f = Fig(700, 420)
+
+    def proc(x, y, w, h, name, fds):
+        """プロセスの箱と、その左端に並ぶファイル記述子の枡"""
+        f.rect(x, y, w, h, cls='tint s', rx=4)
+        f.text(x + w / 2, y + h / 2, name, cls='t-s b m')
+        for i, (num, lab) in enumerate(fds):
+            fy = y + 10 + i * 26
+            f.rect(x - 26, fy, 26, 22, cls='accT sa' if lab else 'bg s')
+            f.text(x - 13, fy + 11, str(num), cls='t-xs m b acc' if lab else 't-xs m')
+        return x - 26
+
+    f.text(350, 32, '%  ls -l /usr/include  |  wc', cls='b m')
+
+    # ls のプロセス
+    lx = proc(150, 66, 210, 88, 'ls -l /usr/include',
+              [(0, False), (1, True), (2, False)])
+    f.text(112, 87, 'キーボード', cls='t-xs lbl', anchor='end')
+    f.line(116, 87, 124, 87, cls='sm')
+    f.text(112, 113, '（付け替えた）', cls='t-xs acc b', anchor='end')
+    f.text(112, 139, '画面', cls='t-xs lbl', anchor='end')
+    f.line(116, 139, 124, 139, cls='sm')
+
+    # wc のプロセス
+    proc(150, 246, 210, 88, 'wc', [(0, True), (1, False), (2, False)])
+    f.text(112, 267, '（付け替えた）', cls='t-xs acc b', anchor='end')
+    f.text(112, 293, '画面', cls='t-xs lbl', anchor='end')
+    f.line(116, 293, 124, 293, cls='sm')
+    f.text(112, 319, '画面', cls='t-xs lbl', anchor='end')
+    f.line(116, 319, 124, 319, cls='sm')
+
+    # パイプ（土管）
+    f.rect(430, 150, 130, 100, cls='tint2 s', rx=8)
+    f.text(495, 190, 'パイプ', cls='t-s b')
+    f.text(495, 210, '（カーネル内）', cls='t-xs lbl')
+    f.path('M360,102 L495,102 L495,146', cls='sa', arrow='aa')
+    f.text(430, 92, '書き口へ', cls='t-xs lbl')
+    f.path('M495,254 L495,282 L364,282', cls='sa', arrow='aa')
+    f.text(430, 300, '読み口から', cls='t-xs lbl')
+
+    f.text(350, 360, '付け替えたのは片側だけ。ls は「1番に書く」、wc は「0番から読む」だけ',
+           cls='t-s b')
+    f.text(350, 384, '互いの存在を知らない2つのプログラムが、それだけでつながる',
+           cls='t-xs lbl')
+
+    # シェルの手順
+    f.rect(596, 66, 96, 268, cls='none sm dash', rx=6)
+    f.text(644, 86, 'シェルの手順', cls='t-xs b')
+    for i, s in enumerate(['① pipe', '② fork', '③ dup', '④ execve']):
+        f.rect(608, 106 + i * 56, 72, 40, cls='bg s', rx=3)
+        f.text(644, 126 + i * 56, s, cls='t-xs m')
+        if i < 3:
+            f.line(644, 146 + i * 56, 644, 162 + i * 56, cls='sm', arrow='am')
+    return f
+
+
+FIGURES['07-06'] = f0706

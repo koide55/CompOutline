@@ -27,14 +27,14 @@
 本文には図の**仕様**（引用ブロック）と**図そのもの**（SVG）の両方を置いてある。
 仕様を残してあるのは、描き直すときに意図が失われないようにするため。
 
-図は全57点、すべて自作の SVG（`figures/fig-NN-MM.svg`）。
+図は全59点、すべて自作の SVG（`figures/fig-NN-MM.svg`）。
 
 ## 構成
 
 | パス | 内容 |
 | --- | --- |
 | `lectures/` | 全13回の講義ノート |
-| `figures/` | 図 57点（SVG） |
+| `figures/` | 図 59点（SVG） |
 | `docs/curriculum.md` | 13回の設計方針、旧スライドとの対応表、執筆上の約束 |
 | `docs/findings.md` | 旧版 `CompOutline2024.pptx`（663枚）の調査結果 |
 | `docs/inventory.md` | 旧版のセクション別スライド一覧 |
@@ -78,6 +78,14 @@ python3 -m venv .venv && .venv/bin/pip install cairosvg pillow
 | 図 6-3 RAID のデータ配置 | 旧 slide 343–357 |
 | 図 9-3 階層を降りて上がる | 旧 slide 191 |
 | 図 11-1 正規化の前と後 | 旧 slide 547–550 |
+
+別講義の `network2026.pptx`（通信工学概論）からは、
+本講義に欠けていた「システムコールを実際に呼ぶ」話を要点だけ移した。
+
+| 移行先 | 内容 | 元 |
+| --- | --- | --- |
+| 第7回 7.2 | ファイル記述子、pipe、dup、シェルの `\|` の仕組み（図 7-6） | network2026 slide 537–550 |
+| 第10回 10.2 | socket / bind / listen / accept / connect の順序（図 10-6） | network2026 slide 551–570 |
 
 ## 執筆上の約束
 

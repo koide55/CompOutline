@@ -469,3 +469,57 @@ FIGURES = {
     '10-01': f1001, '10-02': f1002, '10-03': f1003, '10-04': f1004, '10-05': f1005,
     '11-01': f1101, '11-02': f1102, '11-03': f1103,
 }
+
+
+def f1006():
+    """[旧 network2026 slide 555] ソケットの呼び出し順序（TCP）"""
+    f = Fig(700, 470)
+    f.text(180, 36, 'サーバ', cls='b')
+    f.text(500, 36, 'クライアント', cls='b')
+
+    srv = [('socket', 62), ('bind', 118), ('listen', 174), ('accept', 230)]
+    cli = [('socket', 62), ('connect', 230)]
+    for name, y in srv:
+        f.box(110, y, 140, 42, [name], cls='tint s', tcls='t-s m b')
+    for name, y in cli:
+        f.box(430, y, 140, 42, [name], cls='tint s', tcls='t-s m b')
+    for y in (104, 160, 216):
+        f.line(180, y, 180, y + 14, cls='sm', arrow='am')
+    f.line(500, 104, 500, 228, cls='sm', arrow='am')
+    f.text(578, 166, 'サーバが待ち受けて', cls='t-xs lbl', anchor='start')
+    f.text(578, 182, 'いれば、いつでも', cls='t-xs lbl', anchor='start')
+    f.text(578, 198, '接続を要求できる', cls='t-xs lbl', anchor='start')
+
+    # 接続の確立
+    f.path('M430,251 L254,251', cls='sa', arrow='aa')
+    f.text(342, 236, '接続の確立（3ウェイハンドシェイク）', cls='t-xs acc b')
+
+    # データ転送
+    f.box(110, 308, 140, 42, ['read / write'], cls='accT s', tcls='t-s m')
+    f.box(430, 308, 140, 42, ['write / read'], cls='accT s', tcls='t-s m')
+    f.arrow(254, 320, 426, 320, cls='sa')
+    f.arrow(426, 340, 254, 340, cls='sa')
+    f.text(342, 298, 'ファイルと同じ操作でやりとりする', cls='t-xs lbl')
+    f.line(180, 272, 180, 304, cls='sm', arrow='am')
+    f.line(500, 272, 500, 304, cls='sm', arrow='am')
+
+    f.box(110, 380, 140, 42, ['close'], cls='tint s', tcls='t-s m b')
+    f.box(430, 380, 140, 42, ['close'], cls='tint s', tcls='t-s m b')
+    f.line(180, 350, 180, 376, cls='sm', arrow='am')
+    f.line(500, 350, 500, 376, cls='sm', arrow='am')
+
+    # accept の注記。2列の間の空きに置き、どの矢印とも交差させない
+    f.rect(268, 62, 144, 118, cls='none sm dash', rx=6)
+    f.text(340, 82, 'accept は', cls='t-xs b')
+    f.lines(340, 104, ['新しいソケットを返す。', '元のソケットは受付', '専用として残るので、',
+                       '次の接続を待ち続け', 'られる'], cls='t-xs', lh=15)
+    f.path('M300,184 L268,224', cls='sm', arrow='am')
+
+    f.text(342, 444, '接続してしまえば、あとはファイルと同じ read / write で済む',
+           cls='t-s b')
+    f.text(342, 464, '相手がファイルかパイプか地球の裏側かを、プログラムは意識しなくてよい',
+           cls='t-xs lbl')
+    return f
+
+
+FIGURES['10-06'] = f1006
