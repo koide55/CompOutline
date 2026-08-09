@@ -115,6 +115,21 @@ slides/tools/render.sh 第01回_計算とは何か.pptx     # PowerPoint で描�
 
 詳しくは [slides/README.md](slides/README.md) を参照。
 
+## 理解度確認（AI対話）
+
+[assessment/](assessment/) に、各回の終わりに行う AI 対話による理解度確認を置いている。
+実行基盤は別リポジトリの cyber-social-implementation-arena、
+ここにはシナリオ（何を問うか）と検証道具がある。
+
+**AI は点数をつけない。成績は教員が判断する。**
+AI がするのは対話の記録と、教員が短時間で判断するための前処理だけである。
+
+```bash
+python3 assessment/tools/dryrun.py assessment/samples/lec01-mid.json
+```
+
+詳しくは [assessment/README.md](assessment/README.md) を参照。
+
 ## 公開前チェック
 
 GitHub Public にする前に確認すること。
