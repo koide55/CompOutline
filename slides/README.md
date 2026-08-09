@@ -8,26 +8,24 @@
 | --- | --- |
 | `第01回_計算とは何か.pptx` | 見本（22枚） |
 | `tools/lec01.js` | その生成スクリプト |
+| `tools/figs2png.sh` | 図の SVG を貼り付け用の PNG にする |
+| `tools/render.sh` | PowerPoint で開いて1枚ずつの画像にする |
 
 ## 作り直す
 
 ```bash
-cd slides && npm install pptxgenjs && node tools/lec01.js
+python3 -m venv .venv && .venv/bin/pip install cairosvg pillow   # 最初の1回だけ
+cd slides && npm install pptxgenjs                                # 最初の1回だけ
 ```
-
-図は SVG のままでは PowerPoint が確実に描けないので、
-`figures/*.svg` を 3倍解像度の PNG にしてから貼る。
 
 ```bash
-.venv/bin/python - <<'PY'
-import cairosvg, glob, os, re
-for p in sorted(glob.glob('figures/fig-01-*.svg')):
-    s = re.sub(r'font-family:[^;}]*;?', '', open(p, encoding='utf-8').read())
-    s = s.replace('<svg ', '<svg font-family="Arial Unicode MS" ', 1)
-    cairosvg.svg2png(bytestring=s.encode(),
-                     write_to='slides/png/' + os.path.basename(p)[:-4] + '.png', scale=3.0)
-PY
+slides/tools/figs2png.sh 01                        # 図を PNG に
+node slides/tools/lec01.js                         # pptx を組む
+slides/tools/render.sh 第01回_計算とは何か.pptx      # 画像にして確認
 ```
+
+図を SVG のまま貼らないのは、PowerPoint が確実に描いてくれないため。
+3倍解像度の PNG にしてから貼る。書き出した確認用の画像は `slides/preview/` に入る。
 
 ## 体裁
 
@@ -35,30 +33,51 @@ PY
 
 | 用途 | 色 |
 | --- | --- |
-| 濃色スライドの地 / 本文 | `#16191D` |
+| 濃色スライドの地 / 明色スライドの本文 | `#16191D` |
 | 明色スライドの地 | `#FFFFFF` |
 | 補助の面 | `#EEF1F5` |
 | 強調 | `#0B5CAD` |
-| 補足の文字 | `#5F6672` |
+| 補足の文字（**明色の地の上でのみ**） | `#5F6672` |
+| 補足の文字（**濃色の地の上**） | `#9AA3B0` |
+
+補足の文字を2色持っているのは、明色用の灰色を濃色スライドに使うと読めないため。
+実際に第1回でその失敗をした。
 
 - **濃色と明色を挟む** — タイトル・節の区切り・まとめを濃色、本文を明色にする
 - **意匠はテープのマス目** — 濃色スライドの下端に、チューリングマシンのテープを模した
   マス目を並べ、1マスだけ塗る。回ごとに意匠は変える
 - **見出しの下に飾り線を引かない** — 余白と地色で区切る
-- 書体は `Yu Gothic`（Windows 8.1+ と macOS 10.9+ の両方にある）。
-  等幅は `Courier New`
+- 書体は `Yu Gothic`。Windows 8.1+ に標準で入っており、
+  macOS では PowerPoint が同梱している（`PowerPoint.app/Contents/Resources/DFonts/`）。
+  ヒラギノは macOS 専用なので使わない
 
 ## 検証
 
-```bash
-# 構造（スキーマ・関連付け・コンテンツタイプ）
-.venv/bin/python <pptxスキルの>scripts/office/validate.py slides/第01回_計算とは何か.pptx
+3段構えで見る。
 
-# 幾何（枠外へのはみ出し、文字どうしの重なり）
-python3 tools/pptx_shapes.py slides/第01回_計算とは何か.pptx <スライド番号>
-```
+| 何を | どうやって |
+| --- | --- |
+| 構造 | pptx スキルの `scripts/office/validate.py` |
+| 座標 | `tools/pptx_shapes.py` で枠外へのはみ出しと重なりを検出 |
+| **見た目** | `slides/tools/render.sh` で PowerPoint に描かせて1枚ずつ見る |
 
-**この環境では画面に描画しての確認ができない**（LibreOffice が無い）。
-構造と座標は機械的に確かめられるが、実際の見た目、とくに
-**日本語の折り返しによる溢れ**は確認できていない。
-一度 PowerPoint で開いて確かめること。
+**見た目の確認がいちばん効く。** 座標が正しくても、
+日本語が折り返して箱からあふれるのは、実際に描いてみないと分からない。
+第1回では次の2件が、描画してはじめて見つかった。
+
+- 吹き出しの見出しが2行に折り返し、下の説明文に食い込んでいた
+- 濃色スライドの補足文字に明色用の灰色を使っていて、投影すると読めなかった
+
+### PowerPoint で描かせるときの注意
+
+**同じパスのファイルを開き直しても、PowerPoint がメモリ上の古い内容を
+書き出すことがある。** pptx を作り直したのに描画が変わらないときは、まずこれを疑う。
+
+`render.sh` は毎回一意な名前に複製してから開くことで、これを避けている。
+手で `osascript` を叩くときも同じようにすること。
+
+PDF の保存先は **HFS 形式のパス**（`Macintosh HD:Users:…`）で渡す。
+POSIX パスだと保存が失敗する。`render.sh` の中では
+`(POSIX file "…") as text` で変換している。
+
+`render.sh` は開いている他の書類には触れず、自分が開いた複製だけを閉じる。

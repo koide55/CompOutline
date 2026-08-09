@@ -20,3 +20,10 @@ slide-*.jpg
 figures/_draft/
 .preview/
 .venv/
+
+# スライドの中間生成物
+slides/node_modules/
+slides/png/
+slides/preview/
+slides/.render-*
+.venv/

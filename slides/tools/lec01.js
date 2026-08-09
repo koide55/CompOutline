@@ -3,7 +3,8 @@ const PptxGenJS = require('pptxgenjs');
 const path = require('path');
 const fs = require('fs');
 
-const PNG = path.join(__dirname, 'png');
+const ROOT = path.join(__dirname, '..');   // slides/
+const PNG = path.join(ROOT, 'png');
 const img = (n) => ({ path: path.join(PNG, n) });
 
 // 図の SVG と同じ配色にそろえる。スライドと図が別物に見えないようにするため
@@ -13,6 +14,7 @@ const TINT = 'EEF1F5';
 const ACC = '0B5CAD';
 const MUT = '5F6672';
 const LIGHTINK = 'E8EBEF';
+const DIM = '9AA3B0';   // 濃色スライド用の補足文字。MUT は暗すぎて読めない
 
 const JA = 'Yu Gothic';
 const MONO = 'Courier New';
@@ -139,7 +141,7 @@ function pageNum(s, n) {
   });
   tape(s, { y: 5.4, hi: 9, color: '6AB0F3' });
   s.addText('九州大学', {
-    x: 0.9, y: 6.4, w: 6, h: 0.3, fontFace: JA, fontSize: 12, color: MUT, margin: 0,
+    x: 0.9, y: 6.4, w: 6, h: 0.3, fontFace: JA, fontSize: 12, color: DIM, margin: 0,
   });
 }
 
@@ -160,7 +162,7 @@ function pageNum(s, n) {
   });
   s.addText('この90分で、この1つの問いに答えを出す。', {
     x: 0.9, y: 5.3, w: 11, h: 0.4,
-    fontFace: JA, fontSize: 14, color: MUT, margin: 0,
+    fontFace: JA, fontSize: 14, color: DIM, margin: 0,
   });
   tape(s, { y: 6.4, hi: 4, color: '6AB0F3' });
 }
@@ -356,14 +358,14 @@ function pageNum(s, n) {
     x: 6.4, y: 2.95, w: 6.1, h: 0.3, fontFace: JA, fontSize: 13, color: MUT, margin: 0,
   });
   s.addShape(pres.ShapeType.roundRect, {
-    x: 6.4, y: 3.45, w: 6.15, h: 1.0, rectRadius: 0.06,
+    x: 6.4, y: 3.45, w: 6.15, h: 1.1, rectRadius: 0.06,
     fill: { color: 'D9E6F4' }, line: { color: ACC, width: 1.5 },
   });
-  s.addText('すべての n について終わるかは、2026年現在も証明されていない', {
-    x: 6.62, y: 3.6, w: 5.7, h: 0.35, fontFace: JA, fontSize: 14, bold: true, color: ACC, margin: 0,
+  s.addText('すべての n で終わるかは、未解決', {
+    x: 6.62, y: 3.62, w: 5.7, h: 0.35, fontFace: JA, fontSize: 15, bold: true, color: ACC, margin: 0,
   });
-  s.addText('1937年に提起されて以来、未解決。', {
-    x: 6.62, y: 3.98, w: 5.7, h: 0.3, fontFace: JA, fontSize: 12, color: MUT, margin: 0,
+  s.addText('1937年に提起されて以来、2026年現在も証明されていない。', {
+    x: 6.62, y: 4.04, w: 5.7, h: 0.32, fontFace: JA, fontSize: 12, color: MUT, margin: 0,
   });
   note(s, '「終わるかどうか分からない手順」が、こうも簡単に書けてしまう。この感覚が 1.3 で効いてくる。', 5.0);
   pageNum(s, 9);
@@ -611,14 +613,14 @@ function pageNum(s, n) {
 // 19. 図 1-4
 {
   const s = contentSlide('対角線論法', '1.3　計算の限界');
-  s.addImage({ ...img('fig-01-04.png'), x: 4.05, y: 1.5, w: 5.2, h: 3.34 });
+  s.addImage({ ...img('fig-01-04.png'), x: 3.68, y: 1.45, w: 5.95, h: 3.82 });
   s.addText('対角線をすべて反転させたものが trouble の振る舞い。'
     + 'どの行とも1マス以上食い違うため、表のどこにも存在しえない。', {
-    x: 0.75, y: 5.1, w: 11.8, h: 0.4, fontFace: JA, fontSize: 15, color: INK, align: 'center', margin: 0,
+    x: 0.75, y: 5.45, w: 11.8, h: 0.4, fontFace: JA, fontSize: 15, color: INK, align: 'center', margin: 0,
   });
   s.addText('1.1 で見たコラッツの手順が、なぜ90年も未解決なのかが、これで少し見える。\n'
     + '停止するかどうかを機械的に判定する一般的な方法が、そもそも存在しない。', {
-    x: 0.75, y: 5.6, w: 11.8, h: 0.7, fontFace: JA, fontSize: 13, color: MUT, align: 'center',
+    x: 0.75, y: 5.9, w: 11.8, h: 0.7, fontFace: JA, fontSize: 13, color: MUT, align: 'center',
     margin: 0, lineSpacing: 20,
   });
   pageNum(s, 19);
@@ -709,11 +711,11 @@ function pageNum(s, n) {
   });
   s.addText('次回　計算できるとして、それは現実的な時間で終わるのか。'
     + 'そもそも情報を計算機で扱うには、どう表現すればよいのか。', {
-    x: 0.9, y: 6.5, w: 11.6, h: 0.4, fontFace: JA, fontSize: 13, color: MUT, margin: 0,
+    x: 0.9, y: 6.5, w: 11.6, h: 0.4, fontFace: JA, fontSize: 13, color: DIM, margin: 0,
   });
 }
 
-const out = path.join(__dirname, '第01回_計算とは何か.pptx');
+const out = path.join(ROOT, '第01回_計算とは何か.pptx');
 pres.writeFile({ fileName: out }).then(() => {
   console.log('書き出した:', out, fs.statSync(out).size, 'bytes');
 });
