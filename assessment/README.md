@@ -229,6 +229,18 @@ ASSESS_MODEL=gemma3:12b python3 assessment/tools/dryrun.py assessment/samples/le
 
 研究室の計算機（RTX 6000 Ada 2枚）で運用する。
 
+**運び方と起動手順は arena 側の `docs/deploy.md` にある。**
+梱包（`tools/pack.sh`）から起動（`tools/serve-lecture.sh`）まで、
+設定を間違えると性能が桁で変わる箇所を機械で確かめる形にしてある。
+シナリオは `.gitignore` してあるので、梱包の前に配置しておくこと。
+
+```bash
+assessment/tools/install.sh ~/Documents/Playground/cyber-social-implementation-arena
+```
+
+学生に配る URL は `http://<研究室の計算機>:8000/lecture`。
+講義の回だけが並び、LLM の設定と難易度は出ない。教員は `/teacher`。
+
 カードごとに Ollama を立て、arena には口を2つ渡す。1台の大きな GPU に
 見せかけて層を分割すると、1枚に収まるモデルでもかえって遅くなるため。
 `gemma4:latest`（Q4_K_M / 8.0B）は VRAM 4.2 GB なので、48 GB のカード1枚に余裕で載る。
