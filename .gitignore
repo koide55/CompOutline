@@ -28,3 +28,6 @@ slides/preview/
 slides/.render-*
 .venv/
 .venv
+
+__pycache__/
+*.pyc

@@ -46,9 +46,12 @@ SCHEMA = {
 
 def judge(item, turns, model, timeout=600):
     talk = "\n\n".join(f"問: {t['q']}\n答: {t['a']}" for t in turns)
+    trap = (f"この問には次の誤った前提が仕込まれている: {item['trap']}\n"
+            f"学生がこれに同意していれば C とすること。\n" if item.get("trap") else "")
     prompt = (f"観点: {item['label']}\n"
-              f"判定基準: {item['description']}\n"
-              f"十分と言える例: {item['excellent']}\n\n"
+              f"何を見るか: {item['description']}\n"
+              f"判定の目安: {item.get('anchors', '')}\n"
+              f"{trap}\n"
               f"対話:\n---\n{talk}\n---")
     payload = {
         "model": model, "stream": False, "think": False, "format": SCHEMA,
@@ -65,7 +68,7 @@ def judge(item, turns, model, timeout=600):
     return time.time() - t0, json.loads(d["message"]["content"])
 
 
-def flags(transcript, results):
+def flags(scenario, transcript, results):
     """教員が必ず目を通すべきものを浮かせる。"""
     out = []
     answers = "".join(t["a"] for t in transcript["turns"])
@@ -74,9 +77,10 @@ def flags(transcript, results):
         out.append(f"回答が短い（{n}字）")
     if n > 4000:
         out.append(f"回答が長い（{n}字）")
-    terms = ["チューリング", "停止問題", "決定不能", "対角線", "テーゼ", "万能", "アルゴリズム"]
+    # その回の固有語は scenario から取る。回ごとに違うため
+    terms = scenario.get("must_cover", [])
     hit = sum(1 for t in terms if t in answers)
-    if hit < 3:
+    if terms and hit < max(2, len(terms) // 3):
         out.append(f"講義固有語が少ない（{hit}/{len(terms)}）")
     grades = [r["grade"] for _, r, _ in results]
     if "A" in grades and "C" in grades:
@@ -122,7 +126,7 @@ def main():
         print(f"      根拠「{r['quote'][:64]}」" if real
               else "      根拠なし（引用が実在しないため表示しない）")
 
-    fl = flags(tr, results)
+    fl = flags(sc, tr, results)
     print(f"\n{'-' * 74}")
     if fl:
         print(f"  要確認: {' / '.join(fl)}")
