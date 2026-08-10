@@ -2,6 +2,7 @@
   "scenario_id": "lec07_os_process_comprehension",
   "scenario_version": "1.0.0",
   "category": "education",
+  "requires_student": true,
   "difficulty": "basic",
   "title": "第7回 オペレーティングシステムとプロセス ── 理解度確認",
   "description": "1台の計算機を多数のプログラムで共有する仕組みについて理解を確かめる。",

@@ -2,6 +2,7 @@
   "scenario_id": "lec12_security_comprehension",
   "scenario_version": "1.0.0",
   "category": "education",
+  "requires_student": true,
   "difficulty": "basic",
   "title": "第12回 情報セキュリティ ── 理解度確認",
   "description": "顔の見えない相手をどう信用するかについて理解を確かめる。",

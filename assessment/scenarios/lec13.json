@@ -2,6 +2,7 @@
   "scenario_id": "lec13_ai_agent_comprehension",
   "scenario_version": "1.0.0",
   "category": "education",
+  "requires_student": true,
   "difficulty": "intermediate",
   "title": "第13回 機械学習からLLM・エージェントAIへ ── 理解度確認",
   "description": "計算機が「学習する」とはどういう計算かについて理解を確かめる。",

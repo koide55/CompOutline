@@ -2,6 +2,7 @@
   "scenario_id": "lec01_computation_comprehension",
   "scenario_version": "1.0.0",
   "category": "education",
+  "requires_student": true,
   "difficulty": "basic",
   "title": "第1回 計算とは何か ── 理解度確認",
   "description": "第1回の内容について、聞き手の質問に答える形で理解を確かめる。定義を思い出せるかではなく、自分の言葉で説明できるか、誤った前提の問いを訂正できるかを見る。",

@@ -2,6 +2,7 @@
   "scenario_id": "lec02_information_complexity_comprehension",
   "scenario_version": "1.0.0",
   "category": "education",
+  "requires_student": true,
   "difficulty": "basic",
   "title": "第2回 情報の表現と計算量 ── 理解度確認",
   "description": "情報の表し方と、アルゴリズムの「重さ」の測り方について理解を確かめる。",

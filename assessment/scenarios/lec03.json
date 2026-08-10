@@ -2,6 +2,7 @@
   "scenario_id": "lec03_logic_processor_comprehension",
   "scenario_version": "1.0.0",
   "category": "education",
+  "requires_student": true,
   "difficulty": "basic",
   "title": "第3回 論理回路からプロセッサへ ── 理解度確認",
   "description": "数学的なモデルが電子回路になるまでの道筋について理解を確かめる。",

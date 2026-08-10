@@ -2,6 +2,7 @@
   "scenario_id": "lec11_database_comprehension",
   "scenario_version": "1.0.0",
   "category": "education",
+  "requires_student": true,
   "difficulty": "basic",
   "title": "第11回 データベースとデータ処理 ── 理解度確認",
   "description": "壊れずに矛盾なくデータを溜める仕組みについて理解を確かめる。",

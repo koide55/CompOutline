@@ -2,6 +2,7 @@
   "scenario_id": "lec08_io_cloud_comprehension",
   "scenario_version": "1.0.0",
   "category": "education",
+  "requires_student": true,
   "difficulty": "basic",
   "title": "第8回 入出力・仮想化・クラウド ── 理解度確認",
   "description": "遅い装置との折り合いのつけ方と、計算機そのものの抽象化について理解を確かめる。",

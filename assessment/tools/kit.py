@@ -184,6 +184,9 @@ def build(spec):
         "scenario_id": spec["id"],
         "scenario_version": "1.0.0",
         "category": "education",
+        # 成績の参考資料にするので、誰の回答かを記録する。
+        # arena はこの印がある場合だけ学籍番号と氏名を必須にする。
+        "requires_student": True,
         "difficulty": spec.get("difficulty", "basic"),
         "title": f"第{spec['no']}回 {spec['title']} ── 理解度確認",
         "description": spec["description"],

@@ -2,6 +2,7 @@
   "scenario_id": "lec04_programs_comprehension",
   "scenario_version": "1.0.0",
   "category": "education",
+  "requires_student": true,
   "difficulty": "basic",
   "title": "第4回 プログラムが動くまで ── 理解度確認",
   "description": "人が書いた文字列が機械の動作になるまでの各段階について理解を確かめる。",

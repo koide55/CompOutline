@@ -2,6 +2,7 @@
   "scenario_id": "lec06_storage_comprehension",
   "scenario_version": "1.0.0",
   "category": "education",
+  "requires_student": true,
   "difficulty": "basic",
   "title": "第6回 ストレージとファイルシステム ── 理解度確認",
   "description": "電源を切っても消えないデータの置かれ方について理解を確かめる。",

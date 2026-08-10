@@ -2,6 +2,7 @@
   "scenario_id": "lec10_internet_web_comprehension",
   "scenario_version": "1.0.0",
   "category": "education",
+  "requires_student": true,
   "difficulty": "basic",
   "title": "第10回 インターネットとWeb ── 理解度確認",
   "description": "アドレスしか知らない相手にデータを届ける仕組みについて理解を確かめる。",

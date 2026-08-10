@@ -2,6 +2,7 @@
   "scenario_id": "lec09_network_basics_comprehension",
   "scenario_version": "1.0.0",
   "category": "education",
+  "requires_student": true,
   "difficulty": "basic",
   "title": "第9回 ネットワークの基礎 ── 理解度確認",
   "description": "世界中の計算機が1つの網としてつながる仕組みについて理解を確かめる。",

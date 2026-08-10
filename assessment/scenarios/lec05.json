@@ -2,6 +2,7 @@
   "scenario_id": "lec05_memory_parallel_comprehension",
   "scenario_version": "1.0.0",
   "category": "education",
+  "requires_student": true,
   "difficulty": "basic",
   "title": "第5回 記憶階層とプロセッサの並列性 ── 理解度確認",
   "description": "なぜ計算機の速度がメモリ待ちで決まるのかについて理解を確かめる。",
