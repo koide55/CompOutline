@@ -349,8 +349,13 @@ class Deck {
   lead(s, sl) {
     let y = 1.62;
     if (sl.lead) {
-      const long = sl.lead.length > 46;
-      const lh = long ? 0.68 : 0.40;
+      // 折り返し行数から高さを出す。「46字を超えたら2行」の決め打ちでは
+      // 3行になる導入文があふれた（第1回 p12）。fit() と同じ数え方に揃える。
+      let units = 0;
+      for (const ch of sl.lead) units += /[\x20-\x7E]/.test(ch) ? 0.52 : 1.0;
+      const perLine = Math.floor((CW * 72) / 15);
+      const lines = Math.max(1, Math.ceil(units / perLine));
+      const lh = Math.max(0.40, lines * 0.31);
       s.addText(sl.lead, {
         x: M, y, w: CW, h: lh, fontFace: JA, fontSize: 15, color: C.ink,
         margin: 0, lineSpacing: 22,

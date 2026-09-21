@@ -246,7 +246,11 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <li><span class="num">3</span>
         <span class="g-h">チャーチ＝チューリングのテーゼ</span><span class="g-b">が何を主張しているか説明できる</span></li>
       <li><span class="num">4</span>
-        <span class="g-h">計算できない問題が存在する</span><span class="g-b">ことの意味を説明できる</span></li></ol></div>
+        <span class="g-h">計算できない問題が存在する</span><span class="g-b">ことの意味を説明できる</span></li>
+      <li><span class="num">5</span>
+        <span class="g-h">量子計算機は範囲を変えない</span><span class="g-b">ことを、速さの話と区別して説明できる</span></li>
+      <li><span class="num">6</span>
+        <span class="g-h">決定不能性は生成AIにも及ぶ</span><span class="g-b">ことを説明できる</span></li></ol></div>
         <div class="pageno">3</div>
       </section>
 <section class="slide light">
@@ -290,8 +294,29 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
         <div class="st-h">学習する機械</div>
         <div class="st-b">第13回</div>
       </div></div>
-      <p class="sub">計算機は1940年代から性能で1兆倍近く変わった。しかし「何をする機械か」という定義は、<br>1936年にアラン・チューリングが書いた論文からほとんど変わっていない。</p><p class="note">生成AIも、その定義の内側にある。だから第1回は1936年から始める。</p></div>
+      <p class="sub">ENIAC(1946) は毎秒およそ5千回の加算をした。いまのノートPCは毎秒数兆回の浮動小数点演算をする。約10億倍である。<br>しかし「何をする機械か」という定義は、1936年にアラン・チューリングが書いた論文からほとんど変わっていない。</p><p class="note">生成AIも、その定義の内側にある。だから第1回は1936年から始める。</p></div>
         <div class="pageno">4</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">1.0　ガイダンス</div>
+        <h2>なぜ、AI がコードを書く時代に原理を学ぶのか</h2>
+      </header><div class="body"><p class="lead">「コードは生成AIが書いてくれる。原理を学ぶ意味はあるのか」—— 書いてくれる。しかし書かれたものを評価するのは人間である。</p>
+      <div class="cards" style="--per:3"><div class="card acc">
+      <div class="card-h">そのコードは正しいか</div>
+      <div class="card-b">AIが書いたコードを読めない人は、AIが間違えたことに気づけない</div>
+    </div><div class="card">
+      <div class="card-h">なぜ遅いのか</div>
+      <div class="card-b">どこを直せば速くなるのか。どの階層で詰まっているのか</div>
+    </div><div class="card">
+      <div class="card-h">なぜ壊れたのか</div>
+      <div class="card-b">それはどの層で起きたことなのか</div>
+    </div></div>
+      <div class="callout dashed">
+        <div class="co-h">しかも、機械には原理的にできないことがある</div>
+        <div class="co-b">「このプログラムは正しいか」を機械が完全に判定することは、今日の後半で見るとおり原理的に不可能である。だから最後は人間が判断するしかない。技術の進歩で解消される問題ではない。</div>
+      </div><p class="note">この講義が作るのは、AIと張り合う技能ではなく、AIの出力を評価できる目である。</p></div>
+        <div class="pageno">5</div>
       </section>
 <section class="slide dark ">
       <div class="sec-wrap">
@@ -324,7 +349,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
         <div class="co-h">「明確さ」の要求は、思っているより厳しい</div>
         <div class="co-b">料理のレシピにある「塩少々」は、アルゴリズムの条件を満たさない。実行する人の判断が入る余地があってはならない。</div>
       </div></div>
-        <div class="pageno">6</div>
+        <div class="pageno">7</div>
       </section>
 <section class="slide light">
         <header>
@@ -337,7 +362,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
 2. r = 0 なら b を出力して終了
 3. a &lt;- b,  b &lt;- r  として 1 に戻る</pre></div><div class="col"><div class="col-h">a=1071, b=462 で追いかける</div><table class="tbl mono "><colgroup><col style="width:16.07%"><col style="width:28.57%"><col style="width:26.79%"><col style="width:28.57%"></colgroup><thead><tr><th>回</th><th>a</th><th>b</th><th>r</th></tr></thead><tbody><tr><td>1</td><td>1071</td><td>462</td><td>147</td></tr><tr><td>2</td><td>462</td><td>147</td><td>21</td></tr><tr><td>3</td><td>147</td><td>21</td><td>0</td></tr></tbody></table><p class="col-n">答えは 21。3回で終わった。</p></div></div>
       <p class="note">この手順のどこにも「計算機」は出てこない。アルゴリズムは紙と鉛筆で実行できる。</p></div>
-        <div class="pageno">7</div>
+        <div class="pageno">8</div>
       </section>
 <section class="slide light">
         <header>
@@ -348,7 +373,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <p class="caption">長方形から正方形を切り取っていくと、最後に残る正方形の一辺が最大公約数になる。</p>
       <p class="sub center">余りが毎回真に小さくなり、0以上の整数は無限に減り続けられないので、必ず終わる。</p>
       </div>
-        <div class="pageno">8</div>
+        <div class="pageno">9</div>
       </section>
 <section class="slide light">
         <header>
@@ -362,7 +387,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
    奇数なら       n &lt;- 3n+1
 3. 1 に戻る</pre></div><div class="col"><div class="col-h">n = 7 から始めると</div><p class="col-b">7 → 22 → 11 → 34 → 17 → 52 → 26 → 13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1<br><br>16ステップで終わった。</p><p class="col-n">すべての n で終わるかは、未解決</p></div></div>
       <p class="note">「終わるかどうか分からない手順」が、こうも簡単に書けてしまう。この感覚が 1.3 で効いてくる。</p></div>
-        <div class="pageno">9</div>
+        <div class="pageno">10</div>
       </section>
 <section class="slide dark ">
       <div class="sec-wrap">
@@ -374,7 +399,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
         <header>
         <div class="kicker">1.2　チューリングマシン</div>
         <h2>なぜこんなものを考えるのか</h2>
-      </header><div class="body"><p class="lead">「計算できる」を「アルゴリズムがある」で定義すると、今度は「機械的に実行できる」という曖昧な言葉が残る。堂々巡りになる。</p>
+      </header><div class="body"><p class="lead">「計算できる」を「アルゴリズムがある」で定義すると、「機械的に実行できる」という曖昧な言葉が残る。堂々巡りである。しかも1928年にヒルベルトが提起した決定問題 ——「数学の命題が証明可能かを機械的に判定できるか」—— に答えるには、これを片づける必要があった。</p>
       <div class="cards" style="--per:4"><div class="card">
       <div class="card-h">読む</div>
       <div class="card-b">紙のどこか1箇所を見て、書いてある記号を読む</div>
@@ -392,7 +417,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
         <div class="co-h">チューリングが1936年にとった方針</div>
         <div class="co-b">人間が紙と鉛筆で計算しているとき、その人は実際には何をしているのか。それを極限まで単純化した機械を作れば、その機械ができることが「計算」である。</div>
       </div><p class="note">これを機械にしたものがチューリングマシン。部品はテープ・ヘッド・有限個の状態しかない。</p></div>
-        <div class="pageno">11</div>
+        <div class="pageno">12</div>
       </section>
 <section class="slide light">
         <header>
@@ -403,7 +428,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <p class="caption">遷移規則は (現在の状態, 読んだ記号) → (書く記号, 移動方向, 次の状態) の表で完全に決まる。</p>
       
       </div>
-        <div class="pageno">12</div>
+        <div class="pageno">13</div>
       </section>
 <section class="slide light">
         <header>
@@ -412,7 +437,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       </header><div class="body"><p class="lead">2進数が書かれたテープを受け取り、その数に1を足す。筆算と同じで、右端から見ていく。</p>
       <div class="split"><div class="col"><div class="col-h">遷移規則</div><table class="tbl mono center"><colgroup><col style="width:23.01%"><col style="width:17.70%"><col style="width:15.93%"><col style="width:15.93%"><col style="width:27.43%"></colgroup><thead><tr><th>状態</th><th>読んだ</th><th>書く</th><th>移動</th><th>次の状態</th></tr></thead><tbody><tr><td>carry</td><td>1</td><td>0</td><td>左</td><td>carry</td></tr><tr><td>carry</td><td>0</td><td>1</td><td>—</td><td>halt</td></tr><tr><td>carry</td><td>␣</td><td>1</td><td>—</td><td>halt</td></tr></tbody></table><p class="col-n">状態は2つ、規則は3行しかない</p></div><div class="col"><div class="col-h">1011 で追いかける（[ ] がヘッド位置）</div><table class="tbl mono "><colgroup><col style="width:26.55%"><col style="width:44.25%"><col style="width:29.20%"></colgroup><thead><tr><th>ステップ</th><th>テープ</th><th>状態</th></tr></thead><tbody><tr><td>0</td><td>1 0 1 [1]</td><td>carry</td></tr><tr><td>1</td><td>1 0 [1] 0</td><td>carry</td></tr><tr><td>2</td><td>1 [0] 0 0</td><td>carry</td></tr><tr><td>3</td><td>1 [1] 0 0</td><td>halt</td></tr></tbody></table><p class="col-n">1100 = 12。正しい。</p></div></div>
       <p class="note">この機械は何桁の2進数でも動く。111 なら空白を読んで 1000 になる。</p></div>
-        <div class="pageno">13</div>
+        <div class="pageno">14</div>
       </section>
 <section class="slide light">
         <header>
@@ -423,7 +448,31 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <p class="caption">表と同じ内容を図にしただけ。制御部の正体は「有限個の状態と、それを結ぶ矢印」である。</p>
       
       </div>
-        <div class="pageno">14</div>
+        <div class="pageno">15</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">1.2　チューリングマシン</div>
+        <h2>設計の手順：状態とは「覚えていられること」である</h2>
+      </header><div class="body"><p class="lead">チューリングマシンには変数がない。記憶できる場所はテープと状態しかなく、しかも状態は有限個しかない。</p>
+      <div class="steps" style="--n:3">
+      <div class="step first">
+        <div class="st-n">1</div>
+        <div class="st-h">何を覚えるか決める</div>
+        <div class="st-b">その種類の数が、そのまま状態の数になる</div>
+      </div>
+      <div class="step">
+        <div class="st-n">2</div>
+        <div class="st-h">各状態の動作を書く</div>
+        <div class="st-b">記号を読んだときに、何を書き・どちらへ動き・次はどの状態か</div>
+      </div>
+      <div class="step">
+        <div class="st-n">3</div>
+        <div class="st-h">いつ止まるかを決める</div>
+        <div class="st-b">停止状態に入る条件</div>
+      </div></div>
+      <p class="sub">覚えることが何もなければ状態は1つでよい（例：0 を全部 1 に書き換えて、空白で止まる機械）。<br>「1 の個数が偶数か奇数か」を判定するには状態が2つ要る。個数そのものは覚えられないが、偶奇なら2つで足りる。</p><p class="note">覚えることの数が、状態の数を決める。これが設計のほとんど唯一のコツである（演習1-2）。</p></div>
+        <div class="pageno">16</div>
       </section>
 <section class="slide light">
         <header>
@@ -439,7 +488,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <li><span class="m-a">同じテープに置かれる入力</span><span class="m-arrow"></span>
         <span class="m-b">データ</span></li></ul>
       <p class="note">プログラムとデータが同じ場所に同じ形式で置かれる —— 第3回のノイマン型の原型が、ここにある。</p></div>
-        <div class="pageno">15</div>
+        <div class="pageno">17</div>
       </section>
 <section class="slide dark ">
       <div class="sec-wrap">
@@ -453,8 +502,24 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
         <h2>チャーチ＝チューリングのテーゼ</h2>
       </header><div class="body"><p class="lead">発想はばらばらなのに、計算できる関数の集合はぴったり一致する。</p>
       <table class="tbl  "><colgroup><col style="width:26.27%"><col style="width:28.81%"><col style="width:44.92%"></colgroup><thead><tr><th>モデル</th><th>提案</th><th>発想</th></tr></thead><tbody><tr><td>チューリングマシン</td><td>Turing, 1936</td><td>紙と鉛筆の計算を機械化する</td></tr><tr><td>λ計算</td><td>Church, 1936</td><td>関数の適用だけで計算を表す</td></tr><tr><td>帰納的関数</td><td>Gödel, Kleene, 1930s</td><td>基本関数と再帰から組み立てる</td></tr><tr><td>レジスタマシン</td><td>Shepherdson–Sturgis, 1963</td><td>無限個のレジスタを操作する</td></tr><tr><td>セルオートマトン</td><td>von Neumann, 1940s</td><td>単純な規則で更新される格子</td></tr></tbody></table>
-      <div class="callout solid">「直観的に計算可能」な関数は、チューリングマシンで計算可能な関数と一致する</div><p class="sub">使う言語やハードウェアを変えても、計算できる問題の範囲は広がらない。GPU を1万個並べても同じ。<br>量子計算機も範囲は同じで、一部を速く解けるだけである。</p></div>
-        <div class="pageno">17</div>
+      <div class="callout solid">「直観的に計算可能」な関数は、チューリングマシンで計算可能な関数と一致する</div><p class="sub">使う言語やハードウェアを変えても、計算できる問題の範囲は広がらない。<br>Python でできて C でできないことはないし、GPU を1万個並べても同じである。</p></div>
+        <div class="pageno">19</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">1.3　計算の限界</div>
+        <h2>量子計算機は、この話を変えるか</h2>
+      </header><div class="body"><p class="lead">量子チューリングマシンは、通常のチューリングマシンと同じ範囲の関数を計算することが示されている。チャーチ＝チューリングのテーゼは、いまのところ破られていない。</p>
+      <div class="callout solid big">変わるのは「何が計算できるか」ではなく、「どれだけ速く計算できるか」である</div>
+      <ul class="map">
+      <li><span class="m-a">計算できる範囲</span><span class="m-arrow"></span>
+        <span class="m-b">変わらない</span></li>
+      <li><span class="m-a">計算の速さ</span><span class="m-arrow"></span>
+        <span class="m-b">変わりうる</span></li>
+      <li><span class="m-a">停止問題</span><span class="m-arrow"></span>
+        <span class="m-b">解けないまま</span></li></ul>
+      <p class="sub">Shor (1994) は素因数分解を多項式時間で解く。古典計算機では効率的な方法が知られていない。<br>Grover (1996) はしらみつぶし探索を √n 回に減らす。速さをどう測るかは第2回で扱う。</p><p class="note">現在の公開鍵暗号は、素因数分解が効率的に解けないことに安全性を託している（第12回）。</p></div>
+        <div class="pageno">20</div>
       </section>
 <section class="slide light">
         <header>
@@ -465,7 +530,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
         while True: pass   # 停止するなら、わざと無限ループする
     else:
         return             # 停止しないなら、さっさと停止する</pre><p class="sub">停止する とすると　halts は真を返す → trouble は無限ループに入る → 停止しない。矛盾<br>停止しない とすると　halts は偽を返す → trouble はすぐ return する → 停止する。矛盾</p><p class="note">どちらでも矛盾する。よって仮定が誤りで、halts は存在しない。</p></div>
-        <div class="pageno">18</div>
+        <div class="pageno">21</div>
       </section>
 <section class="slide light">
         <header>
@@ -476,7 +541,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <p class="caption">対角線をすべて反転させたものが trouble の振る舞い。どの行とも1マス以上食い違う。</p>
       <p class="sub center">1.1 で見たコラッツの手順が、なぜ90年も未解決なのかが、これで少し見える。<br>停止するかどうかを機械的に判定する一般的な方法が、そもそも存在しない。</p>
       </div>
-        <div class="pageno">19</div>
+        <div class="pageno">22</div>
       </section>
 <section class="slide light">
         <header>
@@ -494,7 +559,25 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <div class="card-b">判断を人に委ねる</div>
     </div></div>
       <p class="note">技術が未熟だからではなく、原理的にそうである。現場ではこの限界を、こう迂回する。</p></div>
-        <div class="pageno">20</div>
+        <div class="pageno">23</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">1.3　計算の限界</div>
+        <h2>では、生成AI は停止問題を解いているのか</h2>
+      </header><div class="body"><p class="lead">「このプログラムは停止しますか」と生成AIに聞けば答えが返る。静的解析ツールも「ここでヌル参照が起きうる」と教えてくれる。これは停止問題を解いたことにならないのか。</p>
+      <div class="cards" style="--per:2"><div class="card">
+      <div class="card-h">答えは返ってくる</div>
+      <div class="card-b">学習した大量のコードから「この形のループはたいてい止まる」と見当をつけている。当たることは多い</div>
+    </div><div class="card acc">
+      <div class="card-h">しかし保証がない</div>
+      <div class="card-b">間違っていても「分かりません」とは言わない（第13回）。どんな入力に対しても正しい、という保証がどこにもない</div>
+    </div></div>
+      <div class="callout dashed">
+        <div class="co-h">ライスの定理は、どんな方法をとってもその保証は得られないと述べている</div>
+        <div class="co-b">学習データを増やしても、モデルを大きくしても、この壁は動かない。生成AIも静的解析も、迂回策の1つ目「近似する」をやっているにすぎない。</div>
+      </div><p class="note">機械が答えを出せることと、その答えを信用してよいことは、違う。第13回で同じ問いをもう一度扱う。</p></div>
+        <div class="pageno">24</div>
       </section>
 <section class="slide light">
         <header>
@@ -504,8 +587,9 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <li><span class="ex-n">1-1</span><span class="ex-t">互除法を a=252, b=105 で実行し、各ステップの (a, b, r) を書け。</span></li>
       <li><span class="ex-n">1-2</span><span class="ex-t">テープ上の文字列に含まれる 1 の個数が偶数なら Y、奇数なら N を書いて停止するチューリングマシンの遷移規則表を作れ。（ヒント：状態は2つで足りる）</span></li>
       <li><span class="ex-n">1-3</span><span class="ex-t">次の主張は正しいか。理由とともに答えよ。「量子コンピュータが実用化されれば、停止問題も解けるようになる。」</span></li>
-      <li><span class="ex-n">1-4</span><span class="ex-t">普段使っているソフトウェアで「決定不能性を回避するために安全側に倒している」と思われる挙動を1つ挙げ、なぜそう考えるか説明せよ。</span></li></ul></div>
-        <div class="pageno">21</div>
+      <li><span class="ex-n">1-4</span><span class="ex-t">普段使っているソフトウェアで「決定不能性を回避するために安全側に倒している」と思われる挙動を1つ挙げ、なぜそう考えるか説明せよ。</span></li>
+      <li><span class="ex-n">1-5</span><span class="ex-t">「このプログラムは停止しますか」と生成AIに尋ねると答えが返ってくる。これは停止問題が解けたことを意味するか。理由とともに答えよ。</span></li></ul></div>
+        <div class="pageno">25</div>
       </section>
 <section class="slide dark ">
       <div class="sum-wrap">
@@ -515,11 +599,13 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <li><span class="s-h">チューリングマシン</span><span class="s-b">紙と鉛筆の計算を極限まで単純化した機械。部品はテープ・ヘッド・有限個の状態しかない</span></li>
       <li><span class="s-h">万能チューリングマシン</span><span class="s-b">他の機械の規則表をデータとして受け取り実行する。プログラム内蔵方式の原型</span></li>
       <li><span class="s-h">チャーチ＝チューリングのテーゼ</span><span class="s-b">計算モデルを変えても、計算できる範囲は広がらない</span></li>
-      <li><span class="s-h">停止問題</span><span class="s-b">計算できない。プログラムの振る舞いに関する自明でない性質は、すべて計算できない</span></li></ul>
+      <li><span class="s-h">量子計算機</span><span class="s-b">範囲は変えない。変えるのは速さで、その帰結が第12回の公開鍵暗号に効く</span></li>
+      <li><span class="s-h">停止問題</span><span class="s-b">計算できない。プログラムの振る舞いに関する自明でない性質は、すべて計算できない</span></li>
+      <li><span class="s-h">生成AIとの関係</span><span class="s-b">AIも静的解析も、この限界を「近似」で迂回しているにすぎない</span></li></ul>
         <p class="next"><b>次回</b>　計算できるとして、それは現実的な時間で終わるのか。そもそも情報を計算機で扱うには、どう表現すればよいのか。</p>
       </div></section>
 </div>
-<div id="hud"><span id="cur">1</span> / <span id="total">22</span></div>
+<div id="hud"><span id="cur">1</span> / <span id="total">26</span></div>
 <div id="help" hidden>
   <h3>操作</h3>
   <table>
