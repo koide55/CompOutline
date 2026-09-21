@@ -35,13 +35,30 @@ python3 tools/collect_figures.py
 
 | 種別 | 手段 |
 | --- | --- |
-| 構成図・階層図・フロー | Mermaid（`.mmd`）または手書きSVG |
-| 回路図・タイミング図 | SVG |
-| グラフ・プロット | matplotlib のスクリプトを `figures/src/` に置き、SVG を出力 |
+| 構成図・階層図・フロー | `tools/figs/` に Python で書き、SVG を出力 |
+| 回路図・タイミング図 | 同上 |
+| グラフ・プロット | 同上（軸や曲線も `svgkit.py` の部品で描く） |
 | 表で足りるもの | 図にせず本文の表にする |
+
+**全59点が `tools/figs/*.py` の1本道で生成される。** 手で書いた SVG も、
+Mermaid などの外部記法も混ぜていない。共通のスタイルと描画部品は
+`tools/svgkit.py` にあり、配色や線の太さの変更はそこ1箇所で全点に効く。
+
+| ファイル | 担当 |
+| --- | --- |
+| `tools/figs/lec01_04.py` | 第1〜4回 |
+| `tools/figs/lec05_08.py` | 第5〜8回 |
+| `tools/figs/lec09_11.py` | 第9〜11回 |
+| `tools/figs/lec12_13.py` | 第12〜13回 |
+
+```bash
+python3 tools/build_figures.py     # 全点を figures/ に書き出す
+python3 tools/preview.py           # PNG のコンタクトシートで目視確認
+```
 
 出力は `figures/fig-NN-MM.svg` に統一する。SVG にするのは、
 スライドにも印刷物にも解像度を気にせず載せられるため。
+スライドに貼るときは `slides/tools/figs2png.sh` で PNG に落とす。
 
 ### スタイル
 

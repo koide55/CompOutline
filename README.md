@@ -36,6 +36,7 @@
 | `lectures/` | 全13回の講義ノート |
 | `figures/` | 図 59点（SVG） |
 | `docs/curriculum.md` | 13回の設計方針、旧スライドとの対応表、執筆上の約束 |
+| `docs/annual-update.md` | 毎年の更新箇所。新年度の資料を作る前に確認する |
 | `docs/findings.md` | 旧版 `CompOutline2024.pptx`（663枚）の調査結果 |
 | `docs/inventory.md` | 旧版のセクション別スライド一覧 |
 | `docs/legacy-slides-2024.json` | 旧版の全文（タイトル・本文・ノート）の控え |
