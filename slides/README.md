@@ -5,12 +5,60 @@
 
 | パス | 内容 |
 | --- | --- |
-| `第NN回_*.pptx` | 各回のスライド |
-| `decks/lecNN.js` | 各回の内容（何を並べるか） |
-| `tools/kit.js` | 体裁（どう並べるか）。13回ぶんの見た目をここ1箇所で決める |
-| `tools/build.js` | 組み立て |
-| `tools/figs2png.sh` | 図の SVG を貼り付け用の PNG にする |
-| `tools/render.sh` | PowerPoint で開いて1枚ずつの画像にする |
+| `第NN回_*.pptx` | 各回のスライド（PowerPoint 版） |
+| `html/第NN回_*.html` | 各回のスライド（HTML 版）。**1ファイルで完結する** |
+| `decks/lecNN.js` | 各回の内容（何を並べるか）。**pptx と HTML で共用** |
+| `tools/kit.js` | pptx の体裁 |
+| `tools/kit-html.js` | HTML の体裁 |
+| `tools/build.js` | pptx を組み立てる |
+| `tools/build-html.js` | HTML を組み立てる |
+| `tools/figs2png.sh` | 図の SVG を貼り付け用の PNG にする（pptx 版のみ必要） |
+| `tools/render.sh` | PowerPoint で開いて1枚ずつの画像にする（pptx 版のみ必要） |
+
+## HTML 版
+
+```bash
+node slides/tools/build-html.js        # 全13回（回番号を渡せばその回だけ）
+open slides/html/第01回_計算とは何か.html
+```
+
+**内容（`decks/lecNN.js`）は pptx 版とまったく同じものを読む。** 体裁だけが別である。
+図の SVG は data URI で埋め込まれるので、**出力は1ファイルで完結する**。
+PNG への変換（`figs2png.sh`）が要らず、教室の計算機にはファイルを1つ持って行けばよい。
+
+| | pptx | HTML |
+| --- | ---: | ---: |
+| 第1回の大きさ | 780 KB | **67 KB** |
+| 全13回 | 約 14 MB | **約 1 MB** |
+
+### 操作
+
+| キー | 動作 |
+| --- | --- |
+| → ↓ Space | 次へ |
+| ← ↑ | 前へ |
+| 数字 + Enter | その番号へ |
+| O | 一覧表示 |
+| F | 全画面 |
+| **C** | **組版チェック（溢れた枚を赤で示す）** |
+| P | 印刷（PDF 保存。1枚1ページで出る） |
+| ? | 操作の一覧 |
+
+### 組版チェックが効く
+
+pptx 版では `build.js` が字数から溢れを**見積もり**、
+確かめるには `render.sh` で PowerPoint に描かせるしかなかった。
+
+HTML では **C キーで、実際に描いた結果の高さを測る**。見積もりではなく事実である。
+第1〜13回すべてで溢れが無いことを、この方法で確認した。
+
+### 座標の微調整について
+
+`decks/lecNN.js` にある `cardH` `noteY` `codeH` `stepH` は、
+**pptx が絶対座標でしか置けないために手で詰めた値**である。HTML 版はこれを読み飛ばす。
+CSS が中身の高さを知っているので、同じ手当てが要らない。
+`per`（カードの列数）`colW`（表の列幅比）`accent` `mono` のように
+**内容に属する指定はそのまま効く**。
 
 内容と体裁を分けてあるので、**体裁の変更は `kit.js` を1箇所直せば全13回に効く。**
 

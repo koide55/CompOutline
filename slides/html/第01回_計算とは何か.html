@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第1回 計算とは何か｜コンピュータシステム通論</title>
+<style>
+
+:root{
+  --ink:#16191D; --paper:#FFFFFF; --tint:#EEF1F5; --tint2:#DDE4EC;
+  --acc:#0B5CAD; --accT:#D9E6F4; --mut:#5F6672; --dim:#9AA3B0;
+  --lightInk:#E8EBEF; --accLight:#6AB0F3; --code:#F5F7FA; --ghost:#2E3A4A;
+  --ja:"Yu Gothic Medium", "Yu Gothic", YuGothic, "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif; --mono:"SFMono-Regular", Menlo, Consolas, "Courier New", monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0b0d10;font-family:var(--ja);
+  -webkit-font-smoothing:antialiased;overflow:hidden}
+
+/* 1280x720 の板を作り、画面の大きさに合わせて拡大縮小する。
+   どの画面でも同じ見た目になる —— スライドである以上これが要る。 */
+#deck{position:absolute;inset:0}
+.slide{
+  position:absolute;top:50%;left:50%;
+  width:1280px;height:720px;
+  transform:translate(-50%,-50%) scale(var(--s,1));
+  transform-origin:center center;
+  overflow:hidden;display:none;
+}
+.slide.on{display:block}
+.slide.light{background:var(--paper);color:var(--ink)}
+.slide.dark{background:var(--ink);color:var(--paper)}
+
+/* --- 明色スライドの骨格 --- */
+.slide.light header{position:absolute;top:33px;left:60px;right:60px}
+.kicker{font-size:16px;font-weight:700;color:var(--acc);letter-spacing:.02em}
+.slide.light h2{font-size:40px;font-weight:700;line-height:1.25;margin-top:6px}
+/* 内容の塊ごと、見出しと下端のあいだで縦に中央へ寄せる。
+   pptx では noteY を1枚ずつ手で詰めて注記を内容の直下に置いていた。
+   CSS は高さを知っているので、その手当てが要らない。 */
+.slide.light .body{position:absolute;top:130px;left:72px;right:72px;bottom:56px;
+  display:flex;flex-direction:column;gap:14px;justify-content:center}
+.pageno{position:absolute;right:60px;bottom:22px;font-size:13px;color:var(--mut)}
+
+.lead{font-size:20px;line-height:1.55;color:var(--ink)}
+.sub{font-size:17px;line-height:1.6;color:var(--mut)}
+.sub.center,.caption{text-align:center}
+.caption{font-size:20px;line-height:1.5;color:var(--ink)}
+.note{font-size:17px;line-height:1.5;font-weight:700;color:var(--acc);margin-top:8px}
+
+/* --- 意匠：マス目 --- */
+.motif{position:absolute;left:58px;bottom:56px;display:flex;gap:4px}
+.motif i{width:28px;height:19px;border:1px solid rgba(106,176,243,.45);border-radius:2px}
+.motif i.on{background:var(--accLight);border-color:var(--accLight)}
+.slide.title .motif{bottom:128px}
+
+/* --- 表紙 --- */
+.title-wrap{position:absolute;left:86px;top:188px;right:86px}
+.course{font-size:23px;color:var(--dim);letter-spacing:.12em}
+.slide.title h1{font-weight:700;line-height:1.2;margin-top:24px;color:var(--paper)}
+.tq{font-size:24px;line-height:1.5;color:var(--accLight);margin-top:28px}
+.affil{position:absolute;left:86px;bottom:22px;font-size:16px;color:var(--dim)}
+
+/* --- 今回の問い --- */
+.q-wrap{position:absolute;left:86px;right:86px;top:144px}
+.q-label{font-size:19px;font-weight:700;color:var(--accLight)}
+.q-big{font-size:48px;font-weight:700;line-height:1.35;margin-top:22px;color:var(--paper)}
+.q-sub{font-size:27px;color:var(--lightInk);margin-top:22px}
+.q-foot{font-size:19px;color:var(--dim);margin-top:40px}
+
+/* --- 節の区切り --- */
+.sec-wrap{position:absolute;left:86px;right:86px;top:230px}
+.sec-n{font-size:75px;font-weight:700;color:var(--ghost);line-height:1}
+.sec-name{font-size:51px;font-weight:700;color:var(--paper);margin-top:10px;line-height:1.2}
+.sec-tag{font-size:23px;color:var(--dim);margin-top:18px}
+
+/* --- 到達目標 --- */
+.goals{list-style:none;display:flex;flex-direction:column;gap:18px;margin-top:8px}
+.goals li{display:flex;align-items:center;gap:18px}
+.goals .num{flex:none;width:48px;height:48px;border-radius:50%;
+  background:var(--accT);border:1.5px solid var(--acc);color:var(--acc);
+  font-size:19px;font-weight:700;display:grid;place-items:center}
+.g-h{font-size:21px;font-weight:700;color:var(--ink)}
+.g-b{font-size:19px;color:var(--mut);margin-left:12px}
+
+/* --- カード --- */
+.cards{display:grid;grid-template-columns:repeat(var(--per),1fr);gap:16px;align-content:start}
+.card{background:var(--tint);border:1px solid var(--tint2);border-radius:8px;padding:16px 18px}
+.card.acc{background:var(--accT);border-color:var(--acc)}
+.card-h{font-size:19px;font-weight:700;color:var(--ink)}
+.card.acc .card-h{color:var(--acc)}
+.card-b{font-size:16px;line-height:1.55;color:var(--mut);margin-top:8px}
+
+/* --- 囲み --- */
+.callout{border-radius:8px;padding:14px 20px}
+.callout.dashed{border:1.5px dashed var(--acc);background:var(--paper)}
+.callout.solid{border:1.5px solid var(--acc);background:var(--accT);
+  font-size:20px;font-weight:700;color:var(--acc);line-height:1.45}
+.callout.big{font-size:23px}
+.co-h{font-size:20px;font-weight:700;color:var(--acc)}
+.co-b{font-size:16px;line-height:1.5;color:var(--mut);margin-top:6px}
+
+/* --- 箇条書き --- */
+.bullets{list-style:none;display:flex;flex-direction:column;gap:10px}
+.bullets li{position:relative;padding-left:22px;font-size:21px;line-height:1.5;color:var(--ink)}
+.bullets li::before{content:"";position:absolute;left:4px;top:.62em;
+  width:7px;height:7px;border-radius:50%;background:var(--acc)}
+.bullets li.lv1{font-size:18px;color:var(--mut);padding-left:44px}
+.bullets li.lv1::before{left:26px;width:5px;height:5px;background:var(--mut)}
+.bullets.tight li{font-size:18px;gap:6px}
+
+/* --- コード --- */
+.code{background:var(--code);border:1px solid var(--tint2);border-radius:6px;
+  padding:16px 20px;font-family:var(--mono);font-size:17px;line-height:1.7;
+  color:var(--ink);white-space:pre;overflow:hidden}
+.code.small{font-size:15.5px}
+.code-split{display:grid;grid-template-columns:1fr .92fr;gap:22px;align-items:start}
+.side-h{font-size:19px;font-weight:700;color:var(--ink)}
+.side-b{font-size:17px;line-height:1.6;color:var(--mut);margin-top:8px}
+
+/* --- 表 --- */
+.tbl{width:100%;border-collapse:collapse;table-layout:fixed}
+.tbl th,.tbl td{border:1px solid var(--tint2);padding:7px 11px;font-size:17px;
+  line-height:1.4;text-align:left;vertical-align:middle;word-break:break-word}
+.tbl th{background:var(--tint);font-weight:700}
+.tbl.mono{font-family:var(--mono);font-size:16px}
+.tbl.mono th{font-family:var(--ja)}
+.tbl.center th,.tbl.center td{text-align:center}
+
+/* --- 左右2段 --- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+.col{display:flex;flex-direction:column;gap:11px}
+.col-h{font-size:20px;font-weight:700;color:var(--ink)}
+.col-b{font-size:17px;line-height:1.65;color:var(--mut)}
+.col-n{font-size:17px;font-weight:700;color:var(--acc)}
+
+/* --- 主張と対応 --- */
+.map{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:6px}
+.map li{display:grid;grid-template-columns:1fr 60px 1fr;align-items:center;gap:8px}
+.m-a{font-size:20px;color:var(--ink);text-align:right}
+.m-arrow{height:3px;background:var(--acc);position:relative;border-radius:2px}
+.m-arrow::after{content:"";position:absolute;right:-1px;top:-5px;
+  border:7px solid transparent;border-left-color:var(--acc);border-right:0}
+.m-b{font-size:21px;font-weight:700;color:var(--acc)}
+
+/* --- 手順 --- */
+.steps{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:10px;align-items:stretch}
+.step{background:var(--tint);border:1px solid var(--tint2);border-radius:8px;padding:12px 12px 14px}
+.step.first{background:var(--accT);border-color:var(--acc)}
+.st-n{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--acc)}
+.st-h{font-size:17px;font-weight:700;color:var(--ink);margin-top:6px;line-height:1.3}
+.st-b{font-size:15px;color:var(--mut);margin-top:6px;line-height:1.45}
+
+/* --- 図 --- */
+/* 図は枠いっぱいまで伸ばす。SVG なので拡大しても粗くならない。
+   pptx 版も箱に合わせて拡大していたので、そこは同じ振る舞いにしてある。 */
+.figwrap{flex:1;min-height:0;display:flex}
+.fig{width:100%;height:100%;object-fit:contain}
+.fig-missing{color:#b00;font-size:20px;text-align:center;padding:40px}
+
+/* --- 演習 --- */
+.ex{list-style:none;display:flex;flex-direction:column;gap:16px}
+.ex li{display:flex;gap:18px;align-items:flex-start}
+.ex-n{flex:none;width:74px;padding:5px 0;text-align:center;border-radius:7px;
+  background:var(--accT);border:1px solid var(--acc);color:var(--acc);
+  font-family:var(--mono);font-size:17px;font-weight:700}
+.ex-t{font-size:19px;line-height:1.55;color:var(--ink);padding-top:3px}
+
+/* --- まとめ --- */
+.sum-wrap{position:absolute;left:86px;right:86px;top:74px;bottom:74px;
+  display:flex;flex-direction:column}
+.sum-t{font-size:40px;font-weight:700;color:var(--paper)}
+.sum{list-style:none;display:flex;flex-direction:column;gap:16px;margin-top:26px}
+.sum li{display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:baseline}
+.s-h{font-size:20px;font-weight:700;color:var(--accLight)}
+.s-b{font-size:18px;line-height:1.5;color:var(--lightInk)}
+.next{font-size:17px;color:var(--dim);margin-top:auto;line-height:1.5}
+.next b{color:var(--accLight)}
+
+/* --- 画面まわり --- */
+#hud{position:fixed;left:16px;bottom:12px;font-size:13px;color:#7c8694;
+  font-family:var(--mono);z-index:20;user-select:none}
+#help{position:fixed;inset:50% auto auto 50%;transform:translate(-50%,-50%);
+  background:#fff;color:var(--ink);border-radius:12px;padding:26px 30px;z-index:30;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);font-size:15px;max-width:520px}
+#help h3{font-size:19px;margin-bottom:14px}
+#help table{border-collapse:collapse;width:100%}
+#help td{padding:5px 10px 5px 0;vertical-align:top}
+#help td:first-child{font-family:var(--mono);color:var(--acc);white-space:nowrap}
+#help p{margin-top:14px;color:var(--mut);font-size:13.5px;line-height:1.6}
+
+/* --- 一覧表示 --- */
+body.overview{overflow:auto}
+body.overview #deck{position:static;display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px;padding:22px}
+body.overview .slide{position:relative;top:auto;left:auto;display:block;
+  transform:scale(var(--os));transform-origin:top left;
+  width:1280px;height:720px;cursor:pointer;
+  outline:2px solid #2a3340;border-radius:2px}
+body.overview .slide.on{outline:3px solid var(--accLight)}
+body.overview .sl-wrap{overflow:hidden}
+
+/* --- 組版チェック：実際に溢れた箇所だけを赤で示す --- */
+body.check .slide.overflow{outline:4px solid #e0453a;outline-offset:-4px}
+body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
+  right:0;top:0;background:#e0453a;color:#fff;font-size:13px;padding:3px 9px;
+  font-weight:700;z-index:9}
+
+/* --- 印刷：1枚1ページ。PDF にすれば配布できる --- */
+@page{size:1280px 720px;margin:0}
+@media print{
+  html,body{overflow:visible;background:#fff;height:auto}
+  #hud,#help{display:none!important}
+  #deck{position:static}
+  .slide{position:relative!important;display:block!important;top:auto;left:auto;
+    transform:none!important;page-break-after:always;break-after:page;
+    width:1280px;height:720px}
+  .slide:last-child{page-break-after:auto;break-after:auto}
+}
+</style>
+</head>
+<body>
+<div id="deck">
+<section class="slide dark title">
+      <div class="title-wrap">
+        <div class="course">コンピュータシステム通論</div>
+        <h1 style="font-size:59px">第1回　計算とは何か</h1>
+        <p class="tq">「計算できる」とはどういうことか。計算できないことはあるか。</p>
+      </div>
+      <div class="affil">九州大学</div><div class="motif"><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i></div></section>
+<section class="slide dark ">
+      <div class="q-wrap">
+        <div class="q-label">今回の問い</div>
+        <p class="q-big">「計算できる」とは<br>どういうことか。</p>
+        <p class="q-sub">そして、計算できないことはあるか。</p>
+        <p class="q-foot">この90分で、この問いに答えを出す。</p>
+      </div><div class="motif"><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i></div></section>
+<section class="slide light">
+        <header>
+        <div class="kicker">第1回</div>
+        <h2>到達目標</h2>
+      </header><div class="body"><ol class="goals">
+      <li><span class="num">1</span>
+        <span class="g-h">アルゴリズム</span><span class="g-b">が満たすべき条件を挙げられる</span></li>
+      <li><span class="num">2</span>
+        <span class="g-h">チューリングマシン</span><span class="g-b">の動作を追跡し、簡単な機械を設計できる</span></li>
+      <li><span class="num">3</span>
+        <span class="g-h">チャーチ＝チューリングのテーゼ</span><span class="g-b">が何を主張しているか説明できる</span></li>
+      <li><span class="num">4</span>
+        <span class="g-h">計算できない問題が存在する</span><span class="g-b">ことの意味を説明できる</span></li></ol></div>
+        <div class="pageno">3</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">1.0　ガイダンス</div>
+        <h2>この講義の見取り図</h2>
+      </header><div class="body"><p class="lead">この講義は、機器のカタログを読むための科目ではない。CPU の型番も通信規格の数字も、数年で入れ替わる。</p>
+      <div class="steps" style="--n:7">
+      <div class="step first">
+        <div class="st-n">1</div>
+        <div class="st-h">計算の定義</div>
+        <div class="st-b">第1〜2回</div>
+      </div>
+      <div class="step">
+        <div class="st-n">2</div>
+        <div class="st-h">回路と言語</div>
+        <div class="st-b">第3〜4回</div>
+      </div>
+      <div class="step">
+        <div class="st-n">3</div>
+        <div class="st-h">記憶の階層</div>
+        <div class="st-b">第5〜6回</div>
+      </div>
+      <div class="step">
+        <div class="st-n">4</div>
+        <div class="st-h">資源の管理</div>
+        <div class="st-b">第7〜8回</div>
+      </div>
+      <div class="step">
+        <div class="st-n">5</div>
+        <div class="st-h">つなぐ</div>
+        <div class="st-b">第9〜10回</div>
+      </div>
+      <div class="step">
+        <div class="st-n">6</div>
+        <div class="st-h">溜めて守る</div>
+        <div class="st-b">第11〜12回</div>
+      </div>
+      <div class="step">
+        <div class="st-n">7</div>
+        <div class="st-h">学習する機械</div>
+        <div class="st-b">第13回</div>
+      </div></div>
+      <p class="sub">計算機は1940年代から性能で1兆倍近く変わった。しかし「何をする機械か」という定義は、<br>1936年にアラン・チューリングが書いた論文からほとんど変わっていない。</p><p class="note">生成AIも、その定義の内側にある。だから第1回は1936年から始める。</p></div>
+        <div class="pageno">4</div>
+      </section>
+<section class="slide dark ">
+      <div class="sec-wrap">
+        <div class="sec-n">1.1</div>
+        <h1 class="sec-name">アルゴリズム</h1>
+        <p class="sec-tag">手順を、曖昧さなく書き下すとはどういうことか</p>
+      </div><div class="motif"><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i></div></section>
+<section class="slide light">
+        <header>
+        <div class="kicker">1.1　アルゴリズム</div>
+        <h2>アルゴリズムの定義</h2>
+      </header><div class="body">
+      <div class="cards" style="--per:3"><div class="card acc">
+      <div class="card-h">1. 有限性</div>
+      <div class="card-b">有限の手数で必ず終わる</div>
+    </div><div class="card acc">
+      <div class="card-h">2. 明確性</div>
+      <div class="card-b">各ステップが曖昧さなく定まっている</div>
+    </div><div class="card">
+      <div class="card-h">3. 入力</div>
+      <div class="card-b">0個以上の入力を受け取る</div>
+    </div><div class="card">
+      <div class="card-h">4. 出力</div>
+      <div class="card-b">1個以上の出力を返す</div>
+    </div><div class="card">
+      <div class="card-h">5. 実行可能性</div>
+      <div class="card-b">各ステップが機械的に実行できる</div>
+    </div></div>
+      <div class="callout dashed">
+        <div class="co-h">「明確さ」の要求は、思っているより厳しい</div>
+        <div class="co-b">料理のレシピにある「塩少々」は、アルゴリズムの条件を満たさない。実行する人の判断が入る余地があってはならない。</div>
+      </div></div>
+        <div class="pageno">6</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">1.1　アルゴリズム</div>
+        <h2>例：ユークリッドの互除法</h2>
+      </header><div class="body"><p class="lead">2つの自然数 a, b の最大公約数を求める。紀元前300年ごろの記述が残っている。</p>
+      <div class="split"><div class="col"><div class="col-h">手順</div><pre class="code small">入力: 自然数 a, b   (a &gt;= b &gt; 0)
+
+1. a を b で割った余りを r とする
+2. r = 0 なら b を出力して終了
+3. a &lt;- b,  b &lt;- r  として 1 に戻る</pre></div><div class="col"><div class="col-h">a=1071, b=462 で追いかける</div><table class="tbl mono "><colgroup><col style="width:16.07%"><col style="width:28.57%"><col style="width:26.79%"><col style="width:28.57%"></colgroup><thead><tr><th>回</th><th>a</th><th>b</th><th>r</th></tr></thead><tbody><tr><td>1</td><td>1071</td><td>462</td><td>147</td></tr><tr><td>2</td><td>462</td><td>147</td><td>21</td></tr><tr><td>3</td><td>147</td><td>21</td><td>0</td></tr></tbody></table><p class="col-n">答えは 21。3回で終わった。</p></div></div>
+      <p class="note">この手順のどこにも「計算機」は出てこない。アルゴリズムは紙と鉛筆で実行できる。</p></div>
+        <div class="pageno">7</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">1.1　アルゴリズム</div>
+        <h2>互除法を図で見る</h2>
+      </header><div class="body">
+      <div class="figwrap"><img class="fig" alt="図 01-01" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MDAgMzEwIiB3aWR0aD0iNzAwIiBoZWlnaHQ9IjMxMCIgcm9sZT0iaW1nIj48c3R5bGU+CnN2ZyB7IGZvbnQtZmFtaWx5OiAiSGVsdmV0aWNhIE5ldWUiLCBBcmlhbCwgIkhpcmFnaW5vIFNhbnMiLCAiWXUgR290aGljIiwgIk5vdG8gU2FucyBKUCIsIHNhbnMtc2VyaWY7IH0KLmJnICAgeyBmaWxsOiAjZmZmZmZmOyB9Ci5pbmsgIHsgZmlsbDogIzE2MTkxZDsgfQoubXV0ICB7IGZpbGw6ICM1ZjY2NzI7IH0KLnRpbnQgeyBmaWxsOiAjZWVmMWY1OyB9Ci50aW50MnsgZmlsbDogI2RkZTRlYzsgfQouYWNjICB7IGZpbGw6ICMwYjVjYWQ7IH0KLmFjY1QgeyBmaWxsOiAjZDllNmY0OyB9Ci5ub25lIHsgZmlsbDogbm9uZTsgfQoucyAgICB7IHN0cm9rZTogIzE2MTkxZDsgc3Ryb2tlLXdpZHRoOiAxLjY7IGZpbGw6IG5vbmU7IH0KLnMyICAgeyBzdHJva2U6ICMxNjE5MWQ7IHN0cm9rZS13aWR0aDogMi42OyBmaWxsOiBub25lOyB9Ci5zbSAgIHsgc3Ryb2tlOiAjNWY2NjcyOyBzdHJva2Utd2lkdGg6IDEuMjsgZmlsbDogbm9uZTsgfQouc2EgICB7IHN0cm9rZTogIzBiNWNhZDsgc3Ryb2tlLXdpZHRoOiAyLjI7IGZpbGw6IG5vbmU7IH0KLmRhc2ggeyBzdHJva2UtZGFzaGFycmF5OiA1IDQ7IH0KLmRvdCAgeyBzdHJva2UtZGFzaGFycmF5OiAxLjUgMzsgfQp0ZXh0ICB7IGZpbGw6ICMxNjE5MWQ7IGZvbnQtc2l6ZTogMTRweDsgfQoudC1zICB7IGZvbnQtc2l6ZTogMTJweDsgfQoudC14cyB7IGZvbnQtc2l6ZTogMTAuNXB4OyB9Ci50LWwgIHsgZm9udC1zaXplOiAxN3B4OyB9Ci50LXhsIHsgZm9udC1zaXplOiAyMXB4OyB9Ci5iICAgIHsgZm9udC13ZWlnaHQ6IDcwMDsgfQouaSAgICB7IGZvbnQtc3R5bGU6IGl0YWxpYzsgfQoubSAgICB7IGZvbnQtZmFtaWx5OiAiU0YgTW9ubyIsIE1lbmxvLCBDb25zb2xhcywgbW9ub3NwYWNlOyB9Ci5sYmwgIHsgZmlsbDogIzVmNjY3MjsgfQpAbWVkaWEgKHByZWZlcnMtY29sb3Itc2NoZW1lOiBkYXJrKSB7CiAgLmJnICAgeyBmaWxsOiAjMTQxNzFiOyB9CiAgLmluayAgeyBmaWxsOiAjZThlYmVmOyB9CiAgLm11dCAgeyBmaWxsOiAjOWFhM2IwOyB9CiAgLnRpbnQgeyBmaWxsOiAjMjMyODMwOyB9CiAgLnRpbnQyeyBmaWxsOiAjMmUzNDNkOyB9CiAgLmFjYyAgeyBmaWxsOiAjNmFiMGYzOyB9CiAgLmFjY1QgeyBmaWxsOiAjMWUyYzNjOyB9CiAgLnMsIC5zMiB7IHN0cm9rZTogI2U4ZWJlZjsgfQogIC5zbSAgIHsgc3Ryb2tlOiAjOWFhM2IwOyB9CiAgLnNhICAgeyBzdHJva2U6ICM2YWIwZjM7IH0KICB0ZXh0ICB7IGZpbGw6ICNlOGViZWY7IH0KICAubGJsICB7IGZpbGw6ICM5YWEzYjA7IH0KfQo8L3N0eWxlPgo8ZGVmcz4KIDxtYXJrZXIgaWQ9ImEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImluayIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYWEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImFjYyIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYW0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjYiIG1hcmtlckhlaWdodD0iNiIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9Im11dCIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0ibyIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI1IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNiIgbWFya2VySGVpZ2h0PSI2Ij4KICAgPGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjMuNSIgY2xhc3M9ImJnIHMiLz48L21hcmtlcj4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iNzAwIiBoZWlnaHQ9IjMxMCIgY2xhc3M9ImJnIi8+PHJlY3QgeD0iODAuMCIgeT0iNDYiIHdpZHRoPSIxOTQuMDQiIGhlaWdodD0iMTk0LjA0IiBjbGFzcz0idGludCBzIi8+PHRleHQgeD0iMTc3LjAxOTk5OTk5OTk5OTk4IiB5PSIxNDMuMDE5OTk5OTk5OTk5OTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMiPjQ2MjwvdGV4dD48cmVjdCB4PSIyNzQuMDM5OTk5OTk5OTk5OTYiIHk9IjQ2IiB3aWR0aD0iMTk0LjA0IiBoZWlnaHQ9IjE5NC4wNCIgY2xhc3M9InRpbnQgcyIvPjx0ZXh0IHg9IjM3MS4wNTk5OTk5OTk5OTk5NSIgeT0iMTQzLjAxOTk5OTk5OTk5OTk4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIj40NjI8L3RleHQ+PHJlY3QgeD0iNDY4LjA4IiB5PSI0Ni4wIiB3aWR0aD0iNjEuNzM5OTk5OTk5OTk5OTk1IiBoZWlnaHQ9IjYxLjczOTk5OTk5OTk5OTk5NSIgY2xhc3M9InRpbnQyIHMiLz48cmVjdCB4PSI0NjguMDgiIHk9IjEwNy43NCIgd2lkdGg9IjYxLjczOTk5OTk5OTk5OTk5NSIgaGVpZ2h0PSI2MS43Mzk5OTk5OTk5OTk5OTUiIGNsYXNzPSJ0aW50MiBzIi8+PHJlY3QgeD0iNDY4LjA4IiB5PSIxNjkuNDgiIHdpZHRoPSI2MS43Mzk5OTk5OTk5OTk5OTUiIGhlaWdodD0iNjEuNzM5OTk5OTk5OTk5OTk1IiBjbGFzcz0idGludDIgcyIvPjx0ZXh0IHg9IjQ5OC45NSIgeT0iNzYuODciIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj4xNDc8L3RleHQ+PHJlY3QgeD0iNDY4LjA4IiB5PSIyMzEuMjE5OTk5OTk5OTk5OTciIHdpZHRoPSI4LjgyIiBoZWlnaHQ9IjguODIiIGNsYXNzPSJhY2NUIHNhIi8+PHJlY3QgeD0iNDc2LjkiIHk9IjIzMS4yMTk5OTk5OTk5OTk5NyIgd2lkdGg9IjguODIiIGhlaWdodD0iOC44MiIgY2xhc3M9ImFjY1Qgc2EiLz48cmVjdCB4PSI0ODUuNzE5OTk5OTk5OTk5OTciIHk9IjIzMS4yMTk5OTk5OTk5OTk5NyIgd2lkdGg9IjguODIiIGhlaWdodD0iOC44MiIgY2xhc3M9ImFjY1Qgc2EiLz48cmVjdCB4PSI0OTQuNTM5OTk5OTk5OTk5OTYiIHk9IjIzMS4yMTk5OTk5OTk5OTk5NyIgd2lkdGg9IjguODIiIGhlaWdodD0iOC44MiIgY2xhc3M9ImFjY1Qgc2EiLz48cmVjdCB4PSI1MDMuMzYiIHk9IjIzMS4yMTk5OTk5OTk5OTk5NyIgd2lkdGg9IjguODIiIGhlaWdodD0iOC44MiIgY2xhc3M9ImFjY1Qgc2EiLz48cmVjdCB4PSI1MTIuMTgiIHk9IjIzMS4yMTk5OTk5OTk5OTk5NyIgd2lkdGg9IjguODIiIGhlaWdodD0iOC44MiIgY2xhc3M9ImFjY1Qgc2EiLz48cmVjdCB4PSI1MjEuMCIgeT0iMjMxLjIxOTk5OTk5OTk5OTk3IiB3aWR0aD0iOC44MiIgaGVpZ2h0PSI4LjgyIiBjbGFzcz0iYWNjVCBzYSIvPjxyZWN0IHg9IjgwIiB5PSI0NiIgd2lkdGg9IjQ0OS44MiIgaGVpZ2h0PSIxOTQuMDQiIGNsYXNzPSJub25lIHMyIi8+PHRleHQgeD0iNTYzLjgxOTk5OTk5OTk5OTkiIHk9IjIzNS42Mjk5OTk5OTk5OTk5NyIgdGV4dC1hbmNob3I9InN0YXJ0IiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIGFjYyBiIj4yMTwvdGV4dD48bGluZSB4MT0iNTMzLjgxOTk5OTk5OTk5OTkiIHkxPSIyMzUuNjI5OTk5OTk5OTk5OTciIHgyPSI1NTcuODE5OTk5OTk5OTk5OSIgeTI9IjIzNS42Mjk5OTk5OTk5OTk5NyIgY2xhc3M9InNhIi8+PHRleHQgeD0iMzA0LjkwOTk5OTk5OTk5OTk3IiB5PSIyOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBsYmwiPjEwNzE8L3RleHQ+PHRleHQgeD0iNjYiIHk9IjE0My4wMTk5OTk5OTk5OTk5OCIgdGV4dC1hbmNob3I9ImVuZCIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBsYmwiPjQ2MjwvdGV4dD48dGV4dCB4PSI0MCIgeT0iMjY4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMgbSI+MTA3MSA9IDQ2MsOXMiArIDE0NyAgIOKGkiAgIDQ2MiA9IDE0N8OXMyArIDIxICAg4oaSICAgMTQ3ID0gMjHDlzcgKyAwPC90ZXh0Pjx0ZXh0IHg9IjQwIiB5PSIyOTIiIHRleHQtYW5jaG9yPSJzdGFydCIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBiIj7mnIDlvozjgavmrovjgaPjgZ/mraPmlrnlvaLjga7kuIDovrogMjEg44GM5pyA5aSn5YWs57SE5pWwPC90ZXh0Pjwvc3ZnPgo="></div>
+      <p class="caption">長方形から正方形を切り取っていくと、最後に残る正方形の一辺が最大公約数になる。</p>
+      <p class="sub center">余りが毎回真に小さくなり、0以上の整数は無限に減り続けられないので、必ず終わる。</p>
+      </div>
+        <div class="pageno">8</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">1.1　アルゴリズム</div>
+        <h2>「必ず終わる」は自明ではない</h2>
+      </header><div class="body">
+      <div class="split"><div class="col"><div class="col-h">コラッツの手順</div><pre class="code small">入力: 自然数 n
+
+1. n = 1 なら終了
+2. n が偶数なら n &lt;- n/2
+   奇数なら       n &lt;- 3n+1
+3. 1 に戻る</pre></div><div class="col"><div class="col-h">n = 7 から始めると</div><p class="col-b">7 → 22 → 11 → 34 → 17 → 52 → 26 → 13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1<br><br>16ステップで終わった。</p><p class="col-n">すべての n で終わるかは、未解決</p></div></div>
+      <p class="note">「終わるかどうか分からない手順」が、こうも簡単に書けてしまう。この感覚が 1.3 で効いてくる。</p></div>
+        <div class="pageno">9</div>
+      </section>
+<section class="slide dark ">
+      <div class="sec-wrap">
+        <div class="sec-n">1.2</div>
+        <h1 class="sec-name">チューリングマシン</h1>
+        <p class="sec-tag">紙と鉛筆で計算する人を、極限まで単純化する</p>
+      </div><div class="motif"><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i></div></section>
+<section class="slide light">
+        <header>
+        <div class="kicker">1.2　チューリングマシン</div>
+        <h2>なぜこんなものを考えるのか</h2>
+      </header><div class="body"><p class="lead">「計算できる」を「アルゴリズムがある」で定義すると、今度は「機械的に実行できる」という曖昧な言葉が残る。堂々巡りになる。</p>
+      <div class="cards" style="--per:4"><div class="card">
+      <div class="card-h">読む</div>
+      <div class="card-b">紙のどこか1箇所を見て、書いてある記号を読む</div>
+    </div><div class="card">
+      <div class="card-h">決める</div>
+      <div class="card-b">頭の中の「今どういうつもりか」と、読んだ記号から次にすることを決める</div>
+    </div><div class="card">
+      <div class="card-h">書く</div>
+      <div class="card-b">そこに記号を書く。消して書き直すこともある</div>
+    </div><div class="card">
+      <div class="card-h">動く</div>
+      <div class="card-b">視線を隣に移す</div>
+    </div></div>
+      <div class="callout dashed">
+        <div class="co-h">チューリングが1936年にとった方針</div>
+        <div class="co-b">人間が紙と鉛筆で計算しているとき、その人は実際には何をしているのか。それを極限まで単純化した機械を作れば、その機械ができることが「計算」である。</div>
+      </div><p class="note">これを機械にしたものがチューリングマシン。部品はテープ・ヘッド・有限個の状態しかない。</p></div>
+        <div class="pageno">11</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">1.2　チューリングマシン</div>
+        <h2>チューリングマシンの構成</h2>
+      </header><div class="body">
+      <div class="figwrap"><img class="fig" alt="図 01-02" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MDAgMzMwIiB3aWR0aD0iNzAwIiBoZWlnaHQ9IjMzMCIgcm9sZT0iaW1nIj48c3R5bGU+CnN2ZyB7IGZvbnQtZmFtaWx5OiAiSGVsdmV0aWNhIE5ldWUiLCBBcmlhbCwgIkhpcmFnaW5vIFNhbnMiLCAiWXUgR290aGljIiwgIk5vdG8gU2FucyBKUCIsIHNhbnMtc2VyaWY7IH0KLmJnICAgeyBmaWxsOiAjZmZmZmZmOyB9Ci5pbmsgIHsgZmlsbDogIzE2MTkxZDsgfQoubXV0ICB7IGZpbGw6ICM1ZjY2NzI7IH0KLnRpbnQgeyBmaWxsOiAjZWVmMWY1OyB9Ci50aW50MnsgZmlsbDogI2RkZTRlYzsgfQouYWNjICB7IGZpbGw6ICMwYjVjYWQ7IH0KLmFjY1QgeyBmaWxsOiAjZDllNmY0OyB9Ci5ub25lIHsgZmlsbDogbm9uZTsgfQoucyAgICB7IHN0cm9rZTogIzE2MTkxZDsgc3Ryb2tlLXdpZHRoOiAxLjY7IGZpbGw6IG5vbmU7IH0KLnMyICAgeyBzdHJva2U6ICMxNjE5MWQ7IHN0cm9rZS13aWR0aDogMi42OyBmaWxsOiBub25lOyB9Ci5zbSAgIHsgc3Ryb2tlOiAjNWY2NjcyOyBzdHJva2Utd2lkdGg6IDEuMjsgZmlsbDogbm9uZTsgfQouc2EgICB7IHN0cm9rZTogIzBiNWNhZDsgc3Ryb2tlLXdpZHRoOiAyLjI7IGZpbGw6IG5vbmU7IH0KLmRhc2ggeyBzdHJva2UtZGFzaGFycmF5OiA1IDQ7IH0KLmRvdCAgeyBzdHJva2UtZGFzaGFycmF5OiAxLjUgMzsgfQp0ZXh0ICB7IGZpbGw6ICMxNjE5MWQ7IGZvbnQtc2l6ZTogMTRweDsgfQoudC1zICB7IGZvbnQtc2l6ZTogMTJweDsgfQoudC14cyB7IGZvbnQtc2l6ZTogMTAuNXB4OyB9Ci50LWwgIHsgZm9udC1zaXplOiAxN3B4OyB9Ci50LXhsIHsgZm9udC1zaXplOiAyMXB4OyB9Ci5iICAgIHsgZm9udC13ZWlnaHQ6IDcwMDsgfQouaSAgICB7IGZvbnQtc3R5bGU6IGl0YWxpYzsgfQoubSAgICB7IGZvbnQtZmFtaWx5OiAiU0YgTW9ubyIsIE1lbmxvLCBDb25zb2xhcywgbW9ub3NwYWNlOyB9Ci5sYmwgIHsgZmlsbDogIzVmNjY3MjsgfQpAbWVkaWEgKHByZWZlcnMtY29sb3Itc2NoZW1lOiBkYXJrKSB7CiAgLmJnICAgeyBmaWxsOiAjMTQxNzFiOyB9CiAgLmluayAgeyBmaWxsOiAjZThlYmVmOyB9CiAgLm11dCAgeyBmaWxsOiAjOWFhM2IwOyB9CiAgLnRpbnQgeyBmaWxsOiAjMjMyODMwOyB9CiAgLnRpbnQyeyBmaWxsOiAjMmUzNDNkOyB9CiAgLmFjYyAgeyBmaWxsOiAjNmFiMGYzOyB9CiAgLmFjY1QgeyBmaWxsOiAjMWUyYzNjOyB9CiAgLnMsIC5zMiB7IHN0cm9rZTogI2U4ZWJlZjsgfQogIC5zbSAgIHsgc3Ryb2tlOiAjOWFhM2IwOyB9CiAgLnNhICAgeyBzdHJva2U6ICM2YWIwZjM7IH0KICB0ZXh0ICB7IGZpbGw6ICNlOGViZWY7IH0KICAubGJsICB7IGZpbGw6ICM5YWEzYjA7IH0KfQo8L3N0eWxlPgo8ZGVmcz4KIDxtYXJrZXIgaWQ9ImEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImluayIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYWEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImFjYyIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYW0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjYiIG1hcmtlckhlaWdodD0iNiIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9Im11dCIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0ibyIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI1IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNiIgbWFya2VySGVpZ2h0PSI2Ij4KICAgPGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjMuNSIgY2xhc3M9ImJnIHMiLz48L21hcmtlcj4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iNzAwIiBoZWlnaHQ9IjMzMCIgY2xhc3M9ImJnIi8+PHJlY3QgeD0iNDAiIHk9IjIwMCIgd2lkdGg9IjI2IiBoZWlnaHQ9IjQ2IiBjbGFzcz0iYmcgcyIvPjxyZWN0IHg9IjY2IiB5PSIyMDAiIHdpZHRoPSIyNiIgaGVpZ2h0PSI0NiIgY2xhc3M9ImJnIHMiLz48cmVjdCB4PSI5MiIgeT0iMjAwIiB3aWR0aD0iMjYiIGhlaWdodD0iNDYiIGNsYXNzPSJiZyBzIi8+PHJlY3QgeD0iMTE4IiB5PSIyMDAiIHdpZHRoPSIyNiIgaGVpZ2h0PSI0NiIgY2xhc3M9ImJnIHMiLz48cmVjdCB4PSIxNDQiIHk9IjIwMCIgd2lkdGg9IjI2IiBoZWlnaHQ9IjQ2IiBjbGFzcz0iYmcgcyIvPjxyZWN0IHg9IjE3MCIgeT0iMjAwIiB3aWR0aD0iMjYiIGhlaWdodD0iNDYiIGNsYXNzPSJiZyBzIi8+PHJlY3QgeD0iMTk2IiB5PSIyMDAiIHdpZHRoPSIyNiIgaGVpZ2h0PSI0NiIgY2xhc3M9ImJnIHMiLz48cmVjdCB4PSIyMjIiIHk9IjIwMCIgd2lkdGg9IjI2IiBoZWlnaHQ9IjQ2IiBjbGFzcz0iYmcgcyIvPjxyZWN0IHg9IjI0OCIgeT0iMjAwIiB3aWR0aD0iMjYiIGhlaWdodD0iNDYiIGNsYXNzPSJiZyBzIi8+PHJlY3QgeD0iMjc0IiB5PSIyMDAiIHdpZHRoPSIyNiIgaGVpZ2h0PSI0NiIgY2xhc3M9ImJnIHMiLz48cmVjdCB4PSIzMDAiIHk9IjIwMCIgd2lkdGg9IjI2IiBoZWlnaHQ9IjQ2IiBjbGFzcz0iYmcgcyIvPjxyZWN0IHg9IjMyNiIgeT0iMjAwIiB3aWR0aD0iMjYiIGhlaWdodD0iNDYiIGNsYXNzPSJiZyBzIi8+PHJlY3QgeD0iMzUyIiB5PSIyMDAiIHdpZHRoPSIyNiIgaGVpZ2h0PSI0NiIgY2xhc3M9ImJnIHMiLz48cmVjdCB4PSIzNzgiIHk9IjIwMCIgd2lkdGg9IjI2IiBoZWlnaHQ9IjQ2IiBjbGFzcz0iYmcgcyIvPjxyZWN0IHg9IjQwNCIgeT0iMjAwIiB3aWR0aD0iMjYiIGhlaWdodD0iNDYiIGNsYXNzPSJiZyBzIi8+PHJlY3QgeD0iNDMwIiB5PSIyMDAiIHdpZHRoPSIyNiIgaGVpZ2h0PSI0NiIgY2xhc3M9ImJnIHMiLz48cmVjdCB4PSI0NTYiIHk9IjIwMCIgd2lkdGg9IjI2IiBoZWlnaHQ9IjQ2IiBjbGFzcz0iYmcgcyIvPjxyZWN0IHg9IjQ4MiIgeT0iMjAwIiB3aWR0aD0iMjYiIGhlaWdodD0iNDYiIGNsYXNzPSJiZyBzIi8+PHJlY3QgeD0iNTA4IiB5PSIyMDAiIHdpZHRoPSIyNiIgaGVpZ2h0PSI0NiIgY2xhc3M9ImJnIHMiLz48cmVjdCB4PSI1MzQiIHk9IjIwMCIgd2lkdGg9IjI2IiBoZWlnaHQ9IjQ2IiBjbGFzcz0iYmcgcyIvPjxyZWN0IHg9IjU2MCIgeT0iMjAwIiB3aWR0aD0iMjYiIGhlaWdodD0iNDYiIGNsYXNzPSJiZyBzIi8+PHJlY3QgeD0iNTg2IiB5PSIyMDAiIHdpZHRoPSIyNiIgaGVpZ2h0PSI0NiIgY2xhc3M9ImJnIHMiLz48dGV4dCB4PSIxODMuMCIgeT0iMjIzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIG0iPjE8L3RleHQ+PHRleHQgeD0iMjA5LjAiIHk9IjIyMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBtIj4wPC90ZXh0Pjx0ZXh0IHg9IjIzNS4wIiB5PSIyMjMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMgbSI+MTwvdGV4dD48dGV4dCB4PSIyNjEuMCIgeT0iMjIzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIG0iPjE8L3RleHQ+PHRleHQgeD0iMjg3LjAiIHk9IjIyMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBtIj4xPC90ZXh0Pjx0ZXh0IHg9IjMxMy4wIiB5PSIyMjMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMgbSI+MDwvdGV4dD48dGV4dCB4PSIzMzkuMCIgeT0iMjIzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIG0iPjE8L3RleHQ+PHRleHQgeD0iMzY1LjAiIHk9IjIyMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBtIj4xPC90ZXh0Pjx0ZXh0IHg9IjM5MS4wIiB5PSIyMjMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMgbSI+MDwvdGV4dD48dGV4dCB4PSI0MTcuMCIgeT0iMjIzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIG0iPjA8L3RleHQ+PHRleHQgeD0iNDQzLjAiIHk9IjIyMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBtIj4wPC90ZXh0Pjx0ZXh0IHg9IjQ2OS4wIiB5PSIyMjMiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMgbSI+MTwvdGV4dD48dGV4dCB4PSIyNiIgeT0iMjIzIiB0ZXh0LWFuY2hvcj0iZW5kIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0ibGJsIj7igKY8L3RleHQ+PHRleHQgeD0iNjI2IiB5PSIyMjMiIHRleHQtYW5jaG9yPSJzdGFydCIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9ImxibCI+4oCmPC90ZXh0Pjx0ZXh0IHg9IjMyNi4wIiB5PSIyNzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMgbGJsIj7nhKHpmZDjgavplbfjgYTjg4bjg7zjg5c8L3RleHQ+PHBvbHlnb24gcG9pbnRzPSIzMTMuMCwxOTIgMzA0LjAsMTc2IDMyMi4wLDE3NiIgY2xhc3M9ImluayIvPjxsaW5lIHgxPSIzMTMuMCIgeTE9IjE3NiIgeDI9IjMxMy4wIiB5Mj0iMTQ0IiBjbGFzcz0icyIvPjxyZWN0IHg9IjIyOC4wIiB5PSI3MiIgd2lkdGg9IjE3MCIgaGVpZ2h0PSI3MiIgcng9IjgiIGNsYXNzPSJ0aW50IHMiLz48dGV4dCB4PSIzMTMuMCIgeT0iOTIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJiIj7mnInpmZDliLblvqHpg6g8L3RleHQ+PHRleHQgeD0iMzEzLjAiIHk9IjExNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBtIj7nj77lnKjjga7nirbmhYsgIHE8L3RleHQ+PHRleHQgeD0iMzEzLjAiIHk9IjEzMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgbGJsIj7vvIjnirbmhYvjga/mnInpmZDlgIvvvIk8L3RleHQ+PHBhdGggZD0iTTI3OS4wLDE0NCBMMjc5LjAsMTcwIiBjbGFzcz0ic2EiIG1hcmtlci1lbmQ9InVybCgjYWEpIi8+PHBhdGggZD0iTTM0Ny4wLDE3MCBMMzQ3LjAsMTQ0IiBjbGFzcz0ic2EiIG1hcmtlci1lbmQ9InVybCgjYWEpIi8+PHRleHQgeD0iMjY5LjAiIHk9IjE1NiIgdGV4dC1hbmNob3I9ImVuZCIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgbGJsIj7mm7jjgY/oqJjlj7c8L3RleHQ+PHRleHQgeD0iMzU3LjAiIHk9IjE1NiIgdGV4dC1hbmNob3I9InN0YXJ0IiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyBsYmwiPuiqreOCk+OBoOiomOWPtzwvdGV4dD48cmVjdCB4PSI0MzAiIHk9IjMwIiB3aWR0aD0iMjUwIiBoZWlnaHQ9IjkyIiByeD0iNiIgY2xhc3M9Im5vbmUgc20gZGFzaCIvPjx0ZXh0IHg9IjU1NSIgeT0iNDYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMgYiI+MeOCueODhuODg+ODl+OBp+OBmeOCi+OBk+OBqDwvdGV4dD48dGV4dCB4PSI0NDQiIHk9IjY0IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj7ikaAg44OY44OD44OJ44Gu5LiL44Gu6KiY5Y+344KS6Kqt44KAPC90ZXh0Pjx0ZXh0IHg9IjQ0NCIgeT0iODAiIHRleHQtYW5jaG9yPSJzdGFydCIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPuKRoSDjgZ3jgZPjgavoqJjlj7fjgpLmm7jjgY88L3RleHQ+PHRleHQgeD0iNDQ0IiB5PSI5NiIgdGV4dC1hbmNob3I9InN0YXJ0IiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+4pGiIOODmOODg+ODieOCkuW3puOBi+WPs+OBqzHjg57jgrnli5XjgYvjgZk8L3RleHQ+PHRleHQgeD0iNDQ0IiB5PSIxMTIiIHRleHQtYW5jaG9yPSJzdGFydCIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPuKRoyDnirbmhYvjgpLlpInjgYjjgos8L3RleHQ+PHRleHQgeD0iMzI2LjAiIHk9IjI5NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgbGJsIj7jg5jjg4Pjg4njga/lt6blj7Pjgasx44Oe44K544Ga44Gk5YuV44GR44KLPC90ZXh0Pjwvc3ZnPgo="></div>
+      <p class="caption">遷移規則は (現在の状態, 読んだ記号) → (書く記号, 移動方向, 次の状態) の表で完全に決まる。</p>
+      
+      </div>
+        <div class="pageno">12</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">1.2　チューリングマシン</div>
+        <h2>例：1を足す機械</h2>
+      </header><div class="body"><p class="lead">2進数が書かれたテープを受け取り、その数に1を足す。筆算と同じで、右端から見ていく。</p>
+      <div class="split"><div class="col"><div class="col-h">遷移規則</div><table class="tbl mono center"><colgroup><col style="width:23.01%"><col style="width:17.70%"><col style="width:15.93%"><col style="width:15.93%"><col style="width:27.43%"></colgroup><thead><tr><th>状態</th><th>読んだ</th><th>書く</th><th>移動</th><th>次の状態</th></tr></thead><tbody><tr><td>carry</td><td>1</td><td>0</td><td>左</td><td>carry</td></tr><tr><td>carry</td><td>0</td><td>1</td><td>—</td><td>halt</td></tr><tr><td>carry</td><td>␣</td><td>1</td><td>—</td><td>halt</td></tr></tbody></table><p class="col-n">状態は2つ、規則は3行しかない</p></div><div class="col"><div class="col-h">1011 で追いかける（[ ] がヘッド位置）</div><table class="tbl mono "><colgroup><col style="width:26.55%"><col style="width:44.25%"><col style="width:29.20%"></colgroup><thead><tr><th>ステップ</th><th>テープ</th><th>状態</th></tr></thead><tbody><tr><td>0</td><td>1 0 1 [1]</td><td>carry</td></tr><tr><td>1</td><td>1 0 [1] 0</td><td>carry</td></tr><tr><td>2</td><td>1 [0] 0 0</td><td>carry</td></tr><tr><td>3</td><td>1 [1] 0 0</td><td>halt</td></tr></tbody></table><p class="col-n">1100 = 12。正しい。</p></div></div>
+      <p class="note">この機械は何桁の2進数でも動く。111 なら空白を読んで 1000 になる。</p></div>
+        <div class="pageno">13</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">1.2　チューリングマシン</div>
+        <h2>状態遷移図で見る</h2>
+      </header><div class="body">
+      <div class="figwrap"><img class="fig" alt="図 01-03" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NjAgMjUwIiB3aWR0aD0iNTYwIiBoZWlnaHQ9IjI1MCIgcm9sZT0iaW1nIj48c3R5bGU+CnN2ZyB7IGZvbnQtZmFtaWx5OiAiSGVsdmV0aWNhIE5ldWUiLCBBcmlhbCwgIkhpcmFnaW5vIFNhbnMiLCAiWXUgR290aGljIiwgIk5vdG8gU2FucyBKUCIsIHNhbnMtc2VyaWY7IH0KLmJnICAgeyBmaWxsOiAjZmZmZmZmOyB9Ci5pbmsgIHsgZmlsbDogIzE2MTkxZDsgfQoubXV0ICB7IGZpbGw6ICM1ZjY2NzI7IH0KLnRpbnQgeyBmaWxsOiAjZWVmMWY1OyB9Ci50aW50MnsgZmlsbDogI2RkZTRlYzsgfQouYWNjICB7IGZpbGw6ICMwYjVjYWQ7IH0KLmFjY1QgeyBmaWxsOiAjZDllNmY0OyB9Ci5ub25lIHsgZmlsbDogbm9uZTsgfQoucyAgICB7IHN0cm9rZTogIzE2MTkxZDsgc3Ryb2tlLXdpZHRoOiAxLjY7IGZpbGw6IG5vbmU7IH0KLnMyICAgeyBzdHJva2U6ICMxNjE5MWQ7IHN0cm9rZS13aWR0aDogMi42OyBmaWxsOiBub25lOyB9Ci5zbSAgIHsgc3Ryb2tlOiAjNWY2NjcyOyBzdHJva2Utd2lkdGg6IDEuMjsgZmlsbDogbm9uZTsgfQouc2EgICB7IHN0cm9rZTogIzBiNWNhZDsgc3Ryb2tlLXdpZHRoOiAyLjI7IGZpbGw6IG5vbmU7IH0KLmRhc2ggeyBzdHJva2UtZGFzaGFycmF5OiA1IDQ7IH0KLmRvdCAgeyBzdHJva2UtZGFzaGFycmF5OiAxLjUgMzsgfQp0ZXh0ICB7IGZpbGw6ICMxNjE5MWQ7IGZvbnQtc2l6ZTogMTRweDsgfQoudC1zICB7IGZvbnQtc2l6ZTogMTJweDsgfQoudC14cyB7IGZvbnQtc2l6ZTogMTAuNXB4OyB9Ci50LWwgIHsgZm9udC1zaXplOiAxN3B4OyB9Ci50LXhsIHsgZm9udC1zaXplOiAyMXB4OyB9Ci5iICAgIHsgZm9udC13ZWlnaHQ6IDcwMDsgfQouaSAgICB7IGZvbnQtc3R5bGU6IGl0YWxpYzsgfQoubSAgICB7IGZvbnQtZmFtaWx5OiAiU0YgTW9ubyIsIE1lbmxvLCBDb25zb2xhcywgbW9ub3NwYWNlOyB9Ci5sYmwgIHsgZmlsbDogIzVmNjY3MjsgfQpAbWVkaWEgKHByZWZlcnMtY29sb3Itc2NoZW1lOiBkYXJrKSB7CiAgLmJnICAgeyBmaWxsOiAjMTQxNzFiOyB9CiAgLmluayAgeyBmaWxsOiAjZThlYmVmOyB9CiAgLm11dCAgeyBmaWxsOiAjOWFhM2IwOyB9CiAgLnRpbnQgeyBmaWxsOiAjMjMyODMwOyB9CiAgLnRpbnQyeyBmaWxsOiAjMmUzNDNkOyB9CiAgLmFjYyAgeyBmaWxsOiAjNmFiMGYzOyB9CiAgLmFjY1QgeyBmaWxsOiAjMWUyYzNjOyB9CiAgLnMsIC5zMiB7IHN0cm9rZTogI2U4ZWJlZjsgfQogIC5zbSAgIHsgc3Ryb2tlOiAjOWFhM2IwOyB9CiAgLnNhICAgeyBzdHJva2U6ICM2YWIwZjM7IH0KICB0ZXh0ICB7IGZpbGw6ICNlOGViZWY7IH0KICAubGJsICB7IGZpbGw6ICM5YWEzYjA7IH0KfQo8L3N0eWxlPgo8ZGVmcz4KIDxtYXJrZXIgaWQ9ImEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImluayIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYWEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImFjYyIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYW0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjYiIG1hcmtlckhlaWdodD0iNiIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9Im11dCIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0ibyIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI1IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNiIgbWFya2VySGVpZ2h0PSI2Ij4KICAgPGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjMuNSIgY2xhc3M9ImJnIHMiLz48L21hcmtlcj4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iNTYwIiBoZWlnaHQ9IjI1MCIgY2xhc3M9ImJnIi8+PGNpcmNsZSBjeD0iMTYwIiBjeT0iMTMwIiByPSI0NiIgY2xhc3M9InRpbnQgcyIvPjx0ZXh0IHg9IjE2MCIgeT0iMTMwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0iYiI+Y2Fycnk8L3RleHQ+PGNpcmNsZSBjeD0iNDAwIiBjeT0iMTMwIiByPSI0NiIgY2xhc3M9ImJnIHMiLz48Y2lyY2xlIGN4PSI0MDAiIGN5PSIxMzAiIHI9IjQwIiBjbGFzcz0ibm9uZSBzIi8+PHRleHQgeD0iNDAwIiB5PSIxMzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJiIj5oYWx0PC90ZXh0PjxsaW5lIHgxPSI2MCIgeTE9IjEzMCIgeDI9IjExMiIgeTI9IjEzMCIgY2xhc3M9InMiIG1hcmtlci1lbmQ9InVybCgjYSkiLz48dGV4dCB4PSI2MCIgeT0iMTEyIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIGxibCI+6ZaL5aeLPC90ZXh0PjxwYXRoIGQ9Ik0xMzYsOTAgQzEyMCw0MCAyMDAsNDAgMTg0LDkwIiBjbGFzcz0icyIgbWFya2VyLWVuZD0idXJsKCNhKSIvPjx0ZXh0IHg9IjE2MCIgeT0iNDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMgbSI+MSAvIDAsIOW3puOBuDwvdGV4dD48bGluZSB4MT0iMjA2IiB5MT0iMTE4IiB4Mj0iMzU0IiB5Mj0iMTE4IiBjbGFzcz0icyIgbWFya2VyLWVuZD0idXJsKCNhKSIvPjx0ZXh0IHg9IjI4MC4wIiB5PSIxMTAuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBtIj4wIC8gMSwg5YGc5q2iPC90ZXh0PjxsaW5lIHgxPSIyMDYiIHkxPSIxNDYiIHgyPSIzNTQiIHkyPSIxNDYiIGNsYXNzPSJzIiBtYXJrZXItZW5kPSJ1cmwoI2EpIi8+PHRleHQgeD0iMjgwLjAiIHk9IjE2NC4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIG0iPuKQoyAvIDEsIOWBnOatojwvdGV4dD48dGV4dCB4PSIyODAiIHk9IjIxNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgbGJsIj7oqq3jgpPjgaDoqJjlj7cgLyDmm7jjgY/oqJjlj7csIOWLleS9nDwvdGV4dD48L3N2Zz4K"></div>
+      <p class="caption">表と同じ内容を図にしただけ。制御部の正体は「有限個の状態と、それを結ぶ矢印」である。</p>
+      
+      </div>
+        <div class="pageno">14</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">1.2　チューリングマシン</div>
+        <h2>万能チューリングマシン</h2>
+      </header><div class="body"><p class="lead">ここまでの機械は「1を足す」専用だった。ところがチューリングは、他のチューリングマシンの遷移規則表そのものをテープに書いて渡すと、それを解釈して真似する機械が作れることを示した。</p>
+      <div class="callout solid big">専用機を作り分けるのではなく、1台の機械に「何をするか」をデータとして与える</div>
+      <ul class="map">
+      <li><span class="m-a">テープに書かれた規則表</span><span class="m-arrow"></span>
+        <span class="m-b">プログラム</span></li>
+      <li><span class="m-a">それを解釈して実行する万能機</span><span class="m-arrow"></span>
+        <span class="m-b">CPU</span></li>
+      <li><span class="m-a">同じテープに置かれる入力</span><span class="m-arrow"></span>
+        <span class="m-b">データ</span></li></ul>
+      <p class="note">プログラムとデータが同じ場所に同じ形式で置かれる —— 第3回のノイマン型の原型が、ここにある。</p></div>
+        <div class="pageno">15</div>
+      </section>
+<section class="slide dark ">
+      <div class="sec-wrap">
+        <div class="sec-n">1.3</div>
+        <h1 class="sec-name">計算の限界</h1>
+        <p class="sec-tag">計算できないことは、ある。しかも自然な問題で</p>
+      </div><div class="motif"><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i></div></section>
+<section class="slide light">
+        <header>
+        <div class="kicker">1.3　計算の限界</div>
+        <h2>チャーチ＝チューリングのテーゼ</h2>
+      </header><div class="body"><p class="lead">発想はばらばらなのに、計算できる関数の集合はぴったり一致する。</p>
+      <table class="tbl  "><colgroup><col style="width:26.27%"><col style="width:28.81%"><col style="width:44.92%"></colgroup><thead><tr><th>モデル</th><th>提案</th><th>発想</th></tr></thead><tbody><tr><td>チューリングマシン</td><td>Turing, 1936</td><td>紙と鉛筆の計算を機械化する</td></tr><tr><td>λ計算</td><td>Church, 1936</td><td>関数の適用だけで計算を表す</td></tr><tr><td>帰納的関数</td><td>Gödel, Kleene, 1930s</td><td>基本関数と再帰から組み立てる</td></tr><tr><td>レジスタマシン</td><td>Shepherdson–Sturgis, 1963</td><td>無限個のレジスタを操作する</td></tr><tr><td>セルオートマトン</td><td>von Neumann, 1940s</td><td>単純な規則で更新される格子</td></tr></tbody></table>
+      <div class="callout solid">「直観的に計算可能」な関数は、チューリングマシンで計算可能な関数と一致する</div><p class="sub">使う言語やハードウェアを変えても、計算できる問題の範囲は広がらない。GPU を1万個並べても同じ。<br>量子計算機も範囲は同じで、一部を速く解けるだけである。</p></div>
+        <div class="pageno">17</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">1.3　計算の限界</div>
+        <h2>停止問題</h2>
+      </header><div class="body"><p class="lead">プログラム P と入力 x が与えられたとき、「P に x を入力して実行すると、いつか停止するか」を判定せよ。これを判定する halts(P, x) は存在しない。</p><pre class="code">trouble(P):
+    if halts(P, P):        # P に P 自身を入力すると停止するか
+        while True: pass   # 停止するなら、わざと無限ループする
+    else:
+        return             # 停止しないなら、さっさと停止する</pre><p class="sub">停止する とすると　halts は真を返す → trouble は無限ループに入る → 停止しない。矛盾<br>停止しない とすると　halts は偽を返す → trouble はすぐ return する → 停止する。矛盾</p><p class="note">どちらでも矛盾する。よって仮定が誤りで、halts は存在しない。</p></div>
+        <div class="pageno">18</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">1.3　計算の限界</div>
+        <h2>対角線論法</h2>
+      </header><div class="body">
+      <div class="figwrap"><img class="fig" alt="図 01-04" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1NjAgMzYwIiB3aWR0aD0iNTYwIiBoZWlnaHQ9IjM2MCIgcm9sZT0iaW1nIj48c3R5bGU+CnN2ZyB7IGZvbnQtZmFtaWx5OiAiSGVsdmV0aWNhIE5ldWUiLCBBcmlhbCwgIkhpcmFnaW5vIFNhbnMiLCAiWXUgR290aGljIiwgIk5vdG8gU2FucyBKUCIsIHNhbnMtc2VyaWY7IH0KLmJnICAgeyBmaWxsOiAjZmZmZmZmOyB9Ci5pbmsgIHsgZmlsbDogIzE2MTkxZDsgfQoubXV0ICB7IGZpbGw6ICM1ZjY2NzI7IH0KLnRpbnQgeyBmaWxsOiAjZWVmMWY1OyB9Ci50aW50MnsgZmlsbDogI2RkZTRlYzsgfQouYWNjICB7IGZpbGw6ICMwYjVjYWQ7IH0KLmFjY1QgeyBmaWxsOiAjZDllNmY0OyB9Ci5ub25lIHsgZmlsbDogbm9uZTsgfQoucyAgICB7IHN0cm9rZTogIzE2MTkxZDsgc3Ryb2tlLXdpZHRoOiAxLjY7IGZpbGw6IG5vbmU7IH0KLnMyICAgeyBzdHJva2U6ICMxNjE5MWQ7IHN0cm9rZS13aWR0aDogMi42OyBmaWxsOiBub25lOyB9Ci5zbSAgIHsgc3Ryb2tlOiAjNWY2NjcyOyBzdHJva2Utd2lkdGg6IDEuMjsgZmlsbDogbm9uZTsgfQouc2EgICB7IHN0cm9rZTogIzBiNWNhZDsgc3Ryb2tlLXdpZHRoOiAyLjI7IGZpbGw6IG5vbmU7IH0KLmRhc2ggeyBzdHJva2UtZGFzaGFycmF5OiA1IDQ7IH0KLmRvdCAgeyBzdHJva2UtZGFzaGFycmF5OiAxLjUgMzsgfQp0ZXh0ICB7IGZpbGw6ICMxNjE5MWQ7IGZvbnQtc2l6ZTogMTRweDsgfQoudC1zICB7IGZvbnQtc2l6ZTogMTJweDsgfQoudC14cyB7IGZvbnQtc2l6ZTogMTAuNXB4OyB9Ci50LWwgIHsgZm9udC1zaXplOiAxN3B4OyB9Ci50LXhsIHsgZm9udC1zaXplOiAyMXB4OyB9Ci5iICAgIHsgZm9udC13ZWlnaHQ6IDcwMDsgfQouaSAgICB7IGZvbnQtc3R5bGU6IGl0YWxpYzsgfQoubSAgICB7IGZvbnQtZmFtaWx5OiAiU0YgTW9ubyIsIE1lbmxvLCBDb25zb2xhcywgbW9ub3NwYWNlOyB9Ci5sYmwgIHsgZmlsbDogIzVmNjY3MjsgfQpAbWVkaWEgKHByZWZlcnMtY29sb3Itc2NoZW1lOiBkYXJrKSB7CiAgLmJnICAgeyBmaWxsOiAjMTQxNzFiOyB9CiAgLmluayAgeyBmaWxsOiAjZThlYmVmOyB9CiAgLm11dCAgeyBmaWxsOiAjOWFhM2IwOyB9CiAgLnRpbnQgeyBmaWxsOiAjMjMyODMwOyB9CiAgLnRpbnQyeyBmaWxsOiAjMmUzNDNkOyB9CiAgLmFjYyAgeyBmaWxsOiAjNmFiMGYzOyB9CiAgLmFjY1QgeyBmaWxsOiAjMWUyYzNjOyB9CiAgLnMsIC5zMiB7IHN0cm9rZTogI2U4ZWJlZjsgfQogIC5zbSAgIHsgc3Ryb2tlOiAjOWFhM2IwOyB9CiAgLnNhICAgeyBzdHJva2U6ICM2YWIwZjM7IH0KICB0ZXh0ICB7IGZpbGw6ICNlOGViZWY7IH0KICAubGJsICB7IGZpbGw6ICM5YWEzYjA7IH0KfQo8L3N0eWxlPgo8ZGVmcz4KIDxtYXJrZXIgaWQ9ImEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImluayIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYWEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImFjYyIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYW0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjYiIG1hcmtlckhlaWdodD0iNiIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9Im11dCIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0ibyIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI1IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNiIgbWFya2VySGVpZ2h0PSI2Ij4KICAgPGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjMuNSIgY2xhc3M9ImJnIHMiLz48L21hcmtlcj4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iNTYwIiBoZWlnaHQ9IjM2MCIgY2xhc3M9ImJnIi8+PHRleHQgeD0iMTYzLjAiIHk9IjU2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIGxibCI+eOKCgTwvdGV4dD48dGV4dCB4PSIyMjkuMCIgeT0iNTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMgbGJsIj544oKCPC90ZXh0Pjx0ZXh0IHg9IjI5NS4wIiB5PSI1NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBsYmwiPnjigoM8L3RleHQ+PHRleHQgeD0iMzYxLjAiIHk9IjU2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIGxibCI+eOKChDwvdGV4dD48dGV4dCB4PSI0MjcuMCIgeT0iNTYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMgbGJsIj7igKY8L3RleHQ+PHRleHQgeD0iMTE0IiB5PSI5MCIgdGV4dC1hbmNob3I9ImVuZCIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBsYmwiPlDigoE8L3RleHQ+PHRleHQgeD0iMTE0IiB5PSIxMzAiIHRleHQtYW5jaG9yPSJlbmQiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMgbGJsIj5Q4oKCPC90ZXh0Pjx0ZXh0IHg9IjExNCIgeT0iMTcwIiB0ZXh0LWFuY2hvcj0iZW5kIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIGxibCI+UOKCgzwvdGV4dD48dGV4dCB4PSIxMTQiIHk9IjIxMCIgdGV4dC1hbmNob3I9ImVuZCIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBsYmwiPlDigoQ8L3RleHQ+PHRleHQgeD0iMTE0IiB5PSIyNTAiIHRleHQtYW5jaG9yPSJlbmQiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMgbGJsIj7ii648L3RleHQ+PHJlY3QgeD0iMTMwIiB5PSI3MCIgd2lkdGg9IjY2IiBoZWlnaHQ9IjQwIiBjbGFzcz0iYWNjVCBzIi8+PHRleHQgeD0iMTYzLjAiIHk9IjkwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIGIgYWNjIj7lgZw8L3RleHQ+PHJlY3QgeD0iMTk2IiB5PSI3MCIgd2lkdGg9IjY2IiBoZWlnaHQ9IjQwIiBjbGFzcz0iYmcgcyIvPjx0ZXh0IHg9IjIyOS4wIiB5PSI5MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyI+5q2iPC90ZXh0PjxyZWN0IHg9IjI2MiIgeT0iNzAiIHdpZHRoPSI2NiIgaGVpZ2h0PSI0MCIgY2xhc3M9ImJnIHMiLz48dGV4dCB4PSIyOTUuMCIgeT0iOTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMiPuWBnDwvdGV4dD48cmVjdCB4PSIzMjgiIHk9IjcwIiB3aWR0aD0iNjYiIGhlaWdodD0iNDAiIGNsYXNzPSJiZyBzIi8+PHRleHQgeD0iMzYxLjAiIHk9IjkwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIj7mraI8L3RleHQ+PHJlY3QgeD0iMTMwIiB5PSIxMTAiIHdpZHRoPSI2NiIgaGVpZ2h0PSI0MCIgY2xhc3M9ImJnIHMiLz48dGV4dCB4PSIxNjMuMCIgeT0iMTMwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIj7mraI8L3RleHQ+PHJlY3QgeD0iMTk2IiB5PSIxMTAiIHdpZHRoPSI2NiIgaGVpZ2h0PSI0MCIgY2xhc3M9ImFjY1QgcyIvPjx0ZXh0IHg9IjIyOS4wIiB5PSIxMzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMgYiBhY2MiPuatojwvdGV4dD48cmVjdCB4PSIyNjIiIHk9IjExMCIgd2lkdGg9IjY2IiBoZWlnaHQ9IjQwIiBjbGFzcz0iYmcgcyIvPjx0ZXh0IHg9IjI5NS4wIiB5PSIxMzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMiPuWBnDwvdGV4dD48cmVjdCB4PSIzMjgiIHk9IjExMCIgd2lkdGg9IjY2IiBoZWlnaHQ9IjQwIiBjbGFzcz0iYmcgcyIvPjx0ZXh0IHg9IjM2MS4wIiB5PSIxMzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMiPuWBnDwvdGV4dD48cmVjdCB4PSIxMzAiIHk9IjE1MCIgd2lkdGg9IjY2IiBoZWlnaHQ9IjQwIiBjbGFzcz0iYmcgcyIvPjx0ZXh0IHg9IjE2My4wIiB5PSIxNzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMiPuWBnDwvdGV4dD48cmVjdCB4PSIxOTYiIHk9IjE1MCIgd2lkdGg9IjY2IiBoZWlnaHQ9IjQwIiBjbGFzcz0iYmcgcyIvPjx0ZXh0IHg9IjIyOS4wIiB5PSIxNzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMiPuWBnDwvdGV4dD48cmVjdCB4PSIyNjIiIHk9IjE1MCIgd2lkdGg9IjY2IiBoZWlnaHQ9IjQwIiBjbGFzcz0iYWNjVCBzIi8+PHRleHQgeD0iMjk1LjAiIHk9IjE3MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBiIGFjYyI+5q2iPC90ZXh0PjxyZWN0IHg9IjMyOCIgeT0iMTUwIiB3aWR0aD0iNjYiIGhlaWdodD0iNDAiIGNsYXNzPSJiZyBzIi8+PHRleHQgeD0iMzYxLjAiIHk9IjE3MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyI+5YGcPC90ZXh0PjxyZWN0IHg9IjEzMCIgeT0iMTkwIiB3aWR0aD0iNjYiIGhlaWdodD0iNDAiIGNsYXNzPSJiZyBzIi8+PHRleHQgeD0iMTYzLjAiIHk9IjIxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyI+5q2iPC90ZXh0PjxyZWN0IHg9IjE5NiIgeT0iMTkwIiB3aWR0aD0iNjYiIGhlaWdodD0iNDAiIGNsYXNzPSJiZyBzIi8+PHRleHQgeD0iMjI5LjAiIHk9IjIxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyI+5YGcPC90ZXh0PjxyZWN0IHg9IjI2MiIgeT0iMTkwIiB3aWR0aD0iNjYiIGhlaWdodD0iNDAiIGNsYXNzPSJiZyBzIi8+PHRleHQgeD0iMjk1LjAiIHk9IjIxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyI+5YGcPC90ZXh0PjxyZWN0IHg9IjMyOCIgeT0iMTkwIiB3aWR0aD0iNjYiIGhlaWdodD0iNDAiIGNsYXNzPSJhY2NUIHMiLz48dGV4dCB4PSIzNjEuMCIgeT0iMjEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIGIgYWNjIj7mraI8L3RleHQ+PHRleHQgeD0iNDE2IiB5PSIxNTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJsYmwiPuKApjwvdGV4dD48dGV4dCB4PSIyNjIiIHk9IjI0OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9ImxibCI+4ouuPC90ZXh0PjxyZWN0IHg9IjEzMCIgeT0iMjYwIiB3aWR0aD0iMjY0IiBoZWlnaHQ9IjQwIiBjbGFzcz0idGludDIgcyIvPjx0ZXh0IHg9IjExNCIgeT0iMjgwIiB0ZXh0LWFuY2hvcj0iZW5kIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIGIiPnRyb3VibGU8L3RleHQ+PHRleHQgeD0iMTYzLjAiIHk9IjI4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBiIj7mraI8L3RleHQ+PHRleHQgeD0iMjI5LjAiIHk9IjI4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBiIj7lgZw8L3RleHQ+PHRleHQgeD0iMjk1LjAiIHk9IjI4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBiIj7lgZw8L3RleHQ+PHRleHQgeD0iMzYxLjAiIHk9IjI4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBiIj7mraI8L3RleHQ+PHRleHQgeD0iMjYyIiB5PSIzMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMiPuWvvuinkue3muOCkuOBmeOBueOBpuWPjei7ouOBleOBm+OBn+OCguOBrjwvdGV4dD48dGV4dCB4PSIyNjIiIHk9IjMzOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBiIj7jganjga7ooYzjgajjgoIx44Oe44K55Lul5LiK6aOf44GE6YGV44GGIOKGkiDooajjga7jganjgZPjgavjgoLlrZjlnKjjgZfjgarjgYQ8L3RleHQ+PHBhdGggZD0iTTE2My4wLDExMiBMMTYzLjAsMjU2IiBjbGFzcz0ic2EgZG90IiBtYXJrZXItZW5kPSJ1cmwoI2FhKSIvPjxwYXRoIGQ9Ik0yMjkuMCwxNTIgTDIyOS4wLDI1NiIgY2xhc3M9InNhIGRvdCIgbWFya2VyLWVuZD0idXJsKCNhYSkiLz48cGF0aCBkPSJNMjk1LjAsMTkyIEwyOTUuMCwyNTYiIGNsYXNzPSJzYSBkb3QiIG1hcmtlci1lbmQ9InVybCgjYWEpIi8+PHBhdGggZD0iTTM2MS4wLDIzMiBMMzYxLjAsMjU2IiBjbGFzcz0ic2EgZG90IiBtYXJrZXItZW5kPSJ1cmwoI2FhKSIvPjwvc3ZnPgo="></div>
+      <p class="caption">対角線をすべて反転させたものが trouble の振る舞い。どの行とも1マス以上食い違う。</p>
+      <p class="sub center">1.1 で見たコラッツの手順が、なぜ90年も未解決なのかが、これで少し見える。<br>停止するかどうかを機械的に判定する一般的な方法が、そもそも存在しない。</p>
+      </div>
+        <div class="pageno">19</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">1.3　計算の限界</div>
+        <h2>決定不能な問題は、他にもある</h2>
+      </header><div class="body"><p class="lead">ライスの定理：プログラムの入出力の振る舞いに関する自明でない性質は、すべて決定不能である。だからコンパイラの警告は見逃すし、テストはバグの不在を証明できない。</p>
+      <div class="cards" style="--per:3"><div class="card">
+      <div class="card-h">近似する</div>
+      <div class="card-b">「危ないかもしれない」を過剰に報告する（静的解析の偽陽性）</div>
+    </div><div class="card">
+      <div class="card-h">対象を狭める</div>
+      <div class="card-b">決定可能な範囲に制限する（型システム、正規表現）</div>
+    </div><div class="card">
+      <div class="card-h">人間を入れる</div>
+      <div class="card-b">判断を人に委ねる</div>
+    </div></div>
+      <p class="note">技術が未熟だからではなく、原理的にそうである。現場ではこの限界を、こう迂回する。</p></div>
+        <div class="pageno">20</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">第1回</div>
+        <h2>演習</h2>
+      </header><div class="body"><ul class="ex">
+      <li><span class="ex-n">1-1</span><span class="ex-t">互除法を a=252, b=105 で実行し、各ステップの (a, b, r) を書け。</span></li>
+      <li><span class="ex-n">1-2</span><span class="ex-t">テープ上の文字列に含まれる 1 の個数が偶数なら Y、奇数なら N を書いて停止するチューリングマシンの遷移規則表を作れ。（ヒント：状態は2つで足りる）</span></li>
+      <li><span class="ex-n">1-3</span><span class="ex-t">次の主張は正しいか。理由とともに答えよ。「量子コンピュータが実用化されれば、停止問題も解けるようになる。」</span></li>
+      <li><span class="ex-n">1-4</span><span class="ex-t">普段使っているソフトウェアで「決定不能性を回避するために安全側に倒している」と思われる挙動を1つ挙げ、なぜそう考えるか説明せよ。</span></li></ul></div>
+        <div class="pageno">21</div>
+      </section>
+<section class="slide dark ">
+      <div class="sum-wrap">
+        <h1 class="sum-t">まとめ</h1>
+        <ul class="sum">
+      <li><span class="s-h">アルゴリズム</span><span class="s-b">有限性・明確性・実行可能性を満たす手順。「終わること」を確かめるのは、しばしば難しい</span></li>
+      <li><span class="s-h">チューリングマシン</span><span class="s-b">紙と鉛筆の計算を極限まで単純化した機械。部品はテープ・ヘッド・有限個の状態しかない</span></li>
+      <li><span class="s-h">万能チューリングマシン</span><span class="s-b">他の機械の規則表をデータとして受け取り実行する。プログラム内蔵方式の原型</span></li>
+      <li><span class="s-h">チャーチ＝チューリングのテーゼ</span><span class="s-b">計算モデルを変えても、計算できる範囲は広がらない</span></li>
+      <li><span class="s-h">停止問題</span><span class="s-b">計算できない。プログラムの振る舞いに関する自明でない性質は、すべて計算できない</span></li></ul>
+        <p class="next"><b>次回</b>　計算できるとして、それは現実的な時間で終わるのか。そもそも情報を計算機で扱うには、どう表現すればよいのか。</p>
+      </div></section>
+</div>
+<div id="hud"><span id="cur">1</span> / <span id="total">22</span></div>
+<div id="help" hidden>
+  <h3>操作</h3>
+  <table>
+    <tr><td>→ ↓ Space PageDown</td><td>次へ</td></tr>
+    <tr><td>← ↑ PageUp</td><td>前へ</td></tr>
+    <tr><td>Home / End</td><td>最初 / 最後</td></tr>
+    <tr><td>数字 + Enter</td><td>その番号へ</td></tr>
+    <tr><td>O</td><td>一覧表示</td></tr>
+    <tr><td>F</td><td>全画面</td></tr>
+    <tr><td>C</td><td>組版チェック（溢れの検出）</td></tr>
+    <tr><td>P</td><td>印刷（PDF 保存）</td></tr>
+    <tr><td>?</td><td>この画面</td></tr>
+  </table>
+  <p>印刷は1枚1ページで出る。PDF にすれば pptx を配るのと同じことができる。</p>
+</div>
+<script>
+
+(function(){
+  var deck=document.getElementById('deck');
+  var slides=[].slice.call(deck.querySelectorAll('.slide'));
+  var cur=0, buf='';
+  var hud=document.getElementById('cur'), help=document.getElementById('help');
+
+  // 板を画面に合わせて拡大縮小する
+  function fit(){
+    var s=Math.min(innerWidth/1280, innerHeight/720);
+    document.documentElement.style.setProperty('--s', s);
+    var ow=(310)/1280;
+    slides.forEach(function(el){ el.style.setProperty('--os', ow); });
+    if(document.body.classList.contains('overview')) layoutOverview();
+  }
+  function layoutOverview(){
+    // 一覧では実寸の板を縮めて置くので、親に実際の見かけの大きさを持たせる
+    var cell=deck.clientWidth/Math.max(1,Math.floor(deck.clientWidth/330));
+    var s=(cell-8)/1280;
+    slides.forEach(function(el){
+      el.style.setProperty('--os', s);
+      el.style.marginBottom=(720*s-720)+'px';
+      el.style.marginRight=(1280*s-1280)+'px';
+    });
+  }
+  function show(i){
+    cur=Math.max(0,Math.min(slides.length-1,i));
+    slides.forEach(function(el,j){ el.classList.toggle('on', j===cur); });
+    hud.textContent=cur+1;
+    if(location.hash!=='#'+(cur+1)) history.replaceState(null,'','#'+(cur+1));
+  }
+  function overview(on){
+    document.body.classList.toggle('overview', on);
+    if(on){ slides.forEach(function(el){ el.classList.add('on'); }); layoutOverview();
+            slides[cur].scrollIntoView({block:'center'}); }
+    else { slides.forEach(function(el){ el.style.margin=''; }); fit(); show(cur); }
+  }
+
+  // 組版チェック。実際に描いた結果を測るので、見積もりではなく事実が分かる。
+  // pptx では PowerPoint に描かせるまで分からなかった部分である。
+  function check(){
+    var bad=[];
+    slides.forEach(function(el,i){
+      var was=el.classList.contains('on');
+      el.classList.add('on');
+      var over=false;
+      [].slice.call(el.querySelectorAll('*')).forEach(function(n){
+        var r=n.getBoundingClientRect(), e=el.getBoundingClientRect();
+        if(r.height&&(r.bottom>e.bottom+1||r.right>e.right+1)) over=true;
+      });
+      if(el.scrollHeight>el.clientHeight+1||el.scrollWidth>el.clientWidth+1) over=true;
+      el.classList.toggle('overflow', over);
+      if(over) bad.push(i+1);
+      if(!was) el.classList.remove('on');
+    });
+    document.body.classList.add('check');
+    slides[cur].classList.add('on');
+    console.log(bad.length? '組版あふれ: '+bad.length+'枚 → '+bad.join(', ') : '組版あふれなし');
+    return bad;
+  }
+
+  addEventListener('resize', fit);
+  addEventListener('hashchange', function(){
+    var n=parseInt(location.hash.slice(1),10); if(n) show(n-1);
+  });
+  addEventListener('keydown', function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;
+    var k=e.key;
+    if(k>='0'&&k<='9'){ buf+=k; return; }
+    if(k==='Enter'){ if(buf){ show(parseInt(buf,10)-1); buf=''; } return; }
+    buf='';
+    switch(k){
+      case 'ArrowRight': case 'ArrowDown': case ' ': case 'PageDown':
+        e.preventDefault(); show(cur+1); break;
+      case 'ArrowLeft': case 'ArrowUp': case 'PageUp':
+        e.preventDefault(); show(cur-1); break;
+      case 'Home': show(0); break;
+      case 'End': show(slides.length-1); break;
+      case 'o': case 'O': overview(!document.body.classList.contains('overview')); break;
+      case 'f': case 'F':
+        if(document.fullscreenElement) document.exitFullscreen();
+        else document.documentElement.requestFullscreen(); break;
+      case 'c': case 'C':
+        if(document.body.classList.contains('check')){
+          document.body.classList.remove('check');
+          slides.forEach(function(el){ el.classList.remove('overflow'); });
+        } else check();
+        break;
+      case 'p': case 'P': print(); break;
+      case '?': help.hidden=!help.hidden; break;
+      case 'Escape': help.hidden=true; if(document.body.classList.contains('overview')) overview(false); break;
+    }
+  });
+  deck.addEventListener('click', function(e){
+    var el=e.target.closest('.slide'); if(!el) return;
+    if(document.body.classList.contains('overview')){
+      show(slides.indexOf(el)); overview(false);
+    } else show(cur+1);
+  });
+
+  fit();
+  var n=parseInt(location.hash.slice(1),10);
+  show(n? n-1 : 0);
+  window.__check=check;
+})();
+</script>
+</body>
+</html>
