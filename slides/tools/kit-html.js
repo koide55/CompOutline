@@ -298,6 +298,8 @@ class Deck {
   build() {
     const sp = this.spec;
     this.titleSlide();
+    // preface は表紙の直後に差し込む（第1回のガイダンスで使う）
+    (sp.preface || []).forEach((sl) => this.render(sl));
     this.questionSlide();
     this.goalsSlide();
     sp.slides.forEach((sl) => this.render(sl));
