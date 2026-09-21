@@ -133,8 +133,15 @@ python3 assessment/tools/dryrun.py assessment/samples/lec01-mid.json
 
 ## 公開前チェック
 
-GitHub Public にする前に確認すること。
+GitHub Public にする前に確認すること。**2026-09-21 に実施し、公開した。**
 
-- [ ] 100MB を超えるファイルが履歴に入っていないこと（`git count-objects -vH`）
-- [ ] 図が第三者著作物になっていないこと
-- [ ] 個人情報・学内限定情報（試験問題、履修者情報など）が含まれていないこと
+- [x] 100MB を超えるファイルが履歴に入っていないこと（`git count-objects -vH`）
+      — 最大 1.3 MB
+- [x] 図が第三者著作物になっていないこと
+      — 全59点が `tools/build_figures.py` で再生成でき、埋め込みラスタ画像も無い
+- [x] 個人情報・学内限定情報（試験問題、履修者情報など）が含まれていないこと
+      — 個人用メールアドレスと転送先不明の短縮URLが旧スライドの控えに残っていたため、
+      `git filter-repo` で全履歴から置換した。経緯は [docs/findings.md](docs/findings.md) の 3-6
+
+**旧スライドの控え（`docs/legacy-slides-2024.json`）を触るときは注意すること。**
+663枚の全文が入っているので、個人情報が混じりやすい。
