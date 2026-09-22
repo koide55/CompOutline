@@ -49,7 +49,6 @@ module.exports = {
     },
     {
       kind: 'figure', kicker: '11.2　正規化', title: '正規化の前と後', fig: '11-01',
-      caption: '1つの事実は、1箇所にだけ書く。こうすれば変更する場所も1箇所になり、矛盾が生じない。',
     },
     {
       kind: 'cards', kicker: '11.2　正規化', title: '正規化しないと起きる3つの異常',
@@ -85,7 +84,6 @@ module.exports = {
     },
     {
       kind: 'figure', kicker: '11.3　SQL', title: '内部結合の仕組み', fig: '11-02',
-      caption: '一致する相手がない行は、結果に現れない。',
     },
     {
       kind: 'split', kicker: '11.3　SQL', title: '集計と、WHERE / HAVING の違い',
