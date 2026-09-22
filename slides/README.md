@@ -70,7 +70,7 @@ cd slides && npm install pptxgenjs                                # 最初の1�
 ```
 
 ```bash
-slides/tools/figs2png.sh              # 図59点を PNG に
+slides/tools/figs2png.sh              # 図60点を PNG に
 node slides/tools/build.js            # 全13回を組む（回番号を渡せばその回だけ）
 slides/tools/render.sh 第01回_計算とは何か.pptx   # 画像にして確認
 ```

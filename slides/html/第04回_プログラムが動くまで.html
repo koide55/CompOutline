@@ -248,7 +248,9 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <li><span class="num">4</span>
         <span class="g-h">仮想機械と JIT</span><span class="g-b">が何を解決しているか説明できる</span></li>
       <li><span class="num">5</span>
-        <span class="g-h">プログラミング言語</span><span class="g-b">を分類の軸で整理できる</span></li></ol></div>
+        <span class="g-h">プログラミング言語</span><span class="g-b">を分類の軸で整理できる</span></li>
+      <li><span class="num">6</span>
+        <span class="g-h">バージョン管理とテスト</span><span class="g-b">が何を解決し、何を保証しないかを説明できる</span></li></ol></div>
         <div class="pageno">3</div>
       </section>
 <section class="slide dark ">
@@ -435,6 +437,59 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       </div>
         <div class="pageno">19</div>
       </section>
+<section class="slide dark ">
+      <div class="sec-wrap">
+        <div class="sec-n">4.5</div>
+        <h1 class="sec-name">書いたあと、動くと確かめるまで</h1>
+        <p class="sec-tag">ここからは人間の側の仕組みである</p>
+      </div><div class="motif"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div></section>
+<section class="slide light">
+        <header>
+        <div class="kicker">4.5　バージョン管理</div>
+        <h2>バージョン管理が解決すること</h2>
+      </header><div class="body"><p class="lead">ソースコードは1回書いて終わりではない。直し、戻し、複数人で同時に触る。</p>
+      <div class="cards" style="--per:4"><div class="card">
+      <div class="card-h">履歴を残す</div>
+      <div class="card-b">「なぜこう書いたか」が後から追える</div>
+    </div><div class="card">
+      <div class="card-h">任意の時点に戻せる</div>
+      <div class="card-b">壊したときに引き返せる</div>
+    </div><div class="card">
+      <div class="card-h">変更を統合できる</div>
+      <div class="card-b">同じファイルを同時に触っても失われない</div>
+    </div><div class="card">
+      <div class="card-h">分岐して試せる</div>
+      <div class="card-b">本流を壊さずに実験できる</div>
+    </div></div>
+      <div class="callout dashed">
+        <div class="co-h">「いつ壊れたか」は二分探索で特定できる</div>
+        <div class="co-b">1か月前は動いていたが、いま動かない。その間にコミットが100個ある。真ん中で試し、動けば後半、動かなければ前半に絞る —— 7回で1個になる（第2回の二分探索。git bisect が自動化する）。</div>
+      </div><p class="note">コミットは「中途半端な状態を記録しない」単位である。第11回のトランザクションと同じ考え方。</p></div>
+        <div class="pageno">21</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">4.5　テスト</div>
+        <h2>テストは、バグが無いことを証明しない</h2>
+      </header><div class="body"><p class="lead">単体・結合・回帰の3種類がある。自動化がいちばん効くのは回帰テストである —— 人間は一度直した箇所を二度と確かめないが、機械は毎回確かめる。</p>
+      <div class="callout solid big">テストはバグの存在を示せるが、不在は示せない</div>
+      <ul class="map">
+      <li><span class="m-a">テストが通った</span><span class="m-arrow"></span>
+        <span class="m-b">バグが見つからなかった</span></li>
+      <li><span class="m-a">バグが無い</span><span class="m-arrow"></span>
+        <span class="m-b">別の主張</span></li></ul>
+      <p class="sub">第1回のライスの定理 —— プログラムの振る舞いに関する自明でない性質は、すべて決定不能である。<br>テストは有限個の入力で試すだけなので、試していない入力については何も言えない。</p><p class="note">型検査とテストは競合しない。型は全入力について「ある種の誤りが無いこと」を保証し、テストは「ある入力で正しく動くこと」を示す。</p></div>
+        <div class="pageno">22</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">4.5　テスト</div>
+        <h2>第1回の3つの迂回策が、そのまま道具になる</h2>
+      </header><div class="body"><p class="lead">決定不能性は技術の未熟さではない。だから「迂回する」ことが開発の道具立てそのものになる。</p>
+      <table class="tbl  "><colgroup><col style="width:24.58%"><col style="width:27.97%"><col style="width:47.46%"></colgroup><thead><tr><th>第1回の迂回策</th><th>対応する道具</th><th>何をしているか</th></tr></thead><tbody><tr><td>近似する</td><td>テスト、静的解析</td><td>有限個の入力で試す。危ない箇所を過剰に報告する</td></tr><tr><td>対象を狭める</td><td>型システム（4.4）</td><td>決定可能な性質だけを、機械が全入力について保証する</td></tr><tr><td>人間を入れる</td><td>コードレビュー</td><td>機械に判定できないことを人が見る</td></tr></tbody></table>
+      <div class="callout solid">継続的インテグレーション（CI）—— コミットごとに自動でビルドしてテストを走らせる</div><p class="sub">狙いは1つ。壊れたことを早く知る。壊れてから気づくまでが長いほど原因の候補が増える。<br>コミットごとに確かめれば候補は常に1個なので、二分探索する必要すらなくなる。</p></div>
+        <div class="pageno">23</div>
+      </section>
 <section class="slide light">
         <header>
         <div class="kicker">第4回</div>
@@ -443,8 +498,10 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <li><span class="ex-n">4-1</span><span class="ex-t">高級言語で書いたプログラムが、そのままでは CPU で実行できないのはなぜか。第3回の内容に触れて説明せよ。</span></li>
       <li><span class="ex-n">4-2</span><span class="ex-t">JIT コンパイルが事前コンパイルより有利になりうる理由を1つ挙げよ。「実行時にしか分からない情報」の具体例を含めること。</span></li>
       <li><span class="ex-n">4-3</span><span class="ex-t">静的リンクと動的リンクについて、それぞれが有利になる状況を1つずつ挙げよ。</span></li>
-      <li><span class="ex-n">4-4</span><span class="ex-t">次の C 関数の誤りを、メモリ配置を参照して説明せよ。char *f(void) { char buf[64]; sprintf(buf, &quot;hello&quot;); return buf; }</span></li></ul></div>
-        <div class="pageno">20</div>
+      <li><span class="ex-n">4-4</span><span class="ex-t">次の C 関数の誤りを、メモリ配置を参照して説明せよ。char *f(void) { char buf[64]; sprintf(buf, &quot;hello&quot;); return buf; }</span></li>
+      <li><span class="ex-n">4-5</span><span class="ex-t">「テストが全部通ったので、このプログラムにバグは無い」という主張に反論せよ。第1回の内容に触れること。</span></li>
+      <li><span class="ex-n">4-6</span><span class="ex-t">1か月前は動いていたが、いま動かない。その間にコミットが100個ある。原因のコミットを特定するのに最小で何回試せばよいか。方法も述べよ。</span></li></ul></div>
+        <div class="pageno">24</div>
       </section>
 <section class="slide dark ">
       <div class="sum-wrap">
@@ -454,11 +511,12 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <li><span class="s-h">処理系</span><span class="s-b">コンパイラ・インタプリタ・仮想機械・JIT。現代の言語は複数を組み合わせている</span></li>
       <li><span class="s-h">ビルド</span><span class="s-b">前処理→コンパイル→アセンブル→リンク→ロード。リンクで未解決の番地が埋まる</span></li>
       <li><span class="s-h">メモリ配置</span><span class="s-b">テキスト・データ・ヒープ・スタック。この配置がバグの性質も攻撃の成立も決めている</span></li>
-      <li><span class="s-h">言語の選択</span><span class="s-b">生態系・性能要件・保守性で決まる。「良い言語」という問いは立たない</span></li></ul>
+      <li><span class="s-h">言語の選択</span><span class="s-b">生態系・性能要件・保守性で決まる。「良い言語」という問いは立たない</span></li>
+      <li><span class="s-h">バージョン管理とテスト</span><span class="s-b">テストはバグの不在を示せない。第1回の迂回策3つが、テスト・型・レビューに対応する</span></li></ul>
         <p class="next"><b>次回</b>　プログラムは動くようになった。しかし遅い。なぜ遅いのか —— 答えは CPU ではなく、記憶装置にある。</p>
       </div></section>
 </div>
-<div id="hud"><span id="cur">1</span> / <span id="total">21</span></div>
+<div id="hud"><span id="cur">1</span> / <span id="total">25</span></div>
 <div id="help" hidden>
   <h3>操作</h3>
   <table>

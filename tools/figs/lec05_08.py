@@ -193,6 +193,52 @@ def f0505():
 
 
 def f0506():
+    """投機実行のサイドチャネル：時間差が秘密を漏らす"""
+    # 塗りは svgkit の .s（fill:none）に負けるので、線の色で区別する
+    f = Fig(700, 450)
+
+    # ① キャッシュに当たるか外れるかで、アクセス時間が桁で違う
+    f.text(24, 24, '① キャッシュに当たるか外れるかで、アクセス時間が桁で違う',
+           cls='t-s b', anchor='start')
+    bx, sc = 196, 356 / 80.0
+    for lbl, ns, cls, y in [('当たる（ヒット）', 1, 'sa', 44),
+                            ('外れる（ミス）', 80, 's', 74)]:
+        f.text(bx - 10, y + 10, lbl, cls='t-s', anchor='end')
+        w = max(6, ns * sc)
+        f.rect(bx, y, w, 20, cls=cls)
+        f.text(bx + w + 8, y + 10, f'約 {ns} ns', cls='t-xs b', anchor='start')
+    f.text(bx, 124, 'この差は測れる。だから「キャッシュにあったか」が分かる',
+           cls='t-s b acc', anchor='start')
+
+    # ② 投機実行のあと array2 を順に読んで時間を測る
+    f.text(24, 162, '② 投機実行のあと、array2 を順に読んで時間を測る',
+           cls='t-s b', anchor='start')
+    L, T, B, n, secret = 96, 224, 352, 16, 6
+    cw = 552.0 / n
+    f.line(L, T - 8, L, B, cls='s')
+    f.line(L, B, L + 552 + 8, B, cls='s')
+    f.text(L - 8, T - 4, 'アクセス時間', cls='t-xs lbl', anchor='end')
+    for k in range(n):
+        x = L + k * cw + 4
+        hit = (k == secret)
+        f.rect(x, B - (18 if hit else 108), cw - 8, 18 if hit else 108,
+               cls='sa' if hit else 's')
+        f.text(x + (cw - 8) / 2, B + 15, str(k), cls='t-xs lbl')
+    f.text(L + 276, B + 34, 'array2 の添字', cls='t-xs lbl')
+
+    # 短い1本を指す
+    sx = L + secret * cw + 4 + (cw - 8) / 2
+    f.line(sx, T + 2, sx, B - 26, cls='sa dash', arrow='a')
+    f.text(sx + 10, T - 6, '1つだけ速い ＝ この添字が秘密の値',
+           cls='t-s b acc', anchor='start')
+
+    f.text(350, 412, '取り消された実行でも、キャッシュに載せた痕跡は残る', cls='t-s b')
+    f.text(350, 434, '計算の結果ではなく、副作用から情報を取る —— サイドチャネル攻撃',
+           cls='t-xs lbl')
+    return f
+
+
+def f0507():
     """アムダールの法則"""
     f = Fig(680, 400)
     L, R, T, B = 90, 590, 40, 320
@@ -674,7 +720,7 @@ def f0805():
 
 FIGURES = {
     '05-01': f0501, '05-02': f0502, '05-03': f0503, '05-04': f0504,
-    '05-05': f0505, '05-06': f0506,
+    '05-05': f0505, '05-06': f0506, '05-07': f0507,
     '06-01': f0601, '06-02': f0602, '06-03': f0603,
     '07-01': f0701, '07-02': f0702, '07-03': f0703, '07-04': f0704, '07-05': f0705,
     '08-01': f0801, '08-02': f0802, '08-03': f0803, '08-04': f0804, '08-05': f0805,

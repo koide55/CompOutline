@@ -110,6 +110,10 @@ module.exports = {
       noteY: 6.5,
     },
     {
+      kind: 'figure', kicker: '5.4　投機実行', title: '時間差が、秘密を漏らす', fig: '05-06',
+      caption: '「1つだけ速い」が読めれば値が1つ漏れる。繰り返せば1バイトずつ吸い出せる。',
+    },
+    {
       kind: 'table', kicker: '5.4　投機実行', title: 'なぜ直しにくいのか',
       lead: 'これは実装のバグではない。投機実行は性能のための設計そのもので、止めれば大きく遅くなる。',
       rows: [['対策', '代償'],
@@ -132,7 +136,7 @@ module.exports = {
       noteY: 5.5,
     },
     {
-      kind: 'figure', kicker: '5.4　並列性', title: 'アムダールの法則', fig: '05-06',
+      kind: 'figure', kicker: '5.4　並列性', title: 'アムダールの法則', fig: '05-07',
       lead: '並列化できる割合を p、コア数を n とすると、高速化率は S = 1 / ((1 − p) + p/n)。',
       caption: 'n を無限に大きくしても、S は 1/(1−p) を超えない。',
     },
