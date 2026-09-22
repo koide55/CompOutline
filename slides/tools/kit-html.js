@@ -241,7 +241,7 @@ class Deck {
     const callout = sl.callout
       ? `<div class="callout solid">${br(sl.callout)}</div>` : '';
     this.content(sl.title, k, `${lead(sl)}
-      ${table(sl.rows, { colW: sl.colW, mono: sl.mono })}
+      ${table(sl.rows, { colW: sl.colW, mono: sl.mono, align: sl.align })}
       ${callout}${sub(sl.sub)}${note(sl.note)}`);
   }
 

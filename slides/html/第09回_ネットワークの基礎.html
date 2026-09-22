@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第9回 ネットワークの基礎｜コンピュータシステム通論</title>
+<style>
+
+:root{
+  --ink:#16191D; --paper:#FFFFFF; --tint:#EEF1F5; --tint2:#DDE4EC;
+  --acc:#0B5CAD; --accT:#D9E6F4; --mut:#5F6672; --dim:#9AA3B0;
+  --lightInk:#E8EBEF; --accLight:#6AB0F3; --code:#F5F7FA; --ghost:#2E3A4A;
+  --ja:"Yu Gothic Medium", "Yu Gothic", YuGothic, "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif; --mono:"SFMono-Regular", Menlo, Consolas, "Courier New", monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0b0d10;font-family:var(--ja);
+  -webkit-font-smoothing:antialiased;overflow:hidden}
+
+/* 1280x720 の板を作り、画面の大きさに合わせて拡大縮小する。
+   どの画面でも同じ見た目になる —— スライドである以上これが要る。 */
+#deck{position:absolute;inset:0}
+.slide{
+  position:absolute;top:50%;left:50%;
+  width:1280px;height:720px;
+  transform:translate(-50%,-50%) scale(var(--s,1));
+  transform-origin:center center;
+  overflow:hidden;display:none;
+}
+.slide.on{display:block}
+.slide.light{background:var(--paper);color:var(--ink)}
+.slide.dark{background:var(--ink);color:var(--paper)}
+
+/* --- 明色スライドの骨格 --- */
+.slide.light header{position:absolute;top:33px;left:60px;right:60px}
+.kicker{font-size:16px;font-weight:700;color:var(--acc);letter-spacing:.02em}
+.slide.light h2{font-size:40px;font-weight:700;line-height:1.25;margin-top:6px}
+/* 内容の塊ごと、見出しと下端のあいだで縦に中央へ寄せる。
+   pptx では noteY を1枚ずつ手で詰めて注記を内容の直下に置いていた。
+   CSS は高さを知っているので、その手当てが要らない。 */
+.slide.light .body{position:absolute;top:130px;left:72px;right:72px;bottom:56px;
+  display:flex;flex-direction:column;gap:14px;justify-content:center}
+.pageno{position:absolute;right:60px;bottom:22px;font-size:13px;color:var(--mut)}
+
+.lead{font-size:20px;line-height:1.55;color:var(--ink)}
+.sub{font-size:17px;line-height:1.6;color:var(--mut)}
+.sub.center,.caption{text-align:center}
+.caption{font-size:20px;line-height:1.5;color:var(--ink)}
+.note{font-size:17px;line-height:1.5;font-weight:700;color:var(--acc);margin-top:8px}
+
+/* --- 意匠：マス目 --- */
+.motif{position:absolute;left:58px;bottom:56px;display:flex;gap:4px}
+.motif i{width:28px;height:19px;border:1px solid rgba(106,176,243,.45);border-radius:2px}
+.motif i.on{background:var(--accLight);border-color:var(--accLight)}
+.slide.title .motif{bottom:128px}
+
+/* --- 表紙 --- */
+.title-wrap{position:absolute;left:86px;top:188px;right:86px}
+.course{font-size:23px;color:var(--dim);letter-spacing:.12em}
+.slide.title h1{font-weight:700;line-height:1.2;margin-top:24px;color:var(--paper)}
+.tq{font-size:24px;line-height:1.5;color:var(--accLight);margin-top:28px}
+.affil{position:absolute;left:86px;bottom:22px;font-size:16px;color:var(--dim)}
+
+/* --- 今回の問い --- */
+.q-wrap{position:absolute;left:86px;right:86px;top:144px}
+.q-label{font-size:19px;font-weight:700;color:var(--accLight)}
+.q-big{font-size:48px;font-weight:700;line-height:1.35;margin-top:22px;color:var(--paper)}
+.q-sub{font-size:27px;color:var(--lightInk);margin-top:22px}
+.q-foot{font-size:19px;color:var(--dim);margin-top:40px}
+
+/* --- 節の区切り --- */
+.sec-wrap{position:absolute;left:86px;right:86px;top:230px}
+.sec-n{font-size:75px;font-weight:700;color:var(--ghost);line-height:1}
+.sec-name{font-size:51px;font-weight:700;color:var(--paper);margin-top:10px;line-height:1.2}
+.sec-tag{font-size:23px;color:var(--dim);margin-top:18px}
+
+/* --- 到達目標 --- */
+.goals{list-style:none;display:flex;flex-direction:column;gap:18px;margin-top:8px}
+.goals li{display:flex;align-items:center;gap:18px}
+.goals .num{flex:none;width:48px;height:48px;border-radius:50%;
+  background:var(--accT);border:1.5px solid var(--acc);color:var(--acc);
+  font-size:19px;font-weight:700;display:grid;place-items:center}
+.g-h{font-size:21px;font-weight:700;color:var(--ink)}
+.g-b{font-size:19px;color:var(--mut);margin-left:12px}
+
+/* --- カード --- */
+.cards{display:grid;grid-template-columns:repeat(var(--per),1fr);gap:16px;align-content:start}
+.card{background:var(--tint);border:1px solid var(--tint2);border-radius:8px;padding:16px 18px}
+.card.acc{background:var(--accT);border-color:var(--acc)}
+.card-h{font-size:19px;font-weight:700;color:var(--ink)}
+.card.acc .card-h{color:var(--acc)}
+.card-b{font-size:16px;line-height:1.55;color:var(--mut);margin-top:8px}
+
+/* --- 囲み --- */
+.callout{border-radius:8px;padding:14px 20px}
+.callout.dashed{border:1.5px dashed var(--acc);background:var(--paper)}
+.callout.solid{border:1.5px solid var(--acc);background:var(--accT);
+  font-size:20px;font-weight:700;color:var(--acc);line-height:1.45}
+.callout.big{font-size:23px}
+.co-h{font-size:20px;font-weight:700;color:var(--acc)}
+.co-b{font-size:16px;line-height:1.5;color:var(--mut);margin-top:6px}
+
+/* --- 箇条書き --- */
+.bullets{list-style:none;display:flex;flex-direction:column;gap:10px}
+.bullets li{position:relative;padding-left:22px;font-size:21px;line-height:1.5;color:var(--ink)}
+.bullets li::before{content:"";position:absolute;left:4px;top:.62em;
+  width:7px;height:7px;border-radius:50%;background:var(--acc)}
+.bullets li.lv1{font-size:18px;color:var(--mut);padding-left:44px}
+.bullets li.lv1::before{left:26px;width:5px;height:5px;background:var(--mut)}
+.bullets.tight li{font-size:18px;gap:6px}
+
+/* --- コード --- */
+.code{background:var(--code);border:1px solid var(--tint2);border-radius:6px;
+  padding:16px 20px;font-family:var(--mono);font-size:17px;line-height:1.7;
+  color:var(--ink);white-space:pre;overflow:hidden}
+.code.small{font-size:15.5px}
+.code-split{display:grid;grid-template-columns:1fr .92fr;gap:22px;align-items:start}
+.side-h{font-size:19px;font-weight:700;color:var(--ink)}
+.side-b{font-size:17px;line-height:1.6;color:var(--mut);margin-top:8px}
+
+/* --- 表 --- */
+.tbl{width:100%;border-collapse:collapse;table-layout:fixed}
+.tbl th,.tbl td{border:1px solid var(--tint2);padding:7px 11px;font-size:17px;
+  line-height:1.4;text-align:left;vertical-align:middle;word-break:break-word}
+.tbl th{background:var(--tint);font-weight:700}
+.tbl.mono{font-family:var(--mono);font-size:16px}
+.tbl.mono th{font-family:var(--ja)}
+.tbl.center th,.tbl.center td{text-align:center}
+
+/* --- 左右2段 --- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+.col{display:flex;flex-direction:column;gap:11px}
+.col-h{font-size:20px;font-weight:700;color:var(--ink)}
+.col-b{font-size:17px;line-height:1.65;color:var(--mut)}
+.col-n{font-size:17px;font-weight:700;color:var(--acc)}
+
+/* --- 主張と対応 --- */
+.map{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:6px}
+.map li{display:grid;grid-template-columns:1fr 60px 1fr;align-items:center;gap:8px}
+.m-a{font-size:20px;color:var(--ink);text-align:right}
+.m-arrow{height:3px;background:var(--acc);position:relative;border-radius:2px}
+.m-arrow::after{content:"";position:absolute;right:-1px;top:-5px;
+  border:7px solid transparent;border-left-color:var(--acc);border-right:0}
+.m-b{font-size:21px;font-weight:700;color:var(--acc)}
+
+/* --- 手順 --- */
+.steps{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:10px;align-items:stretch}
+.step{background:var(--tint);border:1px solid var(--tint2);border-radius:8px;padding:12px 12px 14px}
+.step.first{background:var(--accT);border-color:var(--acc)}
+.st-n{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--acc)}
+.st-h{font-size:17px;font-weight:700;color:var(--ink);margin-top:6px;line-height:1.3}
+.st-b{font-size:15px;color:var(--mut);margin-top:6px;line-height:1.45}
+
+/* --- 図 --- */
+/* 図は枠いっぱいまで伸ばす。SVG なので拡大しても粗くならない。
+   pptx 版も箱に合わせて拡大していたので、そこは同じ振る舞いにしてある。 */
+.figwrap{flex:1;min-height:0;display:flex}
+.fig{width:100%;height:100%;object-fit:contain}
+.fig-missing{color:#b00;font-size:20px;text-align:center;padding:40px}
+
+/* --- 演習 --- */
+.ex{list-style:none;display:flex;flex-direction:column;gap:16px}
+.ex li{display:flex;gap:18px;align-items:flex-start}
+.ex-n{flex:none;width:74px;padding:5px 0;text-align:center;border-radius:7px;
+  background:var(--accT);border:1px solid var(--acc);color:var(--acc);
+  font-family:var(--mono);font-size:17px;font-weight:700}
+.ex-t{font-size:19px;line-height:1.55;color:var(--ink);padding-top:3px}
+
+/* --- まとめ --- */
+.sum-wrap{position:absolute;left:86px;right:86px;top:74px;bottom:74px;
+  display:flex;flex-direction:column}
+.sum-t{font-size:40px;font-weight:700;color:var(--paper)}
+.sum{list-style:none;display:flex;flex-direction:column;gap:16px;margin-top:26px}
+.sum li{display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:baseline}
+.s-h{font-size:20px;font-weight:700;color:var(--accLight)}
+.s-b{font-size:18px;line-height:1.5;color:var(--lightInk)}
+.next{font-size:17px;color:var(--dim);margin-top:auto;line-height:1.5}
+.next b{color:var(--accLight)}
+
+/* --- 画面まわり --- */
+#hud{position:fixed;left:16px;bottom:12px;font-size:13px;color:#7c8694;
+  font-family:var(--mono);z-index:20;user-select:none}
+#help{position:fixed;inset:50% auto auto 50%;transform:translate(-50%,-50%);
+  background:#fff;color:var(--ink);border-radius:12px;padding:26px 30px;z-index:30;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);font-size:15px;max-width:520px}
+#help h3{font-size:19px;margin-bottom:14px}
+#help table{border-collapse:collapse;width:100%}
+#help td{padding:5px 10px 5px 0;vertical-align:top}
+#help td:first-child{font-family:var(--mono);color:var(--acc);white-space:nowrap}
+#help p{margin-top:14px;color:var(--mut);font-size:13.5px;line-height:1.6}
+
+/* --- 一覧表示 --- */
+body.overview{overflow:auto}
+body.overview #deck{position:static;display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px;padding:22px}
+body.overview .slide{position:relative;top:auto;left:auto;display:block;
+  transform:scale(var(--os));transform-origin:top left;
+  width:1280px;height:720px;cursor:pointer;
+  outline:2px solid #2a3340;border-radius:2px}
+body.overview .slide.on{outline:3px solid var(--accLight)}
+body.overview .sl-wrap{overflow:hidden}
+
+/* --- 組版チェック：実際に溢れた箇所だけを赤で示す --- */
+body.check .slide.overflow{outline:4px solid #e0453a;outline-offset:-4px}
+body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
+  right:0;top:0;background:#e0453a;color:#fff;font-size:13px;padding:3px 9px;
+  font-weight:700;z-index:9}
+
+/* --- 印刷：1枚1ページ。PDF にすれば配布できる --- */
+@page{size:1280px 720px;margin:0}
+@media print{
+  html,body{overflow:visible;background:#fff;height:auto}
+  #hud,#help{display:none!important}
+  #deck{position:static}
+  .slide{position:relative!important;display:block!important;top:auto;left:auto;
+    transform:none!important;page-break-after:always;break-after:page;
+    width:1280px;height:720px}
+  .slide:last-child{page-break-after:auto;break-after:auto}
+}
+</style>
+</head>
+<body>
+<div id="deck">
+<section class="slide dark title">
+      <div class="title-wrap">
+        <div class="course">コンピュータシステム通論</div>
+        <h1 style="font-size:51px">第9回　ネットワークの基礎</h1>
+        <p class="tq">世界中の計算機が、なぜ1つの網としてつながるのか。</p>
+      </div>
+      <div class="affil">九州大学</div><div class="motif"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div></section>
+<section class="slide dark ">
+      <div class="q-wrap">
+        <div class="q-label">今回の問い</div>
+        <p class="q-big">世界中の計算機が、なぜ<br>1つの網としてつながるのか。</p>
+        
+        <p class="q-foot">この90分で、この問いに答えを出す。</p>
+      </div><div class="motif"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div></section>
+<section class="slide light">
+        <header>
+        <div class="kicker">第9回</div>
+        <h2>到達目標</h2>
+      </header><div class="body"><ol class="goals">
+      <li><span class="num">1</span>
+        <span class="g-h">回線交換とパケット交換</span><span class="g-b">の違いと、それぞれの利点を説明できる</span></li>
+      <li><span class="num">2</span>
+        <span class="g-h">階層モデル</span><span class="g-b">の意義と、カプセル化の仕組みを説明できる</span></li>
+      <li><span class="num">3</span>
+        <span class="g-h">インターネットの構造</span><span class="g-b">を、AS と IX の観点から説明できる</span></li>
+      <li><span class="num">4</span>
+        <span class="g-h">Ethernet とスイッチ</span><span class="g-b">の転送と学習の動作を説明できる</span></li>
+      <li><span class="num">5</span>
+        <span class="g-h">MAC アドレスと IP アドレス</span><span class="g-b">の役割の違いを説明できる</span></li></ol></div>
+        <div class="pageno">3</div>
+      </section>
+<section class="slide dark ">
+      <div class="sec-wrap">
+        <div class="sec-n">9.1</div>
+        <h1 class="sec-name">データの届け方</h1>
+        <p class="sec-tag">回線を占有するか、小分けにして混ぜるか</p>
+      </div><div class="motif"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div></section>
+<section class="slide light">
+        <header>
+        <div class="kicker">9.1　パケット交換</div>
+        <h2>回線交換とパケット交換</h2>
+      </header><div class="body">
+      <div class="figwrap"><img class="fig" alt="図 09-01" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MDAgNDQwIiB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQ0MCIgcm9sZT0iaW1nIj48c3R5bGU+CnN2ZyB7IGZvbnQtZmFtaWx5OiAiSGVsdmV0aWNhIE5ldWUiLCBBcmlhbCwgIkhpcmFnaW5vIFNhbnMiLCAiWXUgR290aGljIiwgIk5vdG8gU2FucyBKUCIsIHNhbnMtc2VyaWY7IH0KLmJnICAgeyBmaWxsOiAjZmZmZmZmOyB9Ci5pbmsgIHsgZmlsbDogIzE2MTkxZDsgfQoubXV0ICB7IGZpbGw6ICM1ZjY2NzI7IH0KLnRpbnQgeyBmaWxsOiAjZWVmMWY1OyB9Ci50aW50MnsgZmlsbDogI2RkZTRlYzsgfQouYWNjICB7IGZpbGw6ICMwYjVjYWQ7IH0KLmFjY1QgeyBmaWxsOiAjZDllNmY0OyB9Ci5ub25lIHsgZmlsbDogbm9uZTsgfQoucyAgICB7IHN0cm9rZTogIzE2MTkxZDsgc3Ryb2tlLXdpZHRoOiAxLjY7IGZpbGw6IG5vbmU7IH0KLnMyICAgeyBzdHJva2U6ICMxNjE5MWQ7IHN0cm9rZS13aWR0aDogMi42OyBmaWxsOiBub25lOyB9Ci5zbSAgIHsgc3Ryb2tlOiAjNWY2NjcyOyBzdHJva2Utd2lkdGg6IDEuMjsgZmlsbDogbm9uZTsgfQouc2EgICB7IHN0cm9rZTogIzBiNWNhZDsgc3Ryb2tlLXdpZHRoOiAyLjI7IGZpbGw6IG5vbmU7IH0KLmRhc2ggeyBzdHJva2UtZGFzaGFycmF5OiA1IDQ7IH0KLmRvdCAgeyBzdHJva2UtZGFzaGFycmF5OiAxLjUgMzsgfQp0ZXh0ICB7IGZpbGw6ICMxNjE5MWQ7IGZvbnQtc2l6ZTogMTRweDsgfQoudC1zICB7IGZvbnQtc2l6ZTogMTJweDsgfQoudC14cyB7IGZvbnQtc2l6ZTogMTAuNXB4OyB9Ci50LWwgIHsgZm9udC1zaXplOiAxN3B4OyB9Ci50LXhsIHsgZm9udC1zaXplOiAyMXB4OyB9Ci5iICAgIHsgZm9udC13ZWlnaHQ6IDcwMDsgfQouaSAgICB7IGZvbnQtc3R5bGU6IGl0YWxpYzsgfQoubSAgICB7IGZvbnQtZmFtaWx5OiAiU0YgTW9ubyIsIE1lbmxvLCBDb25zb2xhcywgbW9ub3NwYWNlOyB9Ci5sYmwgIHsgZmlsbDogIzVmNjY3MjsgfQpAbWVkaWEgKHByZWZlcnMtY29sb3Itc2NoZW1lOiBkYXJrKSB7CiAgLmJnICAgeyBmaWxsOiAjMTQxNzFiOyB9CiAgLmluayAgeyBmaWxsOiAjZThlYmVmOyB9CiAgLm11dCAgeyBmaWxsOiAjOWFhM2IwOyB9CiAgLnRpbnQgeyBmaWxsOiAjMjMyODMwOyB9CiAgLnRpbnQyeyBmaWxsOiAjMmUzNDNkOyB9CiAgLmFjYyAgeyBmaWxsOiAjNmFiMGYzOyB9CiAgLmFjY1QgeyBmaWxsOiAjMWUyYzNjOyB9CiAgLnMsIC5zMiB7IHN0cm9rZTogI2U4ZWJlZjsgfQogIC5zbSAgIHsgc3Ryb2tlOiAjOWFhM2IwOyB9CiAgLnNhICAgeyBzdHJva2U6ICM2YWIwZjM7IH0KICB0ZXh0ICB7IGZpbGw6ICNlOGViZWY7IH0KICAubGJsICB7IGZpbGw6ICM5YWEzYjA7IH0KfQo8L3N0eWxlPgo8ZGVmcz4KIDxtYXJrZXIgaWQ9ImEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImluayIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYWEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImFjYyIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYW0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjYiIG1hcmtlckhlaWdodD0iNiIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9Im11dCIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0ibyIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI1IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNiIgbWFya2VySGVpZ2h0PSI2Ij4KICAgPGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjMuNSIgY2xhc3M9ImJnIHMiLz48L21hcmtlcj4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQ0MCIgY2xhc3M9ImJnIi8+PHRleHQgeD0iMjUwIiB5PSIzNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9ImIiPuWbnue3muS6pOaPmzwvdGV4dD48bGluZSB4MT0iODAiIHkxPSIxMjAiIHgyPSIyMDAiIHkyPSI4MCIgY2xhc3M9InNtIi8+PGxpbmUgeDE9IjgwIiB5MT0iMTIwIiB4Mj0iMjAwIiB5Mj0iMTcwIiBjbGFzcz0ic20iLz48bGluZSB4MT0iMjAwIiB5MT0iODAiIHgyPSIzMjAiIHkyPSIxMjAiIGNsYXNzPSJzbSIvPjxsaW5lIHgxPSIyMDAiIHkxPSIxNzAiIHgyPSIzMjAiIHkyPSIxMjAiIGNsYXNzPSJzbSIvPjxsaW5lIHgxPSIyMDAiIHkxPSIxNzAiIHgyPSIzMjAiIHkyPSIyMTAiIGNsYXNzPSJzbSIvPjxsaW5lIHgxPSIzMjAiIHkxPSIxMjAiIHgyPSI0NDAiIHkyPSIxNTAiIGNsYXNzPSJzbSIvPjxsaW5lIHgxPSIzMjAiIHkxPSIyMTAiIHgyPSI0NDAiIHkyPSIxNTAiIGNsYXNzPSJzbSIvPjxsaW5lIHgxPSIyMDAiIHkxPSI4MCIgeDI9IjIwMCIgeTI9IjE3MCIgY2xhc3M9InNtIi8+PHBhdGggZD0iTTgwLDEyMCBMMjAwLDgwIEwzMjAsMTIwIEw0NDAsMTUwIiBjbGFzcz0ic2EiIHN0cm9rZS13aWR0aD0iNyIvPjxjaXJjbGUgY3g9IjgwIiBjeT0iMTIwIiByPSIxMyIgY2xhc3M9InRpbnQgcyIvPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjgwIiByPSIxMyIgY2xhc3M9InRpbnQgcyIvPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjE3MCIgcj0iMTMiIGNsYXNzPSJ0aW50IHMiLz48Y2lyY2xlIGN4PSIzMjAiIGN5PSIxMjAiIHI9IjEzIiBjbGFzcz0idGludCBzIi8+PGNpcmNsZSBjeD0iMzIwIiBjeT0iMjEwIiByPSIxMyIgY2xhc3M9InRpbnQgcyIvPjxjaXJjbGUgY3g9IjQ0MCIgY3k9IjE1MCIgcj0iMTMiIGNsYXNzPSJ0aW50IHMiLz48dGV4dCB4PSI4MCIgeT0iOTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIGxibCI+6YCB5L+h5YWDPC90ZXh0Pjx0ZXh0IHg9IjQ0MCIgeT0iMTc4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyBsYmwiPuWum+WFiDwvdGV4dD48dGV4dCB4PSI1MDAiIHk9IjEwNiIgdGV4dC1hbmNob3I9InN0YXJ0IiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyBhY2MgYiI+57WM6Lev44KS56K65L+d44GX44Gm5Y2g5pyJ44GZ44KLPC90ZXh0Pjx0ZXh0IHg9IjUwMCIgeT0iMTI2IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIGxibCI+5LuW44Gu6YCa5L+h44Gv44GT44Gu57ea44KS5L2/44GI44Gq44GEPC90ZXh0Pjx0ZXh0IHg9IjUwMCIgeT0iMTQ2IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIGxibCI+6Kmx44GX44Gm44GE44Gq44GE6ZaT44KC56m644GR44KJ44KM44Gq44GEPC90ZXh0Pjx0ZXh0IHg9IjI1MCIgeT0iMjQ0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0iYiI+44OR44Kx44OD44OI5Lqk5o+bPC90ZXh0PjxsaW5lIHgxPSI4MCIgeTE9IjMzMCIgeDI9IjIwMCIgeTI9IjI5MCIgY2xhc3M9InNtIi8+PGxpbmUgeDE9IjgwIiB5MT0iMzMwIiB4Mj0iMjAwIiB5Mj0iMzgwIiBjbGFzcz0ic20iLz48bGluZSB4MT0iMjAwIiB5MT0iMjkwIiB4Mj0iMzIwIiB5Mj0iMzMwIiBjbGFzcz0ic20iLz48bGluZSB4MT0iMjAwIiB5MT0iMzgwIiB4Mj0iMzIwIiB5Mj0iMzMwIiBjbGFzcz0ic20iLz48bGluZSB4MT0iMjAwIiB5MT0iMzgwIiB4Mj0iMzIwIiB5Mj0iNDIwIiBjbGFzcz0ic20iLz48bGluZSB4MT0iMzIwIiB5MT0iMzMwIiB4Mj0iNDQwIiB5Mj0iMzYwIiBjbGFzcz0ic20iLz48bGluZSB4MT0iMzIwIiB5MT0iNDIwIiB4Mj0iNDQwIiB5Mj0iMzYwIiBjbGFzcz0ic20iLz48bGluZSB4MT0iMjAwIiB5MT0iMjkwIiB4Mj0iMjAwIiB5Mj0iMzgwIiBjbGFzcz0ic20iLz48cGF0aCBkPSJNODAsMzI0IEwyMDAsMjg0IEwzMjAsMzI0IEw0NDAsMzU0IiBjbGFzcz0ic2EiIG1hcmtlci1lbmQ9InVybCgjYWEpIi8+PHBhdGggZD0iTTgwLDMzMCBMMjAwLDM4MCBMMzIwLDMzMCBMNDQwLDM2MCIgY2xhc3M9InNhIGRhc2giIG1hcmtlci1lbmQ9InVybCgjYWEpIi8+PHBhdGggZD0iTTgwLDMzNiBMMjAwLDM4NiBMMzIwLDQyNiBMNDQwLDM2NiIgY2xhc3M9InNhIGRhc2giIG1hcmtlci1lbmQ9InVybCgjYWEpIi8+PHJlY3QgeD0iMTIwIiB5PSIyOTQiIHdpZHRoPSIyMCIgaGVpZ2h0PSIxNSIgY2xhc3M9ImFjY1Qgc2EiLz48dGV4dCB4PSIxMzAiIHk9IjMwMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPjE8L3RleHQ+PHJlY3QgeD0iMjMwIiB5PSIzODIiIHdpZHRoPSIyMCIgaGVpZ2h0PSIxNSIgY2xhc3M9ImFjY1Qgc2EiLz48dGV4dCB4PSIyNDAiIHk9IjM5MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPjI8L3RleHQ+PHJlY3QgeD0iMzUwIiB5PSIzMDAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIxNSIgY2xhc3M9ImFjY1Qgc2EiLz48dGV4dCB4PSIzNjAiIHk9IjMwOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPjM8L3RleHQ+PGNpcmNsZSBjeD0iODAiIGN5PSIzMzAiIHI9IjEzIiBjbGFzcz0idGludCBzIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjkwIiByPSIxMyIgY2xhc3M9InRpbnQgcyIvPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjM4MCIgcj0iMTMiIGNsYXNzPSJ0aW50IHMiLz48Y2lyY2xlIGN4PSIzMjAiIGN5PSIzMzAiIHI9IjEzIiBjbGFzcz0idGludCBzIi8+PGNpcmNsZSBjeD0iMzIwIiBjeT0iNDIwIiByPSIxMyIgY2xhc3M9InRpbnQgcyIvPjxjaXJjbGUgY3g9IjQ0MCIgY3k9IjM2MCIgcj0iMTMiIGNsYXNzPSJ0aW50IHMiLz48dGV4dCB4PSI4MCIgeT0iMzA0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyBsYmwiPumAgeS/oeWFgzwvdGV4dD48dGV4dCB4PSI0NDAiIHk9IjM4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgbGJsIj7lrpvlhYg8L3RleHQ+PHRleHQgeD0iNTAwIiB5PSIzMTYiIHRleHQtYW5jaG9yPSJzdGFydCIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgYWNjIGIiPuODkeOCseODg+ODiOOBjOWIpeOAheOBrue1jOi3r+OCkumAmuOCizwvdGV4dD48dGV4dCB4PSI1MDAiIHk9IjMzNiIgdGV4dC1hbmNob3I9InN0YXJ0IiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyBsYmwiPuWQjOOBmOe3muOCkuWkmuaVsOOBrumAmuS/oeOBp+WFseacieOBp+OBjeOCizwvdGV4dD48dGV4dCB4PSI1MDAiIHk9IjM1NiIgdGV4dC1hbmNob3I9InN0YXJ0IiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyBsYmwiPuWum+WFiOOBp+eVquWPt+mghuOBq+S4puOBueebtOOBmTwvdGV4dD48bGluZSB4MT0iNDAiIHkxPSIyNTAiIHgyPSI2NjAiIHkyPSIyNTAiIGNsYXNzPSJzbSBkb3QiLz48L3N2Zz4K"></div>
+      <p class="caption">計算機の通信はバースト的である。読んでいる間ずっと回線を占有するのは、極端に効率が悪い。</p>
+      <p class="sub center">パケット交換にはもう1つ、耐障害性という設計思想上の利点がある。<br>インターネットの原型 ARPANET（1969年）では「網の一部が失われても通信が続くこと」が設計目標の1つだった。</p>
+      </div>
+        <div class="pageno">5</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">9.1　パケット交換</div>
+        <h2>ベストエフォート</h2>
+      </header><div class="body"><p class="lead">パケット交換の帰結として、インターネットは「届けるために最善を尽くすが、保証はしない」サービスを提供する。</p>
+      <div class="cards" style="--per:4"><div class="card">
+      <div class="card-h">失われる</div>
+      <div class="card-b">混雑時、回線の障害でパケットが消える</div>
+    </div><div class="card">
+      <div class="card-h">順番が入れ替わる</div>
+      <div class="card-b">別々の経路を通るため</div>
+    </div><div class="card">
+      <div class="card-h">遅延が変動する</div>
+      <div class="card-b">経路上の混雑状況による</div>
+    </div><div class="card">
+      <div class="card-h">重複して届く</div>
+      <div class="card-b">同じデータが2度届くことがある</div>
+    </div></div>
+      <div class="callout dashed">
+        <div class="co-h">では、なぜファイル転送や決済ができるのか</div>
+        <div class="co-b">答えは階層である。下の層が保証しないことを、上の層（第10回の TCP）が補う。この分業が次節の主題である。</div>
+      </div></div>
+        <div class="pageno">6</div>
+      </section>
+<section class="slide dark ">
+      <div class="sec-wrap">
+        <div class="sec-n">9.2</div>
+        <h1 class="sec-name">階層モデル</h1>
+        <p class="sec-tag">問題を層に分け、各層を独立に改良する</p>
+      </div><div class="motif"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div></section>
+<section class="slide light">
+        <header>
+        <div class="kicker">9.2　階層モデル</div>
+        <h2>TCP/IP 階層モデル</h2>
+      </header><div class="body"><p class="lead">理論的には OSI 参照モデル（7層）が知られているが、実際のインターネットはこちらで動いている。</p>
+      <table class="tbl  "><colgroup><col style="width:25.42%"><col style="width:27.12%"><col style="width:28.81%"><col style="width:18.64%"></colgroup><thead><tr><th>層</th><th>役割</th><th>主なプロトコル</th><th>データの呼び名</th></tr></thead><tbody><tr><td>アプリケーション層</td><td>アプリ固有のやりとり</td><td>HTTP, DNS, SMTP, SSH</td><td>メッセージ</td></tr><tr><td>トランスポート層</td><td>端点間の通信の品質</td><td>TCP, UDP, QUIC</td><td>セグメント</td></tr><tr><td>インターネット層</td><td>網をまたぐ中継</td><td>IP, ICMP</td><td>パケット</td></tr><tr><td>データリンク層</td><td>隣の機器への配送</td><td>Ethernet, Wi-Fi</td><td>フレーム</td></tr><tr><td>物理層</td><td>ビットを信号に</td><td>各種ケーブル、電波</td><td>ビット</td></tr></tbody></table>
+      <p class="sub">利点は3つ。各層を独立に設計・改良できる／下の層が変わっても上は影響を受けない／上の層が増えても下は影響を受けない。<br>光ファイバに替えても Web ブラウザを書き直さなくてよい。</p><p class="note">第3回のゲート→CPU、第4回の機械語→高級言語、第8回のドライバと同じ構図である。</p></div>
+        <div class="pageno">8</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">9.2　階層モデル</div>
+        <h2>カプセル化</h2>
+      </header><div class="body"><p class="lead">上の層のデータは、下の層のデータの中身として運ばれる。各層は自分のヘッダを付け加える。</p>
+      <div class="figwrap"><img class="fig" alt="図 09-02" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MDAgMzQwIiB3aWR0aD0iNzAwIiBoZWlnaHQ9IjM0MCIgcm9sZT0iaW1nIj48c3R5bGU+CnN2ZyB7IGZvbnQtZmFtaWx5OiAiSGVsdmV0aWNhIE5ldWUiLCBBcmlhbCwgIkhpcmFnaW5vIFNhbnMiLCAiWXUgR290aGljIiwgIk5vdG8gU2FucyBKUCIsIHNhbnMtc2VyaWY7IH0KLmJnICAgeyBmaWxsOiAjZmZmZmZmOyB9Ci5pbmsgIHsgZmlsbDogIzE2MTkxZDsgfQoubXV0ICB7IGZpbGw6ICM1ZjY2NzI7IH0KLnRpbnQgeyBmaWxsOiAjZWVmMWY1OyB9Ci50aW50MnsgZmlsbDogI2RkZTRlYzsgfQouYWNjICB7IGZpbGw6ICMwYjVjYWQ7IH0KLmFjY1QgeyBmaWxsOiAjZDllNmY0OyB9Ci5ub25lIHsgZmlsbDogbm9uZTsgfQoucyAgICB7IHN0cm9rZTogIzE2MTkxZDsgc3Ryb2tlLXdpZHRoOiAxLjY7IGZpbGw6IG5vbmU7IH0KLnMyICAgeyBzdHJva2U6ICMxNjE5MWQ7IHN0cm9rZS13aWR0aDogMi42OyBmaWxsOiBub25lOyB9Ci5zbSAgIHsgc3Ryb2tlOiAjNWY2NjcyOyBzdHJva2Utd2lkdGg6IDEuMjsgZmlsbDogbm9uZTsgfQouc2EgICB7IHN0cm9rZTogIzBiNWNhZDsgc3Ryb2tlLXdpZHRoOiAyLjI7IGZpbGw6IG5vbmU7IH0KLmRhc2ggeyBzdHJva2UtZGFzaGFycmF5OiA1IDQ7IH0KLmRvdCAgeyBzdHJva2UtZGFzaGFycmF5OiAxLjUgMzsgfQp0ZXh0ICB7IGZpbGw6ICMxNjE5MWQ7IGZvbnQtc2l6ZTogMTRweDsgfQoudC1zICB7IGZvbnQtc2l6ZTogMTJweDsgfQoudC14cyB7IGZvbnQtc2l6ZTogMTAuNXB4OyB9Ci50LWwgIHsgZm9udC1zaXplOiAxN3B4OyB9Ci50LXhsIHsgZm9udC1zaXplOiAyMXB4OyB9Ci5iICAgIHsgZm9udC13ZWlnaHQ6IDcwMDsgfQouaSAgICB7IGZvbnQtc3R5bGU6IGl0YWxpYzsgfQoubSAgICB7IGZvbnQtZmFtaWx5OiAiU0YgTW9ubyIsIE1lbmxvLCBDb25zb2xhcywgbW9ub3NwYWNlOyB9Ci5sYmwgIHsgZmlsbDogIzVmNjY3MjsgfQpAbWVkaWEgKHByZWZlcnMtY29sb3Itc2NoZW1lOiBkYXJrKSB7CiAgLmJnICAgeyBmaWxsOiAjMTQxNzFiOyB9CiAgLmluayAgeyBmaWxsOiAjZThlYmVmOyB9CiAgLm11dCAgeyBmaWxsOiAjOWFhM2IwOyB9CiAgLnRpbnQgeyBmaWxsOiAjMjMyODMwOyB9CiAgLnRpbnQyeyBmaWxsOiAjMmUzNDNkOyB9CiAgLmFjYyAgeyBmaWxsOiAjNmFiMGYzOyB9CiAgLmFjY1QgeyBmaWxsOiAjMWUyYzNjOyB9CiAgLnMsIC5zMiB7IHN0cm9rZTogI2U4ZWJlZjsgfQogIC5zbSAgIHsgc3Ryb2tlOiAjOWFhM2IwOyB9CiAgLnNhICAgeyBzdHJva2U6ICM2YWIwZjM7IH0KICB0ZXh0ICB7IGZpbGw6ICNlOGViZWY7IH0KICAubGJsICB7IGZpbGw6ICM5YWEzYjA7IH0KfQo8L3N0eWxlPgo8ZGVmcz4KIDxtYXJrZXIgaWQ9ImEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImluayIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYWEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImFjYyIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYW0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjYiIG1hcmtlckhlaWdodD0iNiIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9Im11dCIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0ibyIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI1IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNiIgbWFya2VySGVpZ2h0PSI2Ij4KICAgPGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjMuNSIgY2xhc3M9ImJnIHMiLz48L21hcmtlcj4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iNzAwIiBoZWlnaHQ9IjM0MCIgY2xhc3M9ImJnIi8+PHJlY3QgeD0iMzMwLjAiIHk9IjU2IiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjM4IiBjbGFzcz0iYWNjVCBzIi8+PHRleHQgeD0iNDMwLjAiIHk9Ijc1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+SFRUUCDjg6Hjg4Pjgrvjg7zjgrg8L3RleHQ+PHRleHQgeD0iMTYwIiB5PSI3NSIgdGV4dC1hbmNob3I9ImVuZCIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBiIj7jgqLjg5fjg6rjgrHjg7zjgrfjg6fjg7PlsaQ8L3RleHQ+PHJlY3QgeD0iMjg4LjAiIHk9IjExOCIgd2lkdGg9Ijg0IiBoZWlnaHQ9IjM4IiBjbGFzcz0idGludCBzIi8+PHRleHQgeD0iMzMwLjAiIHk9IjEzNyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPlRDUCDjg5jjg4Pjg4A8L3RleHQ+PHJlY3QgeD0iMzcyLjAiIHk9IjExOCIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIzOCIgY2xhc3M9ImFjY1QgcyIvPjx0ZXh0IHg9IjQ3Mi4wIiB5PSIxMzciIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj5IVFRQIOODoeODg+OCu+ODvOOCuDwvdGV4dD48dGV4dCB4PSIxNjAiIHk9IjEzNyIgdGV4dC1hbmNob3I9ImVuZCIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBiIj7jg4jjg6njg7Pjgrnjg53jg7zjg4jlsaQ8L3RleHQ+PGxpbmUgeDE9IjE3MCIgeTE9IjEwMiIgeDI9IjE3MCIgeTI9IjExNiIgY2xhc3M9InNtIiBtYXJrZXItZW5kPSJ1cmwoI2FtKSIvPjxyZWN0IHg9IjI1MC4wIiB5PSIxODAiIHdpZHRoPSI3NiIgaGVpZ2h0PSIzOCIgY2xhc3M9InRpbnQgcyIvPjx0ZXh0IHg9IjI4OC4wIiB5PSIxOTkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj5JUCDjg5jjg4Pjg4A8L3RleHQ+PHJlY3QgeD0iMzI2LjAiIHk9IjE4MCIgd2lkdGg9Ijg0IiBoZWlnaHQ9IjM4IiBjbGFzcz0idGludCBzIi8+PHRleHQgeD0iMzY4LjAiIHk9IjE5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPlRDUCDjg5jjg4Pjg4A8L3RleHQ+PHJlY3QgeD0iNDEwLjAiIHk9IjE4MCIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIzOCIgY2xhc3M9ImFjY1QgcyIvPjx0ZXh0IHg9IjUxMC4wIiB5PSIxOTkiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj5IVFRQIOODoeODg+OCu+ODvOOCuDwvdGV4dD48dGV4dCB4PSIxNjAiIHk9IjE5OSIgdGV4dC1hbmNob3I9ImVuZCIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBiIj7jgqTjg7Pjgr/jg7zjg43jg4Pjg4jlsaQ8L3RleHQ+PGxpbmUgeDE9IjE3MCIgeTE9IjE2NCIgeDI9IjE3MCIgeTI9IjE3OCIgY2xhc3M9InNtIiBtYXJrZXItZW5kPSJ1cmwoI2FtKSIvPjxyZWN0IHg9IjE3Ni4wIiB5PSIyNDIiIHdpZHRoPSIxMDQiIGhlaWdodD0iMzgiIGNsYXNzPSJ0aW50IHMiLz48dGV4dCB4PSIyMjguMCIgeT0iMjYxIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+RXRoZXJuZXQg44OY44OD44OAPC90ZXh0PjxyZWN0IHg9IjI4MC4wIiB5PSIyNDIiIHdpZHRoPSI3NiIgaGVpZ2h0PSIzOCIgY2xhc3M9InRpbnQgcyIvPjx0ZXh0IHg9IjMxOC4wIiB5PSIyNjEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj5JUCDjg5jjg4Pjg4A8L3RleHQ+PHJlY3QgeD0iMzU2LjAiIHk9IjI0MiIgd2lkdGg9Ijg0IiBoZWlnaHQ9IjM4IiBjbGFzcz0idGludCBzIi8+PHRleHQgeD0iMzk4LjAiIHk9IjI2MSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPlRDUCDjg5jjg4Pjg4A8L3RleHQ+PHJlY3QgeD0iNDQwLjAiIHk9IjI0MiIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIzOCIgY2xhc3M9ImFjY1QgcyIvPjx0ZXh0IHg9IjU0MC4wIiB5PSIyNjEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj5IVFRQIOODoeODg+OCu+ODvOOCuDwvdGV4dD48cmVjdCB4PSI2NDAuMCIgeT0iMjQyIiB3aWR0aD0iNDQiIGhlaWdodD0iMzgiIGNsYXNzPSJ0aW50IHMiLz48dGV4dCB4PSI2NjIuMCIgeT0iMjYxIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+RkNTPC90ZXh0Pjx0ZXh0IHg9IjE2MCIgeT0iMjYxIiB0ZXh0LWFuY2hvcj0iZW5kIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIGIiPuODh+ODvOOCv+ODquODs+OCr+WxpDwvdGV4dD48bGluZSB4MT0iMTcwIiB5MT0iMjI2IiB4Mj0iMTcwIiB5Mj0iMjQwIiBjbGFzcz0ic20iIG1hcmtlci1lbmQ9InVybCgjYW0pIi8+PHRleHQgeD0iNDAwIiB5PSIzMDYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMgYiI+5bGk44KS6ZmN44KK44KL44GU44Go44Gr44CB44Gd44Gu5bGk44Gu44OY44OD44OA44Gn5YyF44G+44KM44KL44CC5Y+X5L+h5YG044Gn44Gv6YCG6aCG44Gr5Yml44GM44GZPC90ZXh0Pjx0ZXh0IHg9IjQwMCIgeT0iMzI4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyBsYmwiPuWQhOWxpOOBr+iHquWIhuOBruODmOODg+ODgOOBl+OBi+imi+OBquOBhDwvdGV4dD48L3N2Zz4K"></div>
+      <p class="caption">封筒の比喩：手紙を書き、封筒に何通目かを書き、宛先住所を書き、配送業者の伝票を貼る。</p>
+      
+      </div>
+        <div class="pageno">9</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">9.2　階層モデル</div>
+        <h2>階層を降りて、上がる</h2>
+      </header><div class="body">
+      <div class="figwrap"><img class="fig" alt="図 09-03" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MDAgMzgwIiB3aWR0aD0iNzAwIiBoZWlnaHQ9IjM4MCIgcm9sZT0iaW1nIj48c3R5bGU+CnN2ZyB7IGZvbnQtZmFtaWx5OiAiSGVsdmV0aWNhIE5ldWUiLCBBcmlhbCwgIkhpcmFnaW5vIFNhbnMiLCAiWXUgR290aGljIiwgIk5vdG8gU2FucyBKUCIsIHNhbnMtc2VyaWY7IH0KLmJnICAgeyBmaWxsOiAjZmZmZmZmOyB9Ci5pbmsgIHsgZmlsbDogIzE2MTkxZDsgfQoubXV0ICB7IGZpbGw6ICM1ZjY2NzI7IH0KLnRpbnQgeyBmaWxsOiAjZWVmMWY1OyB9Ci50aW50MnsgZmlsbDogI2RkZTRlYzsgfQouYWNjICB7IGZpbGw6ICMwYjVjYWQ7IH0KLmFjY1QgeyBmaWxsOiAjZDllNmY0OyB9Ci5ub25lIHsgZmlsbDogbm9uZTsgfQoucyAgICB7IHN0cm9rZTogIzE2MTkxZDsgc3Ryb2tlLXdpZHRoOiAxLjY7IGZpbGw6IG5vbmU7IH0KLnMyICAgeyBzdHJva2U6ICMxNjE5MWQ7IHN0cm9rZS13aWR0aDogMi42OyBmaWxsOiBub25lOyB9Ci5zbSAgIHsgc3Ryb2tlOiAjNWY2NjcyOyBzdHJva2Utd2lkdGg6IDEuMjsgZmlsbDogbm9uZTsgfQouc2EgICB7IHN0cm9rZTogIzBiNWNhZDsgc3Ryb2tlLXdpZHRoOiAyLjI7IGZpbGw6IG5vbmU7IH0KLmRhc2ggeyBzdHJva2UtZGFzaGFycmF5OiA1IDQ7IH0KLmRvdCAgeyBzdHJva2UtZGFzaGFycmF5OiAxLjUgMzsgfQp0ZXh0ICB7IGZpbGw6ICMxNjE5MWQ7IGZvbnQtc2l6ZTogMTRweDsgfQoudC1zICB7IGZvbnQtc2l6ZTogMTJweDsgfQoudC14cyB7IGZvbnQtc2l6ZTogMTAuNXB4OyB9Ci50LWwgIHsgZm9udC1zaXplOiAxN3B4OyB9Ci50LXhsIHsgZm9udC1zaXplOiAyMXB4OyB9Ci5iICAgIHsgZm9udC13ZWlnaHQ6IDcwMDsgfQouaSAgICB7IGZvbnQtc3R5bGU6IGl0YWxpYzsgfQoubSAgICB7IGZvbnQtZmFtaWx5OiAiU0YgTW9ubyIsIE1lbmxvLCBDb25zb2xhcywgbW9ub3NwYWNlOyB9Ci5sYmwgIHsgZmlsbDogIzVmNjY3MjsgfQpAbWVkaWEgKHByZWZlcnMtY29sb3Itc2NoZW1lOiBkYXJrKSB7CiAgLmJnICAgeyBmaWxsOiAjMTQxNzFiOyB9CiAgLmluayAgeyBmaWxsOiAjZThlYmVmOyB9CiAgLm11dCAgeyBmaWxsOiAjOWFhM2IwOyB9CiAgLnRpbnQgeyBmaWxsOiAjMjMyODMwOyB9CiAgLnRpbnQyeyBmaWxsOiAjMmUzNDNkOyB9CiAgLmFjYyAgeyBmaWxsOiAjNmFiMGYzOyB9CiAgLmFjY1QgeyBmaWxsOiAjMWUyYzNjOyB9CiAgLnMsIC5zMiB7IHN0cm9rZTogI2U4ZWJlZjsgfQogIC5zbSAgIHsgc3Ryb2tlOiAjOWFhM2IwOyB9CiAgLnNhICAgeyBzdHJva2U6ICM2YWIwZjM7IH0KICB0ZXh0ICB7IGZpbGw6ICNlOGViZWY7IH0KICAubGJsICB7IGZpbGw6ICM5YWEzYjA7IH0KfQo8L3N0eWxlPgo8ZGVmcz4KIDxtYXJrZXIgaWQ9ImEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImluayIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYWEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImFjYyIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYW0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjYiIG1hcmtlckhlaWdodD0iNiIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9Im11dCIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0ibyIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI1IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNiIgbWFya2VySGVpZ2h0PSI2Ij4KICAgPGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjMuNSIgY2xhc3M9ImJnIHMiLz48L21hcmtlcj4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iNzAwIiBoZWlnaHQ9IjM4MCIgY2xhc3M9ImJnIi8+PHRleHQgeD0iOTgiIHk9Ijc2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0iYiI+44Ob44K544OIPC90ZXh0PjxyZWN0IHg9IjQwIiB5PSI5NiIgd2lkdGg9IjExNiIgaGVpZ2h0PSIzOCIgY2xhc3M9InRpbnQgcyIvPjx0ZXh0IHg9Ijk4IiB5PSIxMTUuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPuOCouODl+ODquOCseODvOOCt+ODp+ODs+WxpDwvdGV4dD48cmVjdCB4PSI0MCIgeT0iMTM0IiB3aWR0aD0iMTE2IiBoZWlnaHQ9IjM4IiBjbGFzcz0idGludCBzIi8+PHRleHQgeD0iOTgiIHk9IjE1My4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+44OI44Op44Oz44K544Od44O844OI5bGkPC90ZXh0PjxyZWN0IHg9IjQwIiB5PSIxNzIiIHdpZHRoPSIxMTYiIGhlaWdodD0iMzgiIGNsYXNzPSJ0aW50IHMiLz48dGV4dCB4PSI5OCIgeT0iMTkxLjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj7jgqTjg7Pjgr/jg7zjg43jg4Pjg4jlsaQ8L3RleHQ+PHJlY3QgeD0iNDAiIHk9IjIxMCIgd2lkdGg9IjExNiIgaGVpZ2h0PSIzOCIgY2xhc3M9InRpbnQgcyIvPjx0ZXh0IHg9Ijk4IiB5PSIyMjkuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPuODh+ODvOOCv+ODquODs+OCr+WxpDwvdGV4dD48cmVjdCB4PSI0MCIgeT0iMjQ4IiB3aWR0aD0iMTE2IiBoZWlnaHQ9IjM4IiBjbGFzcz0idGludCBzIi8+PHRleHQgeD0iOTgiIHk9IjI2Ny4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+54mp55CG5bGkPC90ZXh0Pjx0ZXh0IHg9IjI2NiIgeT0iNzYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJiIj7jg6vjg7zjgr88L3RleHQ+PHJlY3QgeD0iMjA4IiB5PSIxNzIiIHdpZHRoPSIxMTYiIGhlaWdodD0iMzgiIGNsYXNzPSJ0aW50MiBzIi8+PHRleHQgeD0iMjY2IiB5PSIxOTEuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPuOCpOODs+OCv+ODvOODjeODg+ODiOWxpDwvdGV4dD48cmVjdCB4PSIyMDgiIHk9IjIxMCIgd2lkdGg9IjExNiIgaGVpZ2h0PSIzOCIgY2xhc3M9InRpbnQyIHMiLz48dGV4dCB4PSIyNjYiIHk9IjIyOS4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+44OH44O844K/44Oq44Oz44Kv5bGkPC90ZXh0PjxyZWN0IHg9IjIwOCIgeT0iMjQ4IiB3aWR0aD0iMTE2IiBoZWlnaHQ9IjM4IiBjbGFzcz0idGludDIgcyIvPjx0ZXh0IHg9IjI2NiIgeT0iMjY3LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj7niannkIblsaQ8L3RleHQ+PHRleHQgeD0iMjY2IiB5PSIxNDkuMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgbGJsIj7kuIvjgYvjgokz5bGk44Gg44GRPC90ZXh0Pjx0ZXh0IHg9IjQzNCIgeT0iNzYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJiIj7jg6vjg7zjgr88L3RleHQ+PHJlY3QgeD0iMzc2IiB5PSIxNzIiIHdpZHRoPSIxMTYiIGhlaWdodD0iMzgiIGNsYXNzPSJ0aW50MiBzIi8+PHRleHQgeD0iNDM0IiB5PSIxOTEuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPuOCpOODs+OCv+ODvOODjeODg+ODiOWxpDwvdGV4dD48cmVjdCB4PSIzNzYiIHk9IjIxMCIgd2lkdGg9IjExNiIgaGVpZ2h0PSIzOCIgY2xhc3M9InRpbnQyIHMiLz48dGV4dCB4PSI0MzQiIHk9IjIyOS4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+44OH44O844K/44Oq44Oz44Kv5bGkPC90ZXh0PjxyZWN0IHg9IjM3NiIgeT0iMjQ4IiB3aWR0aD0iMTE2IiBoZWlnaHQ9IjM4IiBjbGFzcz0idGludDIgcyIvPjx0ZXh0IHg9IjQzNCIgeT0iMjY3LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj7niannkIblsaQ8L3RleHQ+PHRleHQgeD0iNDM0IiB5PSIxNDkuMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgbGJsIj7kuIvjgYvjgokz5bGk44Gg44GRPC90ZXh0Pjx0ZXh0IHg9IjYwMiIgeT0iNzYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJiIj7jg5vjgrnjg4g8L3RleHQ+PHJlY3QgeD0iNTQ0IiB5PSI5NiIgd2lkdGg9IjExNiIgaGVpZ2h0PSIzOCIgY2xhc3M9InRpbnQgcyIvPjx0ZXh0IHg9IjYwMiIgeT0iMTE1LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj7jgqLjg5fjg6rjgrHjg7zjgrfjg6fjg7PlsaQ8L3RleHQ+PHJlY3QgeD0iNTQ0IiB5PSIxMzQiIHdpZHRoPSIxMTYiIGhlaWdodD0iMzgiIGNsYXNzPSJ0aW50IHMiLz48dGV4dCB4PSI2MDIiIHk9IjE1My4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+44OI44Op44Oz44K544Od44O844OI5bGkPC90ZXh0PjxyZWN0IHg9IjU0NCIgeT0iMTcyIiB3aWR0aD0iMTE2IiBoZWlnaHQ9IjM4IiBjbGFzcz0idGludCBzIi8+PHRleHQgeD0iNjAyIiB5PSIxOTEuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPuOCpOODs+OCv+ODvOODjeODg+ODiOWxpDwvdGV4dD48cmVjdCB4PSI1NDQiIHk9IjIxMCIgd2lkdGg9IjExNiIgaGVpZ2h0PSIzOCIgY2xhc3M9InRpbnQgcyIvPjx0ZXh0IHg9IjYwMiIgeT0iMjI5LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj7jg4fjg7zjgr/jg6rjg7Pjgq/lsaQ8L3RleHQ+PHJlY3QgeD0iNTQ0IiB5PSIyNDgiIHdpZHRoPSIxMTYiIGhlaWdodD0iMzgiIGNsYXNzPSJ0aW50IHMiLz48dGV4dCB4PSI2MDIiIHk9IjI2Ny4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+54mp55CG5bGkPC90ZXh0PjxwYXRoIGQ9Ik0xNTYsMTE1LjAgTDU0NCwxMTUuMCIgY2xhc3M9InNtIGRvdCIvPjx0ZXh0IHg9IjM1MCIgeT0iNjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIGxibCI+6KuW55CG55qE44Gr44Gv44CB5ZCM44GY5bGk44Gp44GG44GX44GM5Lya6Kmx44GX44Gm44GE44KL44KI44GG44Gr6KaL44GI44KLPC90ZXh0PjxwYXRoIGQ9Ik0zMCwxMTUuMCBMMzAsMjk0IEwxNTIsMjk0IiBjbGFzcz0ic2EiIG1hcmtlci1lbmQ9InVybCgjYWEpIi8+PHRleHQgeD0iMzAiIHk9IjkyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyBhY2MgYiI+6ZmN44KK44KLPC90ZXh0PjxsaW5lIHgxPSIxNTYiIHkxPSIyOTQiIHgyPSIyMDgiIHkyPSIyOTQiIGNsYXNzPSJzYSIvPjxsaW5lIHgxPSIzMjQiIHkxPSIyOTQiIHgyPSIzNzYiIHkyPSIyOTQiIGNsYXNzPSJzYSIvPjxsaW5lIHgxPSI0OTIiIHkxPSIyOTQiIHgyPSI1NDQiIHkyPSIyOTQiIGNsYXNzPSJzYSIvPjxwYXRoIGQ9Ik01NTYsMjk0IEw2NzAsMjk0IEw2NzAsMTE1LjAiIGNsYXNzPSJzYSIgbWFya2VyLWVuZD0idXJsKCNhYSkiLz48dGV4dCB4PSI2NzAiIHk9IjkyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyBhY2MgYiI+5LiK44GM44KLPC90ZXh0PjxwYXRoIGQ9Ik0yNjYsMjk0IEwyNjYsMjEwIiBjbGFzcz0ic2EgZGFzaCIgbWFya2VyLWVuZD0idXJsKCNhYSkiLz48cGF0aCBkPSJNNDM0LDI5NCBMNDM0LDIxMCIgY2xhc3M9InNhIGRhc2giIG1hcmtlci1lbmQ9InVybCgjYWEpIi8+PHRleHQgeD0iMzUwIiB5PSIzMzIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMgYiI+44K544Kk44OD44OB44GvIEwy44CB44Or44O844K/44GvIEwzIOOBvuOBp+OBl+OBi+S4iuOBjOOCieOBquOBhOOAguOBoOOBi+OCieS4ree2meOBr+mAn+OBhDwvdGV4dD48dGV4dCB4PSIzNTAiIHk9IjM1OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgbGJsIj7vvIjml6fjgrnjg6njgqTjg4njga7mp4vmiJDjgpLjgZ3jga7jgb7jgb7lvJXjgY3ntpnjgYTjgaDvvIk8L3RleHQ+PC9zdmc+Cg=="></div>
+      <p class="caption">中継機器は必要な層までしか処理しない。だから中継は速い。</p>
+      <p class="sub center">配送業者は手紙の中身を読まないし、手紙の書き手は伝票番号を知らない。<br>この独立性が階層の価値である。</p>
+      </div>
+        <div class="pageno">10</div>
+      </section>
+<section class="slide dark ">
+      <div class="sec-wrap">
+        <div class="sec-n">9.3</div>
+        <h1 class="sec-name">インターネットの構造</h1>
+        <p class="sec-tag">中央の管理者がいない「網の網」</p>
+      </div><div class="motif"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div></section>
+<section class="slide light">
+        <header>
+        <div class="kicker">9.3　構造</div>
+        <h2>インターネットは「網の網」</h2>
+      </header><div class="body"><p class="lead">インターネットは単一の巨大なネットワークではない。独立に運営される多数のネットワーク（AS）が相互接続したものである。</p>
+      <div class="figwrap"><img class="fig" alt="図 09-04" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MDAgMzgwIiB3aWR0aD0iNzAwIiBoZWlnaHQ9IjM4MCIgcm9sZT0iaW1nIj48c3R5bGU+CnN2ZyB7IGZvbnQtZmFtaWx5OiAiSGVsdmV0aWNhIE5ldWUiLCBBcmlhbCwgIkhpcmFnaW5vIFNhbnMiLCAiWXUgR290aGljIiwgIk5vdG8gU2FucyBKUCIsIHNhbnMtc2VyaWY7IH0KLmJnICAgeyBmaWxsOiAjZmZmZmZmOyB9Ci5pbmsgIHsgZmlsbDogIzE2MTkxZDsgfQoubXV0ICB7IGZpbGw6ICM1ZjY2NzI7IH0KLnRpbnQgeyBmaWxsOiAjZWVmMWY1OyB9Ci50aW50MnsgZmlsbDogI2RkZTRlYzsgfQouYWNjICB7IGZpbGw6ICMwYjVjYWQ7IH0KLmFjY1QgeyBmaWxsOiAjZDllNmY0OyB9Ci5ub25lIHsgZmlsbDogbm9uZTsgfQoucyAgICB7IHN0cm9rZTogIzE2MTkxZDsgc3Ryb2tlLXdpZHRoOiAxLjY7IGZpbGw6IG5vbmU7IH0KLnMyICAgeyBzdHJva2U6ICMxNjE5MWQ7IHN0cm9rZS13aWR0aDogMi42OyBmaWxsOiBub25lOyB9Ci5zbSAgIHsgc3Ryb2tlOiAjNWY2NjcyOyBzdHJva2Utd2lkdGg6IDEuMjsgZmlsbDogbm9uZTsgfQouc2EgICB7IHN0cm9rZTogIzBiNWNhZDsgc3Ryb2tlLXdpZHRoOiAyLjI7IGZpbGw6IG5vbmU7IH0KLmRhc2ggeyBzdHJva2UtZGFzaGFycmF5OiA1IDQ7IH0KLmRvdCAgeyBzdHJva2UtZGFzaGFycmF5OiAxLjUgMzsgfQp0ZXh0ICB7IGZpbGw6ICMxNjE5MWQ7IGZvbnQtc2l6ZTogMTRweDsgfQoudC1zICB7IGZvbnQtc2l6ZTogMTJweDsgfQoudC14cyB7IGZvbnQtc2l6ZTogMTAuNXB4OyB9Ci50LWwgIHsgZm9udC1zaXplOiAxN3B4OyB9Ci50LXhsIHsgZm9udC1zaXplOiAyMXB4OyB9Ci5iICAgIHsgZm9udC13ZWlnaHQ6IDcwMDsgfQouaSAgICB7IGZvbnQtc3R5bGU6IGl0YWxpYzsgfQoubSAgICB7IGZvbnQtZmFtaWx5OiAiU0YgTW9ubyIsIE1lbmxvLCBDb25zb2xhcywgbW9ub3NwYWNlOyB9Ci5sYmwgIHsgZmlsbDogIzVmNjY3MjsgfQpAbWVkaWEgKHByZWZlcnMtY29sb3Itc2NoZW1lOiBkYXJrKSB7CiAgLmJnICAgeyBmaWxsOiAjMTQxNzFiOyB9CiAgLmluayAgeyBmaWxsOiAjZThlYmVmOyB9CiAgLm11dCAgeyBmaWxsOiAjOWFhM2IwOyB9CiAgLnRpbnQgeyBmaWxsOiAjMjMyODMwOyB9CiAgLnRpbnQyeyBmaWxsOiAjMmUzNDNkOyB9CiAgLmFjYyAgeyBmaWxsOiAjNmFiMGYzOyB9CiAgLmFjY1QgeyBmaWxsOiAjMWUyYzNjOyB9CiAgLnMsIC5zMiB7IHN0cm9rZTogI2U4ZWJlZjsgfQogIC5zbSAgIHsgc3Ryb2tlOiAjOWFhM2IwOyB9CiAgLnNhICAgeyBzdHJva2U6ICM2YWIwZjM7IH0KICB0ZXh0ICB7IGZpbGw6ICNlOGViZWY7IH0KICAubGJsICB7IGZpbGw6ICM5YWEzYjA7IH0KfQo8L3N0eWxlPgo8ZGVmcz4KIDxtYXJrZXIgaWQ9ImEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImluayIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYWEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImFjYyIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYW0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjYiIG1hcmtlckhlaWdodD0iNiIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9Im11dCIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0ibyIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI1IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNiIgbWFya2VySGVpZ2h0PSI2Ij4KICAgPGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjMuNSIgY2xhc3M9ImJnIHMiLz48L21hcmtlcj4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iNzAwIiBoZWlnaHQ9IjM4MCIgY2xhc3M9ImJnIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iNzAiIHI9IjI2IiBjbGFzcz0iYWNjVCBzIi8+PHRleHQgeD0iMjAwIiB5PSI3MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgYiI+VGllciAxPC90ZXh0PjxjaXJjbGUgY3g9IjM1MCIgY3k9IjYwIiByPSIyNiIgY2xhc3M9ImFjY1QgcyIvPjx0ZXh0IHg9IjM1MCIgeT0iNjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIGIiPlRpZXIgMTwvdGV4dD48Y2lyY2xlIGN4PSI1MDAiIGN5PSI3MCIgcj0iMjYiIGNsYXNzPSJhY2NUIHMiLz48dGV4dCB4PSI1MDAiIHk9IjcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyBiIj5UaWVyIDE8L3RleHQ+PGxpbmUgeDE9IjIwMCIgeTE9IjcwIiB4Mj0iMzUwIiB5Mj0iNjAiIGNsYXNzPSJzMiIvPjxsaW5lIHgxPSIyMDAiIHkxPSI3MCIgeDI9IjUwMCIgeTI9IjcwIiBjbGFzcz0iczIiLz48bGluZSB4MT0iMzUwIiB5MT0iNjAiIHgyPSI1MDAiIHkyPSI3MCIgY2xhc3M9InMyIi8+PHRleHQgeD0iNjAwIiB5PSI2MiIgdGV4dC1hbmNob3I9InN0YXJ0IiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyBsYmwiPuODlOOCouODquODs+OCsDwvdGV4dD48dGV4dCB4PSI2MDAiIHk9Ijc4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIGxibCI+77yI5a++562J44O754Sh5paZ77yJPC90ZXh0PjxjaXJjbGUgY3g9IjE0MCIgY3k9IjE4MCIgcj0iMjQiIGNsYXNzPSJ0aW50IHMiLz48dGV4dCB4PSIxNDAiIHk9IjE4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPuWcsOWfn0lTUDwvdGV4dD48Y2lyY2xlIGN4PSIzMDAiIGN5PSIxODAiIHI9IjI0IiBjbGFzcz0idGludCBzIi8+PHRleHQgeD0iMzAwIiB5PSIxODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj7lnLDln59JU1A8L3RleHQ+PGNpcmNsZSBjeD0iNDYwIiBjeT0iMTgwIiByPSIyNCIgY2xhc3M9InRpbnQgcyIvPjx0ZXh0IHg9IjQ2MCIgeT0iMTgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+5Zyw5Z+fSVNQPC90ZXh0PjxsaW5lIHgxPSIxNDAiIHkxPSIxNTgiIHgyPSIyMDAiIHkyPSI5NCIgY2xhc3M9InNtIi8+PGxpbmUgeDE9IjMwMCIgeTE9IjE1OCIgeDI9IjM1MCIgeTI9Ijg0IiBjbGFzcz0ic20iLz48bGluZSB4MT0iNDYwIiB5MT0iMTU4IiB4Mj0iNTAwIiB5Mj0iOTQiIGNsYXNzPSJzbSIvPjxsaW5lIHgxPSIxNDAiIHkxPSIxNTgiIHgyPSIzNTAiIHkyPSI4NCIgY2xhc3M9InNtIi8+PGxpbmUgeDE9IjQ2MCIgeTE9IjE1OCIgeDI9IjM1MCIgeTI9Ijg0IiBjbGFzcz0ic20iLz48cmVjdCB4PSI1MDAiIHk9IjE1NiIgd2lkdGg9IjEzMCIgaGVpZ2h0PSI0OCIgcng9IjYiIGNsYXNzPSJ0aW50MiBzIi8+PHRleHQgeD0iNTY1IiB5PSIxNzIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJiIj5JWDwvdGV4dD48dGV4dCB4PSI1NjUiIHk9IjE5MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPu+8iOebuOS6kuaOpee2mueCue+8iTwvdGV4dD48bGluZSB4MT0iMzIyIiB5MT0iMTgwIiB4Mj0iNDk4IiB5Mj0iMTgwIiBjbGFzcz0ic20iLz48bGluZSB4MT0iNDgyIiB5MT0iMTgwIiB4Mj0iNDk4IiB5Mj0iMTgwIiBjbGFzcz0ic20iLz48bGluZSB4MT0iNTY1IiB5MT0iMTU0IiB4Mj0iNTAwIiB5Mj0iOTIiIGNsYXNzPSJzbSIvPjxjaXJjbGUgY3g9IjkwIiBjeT0iMjY4IiByPSIyMCIgY2xhc3M9ImJnIHMiLz48dGV4dCB4PSI5MCIgeT0iMjY4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+SVNQPC90ZXh0PjxjaXJjbGUgY3g9IjIwMCIgY3k9IjI2OCIgcj0iMjAiIGNsYXNzPSJiZyBzIi8+PHRleHQgeD0iMjAwIiB5PSIyNjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj5JU1A8L3RleHQ+PGNpcmNsZSBjeD0iMzIwIiBjeT0iMjY4IiByPSIyMCIgY2xhc3M9ImJnIHMiLz48dGV4dCB4PSIzMjAiIHk9IjI2OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPklTUDwvdGV4dD48Y2lyY2xlIGN4PSI0NDAiIGN5PSIyNjgiIHI9IjIwIiBjbGFzcz0iYmcgcyIvPjx0ZXh0IHg9IjQ0MCIgeT0iMjY4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+SVNQPC90ZXh0PjxsaW5lIHgxPSI5MCIgeTE9IjI1MCIgeDI9IjE0MCIgeTI9IjIwMiIgY2xhc3M9InNtIi8+PHJlY3QgeD0iNDYiIHk9IjMxNiIgd2lkdGg9Ijg4IiBoZWlnaHQ9IjMyIiBjbGFzcz0idGludCBzIi8+PHRleHQgeD0iOTAuMCIgeT0iMzMyLjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj7lpKflraY8L3RleHQ+PGxpbmUgeDE9IjkwIiB5MT0iMjg4IiB4Mj0iOTAiIHkyPSIzMTQiIGNsYXNzPSJzbSIvPjxsaW5lIHgxPSIyMDAiIHkxPSIyNTAiIHgyPSIxNDAiIHkyPSIyMDIiIGNsYXNzPSJzbSIvPjxyZWN0IHg9IjE1NiIgeT0iMzE2IiB3aWR0aD0iODgiIGhlaWdodD0iMzIiIGNsYXNzPSJ0aW50IHMiLz48dGV4dCB4PSIyMDAuMCIgeT0iMzMyLjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj7kvIHmpa08L3RleHQ+PGxpbmUgeDE9IjIwMCIgeTE9IjI4OCIgeDI9IjIwMCIgeTI9IjMxNCIgY2xhc3M9InNtIi8+PGxpbmUgeDE9IjMyMCIgeTE9IjI1MCIgeDI9IjMwMCIgeTI9IjIwMiIgY2xhc3M9InNtIi8+PHJlY3QgeD0iMjc2IiB5PSIzMTYiIHdpZHRoPSI4OCIgaGVpZ2h0PSIzMiIgY2xhc3M9InRpbnQgcyIvPjx0ZXh0IHg9IjMyMC4wIiB5PSIzMzIuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPuWutuW6rTwvdGV4dD48bGluZSB4MT0iMzIwIiB5MT0iMjg4IiB4Mj0iMzIwIiB5Mj0iMzE0IiBjbGFzcz0ic20iLz48bGluZSB4MT0iNDQwIiB5MT0iMjUwIiB4Mj0iMzAwIiB5Mj0iMjAyIiBjbGFzcz0ic20iLz48cmVjdCB4PSIzOTYiIHk9IjMxNiIgd2lkdGg9Ijg4IiBoZWlnaHQ9IjMyIiBjbGFzcz0idGludCBzIi8+PHRleHQgeD0iNDQwLjAiIHk9IjMzMi4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+5a625bqtPC90ZXh0PjxsaW5lIHgxPSI0NDAiIHkxPSIyODgiIHgyPSI0NDAiIHkyPSIzMTQiIGNsYXNzPSJzbSIvPjx0ZXh0IHg9IjYwMCIgeT0iMjY4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIGxibCI+44OI44Op44Oz44K444OD44OIPC90ZXh0Pjx0ZXh0IHg9IjYwMCIgeT0iMjg0IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIGxibCI+77yI6LK755So44KS5omV44Gj44GmPC90ZXh0Pjx0ZXh0IHg9IjYwMCIgeT0iMzAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIGxibCI+ICDliLDpgZTmgKfjgpLosrfjgYbvvIk8L3RleHQ+PHRleHQgeD0iMzUwIiB5PSIzNzIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMgYiI+5Lit5aSu44Gu566h55CG6ICF44Gv44GE44Gq44GE44CC54us56uL44GX44Gf5aSa5pWw44GuIEFTIOOBjOebuOS6kuaOpee2muOBl+OBpuOBhOOCizwvdGV4dD48L3N2Zz4K"></div>
+      <p class="caption">中央の管理者がいない。誰も全体像を把握していない。それでも「どこからでもどこへでも」届く。</p>
+      
+      </div>
+        <div class="pageno">12</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">9.3　構造</div>
+        <h2>接続の形と IX</h2>
+      </header><div class="body">
+      <div class="cards" style="--per:3"><div class="card">
+      <div class="card-h">トランジット</div>
+      <div class="card-b">下位の事業者が上位に費用を払い、インターネット全体への到達性を買う</div>
+    </div><div class="card">
+      <div class="card-h">ピアリング</div>
+      <div class="card-b">対等な事業者どうしが、互いの顧客宛の通信を無料で交換する</div>
+    </div><div class="card">
+      <div class="card-h">IX（相互接続点）</div>
+      <div class="card-b">多数の事業者が物理的に集まり相互接続する拠点。日本では JPIX、JPNAP など</div>
+    </div></div>
+      <div class="callout dashed">
+        <div class="co-h">IX の意義</div>
+        <div class="co-b">n 個の事業者が互いに接続するには n(n−1)/2 本の線が要る。IX に集まれば n 本で済む。</div>
+      </div><p class="note">1990年代には国内どうしの通信が米国を往復していた。IX の整備は、通信の効率と主権の両面で意味を持つ。</p></div>
+        <div class="pageno">13</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">9.3　構造</div>
+        <h2>スケールフリーネットワーク</h2>
+      </header><div class="body"><p class="lead">インターネットの接続構造は、少数の非常に多く接続されたノードと、多数の少ししか接続されていないノードからなる。</p>
+      <div class="split"><div class="col"><div class="col-h">ランダムな故障に強い</div><p class="col-b">でたらめにノードが壊れても、大半は末端のノードなので、全体の連結性は保たれる。</p></div><div class="col"><div class="col-h">狙った攻撃に弱い</div><p class="col-b">ハブとなるノードを狙って落とすと、網が急速に分断される。</p></div></div>
+      <p class="note">「六次の隔たり」も、少数のハブが遠い領域どうしを橋渡しすることで説明される。インターネットの経路長も、規模の割に驚くほど短い。</p></div>
+        <div class="pageno">14</div>
+      </section>
+<section class="slide dark ">
+      <div class="sec-wrap">
+        <div class="sec-n">9.4</div>
+        <h1 class="sec-name">物理層とデータリンク層</h1>
+        <p class="sec-tag">ビットを信号にし、隣の機器へ届ける</p>
+      </div><div class="motif"><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div></section>
+<section class="slide light">
+        <header>
+        <div class="kicker">9.4　物理層</div>
+        <h2>ツイストペアが撚ってある理由</h2>
+      </header><div class="body">
+      <div class="split"><div class="col"><div class="col-h">媒体</div><ul class="bullets tight"><li>ツイストペアケーブル — 安価。100m 程度まで</li><li>光ファイバ — 長距離・大容量・電磁ノイズに強い</li><li>電波 — 配線不要。共有媒体なので干渉と盗聴の問題がある</li></ul></div><div class="col"><div class="col-h">撚る効果</div><p class="col-b">2本の線を撚ると、外部からのノイズが両方の線にほぼ同じだけ乗る。受信側で2本の差を取れば、共通に乗ったノイズが打ち消される。<br><br>また、自分自身が発する電磁波も互いに打ち消し合う。</p></div></div>
+      <p class="note">単純な工夫で、雑音に強い伝送路を安く作っている。第2回の「2値なら多少ばらついても識別できる」と合わせて、デジタル通信の頑健さの源になっている。</p></div>
+        <div class="pageno">16</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">9.4　データリンク層</div>
+        <h2>MAC アドレスと IP アドレス</h2>
+      </header><div class="body"><p class="lead">データリンク層は「同じネットワーク内で直接つながっている機器」へデータを届ける。単位はフレームである。</p>
+      <table class="tbl  "><colgroup><col style="width:18.64%"><col style="width:37.29%"><col style="width:44.07%"></colgroup><thead><tr><th></th><th>MAC アドレス</th><th>IP アドレス</th></tr></thead><tbody><tr><td>層</td><td>データリンク層</td><td>インターネット層</td></tr><tr><td>範囲</td><td>同じネットワーク内</td><td>インターネット全体</td></tr><tr><td>割り当て</td><td>製造時に固定（48ビット）</td><td>ネットワークへの接続時に決まる</td></tr><tr><td>構造</td><td>場所の情報を持たない</td><td>階層的で、場所を表す</td></tr><tr><td>比喩</td><td>個人の指紋</td><td>現在の住所</td></tr></tbody></table>
+      <div class="callout solid">なぜ2つ要るのか</div><p class="sub">世界中の全機器の位置を各機器が覚えるのは不可能である。IP アドレスは階層的なので「この方向へ送れ」という<br>粗い判断ができ、最後の1ホップだけ MAC アドレスで特定する、という分業が成立する。</p></div>
+        <div class="pageno">17</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">9.4　データリンク層</div>
+        <h2>Ethernet</h2>
+      </header><div class="body"><p class="lead">有線 LAN の事実上の標準。1970年代に開発され、速度を上げながら50年間使われ続けている。</p>
+      <div class="split"><div class="col"><div class="col-h">速度の世代</div><table class="tbl  "><colgroup><col style="width:35.40%"><col style="width:30.09%"><col style="width:34.51%"></colgroup><thead><tr><th>規格</th><th>速度</th><th>主な用途</th></tr></thead><tbody><tr><td>1000BASE-T</td><td>1 Gbps</td><td>一般的な有線 LAN</td></tr><tr><td>10GBASE-T</td><td>10 Gbps</td><td>サーバ、拠点間</td></tr><tr><td>100/400GbE</td><td>100/400 Gbps</td><td>データセンタ、基幹</td></tr></tbody></table></div><div class="col"><div class="col-h">フレームの構造</div><pre class="code small">| 宛先MAC (6) | 送信元MAC (6) |
+| 型 (2) | データ (46-1500) |
+| FCS (4) |</pre><p class="col-b">FCS は誤り検出用。計算が合わなければフレームを捨てるが、訂正はしない。再送は上の層（TCP）に任せる。</p></div></div>
+      <p class="note">初期の CSMA/CD は、1本の同軸ケーブルを全機器で共有していた時代の仕組み。現在のスイッチ構成では衝突は起きない。</p></div>
+        <div class="pageno">18</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">9.4　データリンク層</div>
+        <h2>スイッチは自分で学習する</h2>
+      </header><div class="body">
+      <div class="figwrap"><img class="fig" alt="図 09-05" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MDAgNDUwIiB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQ1MCIgcm9sZT0iaW1nIj48c3R5bGU+CnN2ZyB7IGZvbnQtZmFtaWx5OiAiSGVsdmV0aWNhIE5ldWUiLCBBcmlhbCwgIkhpcmFnaW5vIFNhbnMiLCAiWXUgR290aGljIiwgIk5vdG8gU2FucyBKUCIsIHNhbnMtc2VyaWY7IH0KLmJnICAgeyBmaWxsOiAjZmZmZmZmOyB9Ci5pbmsgIHsgZmlsbDogIzE2MTkxZDsgfQoubXV0ICB7IGZpbGw6ICM1ZjY2NzI7IH0KLnRpbnQgeyBmaWxsOiAjZWVmMWY1OyB9Ci50aW50MnsgZmlsbDogI2RkZTRlYzsgfQouYWNjICB7IGZpbGw6ICMwYjVjYWQ7IH0KLmFjY1QgeyBmaWxsOiAjZDllNmY0OyB9Ci5ub25lIHsgZmlsbDogbm9uZTsgfQoucyAgICB7IHN0cm9rZTogIzE2MTkxZDsgc3Ryb2tlLXdpZHRoOiAxLjY7IGZpbGw6IG5vbmU7IH0KLnMyICAgeyBzdHJva2U6ICMxNjE5MWQ7IHN0cm9rZS13aWR0aDogMi42OyBmaWxsOiBub25lOyB9Ci5zbSAgIHsgc3Ryb2tlOiAjNWY2NjcyOyBzdHJva2Utd2lkdGg6IDEuMjsgZmlsbDogbm9uZTsgfQouc2EgICB7IHN0cm9rZTogIzBiNWNhZDsgc3Ryb2tlLXdpZHRoOiAyLjI7IGZpbGw6IG5vbmU7IH0KLmRhc2ggeyBzdHJva2UtZGFzaGFycmF5OiA1IDQ7IH0KLmRvdCAgeyBzdHJva2UtZGFzaGFycmF5OiAxLjUgMzsgfQp0ZXh0ICB7IGZpbGw6ICMxNjE5MWQ7IGZvbnQtc2l6ZTogMTRweDsgfQoudC1zICB7IGZvbnQtc2l6ZTogMTJweDsgfQoudC14cyB7IGZvbnQtc2l6ZTogMTAuNXB4OyB9Ci50LWwgIHsgZm9udC1zaXplOiAxN3B4OyB9Ci50LXhsIHsgZm9udC1zaXplOiAyMXB4OyB9Ci5iICAgIHsgZm9udC13ZWlnaHQ6IDcwMDsgfQouaSAgICB7IGZvbnQtc3R5bGU6IGl0YWxpYzsgfQoubSAgICB7IGZvbnQtZmFtaWx5OiAiU0YgTW9ubyIsIE1lbmxvLCBDb25zb2xhcywgbW9ub3NwYWNlOyB9Ci5sYmwgIHsgZmlsbDogIzVmNjY3MjsgfQpAbWVkaWEgKHByZWZlcnMtY29sb3Itc2NoZW1lOiBkYXJrKSB7CiAgLmJnICAgeyBmaWxsOiAjMTQxNzFiOyB9CiAgLmluayAgeyBmaWxsOiAjZThlYmVmOyB9CiAgLm11dCAgeyBmaWxsOiAjOWFhM2IwOyB9CiAgLnRpbnQgeyBmaWxsOiAjMjMyODMwOyB9CiAgLnRpbnQyeyBmaWxsOiAjMmUzNDNkOyB9CiAgLmFjYyAgeyBmaWxsOiAjNmFiMGYzOyB9CiAgLmFjY1QgeyBmaWxsOiAjMWUyYzNjOyB9CiAgLnMsIC5zMiB7IHN0cm9rZTogI2U4ZWJlZjsgfQogIC5zbSAgIHsgc3Ryb2tlOiAjOWFhM2IwOyB9CiAgLnNhICAgeyBzdHJva2U6ICM2YWIwZjM7IH0KICB0ZXh0ICB7IGZpbGw6ICNlOGViZWY7IH0KICAubGJsICB7IGZpbGw6ICM5YWEzYjA7IH0KfQo8L3N0eWxlPgo8ZGVmcz4KIDxtYXJrZXIgaWQ9ImEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImluayIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYWEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImFjYyIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYW0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjYiIG1hcmtlckhlaWdodD0iNiIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9Im11dCIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0ibyIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI1IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNiIgbWFya2VySGVpZ2h0PSI2Ij4KICAgPGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjMuNSIgY2xhc3M9ImJnIHMiLz48L21hcmtlcj4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQ1MCIgY2xhc3M9ImJnIi8+PHRleHQgeD0iNDAiIHk9IjQwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJiIj4oMSk8L3RleHQ+PHJlY3QgeD0iMTkwIiB5PSI1MiIgd2lkdGg9IjEzMCIgaGVpZ2h0PSI1NiIgcng9IjYiIGNsYXNzPSJ0aW50IHMiLz48dGV4dCB4PSIyNTUiIHk9IjgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIGIiPuOCueOCpOODg+ODgTwvdGV4dD48Y2lyY2xlIGN4PSIxMjAiIGN5PSI0MCIgcj0iMTYiIGNsYXNzPSJiZyBzIi8+PHRleHQgeD0iMTIwIiB5PSI0MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyI+QTwvdGV4dD48bGluZSB4MT0iMTM2IiB5MT0iNDAiIHgyPSIxOTAiIHkyPSI2NiIgY2xhc3M9InNtIi8+PGNpcmNsZSBjeD0iMTIwIiBjeT0iMTIwIiByPSIxNiIgY2xhc3M9ImJnIHMiLz48dGV4dCB4PSIxMjAiIHk9IjEyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyI+QjwvdGV4dD48bGluZSB4MT0iMTM2IiB5MT0iMTIwIiB4Mj0iMTkwIiB5Mj0iOTQiIGNsYXNzPSJzbSIvPjxjaXJjbGUgY3g9IjM5MCIgY3k9IjQwIiByPSIxNiIgY2xhc3M9ImJnIHMiLz48dGV4dCB4PSIzOTAiIHk9IjQwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIj5DPC90ZXh0PjxsaW5lIHgxPSIzNzQiIHkxPSI0MCIgeDI9IjMyMCIgeTI9IjY2IiBjbGFzcz0ic20iLz48Y2lyY2xlIGN4PSIzOTAiIGN5PSIxMjAiIHI9IjE2IiBjbGFzcz0iYmcgcyIvPjx0ZXh0IHg9IjM5MCIgeT0iMTIwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIj5EPC90ZXh0PjxsaW5lIHgxPSIzNzQiIHkxPSIxMjAiIHgyPSIzMjAiIHkyPSI5NCIgY2xhc3M9InNtIi8+PGxpbmUgeDE9IjEzNiIgeTE9IjQ0IiB4Mj0iMTg2IiB5Mj0iNjQiIGNsYXNzPSJzYSIgbWFya2VyLWVuZD0idXJsKCNhKSIvPjxsaW5lIHgxPSIzMjQiIHkxPSI2NiIgeDI9IjM3NCIgeTI9IjQ2IiBjbGFzcz0ic20iIG1hcmtlci1lbmQ9InVybCgjYSkiLz48bGluZSB4MT0iMzI0IiB5MT0iOTQiIHgyPSIzNzQiIHkyPSIxMTQiIGNsYXNzPSJzbSIgbWFya2VyLWVuZD0idXJsKCNhKSIvPjxsaW5lIHgxPSIxODYiIHkxPSI5NCIgeDI9IjEzOCIgeTI9IjExNCIgY2xhc3M9InNtIiBtYXJrZXItZW5kPSJ1cmwoI2EpIi8+PHRleHQgeD0iNjAiIHk9IjE0OCIgdGV4dC1hbmNob3I9InN0YXJ0IiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+QiDjga7kvY3nva7jgpLnn6XjgonjgarjgYTjga7jgafjgIHlj5fkv6Hjg53jg7zjg4jku6XlpJbjga7lhajjg53jg7zjg4jjgbjvvIjjg5Xjg6njg4Pjg4fjgqPjg7PjgrDvvIk8L3RleHQ+PHJlY3QgeD0iNTAwIiB5PSI0NCIgd2lkdGg9IjE2MCIgaGVpZ2h0PSI0MiIgcng9IjQiIGNsYXNzPSJub25lIHNtIi8+PHRleHQgeD0iNTgwIiB5PSI1OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgYiI+TUFDIOOCouODieODrOOCueODhuODvOODluODqzwvdGV4dD48dGV4dCB4PSI1ODAiIHk9Ijc2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyBtIj5BIOKGkiDjg53jg7zjg4gxPC90ZXh0Pjx0ZXh0IHg9IjQwIiB5PSIxNzAiIHRleHQtYW5jaG9yPSJzdGFydCIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9ImIiPigyKTwvdGV4dD48cmVjdCB4PSIxOTAiIHk9IjE4MiIgd2lkdGg9IjEzMCIgaGVpZ2h0PSI1NiIgcng9IjYiIGNsYXNzPSJ0aW50IHMiLz48dGV4dCB4PSIyNTUiIHk9IjIxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBiIj7jgrnjgqTjg4Pjg4E8L3RleHQ+PGNpcmNsZSBjeD0iMTIwIiBjeT0iMTcwIiByPSIxNiIgY2xhc3M9ImJnIHMiLz48dGV4dCB4PSIxMjAiIHk9IjE3MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyI+QTwvdGV4dD48bGluZSB4MT0iMTM2IiB5MT0iMTcwIiB4Mj0iMTkwIiB5Mj0iMTk2IiBjbGFzcz0ic20iLz48Y2lyY2xlIGN4PSIxMjAiIGN5PSIyNTAiIHI9IjE2IiBjbGFzcz0iYmcgcyIvPjx0ZXh0IHg9IjEyMCIgeT0iMjUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIj5CPC90ZXh0PjxsaW5lIHgxPSIxMzYiIHkxPSIyNTAiIHgyPSIxOTAiIHkyPSIyMjQiIGNsYXNzPSJzbSIvPjxjaXJjbGUgY3g9IjM5MCIgY3k9IjE3MCIgcj0iMTYiIGNsYXNzPSJiZyBzIi8+PHRleHQgeD0iMzkwIiB5PSIxNzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMiPkM8L3RleHQ+PGxpbmUgeDE9IjM3NCIgeTE9IjE3MCIgeDI9IjMyMCIgeTI9IjE5NiIgY2xhc3M9InNtIi8+PGNpcmNsZSBjeD0iMzkwIiBjeT0iMjUwIiByPSIxNiIgY2xhc3M9ImJnIHMiLz48dGV4dCB4PSIzOTAiIHk9IjI1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyI+RDwvdGV4dD48bGluZSB4MT0iMzc0IiB5MT0iMjUwIiB4Mj0iMzIwIiB5Mj0iMjI0IiBjbGFzcz0ic20iLz48bGluZSB4MT0iMTM2IiB5MT0iMjQ2IiB4Mj0iMTg2IiB5Mj0iMjI0IiBjbGFzcz0ic2EiIG1hcmtlci1lbmQ9InVybCgjYSkiLz48bGluZSB4MT0iMTg2IiB5MT0iMTk2IiB4Mj0iMTM4IiB5Mj0iMTc2IiBjbGFzcz0ic2EiIG1hcmtlci1lbmQ9InVybCgjYSkiLz48dGV4dCB4PSI2MCIgeT0iMjc4IiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj7ooajjgpLopovjgabjgIHjg53jg7zjg4gx44Gr44Gg44GR6Lui6YCB44GZ44KLPC90ZXh0PjxyZWN0IHg9IjUwMCIgeT0iMTc0IiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjYwIiByeD0iNCIgY2xhc3M9Im5vbmUgc20iLz48dGV4dCB4PSI1ODAiIHk9IjE4OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgYiI+TUFDIOOCouODieODrOOCueODhuODvOODluODqzwvdGV4dD48dGV4dCB4PSI1ODAiIHk9IjIwNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgbSI+QSDihpIg44Od44O844OIMTwvdGV4dD48dGV4dCB4PSI1ODAiIHk9IjIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgbSI+QiDihpIg44Od44O844OIMjwvdGV4dD48dGV4dCB4PSI0MCIgeT0iMzAwIiB0ZXh0LWFuY2hvcj0ic3RhcnQiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJiIj4oMyk8L3RleHQ+PHJlY3QgeD0iMTkwIiB5PSIzMTIiIHdpZHRoPSIxMzAiIGhlaWdodD0iNTYiIHJ4PSI2IiBjbGFzcz0idGludCBzIi8+PHRleHQgeD0iMjU1IiB5PSIzNDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMgYiI+44K544Kk44OD44OBPC90ZXh0PjxjaXJjbGUgY3g9IjEyMCIgY3k9IjMwMCIgcj0iMTYiIGNsYXNzPSJiZyBzIi8+PHRleHQgeD0iMTIwIiB5PSIzMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMiPkE8L3RleHQ+PGxpbmUgeDE9IjEzNiIgeTE9IjMwMCIgeDI9IjE5MCIgeTI9IjMyNiIgY2xhc3M9InNtIi8+PGNpcmNsZSBjeD0iMTIwIiBjeT0iMzgwIiByPSIxNiIgY2xhc3M9ImJnIHMiLz48dGV4dCB4PSIxMjAiIHk9IjM4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyI+QjwvdGV4dD48bGluZSB4MT0iMTM2IiB5MT0iMzgwIiB4Mj0iMTkwIiB5Mj0iMzU0IiBjbGFzcz0ic20iLz48Y2lyY2xlIGN4PSIzOTAiIGN5PSIzMDAiIHI9IjE2IiBjbGFzcz0iYmcgcyIvPjx0ZXh0IHg9IjM5MCIgeT0iMzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIj5DPC90ZXh0PjxsaW5lIHgxPSIzNzQiIHkxPSIzMDAiIHgyPSIzMjAiIHkyPSIzMjYiIGNsYXNzPSJzbSIvPjxjaXJjbGUgY3g9IjM5MCIgY3k9IjM4MCIgcj0iMTYiIGNsYXNzPSJiZyBzIi8+PHRleHQgeD0iMzkwIiB5PSIzODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMiPkQ8L3RleHQ+PGxpbmUgeDE9IjM3NCIgeTE9IjM4MCIgeDI9IjMyMCIgeTI9IjM1NCIgY2xhc3M9InNtIi8+PGxpbmUgeDE9IjEzNiIgeTE9IjMwNCIgeDI9IjE4NiIgeTI9IjMyNCIgY2xhc3M9InNhIiBtYXJrZXItZW5kPSJ1cmwoI2EpIi8+PGxpbmUgeDE9IjE4NiIgeTE9IjM1NCIgeDI9IjEzOCIgeTI9IjM3NCIgY2xhc3M9InNhIiBtYXJrZXItZW5kPSJ1cmwoI2EpIi8+PHRleHQgeD0iNDA4IiB5PSIzNDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIGxibCI+QywgRCDjgavjga/mtYHjgozjgarjgYQ8L3RleHQ+PHRleHQgeD0iNjAiIHk9IjQwOCIgdGV4dC1hbmNob3I9InN0YXJ0IiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+5Lul5b6MIEHihpRCIOOBrumAmuS/oeOBr+ODneODvOODiDHjgagy44Gu6ZaT44Gg44GR44Gn5a6M57WQ44GZ44KLPC90ZXh0PjxyZWN0IHg9IjUwMCIgeT0iMzA0IiB3aWR0aD0iMTYwIiBoZWlnaHQ9IjYwIiByeD0iNCIgY2xhc3M9Im5vbmUgc20iLz48dGV4dCB4PSI1ODAiIHk9IjMxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgYiI+TUFDIOOCouODieODrOOCueODhuODvOODluODqzwvdGV4dD48dGV4dCB4PSI1ODAiIHk9IjMzNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgbSI+QSDihpIg44Od44O844OIMTwvdGV4dD48dGV4dCB4PSI1ODAiIHk9IjM1NCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgbSI+QiDihpIg44Od44O844OIMjwvdGV4dD48dGV4dCB4PSIzNTAiIHk9IjQzOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBiIj7pgIHkv6HlhYMgTUFDIOOCkuims+Wvn+OBmeOCi+OBoOOBkeOBp+OAgei7oumAgeihqOOBjOiHquW+i+eahOOBq+Wfi+OBvuOBo+OBpuOBhOOBjzwvdGV4dD48L3N2Zz4K"></div>
+      <p class="caption">中央の管理者なしに、局所的な観察だけで効率的な転送を実現している。</p>
+      
+      </div>
+        <div class="pageno">19</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">9.4　無線</div>
+        <h2>Wi-Fi：共有媒体ゆえの問題</h2>
+      </header><div class="body"><p class="lead">無線 LAN（IEEE 802.11 系）は電波という共有媒体を使うため、有線とは異なる問題を抱える。</p>
+      <div class="cards" style="--per:2"><div class="card">
+      <div class="card-h">衝突を検出できない</div>
+      <div class="card-b">送信中は自分の電波で相手の電波が聞こえない。送る前に一定時間待つ方式（CSMA/CA）を使う</div>
+    </div><div class="card">
+      <div class="card-h">隠れ端末問題</div>
+      <div class="card-b">A と C が互いの電波は届かないが、両方とも B に届く場合、互いの送信に気づかず衝突する</div>
+    </div><div class="card">
+      <div class="card-h">帯域を分け合う</div>
+      <div class="card-b">同じアクセスポイントの利用者が増えると、帯域が分割される</div>
+    </div><div class="card">
+      <div class="card-h">傍受されうる</div>
+      <div class="card-b">電波は誰にでも届く。暗号化が必須（WPA3 を使う。WEP と WPA は破られている）</div>
+    </div></div>
+      <p class="note">現在は通信そのものが TLS で暗号化されているため（第10回）、公衆 Wi-Fi の危険性は昔より小さくなっている。</p></div>
+        <div class="pageno">20</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">第9回</div>
+        <h2>演習</h2>
+      </header><div class="body"><ul class="ex">
+      <li><span class="ex-n">9-1</span><span class="ex-t">回線交換とパケット交換について、(a) 帯域の使われ方 (b) 遅延の安定性 (c) 障害への強さ で比較せよ。計算機の通信でパケット交換が選ばれた理由を述べよ。</span></li>
+      <li><span class="ex-n">9-2</span><span class="ex-t">HTTP メッセージが Ethernet フレームとして送出されるまでに、どのヘッダがどの順に付加されるか示せ。</span></li>
+      <li><span class="ex-n">9-3</span><span class="ex-t">MAC アドレスと IP アドレスの役割の違いを (a) 有効範囲 (b) 割り当て方 (c) 階層構造の有無 で説明し、両方が必要な理由を述べよ。</span></li>
+      <li><span class="ex-n">9-4</span><span class="ex-t">有線 Ethernet では衝突が起きなくなったのに、Wi-Fi では今も媒体アクセス制御が必要なのはなぜか。</span></li></ul></div>
+        <div class="pageno">21</div>
+      </section>
+<section class="slide dark ">
+      <div class="sum-wrap">
+        <h1 class="sum-t">まとめ</h1>
+        <ul class="sum">
+      <li><span class="s-h">パケット交換</span><span class="s-b">回線を占有せず経路の障害に強いが、遅延も到達も保証しない（ベストエフォート）</span></li>
+      <li><span class="s-h">階層モデル</span><span class="s-b">問題を分割し、各層を独立に改良できる。データは層を降りるごとにヘッダで包まれる</span></li>
+      <li><span class="s-h">インターネット</span><span class="s-b">独立した多数の AS が相互接続した「網の網」。中央の管理者はいない</span></li>
+      <li><span class="s-h">スケールフリー</span><span class="s-b">ランダム故障に強く、ハブへの攻撃に弱い</span></li>
+      <li><span class="s-h">2種類のアドレス</span><span class="s-b">MAC は「隣の機器」、IP は「世界のどこか」を指す。役割が違うので両方要る</span></li>
+      <li><span class="s-h">スイッチ</span><span class="s-b">送信元 MAC を観察するだけで、転送表を自律的に学習する</span></li></ul>
+        <p class="next"><b>次回</b>　隣までは届くようになった。では、地球の裏側の、アドレスしか知らない相手にどうやって届けるのか。</p>
+      </div></section>
+</div>
+<div id="hud"><span id="cur">1</span> / <span id="total">22</span></div>
+<div id="help" hidden>
+  <h3>操作</h3>
+  <table>
+    <tr><td>→ ↓ Space PageDown</td><td>次へ</td></tr>
+    <tr><td>← ↑ PageUp</td><td>前へ</td></tr>
+    <tr><td>Home / End</td><td>最初 / 最後</td></tr>
+    <tr><td>数字 + Enter</td><td>その番号へ</td></tr>
+    <tr><td>O</td><td>一覧表示</td></tr>
+    <tr><td>F</td><td>全画面</td></tr>
+    <tr><td>C</td><td>組版チェック（溢れの検出）</td></tr>
+    <tr><td>P</td><td>印刷（PDF 保存）</td></tr>
+    <tr><td>?</td><td>この画面</td></tr>
+  </table>
+  <p>印刷は1枚1ページで出る。PDF にすれば pptx を配るのと同じことができる。</p>
+</div>
+<script>
+
+(function(){
+  var deck=document.getElementById('deck');
+  var slides=[].slice.call(deck.querySelectorAll('.slide'));
+  var cur=0, buf='';
+  var hud=document.getElementById('cur'), help=document.getElementById('help');
+
+  // 板を画面に合わせて拡大縮小する
+  function fit(){
+    var s=Math.min(innerWidth/1280, innerHeight/720);
+    document.documentElement.style.setProperty('--s', s);
+    var ow=(310)/1280;
+    slides.forEach(function(el){ el.style.setProperty('--os', ow); });
+    if(document.body.classList.contains('overview')) layoutOverview();
+  }
+  function layoutOverview(){
+    // 一覧では実寸の板を縮めて置くので、親に実際の見かけの大きさを持たせる
+    var cell=deck.clientWidth/Math.max(1,Math.floor(deck.clientWidth/330));
+    var s=(cell-8)/1280;
+    slides.forEach(function(el){
+      el.style.setProperty('--os', s);
+      el.style.marginBottom=(720*s-720)+'px';
+      el.style.marginRight=(1280*s-1280)+'px';
+    });
+  }
+  function show(i){
+    cur=Math.max(0,Math.min(slides.length-1,i));
+    slides.forEach(function(el,j){ el.classList.toggle('on', j===cur); });
+    hud.textContent=cur+1;
+    if(location.hash!=='#'+(cur+1)) history.replaceState(null,'','#'+(cur+1));
+  }
+  function overview(on){
+    document.body.classList.toggle('overview', on);
+    if(on){ slides.forEach(function(el){ el.classList.add('on'); }); layoutOverview();
+            slides[cur].scrollIntoView({block:'center'}); }
+    else { slides.forEach(function(el){ el.style.margin=''; }); fit(); show(cur); }
+  }
+
+  // 組版チェック。実際に描いた結果を測るので、見積もりではなく事実が分かる。
+  // pptx では PowerPoint に描かせるまで分からなかった部分である。
+  function check(){
+    var bad=[];
+    slides.forEach(function(el,i){
+      var was=el.classList.contains('on');
+      el.classList.add('on');
+      var over=false;
+      [].slice.call(el.querySelectorAll('*')).forEach(function(n){
+        var r=n.getBoundingClientRect(), e=el.getBoundingClientRect();
+        if(r.height&&(r.bottom>e.bottom+1||r.right>e.right+1)) over=true;
+      });
+      if(el.scrollHeight>el.clientHeight+1||el.scrollWidth>el.clientWidth+1) over=true;
+      el.classList.toggle('overflow', over);
+      if(over) bad.push(i+1);
+      if(!was) el.classList.remove('on');
+    });
+    document.body.classList.add('check');
+    slides[cur].classList.add('on');
+    console.log(bad.length? '組版あふれ: '+bad.length+'枚 → '+bad.join(', ') : '組版あふれなし');
+    return bad;
+  }
+
+  addEventListener('resize', fit);
+  addEventListener('hashchange', function(){
+    var n=parseInt(location.hash.slice(1),10); if(n) show(n-1);
+  });
+  addEventListener('keydown', function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;
+    var k=e.key;
+    if(k>='0'&&k<='9'){ buf+=k; return; }
+    if(k==='Enter'){ if(buf){ show(parseInt(buf,10)-1); buf=''; } return; }
+    buf='';
+    switch(k){
+      case 'ArrowRight': case 'ArrowDown': case ' ': case 'PageDown':
+        e.preventDefault(); show(cur+1); break;
+      case 'ArrowLeft': case 'ArrowUp': case 'PageUp':
+        e.preventDefault(); show(cur-1); break;
+      case 'Home': show(0); break;
+      case 'End': show(slides.length-1); break;
+      case 'o': case 'O': overview(!document.body.classList.contains('overview')); break;
+      case 'f': case 'F':
+        if(document.fullscreenElement) document.exitFullscreen();
+        else document.documentElement.requestFullscreen(); break;
+      case 'c': case 'C':
+        if(document.body.classList.contains('check')){
+          document.body.classList.remove('check');
+          slides.forEach(function(el){ el.classList.remove('overflow'); });
+        } else check();
+        break;
+      case 'p': case 'P': print(); break;
+      case '?': help.hidden=!help.hidden; break;
+      case 'Escape': help.hidden=true; if(document.body.classList.contains('overview')) overview(false); break;
+    }
+  });
+  deck.addEventListener('click', function(e){
+    var el=e.target.closest('.slide'); if(!el) return;
+    if(document.body.classList.contains('overview')){
+      show(slides.indexOf(el)); overview(false);
+    } else show(cur+1);
+  });
+
+  fit();
+  var n=parseInt(location.hash.slice(1),10);
+  show(n? n-1 : 0);
+  window.__check=check;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第12回 情報セキュリティ｜コンピュータシステム通論</title>
+<style>
+
+:root{
+  --ink:#16191D; --paper:#FFFFFF; --tint:#EEF1F5; --tint2:#DDE4EC;
+  --acc:#0B5CAD; --accT:#D9E6F4; --mut:#5F6672; --dim:#9AA3B0;
+  --lightInk:#E8EBEF; --accLight:#6AB0F3; --code:#F5F7FA; --ghost:#2E3A4A;
+  --ja:"Yu Gothic Medium", "Yu Gothic", YuGothic, "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif; --mono:"SFMono-Regular", Menlo, Consolas, "Courier New", monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0b0d10;font-family:var(--ja);
+  -webkit-font-smoothing:antialiased;overflow:hidden}
+
+/* 1280x720 の板を作り、画面の大きさに合わせて拡大縮小する。
+   どの画面でも同じ見た目になる —— スライドである以上これが要る。 */
+#deck{position:absolute;inset:0}
+.slide{
+  position:absolute;top:50%;left:50%;
+  width:1280px;height:720px;
+  transform:translate(-50%,-50%) scale(var(--s,1));
+  transform-origin:center center;
+  overflow:hidden;display:none;
+}
+.slide.on{display:block}
+.slide.light{background:var(--paper);color:var(--ink)}
+.slide.dark{background:var(--ink);color:var(--paper)}
+
+/* --- 明色スライドの骨格 --- */
+.slide.light header{position:absolute;top:33px;left:60px;right:60px}
+.kicker{font-size:16px;font-weight:700;color:var(--acc);letter-spacing:.02em}
+.slide.light h2{font-size:40px;font-weight:700;line-height:1.25;margin-top:6px}
+/* 内容の塊ごと、見出しと下端のあいだで縦に中央へ寄せる。
+   pptx では noteY を1枚ずつ手で詰めて注記を内容の直下に置いていた。
+   CSS は高さを知っているので、その手当てが要らない。 */
+.slide.light .body{position:absolute;top:130px;left:72px;right:72px;bottom:56px;
+  display:flex;flex-direction:column;gap:14px;justify-content:center}
+.pageno{position:absolute;right:60px;bottom:22px;font-size:13px;color:var(--mut)}
+
+.lead{font-size:20px;line-height:1.55;color:var(--ink)}
+.sub{font-size:17px;line-height:1.6;color:var(--mut)}
+.sub.center,.caption{text-align:center}
+.caption{font-size:20px;line-height:1.5;color:var(--ink)}
+.note{font-size:17px;line-height:1.5;font-weight:700;color:var(--acc);margin-top:8px}
+
+/* --- 意匠：マス目 --- */
+.motif{position:absolute;left:58px;bottom:56px;display:flex;gap:4px}
+.motif i{width:28px;height:19px;border:1px solid rgba(106,176,243,.45);border-radius:2px}
+.motif i.on{background:var(--accLight);border-color:var(--accLight)}
+.slide.title .motif{bottom:128px}
+
+/* --- 表紙 --- */
+.title-wrap{position:absolute;left:86px;top:188px;right:86px}
+.course{font-size:23px;color:var(--dim);letter-spacing:.12em}
+.slide.title h1{font-weight:700;line-height:1.2;margin-top:24px;color:var(--paper)}
+.tq{font-size:24px;line-height:1.5;color:var(--accLight);margin-top:28px}
+.affil{position:absolute;left:86px;bottom:22px;font-size:16px;color:var(--dim)}
+
+/* --- 今回の問い --- */
+.q-wrap{position:absolute;left:86px;right:86px;top:144px}
+.q-label{font-size:19px;font-weight:700;color:var(--accLight)}
+.q-big{font-size:48px;font-weight:700;line-height:1.35;margin-top:22px;color:var(--paper)}
+.q-sub{font-size:27px;color:var(--lightInk);margin-top:22px}
+.q-foot{font-size:19px;color:var(--dim);margin-top:40px}
+
+/* --- 節の区切り --- */
+.sec-wrap{position:absolute;left:86px;right:86px;top:230px}
+.sec-n{font-size:75px;font-weight:700;color:var(--ghost);line-height:1}
+.sec-name{font-size:51px;font-weight:700;color:var(--paper);margin-top:10px;line-height:1.2}
+.sec-tag{font-size:23px;color:var(--dim);margin-top:18px}
+
+/* --- 到達目標 --- */
+.goals{list-style:none;display:flex;flex-direction:column;gap:18px;margin-top:8px}
+.goals li{display:flex;align-items:center;gap:18px}
+.goals .num{flex:none;width:48px;height:48px;border-radius:50%;
+  background:var(--accT);border:1.5px solid var(--acc);color:var(--acc);
+  font-size:19px;font-weight:700;display:grid;place-items:center}
+.g-h{font-size:21px;font-weight:700;color:var(--ink)}
+.g-b{font-size:19px;color:var(--mut);margin-left:12px}
+
+/* --- カード --- */
+.cards{display:grid;grid-template-columns:repeat(var(--per),1fr);gap:16px;align-content:start}
+.card{background:var(--tint);border:1px solid var(--tint2);border-radius:8px;padding:16px 18px}
+.card.acc{background:var(--accT);border-color:var(--acc)}
+.card-h{font-size:19px;font-weight:700;color:var(--ink)}
+.card.acc .card-h{color:var(--acc)}
+.card-b{font-size:16px;line-height:1.55;color:var(--mut);margin-top:8px}
+
+/* --- 囲み --- */
+.callout{border-radius:8px;padding:14px 20px}
+.callout.dashed{border:1.5px dashed var(--acc);background:var(--paper)}
+.callout.solid{border:1.5px solid var(--acc);background:var(--accT);
+  font-size:20px;font-weight:700;color:var(--acc);line-height:1.45}
+.callout.big{font-size:23px}
+.co-h{font-size:20px;font-weight:700;color:var(--acc)}
+.co-b{font-size:16px;line-height:1.5;color:var(--mut);margin-top:6px}
+
+/* --- 箇条書き --- */
+.bullets{list-style:none;display:flex;flex-direction:column;gap:10px}
+.bullets li{position:relative;padding-left:22px;font-size:21px;line-height:1.5;color:var(--ink)}
+.bullets li::before{content:"";position:absolute;left:4px;top:.62em;
+  width:7px;height:7px;border-radius:50%;background:var(--acc)}
+.bullets li.lv1{font-size:18px;color:var(--mut);padding-left:44px}
+.bullets li.lv1::before{left:26px;width:5px;height:5px;background:var(--mut)}
+.bullets.tight li{font-size:18px;gap:6px}
+
+/* --- コード --- */
+.code{background:var(--code);border:1px solid var(--tint2);border-radius:6px;
+  padding:16px 20px;font-family:var(--mono);font-size:17px;line-height:1.7;
+  color:var(--ink);white-space:pre;overflow:hidden}
+.code.small{font-size:15.5px}
+.code-split{display:grid;grid-template-columns:1fr .92fr;gap:22px;align-items:start}
+.side-h{font-size:19px;font-weight:700;color:var(--ink)}
+.side-b{font-size:17px;line-height:1.6;color:var(--mut);margin-top:8px}
+
+/* --- 表 --- */
+.tbl{width:100%;border-collapse:collapse;table-layout:fixed}
+.tbl th,.tbl td{border:1px solid var(--tint2);padding:7px 11px;font-size:17px;
+  line-height:1.4;text-align:left;vertical-align:middle;word-break:break-word}
+.tbl th{background:var(--tint);font-weight:700}
+.tbl.mono{font-family:var(--mono);font-size:16px}
+.tbl.mono th{font-family:var(--ja)}
+.tbl.center th,.tbl.center td{text-align:center}
+
+/* --- 左右2段 --- */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+.col{display:flex;flex-direction:column;gap:11px}
+.col-h{font-size:20px;font-weight:700;color:var(--ink)}
+.col-b{font-size:17px;line-height:1.65;color:var(--mut)}
+.col-n{font-size:17px;font-weight:700;color:var(--acc)}
+
+/* --- 主張と対応 --- */
+.map{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:6px}
+.map li{display:grid;grid-template-columns:1fr 60px 1fr;align-items:center;gap:8px}
+.m-a{font-size:20px;color:var(--ink);text-align:right}
+.m-arrow{height:3px;background:var(--acc);position:relative;border-radius:2px}
+.m-arrow::after{content:"";position:absolute;right:-1px;top:-5px;
+  border:7px solid transparent;border-left-color:var(--acc);border-right:0}
+.m-b{font-size:21px;font-weight:700;color:var(--acc)}
+
+/* --- 手順 --- */
+.steps{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:10px;align-items:stretch}
+.step{background:var(--tint);border:1px solid var(--tint2);border-radius:8px;padding:12px 12px 14px}
+.step.first{background:var(--accT);border-color:var(--acc)}
+.st-n{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--acc)}
+.st-h{font-size:17px;font-weight:700;color:var(--ink);margin-top:6px;line-height:1.3}
+.st-b{font-size:15px;color:var(--mut);margin-top:6px;line-height:1.45}
+
+/* --- 図 --- */
+/* 図は枠いっぱいまで伸ばす。SVG なので拡大しても粗くならない。
+   pptx 版も箱に合わせて拡大していたので、そこは同じ振る舞いにしてある。 */
+.figwrap{flex:1;min-height:0;display:flex}
+.fig{width:100%;height:100%;object-fit:contain}
+.fig-missing{color:#b00;font-size:20px;text-align:center;padding:40px}
+
+/* --- 演習 --- */
+.ex{list-style:none;display:flex;flex-direction:column;gap:16px}
+.ex li{display:flex;gap:18px;align-items:flex-start}
+.ex-n{flex:none;width:74px;padding:5px 0;text-align:center;border-radius:7px;
+  background:var(--accT);border:1px solid var(--acc);color:var(--acc);
+  font-family:var(--mono);font-size:17px;font-weight:700}
+.ex-t{font-size:19px;line-height:1.55;color:var(--ink);padding-top:3px}
+
+/* --- まとめ --- */
+.sum-wrap{position:absolute;left:86px;right:86px;top:74px;bottom:74px;
+  display:flex;flex-direction:column}
+.sum-t{font-size:40px;font-weight:700;color:var(--paper)}
+.sum{list-style:none;display:flex;flex-direction:column;gap:16px;margin-top:26px}
+.sum li{display:grid;grid-template-columns:300px 1fr;gap:24px;align-items:baseline}
+.s-h{font-size:20px;font-weight:700;color:var(--accLight)}
+.s-b{font-size:18px;line-height:1.5;color:var(--lightInk)}
+.next{font-size:17px;color:var(--dim);margin-top:auto;line-height:1.5}
+.next b{color:var(--accLight)}
+
+/* --- 画面まわり --- */
+#hud{position:fixed;left:16px;bottom:12px;font-size:13px;color:#7c8694;
+  font-family:var(--mono);z-index:20;user-select:none}
+#help{position:fixed;inset:50% auto auto 50%;transform:translate(-50%,-50%);
+  background:#fff;color:var(--ink);border-radius:12px;padding:26px 30px;z-index:30;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);font-size:15px;max-width:520px}
+#help h3{font-size:19px;margin-bottom:14px}
+#help table{border-collapse:collapse;width:100%}
+#help td{padding:5px 10px 5px 0;vertical-align:top}
+#help td:first-child{font-family:var(--mono);color:var(--acc);white-space:nowrap}
+#help p{margin-top:14px;color:var(--mut);font-size:13.5px;line-height:1.6}
+
+/* --- 一覧表示 --- */
+body.overview{overflow:auto}
+body.overview #deck{position:static;display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px;padding:22px}
+body.overview .slide{position:relative;top:auto;left:auto;display:block;
+  transform:scale(var(--os));transform-origin:top left;
+  width:1280px;height:720px;cursor:pointer;
+  outline:2px solid #2a3340;border-radius:2px}
+body.overview .slide.on{outline:3px solid var(--accLight)}
+body.overview .sl-wrap{overflow:hidden}
+
+/* --- 組版チェック：実際に溢れた箇所だけを赤で示す --- */
+body.check .slide.overflow{outline:4px solid #e0453a;outline-offset:-4px}
+body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
+  right:0;top:0;background:#e0453a;color:#fff;font-size:13px;padding:3px 9px;
+  font-weight:700;z-index:9}
+
+/* --- 印刷：1枚1ページ。PDF にすれば配布できる --- */
+@page{size:1280px 720px;margin:0}
+@media print{
+  html,body{overflow:visible;background:#fff;height:auto}
+  #hud,#help{display:none!important}
+  #deck{position:static}
+  .slide{position:relative!important;display:block!important;top:auto;left:auto;
+    transform:none!important;page-break-after:always;break-after:page;
+    width:1280px;height:720px}
+  .slide:last-child{page-break-after:auto;break-after:auto}
+}
+</style>
+</head>
+<body>
+<div id="deck">
+<section class="slide dark title">
+      <div class="title-wrap">
+        <div class="course">コンピュータシステム通論</div>
+        <h1 style="font-size:51px">第12回　情報セキュリティ</h1>
+        <p class="tq">顔の見えない相手を、どうやって信用するのか。</p>
+      </div>
+      <div class="affil">九州大学</div><div class="motif"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div></section>
+<section class="slide dark ">
+      <div class="q-wrap">
+        <div class="q-label">今回の問い</div>
+        <p class="q-big">顔の見えない相手を、<br>どうやって信用するのか。</p>
+        
+        <p class="q-foot">この90分で、この問いに答えを出す。</p>
+      </div><div class="motif"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div></section>
+<section class="slide light">
+        <header>
+        <div class="kicker">第12回</div>
+        <h2>到達目標</h2>
+      </header><div class="body"><ol class="goals">
+      <li><span class="num">1</span>
+        <span class="g-h">情報セキュリティの3要素</span><span class="g-b">を挙げ、それぞれが破られた例を説明できる</span></li>
+      <li><span class="num">2</span>
+        <span class="g-h">共通鍵暗号と公開鍵暗号</span><span class="g-b">の違いと、それぞれの利点と限界を説明できる</span></li>
+      <li><span class="num">3</span>
+        <span class="g-h">ディジタル署名</span><span class="g-b">の役割を説明できる</span></li>
+      <li><span class="num">4</span>
+        <span class="g-h">証明書と認証局</span><span class="g-b">が「信頼の連鎖」をどう作るか説明できる</span></li>
+      <li><span class="num">5</span>
+        <span class="g-h">認証と認可</span><span class="g-b">を区別し、パスキーやシングルサインオンを説明できる</span></li></ol></div>
+        <div class="pageno">3</div>
+      </section>
+<section class="slide dark ">
+      <div class="sec-wrap">
+        <div class="sec-n">12.1</div>
+        <h1 class="sec-name">何を守るのか</h1>
+        <p class="sec-tag">安全にすることではなく、釣り合いを決めること</p>
+      </div><div class="motif"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div></section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.1　CIA</div>
+        <h2>情報セキュリティの3要素</h2>
+      </header><div class="body">
+      <div class="cards" style="--per:3"><div class="card">
+      <div class="card-h">機密性 (Confidentiality)</div>
+      <div class="card-b">権限のない者に見せない。破られた例：個人情報の漏洩</div>
+    </div><div class="card">
+      <div class="card-h">完全性 (Integrity)</div>
+      <div class="card-b">勝手に書き換えられない。破られた例：Web サイトの改竄、成績データの不正操作</div>
+    </div><div class="card">
+      <div class="card-h">可用性 (Availability)</div>
+      <div class="card-b">必要なときに使える。破られた例：サービス妨害攻撃、ランサムウェアによる暗号化</div>
+    </div></div>
+      <div class="callout dashed">
+        <div class="co-h">この3つはしばしば互いに衝突する</div>
+        <div class="co-b">機密性を極めるなら誰にも見せず電源を切ってネットワークから外すのが最も安全だが、可用性は失われる。</div>
+      </div><p class="note">セキュリティは「安全にすること」ではなく、「守るべきものと、失ってよい利便性の釣り合いを決めること」である。</p></div>
+        <div class="pageno">5</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.1　なぜ難しいか</div>
+        <h2>対面と遠隔の違い</h2>
+      </header><div class="body">
+      <table class="tbl  "><colgroup><col style="width:45.76%"><col style="width:54.24%"></colgroup><thead><tr><th>対面</th><th>インターネット</th></tr></thead><tbody><tr><td>相手を目で見て確認する</td><td>相手が誰か分からない</td></tr><tr><td>その場で交換する</td><td>送ったものが届いたか分からない</td></tr><tr><td>会話は当事者だけに聞こえる</td><td>経路上の誰でも聞ける</td></tr><tr><td>契約書に署名する</td><td>署名を真似られる</td></tr></tbody></table>
+      <div class="callout solid">パケットは多数のネットワークを経由する。どこかで読むことも、書き換えることもできる</div><p class="sub">だから暗号技術が要る。近年は CIA に加えて、真正性（相手が名乗ったとおりか）と<br>否認防止（後から「やっていない」と言えないこと）を加えて論じることが多い。</p></div>
+        <div class="pageno">6</div>
+      </section>
+<section class="slide dark ">
+      <div class="sec-wrap">
+        <div class="sec-n">12.2</div>
+        <h1 class="sec-name">暗号の基礎</h1>
+        <p class="sec-tag">方式は公開されている前提で設計する</p>
+      </div><div class="motif"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div></section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.2　暗号</div>
+        <h2>ケルクホフスの原理（1883年）</h2>
+      </header><div class="body">
+      <div class="callout solid big">暗号方式が公開されていても、鍵さえ秘密であれば安全でなければならない</div>
+      <ul class="map">
+      <li><span class="m-a">方式を秘密にして守る</span><span class="m-arrow"></span>
+        <span class="m-b">成り立たない</span></li>
+      <li><span class="m-a">方式はいずれ漏れる</span><span class="m-arrow"></span>
+        <span class="m-b">前提にする</span></li>
+      <li><span class="m-a">公開して攻撃され生き残った方式</span><span class="m-arrow"></span>
+        <span class="m-b">こそ信頼できる</span></li></ul>
+      <p class="sub">「自作の暗号を使ってはならない」という実務上の鉄則は、ここから来ている。</p></div>
+        <div class="pageno">8</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.2　暗号</div>
+        <h2>共通鍵暗号の限界</h2>
+      </header><div class="body">
+      <div class="split"><div class="col"><div class="col-h">共通鍵暗号　AES, ChaCha20</div><p class="col-b">暗号化と復号に同じ鍵を使う。処理が速く、大量のデータを扱える。</p><p class="col-n">問題は鍵の配送である</p></div><div class="col"><div class="col-h">2つの行き詰まり</div><p class="col-b">鍵を安全に渡すには安全な通信路が要る。しかし安全な通信路を作るために鍵が要る —— 堂々巡りになる。<br><br>さらに n 人が互いに通信するには n(n−1)/2 個の鍵が必要。100人で4,950個、1万人で約5,000万個。</p></div></div>
+      <p class="note">1976年の Diffie–Hellman、1977年の RSA によって、この行き詰まりが破られた。</p></div>
+        <div class="pageno">9</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.2　暗号</div>
+        <h2>公開鍵暗号</h2>
+      </header><div class="body"><p class="lead">鍵を2つに分ける。公開鍵は誰にでも配ってよく、秘密鍵は本人だけが持つ。</p>
+      <div class="figwrap"><img class="fig" alt="図 12-01" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MDAgNDAwIiB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQwMCIgcm9sZT0iaW1nIj48c3R5bGU+CnN2ZyB7IGZvbnQtZmFtaWx5OiAiSGVsdmV0aWNhIE5ldWUiLCBBcmlhbCwgIkhpcmFnaW5vIFNhbnMiLCAiWXUgR290aGljIiwgIk5vdG8gU2FucyBKUCIsIHNhbnMtc2VyaWY7IH0KLmJnICAgeyBmaWxsOiAjZmZmZmZmOyB9Ci5pbmsgIHsgZmlsbDogIzE2MTkxZDsgfQoubXV0ICB7IGZpbGw6ICM1ZjY2NzI7IH0KLnRpbnQgeyBmaWxsOiAjZWVmMWY1OyB9Ci50aW50MnsgZmlsbDogI2RkZTRlYzsgfQouYWNjICB7IGZpbGw6ICMwYjVjYWQ7IH0KLmFjY1QgeyBmaWxsOiAjZDllNmY0OyB9Ci5ub25lIHsgZmlsbDogbm9uZTsgfQoucyAgICB7IHN0cm9rZTogIzE2MTkxZDsgc3Ryb2tlLXdpZHRoOiAxLjY7IGZpbGw6IG5vbmU7IH0KLnMyICAgeyBzdHJva2U6ICMxNjE5MWQ7IHN0cm9rZS13aWR0aDogMi42OyBmaWxsOiBub25lOyB9Ci5zbSAgIHsgc3Ryb2tlOiAjNWY2NjcyOyBzdHJva2Utd2lkdGg6IDEuMjsgZmlsbDogbm9uZTsgfQouc2EgICB7IHN0cm9rZTogIzBiNWNhZDsgc3Ryb2tlLXdpZHRoOiAyLjI7IGZpbGw6IG5vbmU7IH0KLmRhc2ggeyBzdHJva2UtZGFzaGFycmF5OiA1IDQ7IH0KLmRvdCAgeyBzdHJva2UtZGFzaGFycmF5OiAxLjUgMzsgfQp0ZXh0ICB7IGZpbGw6ICMxNjE5MWQ7IGZvbnQtc2l6ZTogMTRweDsgfQoudC1zICB7IGZvbnQtc2l6ZTogMTJweDsgfQoudC14cyB7IGZvbnQtc2l6ZTogMTAuNXB4OyB9Ci50LWwgIHsgZm9udC1zaXplOiAxN3B4OyB9Ci50LXhsIHsgZm9udC1zaXplOiAyMXB4OyB9Ci5iICAgIHsgZm9udC13ZWlnaHQ6IDcwMDsgfQouaSAgICB7IGZvbnQtc3R5bGU6IGl0YWxpYzsgfQoubSAgICB7IGZvbnQtZmFtaWx5OiAiU0YgTW9ubyIsIE1lbmxvLCBDb25zb2xhcywgbW9ub3NwYWNlOyB9Ci5sYmwgIHsgZmlsbDogIzVmNjY3MjsgfQpAbWVkaWEgKHByZWZlcnMtY29sb3Itc2NoZW1lOiBkYXJrKSB7CiAgLmJnICAgeyBmaWxsOiAjMTQxNzFiOyB9CiAgLmluayAgeyBmaWxsOiAjZThlYmVmOyB9CiAgLm11dCAgeyBmaWxsOiAjOWFhM2IwOyB9CiAgLnRpbnQgeyBmaWxsOiAjMjMyODMwOyB9CiAgLnRpbnQyeyBmaWxsOiAjMmUzNDNkOyB9CiAgLmFjYyAgeyBmaWxsOiAjNmFiMGYzOyB9CiAgLmFjY1QgeyBmaWxsOiAjMWUyYzNjOyB9CiAgLnMsIC5zMiB7IHN0cm9rZTogI2U4ZWJlZjsgfQogIC5zbSAgIHsgc3Ryb2tlOiAjOWFhM2IwOyB9CiAgLnNhICAgeyBzdHJva2U6ICM2YWIwZjM7IH0KICB0ZXh0ICB7IGZpbGw6ICNlOGViZWY7IH0KICAubGJsICB7IGZpbGw6ICM5YWEzYjA7IH0KfQo8L3N0eWxlPgo8ZGVmcz4KIDxtYXJrZXIgaWQ9ImEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImluayIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYWEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImFjYyIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYW0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjYiIG1hcmtlckhlaWdodD0iNiIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9Im11dCIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0ibyIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI1IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNiIgbWFya2VySGVpZ2h0PSI2Ij4KICAgPGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjMuNSIgY2xhc3M9ImJnIHMiLz48L21hcmtlcj4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQwMCIgY2xhc3M9ImJnIi8+PHJlY3QgeD0iNDAiIHk9IjkwIiB3aWR0aD0iMTMwIiBoZWlnaHQ9IjYwIiBjbGFzcz0idGludCBzIi8+PHRleHQgeD0iMTA1LjAiIHk9IjEyMC4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIj7pgIHkv6HogIU8L3RleHQ+PHJlY3QgeD0iNTMwIiB5PSI5MCIgd2lkdGg9IjEzMCIgaGVpZ2h0PSI2MCIgY2xhc3M9InRpbnQgcyIvPjx0ZXh0IHg9IjU5NS4wIiB5PSIxMjAuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyI+5Y+X5L+h6ICFPC90ZXh0PjxsaW5lIHgxPSI1MjYiIHkxPSI3NiIgeDI9IjE3NCIgeTI9Ijc2IiBjbGFzcz0ic20iIG1hcmtlci1lbmQ9InVybCgjYW0pIi8+PHRleHQgeD0iMzUwIiB5PSI1OCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgbGJsIj7ikaAg5YWs6ZaL6Y2144KS6YWN44KL77yI55uX44G+44KM44Gm44KI44GE77yJPC90ZXh0PjxyZWN0IHg9IjMzNyIgeT0iODQiIHdpZHRoPSIyNiIgaGVpZ2h0PSIyMiIgcng9IjMiIGNsYXNzPSJhY2NUIHMiLz48cGF0aCBkPSJNMzQyLDg0IEwzNDIsNzUgQTgsOCAwIDAgMSAzNTgsNzUgTDM1OCw3OSIgY2xhc3M9InMiLz48cmVjdCB4PSIyMTAiIHk9IjE3MiIgd2lkdGg9IjExMCIgaGVpZ2h0PSIzNCIgY2xhc3M9ImJnIHMiLz48dGV4dCB4PSIyNjUiIHk9IjE4OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPuW5s+aWhzwvdGV4dD48bGluZSB4MT0iMTcwIiB5MT0iMTIwIiB4Mj0iMjA2IiB5Mj0iMTY4IiBjbGFzcz0ic2EiIG1hcmtlci1lbmQ9InVybCgjYSkiLz48dGV4dCB4PSIxNTAiIHk9IjE2OCIgdGV4dC1hbmNob3I9ImVuZCIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgbGJsIj7ikaEg5YWs6ZaL6Y2144GnPC90ZXh0Pjx0ZXh0IHg9IjE1MCIgeT0iMTg0IiB0ZXh0LWFuY2hvcj0iZW5kIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyBsYmwiPiAgIOaal+WPt+WMljwvdGV4dD48cmVjdCB4PSIzODAiIHk9IjE3MiIgd2lkdGg9IjExMCIgaGVpZ2h0PSIzNCIgY2xhc3M9InRpbnQyIHMiLz48dGV4dCB4PSI0MzUiIHk9IjE4OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPuaal+WPt+aWhzwvdGV4dD48cmVjdCB4PSIzMzciIHk9IjE3OCIgd2lkdGg9IjI2IiBoZWlnaHQ9IjIyIiByeD0iMyIgY2xhc3M9ImFjY1QgcyIvPjxwYXRoIGQ9Ik0zNDIsMTc4IEwzNDIsMTY5IEE4LDggMCAwIDEgMzU4LDE2OSBMMzU4LDE3OCIgY2xhc3M9InMiLz48bGluZSB4MT0iMzIwIiB5MT0iMTg5IiB4Mj0iMzc2IiB5Mj0iMTg5IiBjbGFzcz0ic2EiIG1hcmtlci1lbmQ9InVybCgjYSkiLz48bGluZSB4MT0iNDkwIiB5MT0iMTg5IiB4Mj0iNTI2IiB5Mj0iMTQ4IiBjbGFzcz0ic2EiIG1hcmtlci1lbmQ9InVybCgjYSkiLz48dGV4dCB4PSI1NjAiIHk9IjE3OCIgdGV4dC1hbmNob3I9InN0YXJ0IiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyBsYmwiPuKRoyDnp5jlr4bpjbXjgaflvqnlj7c8L3RleHQ+PHJlY3QgeD0iMzAwIiB5PSIyNTAiIHdpZHRoPSIxMzAiIGhlaWdodD0iNDYiIGNsYXNzPSJub25lIHMgZGFzaCIvPjx0ZXh0IHg9IjM2NS4wIiB5PSIyNzMuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyI+55uX6IG06ICFPC90ZXh0PjxsaW5lIHgxPSI0MDAiIHkxPSIyMTQiIHgyPSI0MDAiIHkyPSIyNDYiIGNsYXNzPSJzbSIgbWFya2VyLWVuZD0idXJsKCNhbSkiLz48dGV4dCB4PSI0NDYiIHk9IjI3NCIgdGV4dC1hbmNob3I9InN0YXJ0IiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyBhY2MgYiI+5pqX5Y+35paH44Gv6Kqt44KB44KL44GM44CB56eY5a+G6Y2144GM44Gq44GE44Gu44Gn5b6p5Y+344Gn44GN44Gq44GEPC90ZXh0Pjx0ZXh0IHg9IjM1MCIgeT0iMzM2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIGIiPumMoOOBr+iqsOOBp+OCguaOm+OBkeOCieOCjOOCi+OBjOOAgemWi+OBkeOCieOCjOOCi+OBruOBr+mNteOCkuaMgeOBpOacrOS6uuOBoOOBkTwvdGV4dD48dGV4dCB4PSIzNTAiIHk9IjM2MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgbGJsIj5uIOS6uuOBjOmAmuS/oeOBmeOCi+OBruOBq+W/heimgeOBqumNteOBryAybiDlgIvvvIjlhbHpgJrpjbXjgarjgokgbihu4oiSMSkvMiDlgIvvvIk8L3RleHQ+PHRleHQgeD0iMzUwIiB5PSIzODQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIGxibCI+5YWs6ZaL6Y215pqX5Y+344Gv6YGF44GE44Gu44Gn44CB5a6f6Zqb44Gv5YWx6YCa6Y2144KS5rih44GZ44Gu44Gr5L2/44GG77yI44OP44Kk44OW44Oq44OD44OJ5pa55byP77yJPC90ZXh0Pjwvc3ZnPgo="></div>
+      <p class="caption">公開鍵で暗号化したものは、対応する秘密鍵でしか復号できない。</p>
+      
+      </div>
+        <div class="pageno">10</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.2　暗号</div>
+        <h2>安全性は「まだ誰も解けていない」ことに乗っている</h2>
+      </header><div class="body"><p class="lead">RSA は「大きな素数2つを掛けるのは易しいが、その積を素因数分解するのは難しい」ことに基づく。楕円曲線暗号は離散対数問題を使い、より短い鍵で同等の強度が得られる。</p>
+      <div class="callout solid big">素因数分解は「計算できない」のではなく、「多項式時間の解法が知られていない」だけ</div>
+      <ul class="map">
+      <li><span class="m-a">第2回の計算量の話</span><span class="m-arrow"></span>
+        <span class="m-b">ここで効いてくる</span></li>
+      <li><span class="m-a">P = NP が証明されたら</span><span class="m-arrow"></span>
+        <span class="m-b">現在の公開鍵暗号は無力になる</span></li>
+      <li><span class="m-a">安全性の根拠</span><span class="m-arrow"></span>
+        <span class="m-b">数学的証明ではない</span></li></ul>
+      <p class="note">公開鍵暗号は遅い（共通鍵の数百〜数千倍）。実際は公開鍵で共通鍵を渡し、以降は共通鍵で流す（ハイブリッド方式）。TLS がまさにこれである。</p></div>
+        <div class="pageno">11</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.2　ハッシュ</div>
+        <h2>ハッシュ関数</h2>
+      </header><div class="body"><p class="lead">任意長のデータから固定長の値を作る。一方向性・衝突困難性・雪崩効果を満たす。</p>
+      <div class="cards" style="--per:3"><div class="card">
+      <div class="card-h">改竄の検知</div>
+      <div class="card-b">データとハッシュ値を別々に持ち、照合する</div>
+    </div><div class="card">
+      <div class="card-h">パスワードの保管</div>
+      <div class="card-b">パスワードそのものではなくハッシュ値を保存する。漏洩しても元が分からない</div>
+    </div><div class="card">
+      <div class="card-h">ディジタル署名</div>
+      <div class="card-b">次項で扱う</div>
+    </div></div>
+      <div class="callout dashed">
+        <div class="co-h">パスワードには専用の関数を使う</div>
+        <div class="co-b">SHA-256 は高速に設計されているため総当たり攻撃も速い。パスワードには意図的に遅い bcrypt、scrypt、Argon2 を使い、利用者ごとに異なるソルトを混ぜる。</div>
+      </div><p class="note">使ってよい：SHA-256、SHA-3。使ってはならない：MD5、SHA-1（衝突が実際に発見されている）。</p></div>
+        <div class="pageno">12</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.2　署名</div>
+        <h2>ディジタル署名</h2>
+      </header><div class="body"><p class="lead">公開鍵暗号を逆向きに使う。秘密鍵で処理したものは、対応する公開鍵で検証できる。</p>
+      <div class="figwrap"><img class="fig" alt="図 12-02" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MDAgNDMwIiB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQzMCIgcm9sZT0iaW1nIj48c3R5bGU+CnN2ZyB7IGZvbnQtZmFtaWx5OiAiSGVsdmV0aWNhIE5ldWUiLCBBcmlhbCwgIkhpcmFnaW5vIFNhbnMiLCAiWXUgR290aGljIiwgIk5vdG8gU2FucyBKUCIsIHNhbnMtc2VyaWY7IH0KLmJnICAgeyBmaWxsOiAjZmZmZmZmOyB9Ci5pbmsgIHsgZmlsbDogIzE2MTkxZDsgfQoubXV0ICB7IGZpbGw6ICM1ZjY2NzI7IH0KLnRpbnQgeyBmaWxsOiAjZWVmMWY1OyB9Ci50aW50MnsgZmlsbDogI2RkZTRlYzsgfQouYWNjICB7IGZpbGw6ICMwYjVjYWQ7IH0KLmFjY1QgeyBmaWxsOiAjZDllNmY0OyB9Ci5ub25lIHsgZmlsbDogbm9uZTsgfQoucyAgICB7IHN0cm9rZTogIzE2MTkxZDsgc3Ryb2tlLXdpZHRoOiAxLjY7IGZpbGw6IG5vbmU7IH0KLnMyICAgeyBzdHJva2U6ICMxNjE5MWQ7IHN0cm9rZS13aWR0aDogMi42OyBmaWxsOiBub25lOyB9Ci5zbSAgIHsgc3Ryb2tlOiAjNWY2NjcyOyBzdHJva2Utd2lkdGg6IDEuMjsgZmlsbDogbm9uZTsgfQouc2EgICB7IHN0cm9rZTogIzBiNWNhZDsgc3Ryb2tlLXdpZHRoOiAyLjI7IGZpbGw6IG5vbmU7IH0KLmRhc2ggeyBzdHJva2UtZGFzaGFycmF5OiA1IDQ7IH0KLmRvdCAgeyBzdHJva2UtZGFzaGFycmF5OiAxLjUgMzsgfQp0ZXh0ICB7IGZpbGw6ICMxNjE5MWQ7IGZvbnQtc2l6ZTogMTRweDsgfQoudC1zICB7IGZvbnQtc2l6ZTogMTJweDsgfQoudC14cyB7IGZvbnQtc2l6ZTogMTAuNXB4OyB9Ci50LWwgIHsgZm9udC1zaXplOiAxN3B4OyB9Ci50LXhsIHsgZm9udC1zaXplOiAyMXB4OyB9Ci5iICAgIHsgZm9udC13ZWlnaHQ6IDcwMDsgfQouaSAgICB7IGZvbnQtc3R5bGU6IGl0YWxpYzsgfQoubSAgICB7IGZvbnQtZmFtaWx5OiAiU0YgTW9ubyIsIE1lbmxvLCBDb25zb2xhcywgbW9ub3NwYWNlOyB9Ci5sYmwgIHsgZmlsbDogIzVmNjY3MjsgfQpAbWVkaWEgKHByZWZlcnMtY29sb3Itc2NoZW1lOiBkYXJrKSB7CiAgLmJnICAgeyBmaWxsOiAjMTQxNzFiOyB9CiAgLmluayAgeyBmaWxsOiAjZThlYmVmOyB9CiAgLm11dCAgeyBmaWxsOiAjOWFhM2IwOyB9CiAgLnRpbnQgeyBmaWxsOiAjMjMyODMwOyB9CiAgLnRpbnQyeyBmaWxsOiAjMmUzNDNkOyB9CiAgLmFjYyAgeyBmaWxsOiAjNmFiMGYzOyB9CiAgLmFjY1QgeyBmaWxsOiAjMWUyYzNjOyB9CiAgLnMsIC5zMiB7IHN0cm9rZTogI2U4ZWJlZjsgfQogIC5zbSAgIHsgc3Ryb2tlOiAjOWFhM2IwOyB9CiAgLnNhICAgeyBzdHJva2U6ICM2YWIwZjM7IH0KICB0ZXh0ICB7IGZpbGw6ICNlOGViZWY7IH0KICAubGJsICB7IGZpbGw6ICM5YWEzYjA7IH0KfQo8L3N0eWxlPgo8ZGVmcz4KIDxtYXJrZXIgaWQ9ImEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImluayIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYWEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImFjYyIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYW0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjYiIG1hcmtlckhlaWdodD0iNiIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9Im11dCIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0ibyIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI1IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNiIgbWFya2VySGVpZ2h0PSI2Ij4KICAgPGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjMuNSIgY2xhc3M9ImJnIHMiLz48L21hcmtlcj4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQzMCIgY2xhc3M9ImJnIi8+PHRleHQgeD0iMzUwIiB5PSIzNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9ImIiPue9suWQjeOBmeOCi+WBtDwvdGV4dD48cmVjdCB4PSI0MCIgeT0iNTYiIHdpZHRoPSIxMTAiIGhlaWdodD0iNDQiIGNsYXNzPSJiZyBzIi8+PHRleHQgeD0iOTUuMCIgeT0iNzguMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyI+5paH5pu4PC90ZXh0PjxyZWN0IHg9IjIyMCIgeT0iNTYiIHdpZHRoPSIxMjAiIGhlaWdodD0iNDQiIGNsYXNzPSJ0aW50IHMiLz48dGV4dCB4PSIyODAuMCIgeT0iNzguMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPuODj+ODg+OCt+ODpemWouaVsDwvdGV4dD48cmVjdCB4PSI0MDAiIHk9IjU2IiB3aWR0aD0iMTEwIiBoZWlnaHQ9IjQ0IiBjbGFzcz0idGludDIgcyIvPjx0ZXh0IHg9IjQ1NS4wIiB5PSI3OC4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+44OP44OD44K344Ol5YCkPC90ZXh0PjxyZWN0IHg9IjU3MCIgeT0iNTYiIHdpZHRoPSI5MCIgaGVpZ2h0PSI0NCIgY2xhc3M9ImFjY1QgcyIvPjx0ZXh0IHg9IjYxNS4wIiB5PSI3OC4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIj7nvbLlkI08L3RleHQ+PGxpbmUgeDE9IjE1MCIgeTE9Ijc4IiB4Mj0iMjE2IiB5Mj0iNzgiIGNsYXNzPSJzbSIgbWFya2VyLWVuZD0idXJsKCNhbSkiLz48bGluZSB4MT0iMzQwIiB5MT0iNzgiIHgyPSIzOTYiIHkyPSI3OCIgY2xhc3M9InNtIiBtYXJrZXItZW5kPSJ1cmwoI2FtKSIvPjxsaW5lIHgxPSI1MTAiIHkxPSI3OCIgeDI9IjU2NiIgeTI9Ijc4IiBjbGFzcz0ic2EiIG1hcmtlci1lbmQ9InVybCgjYSkiLz48dGV4dCB4PSI1MzguMCIgeT0iNzAuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgbGJsIj7np5jlr4bpjbU8L3RleHQ+PGxpbmUgeDE9IjQwIiB5MT0iMTM2IiB4Mj0iNjYwIiB5Mj0iMTM2IiBjbGFzcz0ic20gZG90Ii8+PHRleHQgeD0iMzUwIiB5PSIxNjYiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJiIj7mpJzoqLzjgZnjgovlgbQ8L3RleHQ+PHJlY3QgeD0iNDAiIHk9IjE5MCIgd2lkdGg9IjExMCIgaGVpZ2h0PSI0NCIgY2xhc3M9ImJnIHMiLz48dGV4dCB4PSI5NS4wIiB5PSIyMTIuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPuWPl+OBkeWPluOBo+OBn+aWh+abuDwvdGV4dD48cmVjdCB4PSIyMjAiIHk9IjE5MCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSI0NCIgY2xhc3M9InRpbnQgcyIvPjx0ZXh0IHg9IjI4MC4wIiB5PSIyMTIuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPuODj+ODg+OCt+ODpemWouaVsDwvdGV4dD48cmVjdCB4PSI0MDAiIHk9IjE5MCIgd2lkdGg9IjExMCIgaGVpZ2h0PSI0NCIgY2xhc3M9InRpbnQyIHMiLz48dGV4dCB4PSI0NTUuMCIgeT0iMjEyLjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj7jg4/jg4Pjgrfjg6XlgKQgQTwvdGV4dD48bGluZSB4MT0iMTUwIiB5MT0iMjEyIiB4Mj0iMjE2IiB5Mj0iMjEyIiBjbGFzcz0ic20iIG1hcmtlci1lbmQ9InVybCgjYW0pIi8+PGxpbmUgeDE9IjM0MCIgeTE9IjIxMiIgeDI9IjM5NiIgeTI9IjIxMiIgY2xhc3M9InNtIiBtYXJrZXItZW5kPSJ1cmwoI2FtKSIvPjxyZWN0IHg9IjQwIiB5PSIyNjIiIHdpZHRoPSIxMTAiIGhlaWdodD0iNDQiIGNsYXNzPSJhY2NUIHMiLz48dGV4dCB4PSI5NS4wIiB5PSIyODQuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMiPuWPl+OBkeWPluOBo+OBn+e9suWQjTwvdGV4dD48cmVjdCB4PSI0MDAiIHk9IjI2MiIgd2lkdGg9IjExMCIgaGVpZ2h0PSI0NCIgY2xhc3M9InRpbnQyIHMiLz48dGV4dCB4PSI0NTUuMCIgeT0iMjg0LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIj7jg4/jg4Pjgrfjg6XlgKQgQjwvdGV4dD48bGluZSB4MT0iMTUwIiB5MT0iMjg0IiB4Mj0iMzk2IiB5Mj0iMjg0IiBjbGFzcz0ic2EiIG1hcmtlci1lbmQ9InVybCgjYSkiLz48dGV4dCB4PSIyNzMuMCIgeT0iMjc2LjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIGxibCI+5YWs6ZaL6Y2144Gn5Yem55CGPC90ZXh0PjxyZWN0IHg9IjU2MCIgeT0iMjIyIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjYyIiBjbGFzcz0idGludCBzIi8+PHRleHQgeD0iNjEwLjAiIHk9IjI0NS4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+QSDjgaggQiDjgpI8L3RleHQ+PHRleHQgeD0iNjEwLjAiIHk9IjI2MS4wIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+5q+U44G544KLPC90ZXh0PjxsaW5lIHgxPSI1MTAiIHkxPSIyMTIiIHgyPSI1NTYiIHkyPSIyNDAiIGNsYXNzPSJzbSIgbWFya2VyLWVuZD0idXJsKCNhbSkiLz48bGluZSB4MT0iNTEwIiB5MT0iMjg0IiB4Mj0iNTU2IiB5Mj0iMjY4IiBjbGFzcz0ic20iIG1hcmtlci1lbmQ9InVybCgjYW0pIi8+PHRleHQgeD0iMzUwIiB5PSIzMzIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIGIiPuS4gOiHtCDihpIg5pys5Lq644GM572y5ZCN44GX44CB5pS556uE44KC44GV44KM44Gm44GE44Gq44GEPC90ZXh0Pjx0ZXh0IHg9IjM1MCIgeT0iMzUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyBsYmwiPuS4jeS4gOiHtCDihpIg5pS556uE44GV44KM44Gf44GL44CB5YG944Gu572y5ZCNPC90ZXh0Pjx0ZXh0IHg9IjM1MCIgeT0iMzg2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIGIiPuenmOWvhumNteOCkuaMgeOBpOOBruOBr+acrOS6uuOBoOOBkeOBquOBruOBp+OAgeOBneOCjOOCkuS9nOOCjOOBn+OBruOBr+acrOS6uuOBl+OBi+OBhOOBquOBhDwvdGV4dD48dGV4dCB4PSIzNTAiIHk9IjQxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgbGJsIj7nvbLlkI3jga/mlofmm7jjgpLnp5jlr4bjgavjgZfjgarjgYTjgILnp5jlr4bjgavjgZfjgZ/jgZHjgozjgbDmmpflj7fljJbjgoLkvbXjgZvjgabooYzjgYY8L3RleHQ+PC9zdmc+Cg=="></div>
+      <p class="caption">秘密鍵を持つのは本人だけなので、それを作れたのは本人しかいない。</p>
+      
+      </div>
+        <div class="pageno">13</div>
+      </section>
+<section class="slide dark ">
+      <div class="sec-wrap">
+        <div class="sec-n">12.3</div>
+        <h1 class="sec-name">証明書と信頼の連鎖</h1>
+        <p class="sec-tag">その公開鍵は、本当にその相手のものか</p>
+      </div><div class="motif"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div></section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.3　証明書</div>
+        <h2>残った問題：中間者攻撃</h2>
+      </header><div class="body"><p class="lead">公開鍵暗号で鍵配送問題は解けた。しかし、攻撃者が「これが銀行の公開鍵です」と偽の鍵を渡せば、利用者はそれで暗号化してしまう。</p>
+      <div class="callout solid big">暗号化していても、暗号化した相手が偽物なら意味がない</div>
+      <ul class="map">
+      <li><span class="m-a">解決策</span><span class="m-arrow"></span>
+        <span class="m-b">信頼できる第三者に保証してもらう</span></li>
+      <li><span class="m-a">公開鍵証明書</span><span class="m-arrow"></span>
+        <span class="m-b">主体者名・公開鍵・発行者・有効期間・用途</span></li>
+      <li><span class="m-a">決め手</span><span class="m-arrow"></span>
+        <span class="m-b">発行者の署名。1ビットでも書き換えれば検証が失敗する</span></li></ul>
+      <p class="note">第10回で「TLS の3つの保証のうち真正性が土台」と述べたのは、このことである。</p></div>
+        <div class="pageno">15</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.3　証明書</div>
+        <h2>信頼の連鎖</h2>
+      </header><div class="body">
+      <div class="figwrap"><img class="fig" alt="図 12-03" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MDAgNDIwIiB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQyMCIgcm9sZT0iaW1nIj48c3R5bGU+CnN2ZyB7IGZvbnQtZmFtaWx5OiAiSGVsdmV0aWNhIE5ldWUiLCBBcmlhbCwgIkhpcmFnaW5vIFNhbnMiLCAiWXUgR290aGljIiwgIk5vdG8gU2FucyBKUCIsIHNhbnMtc2VyaWY7IH0KLmJnICAgeyBmaWxsOiAjZmZmZmZmOyB9Ci5pbmsgIHsgZmlsbDogIzE2MTkxZDsgfQoubXV0ICB7IGZpbGw6ICM1ZjY2NzI7IH0KLnRpbnQgeyBmaWxsOiAjZWVmMWY1OyB9Ci50aW50MnsgZmlsbDogI2RkZTRlYzsgfQouYWNjICB7IGZpbGw6ICMwYjVjYWQ7IH0KLmFjY1QgeyBmaWxsOiAjZDllNmY0OyB9Ci5ub25lIHsgZmlsbDogbm9uZTsgfQoucyAgICB7IHN0cm9rZTogIzE2MTkxZDsgc3Ryb2tlLXdpZHRoOiAxLjY7IGZpbGw6IG5vbmU7IH0KLnMyICAgeyBzdHJva2U6ICMxNjE5MWQ7IHN0cm9rZS13aWR0aDogMi42OyBmaWxsOiBub25lOyB9Ci5zbSAgIHsgc3Ryb2tlOiAjNWY2NjcyOyBzdHJva2Utd2lkdGg6IDEuMjsgZmlsbDogbm9uZTsgfQouc2EgICB7IHN0cm9rZTogIzBiNWNhZDsgc3Ryb2tlLXdpZHRoOiAyLjI7IGZpbGw6IG5vbmU7IH0KLmRhc2ggeyBzdHJva2UtZGFzaGFycmF5OiA1IDQ7IH0KLmRvdCAgeyBzdHJva2UtZGFzaGFycmF5OiAxLjUgMzsgfQp0ZXh0ICB7IGZpbGw6ICMxNjE5MWQ7IGZvbnQtc2l6ZTogMTRweDsgfQoudC1zICB7IGZvbnQtc2l6ZTogMTJweDsgfQoudC14cyB7IGZvbnQtc2l6ZTogMTAuNXB4OyB9Ci50LWwgIHsgZm9udC1zaXplOiAxN3B4OyB9Ci50LXhsIHsgZm9udC1zaXplOiAyMXB4OyB9Ci5iICAgIHsgZm9udC13ZWlnaHQ6IDcwMDsgfQouaSAgICB7IGZvbnQtc3R5bGU6IGl0YWxpYzsgfQoubSAgICB7IGZvbnQtZmFtaWx5OiAiU0YgTW9ubyIsIE1lbmxvLCBDb25zb2xhcywgbW9ub3NwYWNlOyB9Ci5sYmwgIHsgZmlsbDogIzVmNjY3MjsgfQpAbWVkaWEgKHByZWZlcnMtY29sb3Itc2NoZW1lOiBkYXJrKSB7CiAgLmJnICAgeyBmaWxsOiAjMTQxNzFiOyB9CiAgLmluayAgeyBmaWxsOiAjZThlYmVmOyB9CiAgLm11dCAgeyBmaWxsOiAjOWFhM2IwOyB9CiAgLnRpbnQgeyBmaWxsOiAjMjMyODMwOyB9CiAgLnRpbnQyeyBmaWxsOiAjMmUzNDNkOyB9CiAgLmFjYyAgeyBmaWxsOiAjNmFiMGYzOyB9CiAgLmFjY1QgeyBmaWxsOiAjMWUyYzNjOyB9CiAgLnMsIC5zMiB7IHN0cm9rZTogI2U4ZWJlZjsgfQogIC5zbSAgIHsgc3Ryb2tlOiAjOWFhM2IwOyB9CiAgLnNhICAgeyBzdHJva2U6ICM2YWIwZjM7IH0KICB0ZXh0ICB7IGZpbGw6ICNlOGViZWY7IH0KICAubGJsICB7IGZpbGw6ICM5YWEzYjA7IH0KfQo8L3N0eWxlPgo8ZGVmcz4KIDxtYXJrZXIgaWQ9ImEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImluayIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYWEiIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjciIG1hcmtlckhlaWdodD0iNyIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9ImFjYyIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0iYW0iIHZpZXdCb3g9IjAgMCAxMCAxMCIgcmVmWD0iOSIgcmVmWT0iNSIgbWFya2VyV2lkdGg9IjYiIG1hcmtlckhlaWdodD0iNiIKICAgb3JpZW50PSJhdXRvLXN0YXJ0LXJldmVyc2UiPjxwYXRoIGQ9Ik0wLDAgTDEwLDUgTDAsMTAgeiIgY2xhc3M9Im11dCIvPjwvbWFya2VyPgogPG1hcmtlciBpZD0ibyIgdmlld0JveD0iMCAwIDEwIDEwIiByZWZYPSI1IiByZWZZPSI1IiBtYXJrZXJXaWR0aD0iNiIgbWFya2VySGVpZ2h0PSI2Ij4KICAgPGNpcmNsZSBjeD0iNSIgY3k9IjUiIHI9IjMuNSIgY2xhc3M9ImJnIHMiLz48L21hcmtlcj4KPC9kZWZzPgo8cmVjdCB3aWR0aD0iNzAwIiBoZWlnaHQ9IjQyMCIgY2xhc3M9ImJnIi8+PHJlY3QgeD0iMTgwIiB5PSIzMDAiIHdpZHRoPSIyNDAiIGhlaWdodD0iNjIiIGNsYXNzPSJ0aW50IHMiLz48dGV4dCB4PSIzMDAuMCIgeT0iMzIxLjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMiPuOCteODvOODkOiovOaYjuabuDwvdGV4dD48dGV4dCB4PSIzMDAuMCIgeT0iMzQxLjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMiPnd3dy5leGFtcGxlLmNvbTwvdGV4dD48cmVjdCB4PSIxODAiIHk9IjIwMCIgd2lkdGg9IjI0MCIgaGVpZ2h0PSI2MiIgY2xhc3M9InRpbnQgcyIvPjx0ZXh0IHg9IjMwMC4wIiB5PSIyMjEuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyI+5Lit6ZaTIENBIOiovOaYjuabuDwvdGV4dD48dGV4dCB4PSIzMDAuMCIgeT0iMjQxLjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMiPuS4remWk+iqjeiovOWxgDwvdGV4dD48cmVjdCB4PSIxODAiIHk9IjEwMCIgd2lkdGg9IjI0MCIgaGVpZ2h0PSI2MiIgY2xhc3M9ImFjY1QgcyIvPjx0ZXh0IHg9IjMwMC4wIiB5PSIxMjEuMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyI+44Or44O844OIIENBIOiovOaYjuabuDwvdGV4dD48dGV4dCB4PSIzMDAuMCIgeT0iMTQxLjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXMiPuODq+ODvOODiOiqjeiovOWxgO+8iOiHquW3see9suWQje+8iTwvdGV4dD48bGluZSB4MT0iMzAwIiB5MT0iMzAwIiB4Mj0iMzAwIiB5Mj0iMjYyIiBjbGFzcz0ic2EiIG1hcmtlci1lbmQ9InVybCgjYSkiLz48dGV4dCB4PSIzMTYiIHk9IjI4MCIgdGV4dC1hbmNob3I9InN0YXJ0IiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyBsYmwiPuS4iuOBruenmOWvhumNteOBp+e9suWQjeOBleOCjOOBpuOBhOOCizwvdGV4dD48bGluZSB4MT0iMzAwIiB5MT0iMjAwIiB4Mj0iMzAwIiB5Mj0iMTYyIiBjbGFzcz0ic2EiIG1hcmtlci1lbmQ9InVybCgjYSkiLz48dGV4dCB4PSIzMTYiIHk9IjE4MCIgdGV4dC1hbmNob3I9InN0YXJ0IiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyBsYmwiPuS4iuOBruenmOWvhumNteOBp+e9suWQjeOBleOCjOOBpuOBhOOCizwvdGV4dD48cGF0aCBkPSJNMTgwLDEyMCBDMTQwLDEyMCAxNDAsMTYwIDE4MCwxNTAiIGNsYXNzPSJzYSIgbWFya2VyLWVuZD0idXJsKCNhYSkiLz48dGV4dCB4PSIxMjYiIHk9IjEzNiIgdGV4dC1hbmNob3I9ImVuZCIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgbGJsIj7oh6rlt7HnvbLlkI08L3RleHQ+PHJlY3QgeD0iMTUwIiB5PSI3NCIgd2lkdGg9IjMwMCIgaGVpZ2h0PSIxMTQiIHJ4PSI4IiBjbGFzcz0ibm9uZSBzIGRhc2giLz48dGV4dCB4PSIzMDAiIHk9IjYyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIGIiPuODluODqeOCpuOCtu+8j09TIOOBq+e1hOOBv+i+vOOBvuOCjOOBn+ODiOODqeOCueODiOOCueODiOOCojwvdGV4dD48dGV4dCB4PSIzMDAiIHk9IjM4NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQtcyBiIj7mnIDntYLnmoTjgarkv6HpoLzjga7moLnmi6Djga/jgIzjg5bjg6njgqbjgrbjgoQgT1Mg44Gu6ZaL55m65YWD44GM44GT44GuIENBIOOCkuS/oemgvOOBl+OBn+OAjeOBk+OBqDwvdGV4dD48cmVjdCB4PSI0NzAiIHk9IjIwMCIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIxNTAiIHJ4PSI2IiBjbGFzcz0ibm9uZSBzbSIvPjx0ZXh0IHg9IjU3MCIgeT0iMjIyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC1zIGIiPuaknOiovOOBr+S4i+OBi+OCieS4iuOBuDwvdGV4dD48dGV4dCB4PSI0ODYiIHk9IjI0NiIgdGV4dC1hbmNob3I9InN0YXJ0IiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+4pGgIOWQjeWJjeOBjOOCouOCr+OCu+OCueWFiOOBqOS4gOiHtOOBmeOCi+OBizwvdGV4dD48dGV4dCB4PSI0ODYiIHk9IjI2NSIgdGV4dC1hbmNob3I9InN0YXJ0IiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+4pGhIOacieWKueacn+mZkOWGheOBizwvdGV4dD48dGV4dCB4PSI0ODYiIHk9IjI4NCIgdGV4dC1hbmNob3I9InN0YXJ0IiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+4pGiIOeZuuihjOiAheOBrue9suWQjeOBjOato+OBl+OBhOOBizwvdGV4dD48dGV4dCB4PSI0ODYiIHk9IjMwMyIgdGV4dC1hbmNob3I9InN0YXJ0IiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+4pGjIOWkseWKueOBl+OBpuOBhOOBquOBhOOBizwvdGV4dD48dGV4dCB4PSI0ODYiIHk9IjMyMiIgdGV4dC1hbmNob3I9InN0YXJ0IiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBjbGFzcz0idC14cyI+4pGkIOODiOODqeOCueODiOOCueODiOOCouOBq+WIsOmBlOOBl+OBn+OBizwvdGV4dD48dGV4dCB4PSI1NzAiIHk9IjM2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9InQteHMgYWNjIGIiPuOBqeOCjOOBizHjgaTjgafjgoLmrKDjgZHjgozjgbDorablkYo8L3RleHQ+PHRleHQgeD0iMzAwIiB5PSI0MTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiIGNsYXNzPSJ0LXhzIGxibCI+6LW354K544GM5pWw55m+44GuIENBIOOBq+WIhuaVo+OBl+OBpuOBhOOCi+OBk+OBqOOBjOOAgeOBk+OBruS7lee1hOOBv+OBruW8seeCueOBp+OCguOBguOCizwvdGV4dD48L3N2Zz4K"></div>
+      <p class="caption">最終的な信頼の根拠は「ブラウザや OS の開発元が、この CA を信頼できると判断した」ことである。</p>
+      
+      </div>
+        <div class="pageno">16</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.3　証明書</div>
+        <h2>この仕組みの弱点</h2>
+      </header><div class="body"><p class="lead">ブラウザには世界中の数百の CA が登録されており、そのどれか1つが不正な証明書を発行すれば、任意のサイトになりすませる。</p>
+      <div class="cards" style="--per:3"><div class="card">
+      <div class="card-h">実際に起きた事例</div>
+      <div class="card-b">2011年、オランダの CA が侵害され Google などの偽証明書が発行された。その CA は信頼リストから削除され事業を停止した</div>
+    </div><div class="card">
+      <div class="card-h">証明書の透明性</div>
+      <div class="card-b">発行された証明書をすべて公開ログに記録する。ドメイン所有者が身に覚えのない証明書を検知できる</div>
+    </div><div class="card">
+      <div class="card-h">有効期間の短縮</div>
+      <div class="card-b">長くて数ヶ月。失効の仕組みが働かなくても、被害の期間が限られる</div>
+    </div></div>
+      <p class="note">ブラウザの警告は、名前の不一致・期限切れ・信頼された CA に到達できない・失効のいずれか。どれも中間者攻撃時に起きる現象と区別がつかない。</p></div>
+        <div class="pageno">17</div>
+      </section>
+<section class="slide dark ">
+      <div class="sec-wrap">
+        <div class="sec-n">12.4</div>
+        <h1 class="sec-name">認証と認可</h1>
+        <p class="sec-tag">あなたは誰か、と、何をしてよいか</p>
+      </div><div class="motif"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div></section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.4　認証と認可</div>
+        <h2>まったく別の概念である</h2>
+      </header><div class="body">
+      <div class="split"><div class="col"><div class="col-h">認証 (Authentication)</div><p class="col-b">問い：あなたは誰か<br><br>例：ログイン<br><br>順序：先</p></div><div class="col"><div class="col-h">認可 (Authorization)</div><p class="col-b">問い：あなたは何をしてよいか<br><br>例：ファイルの読み書き権限<br><br>順序：後</p></div></div>
+      <p class="note">実際の事故の多くは認可の不備である。ログイン機能は作られているが「URL の ID を書き換えれば他人のデータが見える」という欠陥は繰り返し発見されている。</p></div>
+        <div class="pageno">19</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.4　認証</div>
+        <h2>認証の3要素と、パスワードの限界</h2>
+      </header><div class="body"><p class="lead">多要素認証は「異なる要素」を2つ以上組み合わせる。「パスワード＋秘密の質問」は両方とも知識なので多要素ではない。</p>
+      <table class="tbl  "><colgroup><col style="width:33.90%"><col style="width:25.42%"><col style="width:40.68%"></colgroup><thead><tr><th>要素</th><th>内容</th><th>例</th></tr></thead><tbody><tr><td>知識 (something you know)</td><td>知っていること</td><td>パスワード、暗証番号</td></tr><tr><td>所持 (something you have)</td><td>持っているもの</td><td>スマートフォン、ICカード、セキュリティキー</td></tr><tr><td>生体 (something you are)</td><td>身体的特徴</td><td>指紋、顔、虹彩</td></tr></tbody></table>
+      <div class="callout solid">パスワードは、覚えられる複雑さに限度があり、使い回され、フィッシングに弱い</div><p class="sub">SMS の確認コードもフィッシングを完全には防げない。偽サイトが利用者からコードを聞き出し、<br>即座に本物のサイトに入力すれば通ってしまう。</p></div>
+        <div class="pageno">20</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.4　パスキー</div>
+        <h2>パスキー（FIDO2 / WebAuthn）</h2>
+      </header><div class="body"><p class="lead">端末が鍵ペアを生成し、公開鍵だけをサーバに登録する。認証時はサーバのチャレンジに秘密鍵で署名して返す。秘密鍵は端末から出ない。</p>
+      <div class="callout solid big">署名の対象にアクセス先のドメイン名が含まれている</div>
+      <ul class="map">
+      <li><span class="m-a">偽サイト examp1e.com からの要求</span><span class="m-arrow"></span>
+        <span class="m-b">端末は署名しない</span></li>
+      <li><span class="m-a">利用者が騙されても</span><span class="m-arrow"></span>
+        <span class="m-b">端末が騙されない</span></li>
+      <li><span class="m-a">サーバが侵害されても</span><span class="m-arrow"></span>
+        <span class="m-b">公開鍵しかないので認証情報が漏れない</span></li></ul>
+      <p class="note">秘密鍵の使用には端末のロック解除（生体認証や PIN）が要求される。これで「所持」と「知識／生体」の多要素が自然に成立する。</p></div>
+        <div class="pageno">21</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.4　認証連携</div>
+        <h2>OAuth 2.0 と OpenID Connect</h2>
+      </header><div class="body"><p class="lead">利用するサービスが増えると、それぞれで別々にアカウントを管理するのは破綻する。</p>
+      <div class="split"><div class="col"><div class="col-h">OAuth 2.0 —— 認可</div><p class="col-b">「このアプリに、私のカレンダーの読み取りだけを許可する」<br><br>要点はパスワードを渡さないこと。限定された権限のトークンを渡す。権限を絞れ、期限を設けられ、後から取り消せる。</p></div><div class="col"><div class="col-h">OpenID Connect —— 認証</div><p class="col-b">OAuth 2.0 の上に構築され、「この人は誰か」を伝える。<br><br>「〇〇でログイン」というボタンの裏側はこれである。</p></div></div>
+      <p class="note">かつて Unix 系で使われた NIS は通信が暗号化されておらず、現在は使われない。ディレクトリサービス（LDAP、Active Directory）や学認 Shibboleth も同じ系譜にある。</p></div>
+        <div class="pageno">22</div>
+      </section>
+<section class="slide dark ">
+      <div class="sec-wrap">
+        <div class="sec-n">12.5</div>
+        <h1 class="sec-name">現実の脅威</h1>
+        <p class="sec-tag">手口は違っても、根は同じ</p>
+      </div><div class="motif"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div></section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.5　脅威</div>
+        <h2>主な攻撃手法</h2>
+      </header><div class="body">
+      <table class="tbl  "><colgroup><col style="width:30.51%"><col style="width:38.98%"><col style="width:30.51%"></colgroup><thead><tr><th>攻撃</th><th>内容</th><th>主な対策</th></tr></thead><tbody><tr><td>フィッシング</td><td>偽サイトへ誘導し情報を入力させる</td><td>パスキー、ドメインの確認</td></tr><tr><td>ランサムウェア</td><td>データを暗号化し身代金を要求</td><td>オフラインバックアップ</td></tr><tr><td>SQLインジェクション</td><td>入力値に SQL を埋め込み不正操作</td><td>プレースホルダの使用</td></tr><tr><td>クロスサイトスクリプティング</td><td>他者のブラウザで悪意ある JS を実行</td><td>出力時のエスケープ</td></tr><tr><td>バッファオーバフロー</td><td>領域を超えた書き込みで制御を奪う</td><td>メモリ安全な言語</td></tr><tr><td>サプライチェーン攻撃</td><td>ライブラリや業者を経由して侵入</td><td>依存関係の把握と検証</td></tr></tbody></table>
+      <p class="note">個々の手口は違うが、根底には同じ構造がある。</p></div>
+        <div class="pageno">24</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.5　脅威</div>
+        <h2>根は「データとコードの境界の曖昧さ」</h2>
+      </header><div class="body"><p class="lead">第3回のノイマン型は命令とデータを区別せずに置く。この設計が次の攻撃を可能にしている。</p><pre class="code small"># 危険：入力が SQL として解釈されうる
+cursor.execute(&quot;SELECT * FROM users WHERE name = '&quot; + name + &quot;'&quot;)
+
+# 安全：値として扱われる
+cursor.execute(&quot;SELECT * FROM users WHERE name = %s&quot;, (name,))</pre><p class="sub">SQLインジェクションは「データのつもりの入力が SQL の一部として解釈される」問題。XSS は JavaScript として実行される問題。<br>バッファオーバフローは、データの書き込みが戻り番地を書き換える問題（第4回のメモリ配置）。</p><p class="note">共通の対策は「データをデータとして扱う」こと。文字列を連結せず、プレースホルダで「これは値である」と明示する。</p></div>
+        <div class="pageno">25</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.5　ゼロトラスト</div>
+        <h2>境界型からゼロトラストへ</h2>
+      </header><div class="body"><p class="lead">従来は「社内は安全、外は危険」と考え、境界にファイアウォールを置いた。クラウド利用と在宅勤務で、これが成り立たなくなった。</p>
+      <div class="cards" style="--per:3"><div class="card">
+      <div class="card-h">前提を変える</div>
+      <div class="card-b">ネットワークの位置によらず、何も信頼しない。すべてのアクセスを、その都度検証する</div>
+    </div><div class="card">
+      <div class="card-h">最小権限</div>
+      <div class="card-b">必要な権限だけを、必要な期間だけ与える</div>
+    </div><div class="card">
+      <div class="card-h">記録と分割</div>
+      <div class="card-b">すべてのアクセスを記録し異常を検知する。ネットワークを細かく分割し、侵入時の被害範囲を限る</div>
+    </div></div>
+      <div class="callout dashed">
+        <div class="co-h">守る側の原則</div>
+        <div class="co-b">多層防御／最小権限／安全側に倒す（第1回の決定不能性への対処と同じ発想）／隠蔽に頼らない／更新を適用する／バックアップ／記録を取る</div>
+      </div><p class="note">セキュリティは製品ではなく過程である。一度設定して終わりではなく、脅威も環境も変わり続ける。</p></div>
+        <div class="pageno">26</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">第12回</div>
+        <h2>演習</h2>
+      </header><div class="body"><ul class="ex">
+      <li><span class="ex-n">12-1</span><span class="ex-t">情報セキュリティの3要素を挙げ、それぞれが破られた場合に大学の成績システムで何が起きるか具体的に述べよ。</span></li>
+      <li><span class="ex-n">12-2</span><span class="ex-t">共通鍵暗号における鍵配送問題とは何か。n 人が互いに通信する場合に必要な鍵の数を共通鍵と公開鍵で求め、n=1000 で比較せよ。</span></li>
+      <li><span class="ex-n">12-3</span><span class="ex-t">認証と認可の違いを説明し、「認証は正しく行われているが認可に欠陥がある」システムの例を挙げよ。</span></li>
+      <li><span class="ex-n">12-4</span><span class="ex-t">パスキーがパスワード＋SMS認証よりフィッシングに強い理由を、署名の対象に何が含まれるかに触れて説明せよ。</span></li></ul></div>
+        <div class="pageno">27</div>
+      </section>
+<section class="slide dark ">
+      <div class="sum-wrap">
+        <h1 class="sum-t">まとめ</h1>
+        <ul class="sum">
+      <li><span class="s-h">CIA</span><span class="s-b">機密性・完全性・可用性の釣り合いを決めることがセキュリティである</span></li>
+      <li><span class="s-h">ケルクホフスの原理</span><span class="s-b">方式は公開されている前提で設計する。自作の暗号を使ってはならない</span></li>
+      <li><span class="s-h">公開鍵暗号</span><span class="s-b">鍵配送問題を解いたが遅い。実際はハイブリッドで使う。安全性は「まだ解けていない」ことに依存する</span></li>
+      <li><span class="s-h">証明書</span><span class="s-b">信頼の連鎖を作るが、起点が数百の CA に分散している弱点を持つ</span></li>
+      <li><span class="s-h">認証と認可</span><span class="s-b">別物である。事故の多くは認可の不備による</span></li>
+      <li><span class="s-h">攻撃の根</span><span class="s-b">多くは「データとコードの境界の曖昧さ」に由来する</span></li></ul>
+        <p class="next"><b>次回</b>　最終回。計算機が「学習する」とはどういう計算か。第1回のチューリングマシンから始まった話が、生成AIとエージェントに至る。</p>
+      </div></section>
+</div>
+<div id="hud"><span id="cur">1</span> / <span id="total">28</span></div>
+<div id="help" hidden>
+  <h3>操作</h3>
+  <table>
+    <tr><td>→ ↓ Space PageDown</td><td>次へ</td></tr>
+    <tr><td>← ↑ PageUp</td><td>前へ</td></tr>
+    <tr><td>Home / End</td><td>最初 / 最後</td></tr>
+    <tr><td>数字 + Enter</td><td>その番号へ</td></tr>
+    <tr><td>O</td><td>一覧表示</td></tr>
+    <tr><td>F</td><td>全画面</td></tr>
+    <tr><td>C</td><td>組版チェック（溢れの検出）</td></tr>
+    <tr><td>P</td><td>印刷（PDF 保存）</td></tr>
+    <tr><td>?</td><td>この画面</td></tr>
+  </table>
+  <p>印刷は1枚1ページで出る。PDF にすれば pptx を配るのと同じことができる。</p>
+</div>
+<script>
+
+(function(){
+  var deck=document.getElementById('deck');
+  var slides=[].slice.call(deck.querySelectorAll('.slide'));
+  var cur=0, buf='';
+  var hud=document.getElementById('cur'), help=document.getElementById('help');
+
+  // 板を画面に合わせて拡大縮小する
+  function fit(){
+    var s=Math.min(innerWidth/1280, innerHeight/720);
+    document.documentElement.style.setProperty('--s', s);
+    var ow=(310)/1280;
+    slides.forEach(function(el){ el.style.setProperty('--os', ow); });
+    if(document.body.classList.contains('overview')) layoutOverview();
+  }
+  function layoutOverview(){
+    // 一覧では実寸の板を縮めて置くので、親に実際の見かけの大きさを持たせる
+    var cell=deck.clientWidth/Math.max(1,Math.floor(deck.clientWidth/330));
+    var s=(cell-8)/1280;
+    slides.forEach(function(el){
+      el.style.setProperty('--os', s);
+      el.style.marginBottom=(720*s-720)+'px';
+      el.style.marginRight=(1280*s-1280)+'px';
+    });
+  }
+  function show(i){
+    cur=Math.max(0,Math.min(slides.length-1,i));
+    slides.forEach(function(el,j){ el.classList.toggle('on', j===cur); });
+    hud.textContent=cur+1;
+    if(location.hash!=='#'+(cur+1)) history.replaceState(null,'','#'+(cur+1));
+  }
+  function overview(on){
+    document.body.classList.toggle('overview', on);
+    if(on){ slides.forEach(function(el){ el.classList.add('on'); }); layoutOverview();
+            slides[cur].scrollIntoView({block:'center'}); }
+    else { slides.forEach(function(el){ el.style.margin=''; }); fit(); show(cur); }
+  }
+
+  // 組版チェック。実際に描いた結果を測るので、見積もりではなく事実が分かる。
+  // pptx では PowerPoint に描かせるまで分からなかった部分である。
+  function check(){
+    var bad=[];
+    slides.forEach(function(el,i){
+      var was=el.classList.contains('on');
+      el.classList.add('on');
+      var over=false;
+      [].slice.call(el.querySelectorAll('*')).forEach(function(n){
+        var r=n.getBoundingClientRect(), e=el.getBoundingClientRect();
+        if(r.height&&(r.bottom>e.bottom+1||r.right>e.right+1)) over=true;
+      });
+      if(el.scrollHeight>el.clientHeight+1||el.scrollWidth>el.clientWidth+1) over=true;
+      el.classList.toggle('overflow', over);
+      if(over) bad.push(i+1);
+      if(!was) el.classList.remove('on');
+    });
+    document.body.classList.add('check');
+    slides[cur].classList.add('on');
+    console.log(bad.length? '組版あふれ: '+bad.length+'枚 → '+bad.join(', ') : '組版あふれなし');
+    return bad;
+  }
+
+  addEventListener('resize', fit);
+  addEventListener('hashchange', function(){
+    var n=parseInt(location.hash.slice(1),10); if(n) show(n-1);
+  });
+  addEventListener('keydown', function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;
+    var k=e.key;
+    if(k>='0'&&k<='9'){ buf+=k; return; }
+    if(k==='Enter'){ if(buf){ show(parseInt(buf,10)-1); buf=''; } return; }
+    buf='';
+    switch(k){
+      case 'ArrowRight': case 'ArrowDown': case ' ': case 'PageDown':
+        e.preventDefault(); show(cur+1); break;
+      case 'ArrowLeft': case 'ArrowUp': case 'PageUp':
+        e.preventDefault(); show(cur-1); break;
+      case 'Home': show(0); break;
+      case 'End': show(slides.length-1); break;
+      case 'o': case 'O': overview(!document.body.classList.contains('overview')); break;
+      case 'f': case 'F':
+        if(document.fullscreenElement) document.exitFullscreen();
+        else document.documentElement.requestFullscreen(); break;
+      case 'c': case 'C':
+        if(document.body.classList.contains('check')){
+          document.body.classList.remove('check');
+          slides.forEach(function(el){ el.classList.remove('overflow'); });
+        } else check();
+        break;
+      case 'p': case 'P': print(); break;
+      case '?': help.hidden=!help.hidden; break;
+      case 'Escape': help.hidden=true; if(document.body.classList.contains('overview')) overview(false); break;
+    }
+  });
+  deck.addEventListener('click', function(e){
+    var el=e.target.closest('.slide'); if(!el) return;
+    if(document.body.classList.contains('overview')){
+      show(slides.indexOf(el)); overview(false);
+    } else show(cur+1);
+  });
+
+  fit();
+  var n=parseInt(location.hash.slice(1),10);
+  show(n? n-1 : 0);
+  window.__check=check;
+})();
+</script>
+</body>
+</html>
