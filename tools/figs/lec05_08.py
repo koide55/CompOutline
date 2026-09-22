@@ -194,15 +194,15 @@ def f0505():
 
 def f0506():
     """投機実行のサイドチャネル：時間差が秘密を漏らす"""
-    # 塗りは svgkit の .s（fill:none）に負けるので、線の色で区別する
+    # 「当たる」側だけ塗って目立たせる。残りは白のまま
     f = Fig(700, 450)
 
     # ① キャッシュに当たるか外れるかで、アクセス時間が桁で違う
     f.text(24, 24, '① キャッシュに当たるか外れるかで、アクセス時間が桁で違う',
            cls='t-s b', anchor='start')
     bx, sc = 196, 356 / 80.0
-    for lbl, ns, cls, y in [('当たる（ヒット）', 1, 'sa', 44),
-                            ('外れる（ミス）', 80, 's', 74)]:
+    for lbl, ns, cls, y in [('当たる（ヒット）', 1, 'accT sa', 44),
+                            ('外れる（ミス）', 80, 'bg s', 74)]:
         f.text(bx - 10, y + 10, lbl, cls='t-s', anchor='end')
         w = max(6, ns * sc)
         f.rect(bx, y, w, 20, cls=cls)
@@ -222,7 +222,7 @@ def f0506():
         x = L + k * cw + 4
         hit = (k == secret)
         f.rect(x, B - (18 if hit else 108), cw - 8, 18 if hit else 108,
-               cls='sa' if hit else 's')
+               cls='accT sa' if hit else 'bg s')
         f.text(x + (cw - 8) / 2, B + 15, str(k), cls='t-xs lbl')
     f.text(L + 276, B + 34, 'array2 の添字', cls='t-xs lbl')
 

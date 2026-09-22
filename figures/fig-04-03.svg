@@ -1,5 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 320" width="700" height="320" role="img"><style>
 svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+/* 線のクラスを先に置く。fill: none を持たせているのは、線だけの図形が
+   既定の黒で塗られないようにするため。ただしこれを塗りのクラスより
+   後に書くと、同じ詳細度なので後勝ちで cls='tint2 s' の塗りが消える。
+   実際そうなっており、全図で塗りが出ていなかった（2026-09-22 に修正）。 */
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+/* 塗りのクラス。線のクラスより後に置くことで cls='tint2 s' が塗られる */
 .bg   { fill: #ffffff; }
 .ink  { fill: #16191d; }
 .mut  { fill: #5f6672; }
@@ -8,12 +19,6 @@ svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto 
 .acc  { fill: #0b5cad; }
 .accT { fill: #d9e6f4; }
 .none { fill: none; }
-.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
-.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
-.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
-.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
-.dash { stroke-dasharray: 5 4; }
-.dot  { stroke-dasharray: 1.5 3; }
 text  { fill: #16191d; font-size: 14px; }
 .t-s  { font-size: 12px; }
 .t-xs { font-size: 10.5px; }

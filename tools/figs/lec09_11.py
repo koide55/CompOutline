@@ -118,12 +118,14 @@ def f0904():
     f = Fig(700, 380)
     # Tier 1
     t1 = [(200, 70), (350, 60), (500, 70)]
-    for x, y in t1:
-        f.circle(x, y, 26, cls='accT s')
-        f.text(x, y, 'Tier 1', cls='t-xs b')
+    # ピアリング線は中心どうしを結ぶので、円より先に引く。
+    # あとに引くと線が「Tier 1」の文字を貫いて読めなくなる。
     for i in range(3):
         for j in range(i + 1, 3):
             f.line(*t1[i], *t1[j], cls='s2')
+    for x, y in t1:
+        f.circle(x, y, 26, cls='accT s')
+        f.text(x, y, 'Tier 1', cls='t-xs b')
     f.text(600, 62, 'ピアリング', cls='t-xs lbl', anchor='start')
     f.text(600, 78, '（対等・無料）', cls='t-xs lbl', anchor='start')
 
