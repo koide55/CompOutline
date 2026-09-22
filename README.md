@@ -1,4 +1,6 @@
-# コンピュータシステム通論 (An Outline of Computer System)
+# コンピュータシステム通論 (An Outline of Computer Systems)
+
+**🇬🇧 English edition of all 13 lectures → [lectures-en/](lectures-en/README.md)**
 
 九州大学 学部講義「コンピュータシステム通論」の講義資料。
 
@@ -23,6 +25,9 @@
 | 12 | [情報セキュリティ](lectures/12-information-security.md) | 顔の見えない相手を、どうやって信用するのか |
 | 13 | [機械学習からLLM・エージェントAIへ](lectures/13-machine-learning-llm-agents.md) | 計算機が「学習する」とはどういう計算か |
 
+**英語版**: 全13回の英訳を [lectures-en/](lectures-en/README.md) に置いてある。
+図は日英で共通（ラベルは日本語）で、各図のキャプションが内容を英語で説明している。
+
 各回は 到達目標 → 時間配分 → 本文 → 演習 → まとめ の構成。
 本文には図の**仕様**（引用ブロック）と**図そのもの**（SVG）の両方を置いてある。
 仕様を残してあるのは、描き直すときに意図が失われないようにするため。
@@ -34,6 +39,7 @@
 | パス | 内容 |
 | --- | --- |
 | `lectures/` | 全13回の講義ノート |
+| `lectures-en/` | **全13回の英語版**（図は `figures/` を共用） |
 | `figures/` | 図 60点（SVG） |
 | `docs/curriculum.md` | 13回の設計方針、旧スライドとの対応表、執筆上の約束 |
 | `docs/annual-update.md` | 毎年の更新箇所。新年度の資料を作る前に確認する |
