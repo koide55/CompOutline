@@ -240,6 +240,7 @@ fs.rmSync(dir, { recursive: true, force: true });
 fs.mkdirSync(dir, { recursive: true });
 
 const all = [];
+const perLecture = [];
 const total = { numerical: 0, cloze: 0, essay: 0, grade: 0, items: 0 };
 for (const lec of readLectures()) {
   const { xml, tally } = buildLecture(lec);
@@ -249,6 +250,7 @@ for (const lec of readLectures()) {
   for (const k of ['numerical', 'cloze', 'essay', 'grade']) total[k] += tally[k];
   total.items += lec.items.length;
   const n = tally.numerical + tally.cloze + tally.essay;
+  perLecture.push({ no: lec.no, n, ...tally });
   console.log(`第${String(lec.no).padStart(2, '0')}回  演習${String(lec.items.length).padStart(2)}問 → ${String(n).padStart(2)}問  ${tally.grade}点  ${file}`);
 }
 fs.writeFileSync(path.join(dir, '全13回.xml'), wrap(all));
@@ -258,6 +260,18 @@ console.log(`\n演習 ${total.items}問 → Moodle ${n}問`);
 console.log(`  数値問題 ${total.numerical} / 穴埋め問題 ${total.cloze} / 作文問題 ${total.essay}`);
 console.log(`  満点 ${total.grade}点（自動採点 ${total.grade - total.essay}点・手採点 ${total.essay}点）`);
 console.log(`moodle/xml/ に ${fs.readdirSync(dir).length} ファイル`);
+// 最大評点を各回 MAX に揃えたときの換算。小テスト側の設定なので XML には入らない
+const MAX = 10;
+console.log(`\n小テストの最大評点を各回 ${MAX} 点に揃えたときの換算`);
+console.log('（最大評点は小テスト（活動）の設定で、問題バンクの XML には入らない。');
+console.log(' Moodle で 小テスト → 設定 → 評点 → 最大評点 に手で入れること）');
+console.log('\n  回  素点  自動  手採点   係数  素点1点の価値  自動の比率');
+for (const l of perLecture) {
+  const f = MAX / l.grade;
+  const auto = l.grade - l.essay;
+  console.log(`  ${String(l.no).padStart(2)}  ${String(l.grade).padStart(4)}  ${String(auto).padStart(4)}  ${String(l.essay).padStart(6)}  ${f.toFixed(3).padStart(5)}  ${(f).toFixed(3).padStart(11)}点  ${String(Math.round(auto / l.grade * 100)).padStart(8)}%`);
+}
+
 if (unnamed.length) {
   console.log(`\n警告: moodle/essay.js の names に無い問題 ${unnamed.length}件 — ${unnamed.join(', ')}`);
   console.log('設問の頭で間に合わせたので、問題バンクの一覧で途中で切れて読めない');
