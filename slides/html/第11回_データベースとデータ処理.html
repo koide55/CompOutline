@@ -248,7 +248,9 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <li><span class="num">4</span>
         <span class="g-h">ACID 特性</span><span class="g-b">を説明し、それぞれが何を防ぐか述べられる</span></li>
       <li><span class="num">5</span>
-        <span class="g-h">NoSQL と CAP 定理</span><span class="g-b">の意味を説明できる</span></li></ol></div>
+        <span class="g-h">NoSQL と CAP 定理</span><span class="g-b">の意味を説明できる</span></li>
+      <li><span class="num">6</span>
+        <span class="g-h">ベクトル検索</span><span class="g-b">が何を検索しているか説明し、RAG との関係を述べられる</span></li></ol></div>
         <div class="pageno">3</div>
       </section>
 <section class="slide dark ">
@@ -487,6 +489,44 @@ COMMIT;   -- ここで初めて確定する</pre></div><div class="col"><div cla
       </section>
 <section class="slide light">
         <header>
+        <div class="kicker">11.5　ベクトル検索</div>
+        <h2>「意味が近いか」で探す</h2>
+      </header><div class="body"><p class="lead">ここまでの検索は「値が一致するか」だった。しかし「この文書と似た内容の文書を探せ」は WHERE でも LIKE でも書けない。言い回しが違えば文字は一致しない。</p>
+      <div class="callout solid big">文章や画像を高次元のベクトルに変換し、もっとも近いベクトルを探す</div>
+      <ul class="map">
+      <li><span class="m-a">従来の検索</span><span class="m-arrow"></span>
+        <span class="m-b">値が一致するか</span></li>
+      <li><span class="m-a">ベクトル検索</span><span class="m-arrow"></span>
+        <span class="m-b">意味が近いか</span></li></ul>
+      <p class="sub">学習済みモデルが「意味の近いものが近い位置に来る」ようにベクトル（埋め込み）を作る。検索は最近傍探索になる。<br>B木は「大小の順序」で絞る構造だったが、ベクトルには自然な全順序がないので別の索引（HNSW などのグラフ）が要る。</p><p class="note">高次元では厳密な最近傍は全件走査に近づくので、近似最近傍探索を使う。第2回の「厳密解を諦めて近似に向かう」がここでも現れている。</p></div>
+        <div class="pageno">24</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">11.5　ベクトル検索</div>
+        <h2>RAG は、この上に立っている</h2>
+      </header><div class="body"><p class="lead">第13回で扱う RAG（検索拡張生成）は、ベクトル検索とLLMの組み合わせである。</p>
+      <div class="steps" style="--n:3">
+      <div class="step first">
+        <div class="st-n">1</div>
+        <div class="st-h">溜める</div>
+        <div class="st-b">社内文書などを、あらかじめ全部ベクトルにして保存しておく</div>
+      </div>
+      <div class="step">
+        <div class="st-n">2</div>
+        <div class="st-h">探す</div>
+        <div class="st-b">質問もベクトルにして、近いベクトルの文書を取り出す</div>
+      </div>
+      <div class="step">
+        <div class="st-n">3</div>
+        <div class="st-h">答えさせる</div>
+        <div class="st-b">その文書を文脈に入れて、LLM に答えさせる</div>
+      </div></div>
+      <p class="sub">モデルを学習し直さずに、最新のデータや社内の文書に基づいた回答をさせられる。これが実務で RAG が重視される理由である。</p><p class="note">「データベースの話」が「生成AIの話」に直結する場所である。</p></div>
+        <div class="pageno">25</div>
+      </section>
+<section class="slide light">
+        <header>
         <div class="kicker">11.5　大規模処理</div>
         <h2>MapReduce の形が、この形である理由</h2>
       </header><div class="body">
@@ -507,7 +547,7 @@ COMMIT;   -- ここで初めて確定する</pre></div><div class="col"><div cla
         <div class="st-b">キーごとに集約する</div>
       </div></div>
       <p class="sub">第5回のアムダールの法則を思い出す。並列化できる割合が上限を決める。Map の段階は完全に独立なので効率がよい。<br>また、どこか1台が壊れてもその断片だけやり直せばよい（耐障害性）。</p><p class="note">現在は中間結果を主記憶に保持する Apache Spark のような枠組みが主流。第13回の機械学習は、この蓄積の上に成り立っている。</p></div>
-        <div class="pageno">24</div>
+        <div class="pageno">26</div>
       </section>
 <section class="slide light">
         <header>
@@ -517,8 +557,9 @@ COMMIT;   -- ここで初めて確定する</pre></div><div class="col"><div cla
       <li><span class="ex-n">11-1</span><span class="ex-t">CSV ファイルで学生名簿を管理する場合の問題を4つ挙げ、それぞれ DBMS のどの機能が解決するか対応づけよ。</span></li>
       <li><span class="ex-n">11-2</span><span class="ex-t">「注文番号・顧客名・顧客住所・商品名・単価・数量」からなる表について、更新異常・挿入異常・削除異常の例をそれぞれ挙げ、正規化した設計を示せ。</span></li>
       <li><span class="ex-n">11-3</span><span class="ex-t">WHERE と HAVING の違いを説明し、両方を使う SQL の例を1つ書け。</span></li>
-      <li><span class="ex-n">11-4</span><span class="ex-t">CAP 定理において分断耐性を諦められないのはなぜか。また (a) 銀行の残高照会 (b) SNS の「いいね」の数 (c) 航空券の座席予約 は C と A のどちらを優先すべきか。</span></li></ul></div>
-        <div class="pageno">25</div>
+      <li><span class="ex-n">11-4</span><span class="ex-t">「この文書と似た内容の文書を探せ」が WHERE や LIKE では書けないのはなぜか。ベクトル検索がそれをどう解くか説明せよ。</span></li>
+      <li><span class="ex-n">11-5</span><span class="ex-t">CAP 定理において分断耐性を諦められないのはなぜか。また (a) 銀行の残高照会 (b) SNS の「いいね」の数 (c) 航空券の座席予約 は C と A のどちらを優先すべきか。</span></li></ul></div>
+        <div class="pageno">27</div>
       </section>
 <section class="slide dark ">
       <div class="sum-wrap">
@@ -529,11 +570,12 @@ COMMIT;   -- ここで初めて確定する</pre></div><div class="col"><div cla
       <li><span class="s-h">SQL</span><span class="s-b">宣言的。「何が欲しいか」を書けば、取り方は DBMS が決める</span></li>
       <li><span class="s-h">インデックス</span><span class="s-b">検索を速くする代わりに、書き込みを遅くし領域を消費する</span></li>
       <li><span class="s-h">ACID</span><span class="s-b">独立性は第7回の競合状態と同じ問題。永続性は WAL で実現する</span></li>
-      <li><span class="s-h">分散と CAP</span><span class="s-b">分断は必ず起きるので、C と A のどちらを選ぶかになる</span></li></ul>
+      <li><span class="s-h">分散と CAP</span><span class="s-b">分断は必ず起きるので、C と A のどちらを選ぶかになる</span></li>
+      <li><span class="s-h">ベクトル検索</span><span class="s-b">値の一致ではなく意味の近さで探す。第13回の RAG はこの上に立つ</span></li></ul>
         <p class="next"><b>次回</b>　データを溜められるようになった。では、それを守るには —— そして顔の見えない相手をどう信用するか。</p>
       </div></section>
 </div>
-<div id="hud"><span id="cur">1</span> / <span id="total">26</span></div>
+<div id="hud"><span id="cur">1</span> / <span id="total">28</span></div>
 <div id="help" hidden>
   <h3>操作</h3>
   <table>

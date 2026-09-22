@@ -248,7 +248,9 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <li><span class="num">4</span>
         <span class="g-h">証明書と認証局</span><span class="g-b">が「信頼の連鎖」をどう作るか説明できる</span></li>
       <li><span class="num">5</span>
-        <span class="g-h">認証と認可</span><span class="g-b">を区別し、パスキーやシングルサインオンを説明できる</span></li></ol></div>
+        <span class="g-h">認証と認可</span><span class="g-b">を区別し、パスキーやシングルサインオンを説明できる</span></li>
+      <li><span class="num">6</span>
+        <span class="g-h">量子計算機の影響</span><span class="g-b">と、いま暗号の移行が進む理由を説明できる</span></li></ol></div>
         <div class="pageno">3</div>
       </section>
 <section class="slide dark ">
@@ -347,6 +349,38 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       </section>
 <section class="slide light">
         <header>
+        <div class="kicker">12.2　耐量子</div>
+        <h2>量子計算機が、その「まだ解けていない」を崩す</h2>
+      </header><div class="body"><p class="lead">第1回で見たとおり、量子計算機は計算できる範囲を変えないが、速さを変える。そして変わる対象に、公開鍵暗号が正面から入っている。</p>
+      <div class="callout solid big">Shor のアルゴリズムは、RSA も楕円曲線暗号も多項式時間で破る</div>
+      <ul class="map">
+      <li><span class="m-a">共通鍵暗号（AES）</span><span class="m-arrow"></span>
+        <span class="m-b">鍵長を倍にすれば足りる</span></li>
+      <li><span class="m-a">公開鍵暗号</span><span class="m-arrow"></span>
+        <span class="m-b">別の数学問題へ乗り換え</span></li></ul>
+      <p class="sub">Grover のアルゴリズムでも探索は √n 回に減るだけなので、共通鍵は鍵長で対処できる。ハッシュも出力長を延ばせばよい。<br>影響は公開鍵暗号に集中している。RSA と楕円曲線暗号は、現在の公開鍵暗号のほぼ全部である。</p><p class="note">実用的な量子計算機は2026年時点で存在しない。それでも移行は急がれている。</p></div>
+        <div class="pageno">12</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">12.2　耐量子</div>
+        <h2>なぜ、いま移行するのか</h2>
+      </header><div class="body"><p class="lead">攻撃が今日から成立するからである。</p>
+      <div class="cards" style="--per:2"><div class="card acc">
+      <div class="card-h">いま盗聴して、あとで復号する</div>
+      <div class="card-b">通信を保存しておき、量子計算機ができてから復号する。store now, decrypt later という</div>
+    </div><div class="card">
+      <div class="card-h">長期の秘密は、すでに危ない</div>
+      <div class="card-b">いま暗号化して送ったものが10年後に読まれる。医療記録や国家機密は、完成を待ってからでは間に合わない</div>
+    </div></div>
+      <div class="callout dashed">
+        <div class="co-h">耐量子計算機暗号（PQC）への移行</div>
+        <div class="co-b">量子計算機でも効率的に解く方法が知られていない問題（格子問題など）に基づく。2024年に NIST が標準を定めた —— 鍵交換の ML-KEM、署名の ML-DSA など。TLS では従来の鍵交換と両方走らせて結果を混ぜる（ハイブリッド）。</div>
+      </div><p class="note">NIST の選定は公募と公開解析で行われた。ケルクホフスの原理が、そのまま運用されている例である。</p></div>
+        <div class="pageno">13</div>
+      </section>
+<section class="slide light">
+        <header>
         <div class="kicker">12.2　ハッシュ</div>
         <h2>ハッシュ関数</h2>
       </header><div class="body"><p class="lead">任意長のデータから固定長の値を作る。一方向性・衝突困難性・雪崩効果を満たす。</p>
@@ -364,7 +398,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
         <div class="co-h">パスワードには専用の関数を使う</div>
         <div class="co-b">SHA-256 は高速に設計されているため総当たり攻撃も速い。パスワードには意図的に遅い bcrypt、scrypt、Argon2 を使い、利用者ごとに異なるソルトを混ぜる。</div>
       </div><p class="note">使ってよい：SHA-256、SHA-3。使ってはならない：MD5、SHA-1（衝突が実際に発見されている）。</p></div>
-        <div class="pageno">12</div>
+        <div class="pageno">14</div>
       </section>
 <section class="slide light">
         <header>
@@ -375,7 +409,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       
       
       </div>
-        <div class="pageno">13</div>
+        <div class="pageno">15</div>
       </section>
 <section class="slide dark ">
       <div class="sec-wrap">
@@ -397,7 +431,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <li><span class="m-a">決め手</span><span class="m-arrow"></span>
         <span class="m-b">発行者の署名。1ビットでも書き換えれば検証が失敗する</span></li></ul>
       <p class="note">第10回で「TLS の3つの保証のうち真正性が土台」と述べたのは、このことである。</p></div>
-        <div class="pageno">15</div>
+        <div class="pageno">17</div>
       </section>
 <section class="slide light">
         <header>
@@ -408,7 +442,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       
       
       </div>
-        <div class="pageno">16</div>
+        <div class="pageno">18</div>
       </section>
 <section class="slide light">
         <header>
@@ -426,7 +460,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <div class="card-b">長くて数ヶ月。失効の仕組みが働かなくても、被害の期間が限られる</div>
     </div></div>
       <p class="note">ブラウザの警告は、名前の不一致・期限切れ・信頼された CA に到達できない・失効のいずれか。どれも中間者攻撃時に起きる現象と区別がつかない。</p></div>
-        <div class="pageno">17</div>
+        <div class="pageno">19</div>
       </section>
 <section class="slide dark ">
       <div class="sec-wrap">
@@ -441,7 +475,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       </header><div class="body">
       <div class="split"><div class="col"><div class="col-h">認証 (Authentication)</div><p class="col-b">問い：あなたは誰か<br><br>例：ログイン<br><br>順序：先</p></div><div class="col"><div class="col-h">認可 (Authorization)</div><p class="col-b">問い：あなたは何をしてよいか<br><br>例：ファイルの読み書き権限<br><br>順序：後</p></div></div>
       <p class="note">実際の事故の多くは認可の不備である。ログイン機能は作られているが「URL の ID を書き換えれば他人のデータが見える」という欠陥は繰り返し発見されている。</p></div>
-        <div class="pageno">19</div>
+        <div class="pageno">21</div>
       </section>
 <section class="slide light">
         <header>
@@ -450,7 +484,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       </header><div class="body"><p class="lead">多要素認証は「異なる要素」を2つ以上組み合わせる。「パスワード＋秘密の質問」は両方とも知識なので多要素ではない。</p>
       <table class="tbl  "><colgroup><col style="width:33.90%"><col style="width:25.42%"><col style="width:40.68%"></colgroup><thead><tr><th>要素</th><th>内容</th><th>例</th></tr></thead><tbody><tr><td>知識 (something you know)</td><td>知っていること</td><td>パスワード、暗証番号</td></tr><tr><td>所持 (something you have)</td><td>持っているもの</td><td>スマートフォン、ICカード、セキュリティキー</td></tr><tr><td>生体 (something you are)</td><td>身体的特徴</td><td>指紋、顔、虹彩</td></tr></tbody></table>
       <div class="callout solid">パスワードは、覚えられる複雑さに限度があり、使い回され、フィッシングに弱い</div><p class="sub">SMS の確認コードもフィッシングを完全には防げない。偽サイトが利用者からコードを聞き出し、<br>即座に本物のサイトに入力すれば通ってしまう。</p></div>
-        <div class="pageno">20</div>
+        <div class="pageno">22</div>
       </section>
 <section class="slide light">
         <header>
@@ -466,7 +500,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <li><span class="m-a">サーバが侵害されても</span><span class="m-arrow"></span>
         <span class="m-b">公開鍵しかないので認証情報が漏れない</span></li></ul>
       <p class="note">秘密鍵の使用には端末のロック解除（生体認証や PIN）が要求される。これで「所持」と「知識／生体」の多要素が自然に成立する。</p></div>
-        <div class="pageno">21</div>
+        <div class="pageno">23</div>
       </section>
 <section class="slide light">
         <header>
@@ -475,7 +509,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       </header><div class="body"><p class="lead">利用するサービスが増えると、それぞれで別々にアカウントを管理するのは破綻する。</p>
       <div class="split"><div class="col"><div class="col-h">OAuth 2.0 —— 認可</div><p class="col-b">「このアプリに、私のカレンダーの読み取りだけを許可する」<br><br>要点はパスワードを渡さないこと。限定された権限のトークンを渡す。権限を絞れ、期限を設けられ、後から取り消せる。</p></div><div class="col"><div class="col-h">OpenID Connect —— 認証</div><p class="col-b">OAuth 2.0 の上に構築され、「この人は誰か」を伝える。<br><br>「〇〇でログイン」というボタンの裏側はこれである。</p></div></div>
       <p class="note">かつて Unix 系で使われた NIS は通信が暗号化されておらず、現在は使われない。ディレクトリサービス（LDAP、Active Directory）や学認 Shibboleth も同じ系譜にある。</p></div>
-        <div class="pageno">22</div>
+        <div class="pageno">24</div>
       </section>
 <section class="slide dark ">
       <div class="sec-wrap">
@@ -490,7 +524,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       </header><div class="body">
       <table class="tbl  "><colgroup><col style="width:30.51%"><col style="width:38.98%"><col style="width:30.51%"></colgroup><thead><tr><th>攻撃</th><th>内容</th><th>主な対策</th></tr></thead><tbody><tr><td>フィッシング</td><td>偽サイトへ誘導し情報を入力させる</td><td>パスキー、ドメインの確認</td></tr><tr><td>ランサムウェア</td><td>データを暗号化し身代金を要求</td><td>オフラインバックアップ</td></tr><tr><td>SQLインジェクション</td><td>入力値に SQL を埋め込み不正操作</td><td>プレースホルダの使用</td></tr><tr><td>クロスサイトスクリプティング</td><td>他者のブラウザで悪意ある JS を実行</td><td>出力時のエスケープ</td></tr><tr><td>バッファオーバフロー</td><td>領域を超えた書き込みで制御を奪う</td><td>メモリ安全な言語</td></tr><tr><td>サプライチェーン攻撃</td><td>ライブラリや業者を経由して侵入</td><td>依存関係の把握と検証</td></tr></tbody></table>
       <p class="note">個々の手口は違うが、根底には同じ構造がある。</p></div>
-        <div class="pageno">24</div>
+        <div class="pageno">26</div>
       </section>
 <section class="slide light">
         <header>
@@ -501,7 +535,7 @@ cursor.execute(&quot;SELECT * FROM users WHERE name = '&quot; + name + &quot;'&q
 
 # 安全：値として扱われる
 cursor.execute(&quot;SELECT * FROM users WHERE name = %s&quot;, (name,))</pre><p class="sub">SQLインジェクションは「データのつもりの入力が SQL の一部として解釈される」問題。XSS は JavaScript として実行される問題。<br>バッファオーバフローは、データの書き込みが戻り番地を書き換える問題（第4回のメモリ配置）。</p><p class="note">共通の対策は「データをデータとして扱う」こと。文字列を連結せず、プレースホルダで「これは値である」と明示する。</p></div>
-        <div class="pageno">25</div>
+        <div class="pageno">27</div>
       </section>
 <section class="slide light">
         <header>
@@ -522,7 +556,7 @@ cursor.execute(&quot;SELECT * FROM users WHERE name = %s&quot;, (name,))</pre><p
         <div class="co-h">守る側の原則</div>
         <div class="co-b">多層防御／最小権限／安全側に倒す（第1回の決定不能性への対処と同じ発想）／隠蔽に頼らない／更新を適用する／バックアップ／記録を取る</div>
       </div><p class="note">セキュリティは製品ではなく過程である。一度設定して終わりではなく、脅威も環境も変わり続ける。</p></div>
-        <div class="pageno">26</div>
+        <div class="pageno">28</div>
       </section>
 <section class="slide light">
         <header>
@@ -533,7 +567,7 @@ cursor.execute(&quot;SELECT * FROM users WHERE name = %s&quot;, (name,))</pre><p
       <li><span class="ex-n">12-2</span><span class="ex-t">共通鍵暗号における鍵配送問題とは何か。n 人が互いに通信する場合に必要な鍵の数を共通鍵と公開鍵で求め、n=1000 で比較せよ。</span></li>
       <li><span class="ex-n">12-3</span><span class="ex-t">認証と認可の違いを説明し、「認証は正しく行われているが認可に欠陥がある」システムの例を挙げよ。</span></li>
       <li><span class="ex-n">12-4</span><span class="ex-t">パスキーがパスワード＋SMS認証よりフィッシングに強い理由を、署名の対象に何が含まれるかに触れて説明せよ。</span></li></ul></div>
-        <div class="pageno">27</div>
+        <div class="pageno">29</div>
       </section>
 <section class="slide dark ">
       <div class="sum-wrap">
@@ -541,6 +575,7 @@ cursor.execute(&quot;SELECT * FROM users WHERE name = %s&quot;, (name,))</pre><p
         <ul class="sum">
       <li><span class="s-h">CIA</span><span class="s-b">機密性・完全性・可用性の釣り合いを決めることがセキュリティである</span></li>
       <li><span class="s-h">ケルクホフスの原理</span><span class="s-b">方式は公開されている前提で設計する。自作の暗号を使ってはならない</span></li>
+      <li><span class="s-h">耐量子計算機暗号</span><span class="s-b">Shor が RSA と楕円曲線を破る。いま盗聴して後で復号されるので、移行はもう始まっている</span></li>
       <li><span class="s-h">公開鍵暗号</span><span class="s-b">鍵配送問題を解いたが遅い。実際はハイブリッドで使う。安全性は「まだ解けていない」ことに依存する</span></li>
       <li><span class="s-h">証明書</span><span class="s-b">信頼の連鎖を作るが、起点が数百の CA に分散している弱点を持つ</span></li>
       <li><span class="s-h">認証と認可</span><span class="s-b">別物である。事故の多くは認可の不備による</span></li>
@@ -548,7 +583,7 @@ cursor.execute(&quot;SELECT * FROM users WHERE name = %s&quot;, (name,))</pre><p
         <p class="next"><b>次回</b>　最終回。計算機が「学習する」とはどういう計算か。第1回のチューリングマシンから始まった話が、生成AIとエージェントに至る。</p>
       </div></section>
 </div>
-<div id="hud"><span id="cur">1</span> / <span id="total">28</span></div>
+<div id="hud"><span id="cur">1</span> / <span id="total">30</span></div>
 <div id="help" hidden>
   <h3>操作</h3>
   <table>
