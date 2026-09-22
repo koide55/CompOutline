@@ -18,7 +18,7 @@
 | 7 | [OSとプロセス](lectures/07-os-and-processes.md) | 1台の計算機を、なぜ何十ものプログラムで同時に使えるのか |
 | 8 | [入出力・仮想化・クラウド](lectures/08-io-virtualization-cloud.md) | 100万倍遅い装置と、どうやって折り合いをつけるのか |
 | 9 | [ネットワークの基礎](lectures/09-network-fundamentals.md) | 世界中の計算機が、なぜ1つの網としてつながるのか |
-| 10 | [インターネットとWeb](lectures/10-internet-and-web.md) | アドレスしか知らない相手に、どうやってデータを届けるのか |
+| 10 | [インターネットとWeb](lectures/10-internet-and-web.md) | 名前しか知らない相手と、どうやって確実に、安全にやりとりするのか |
 | 11 | [データベースとデータ処理](lectures/11-databases.md) | 壊れずに、矛盾なくデータを溜めるにはどうするか |
 | 12 | [情報セキュリティ](lectures/12-information-security.md) | 顔の見えない相手を、どうやって信用するのか |
 | 13 | [機械学習からLLM・エージェントAIへ](lectures/13-machine-learning-llm-agents.md) | 計算機が「学習する」とはどういう計算か |
@@ -87,7 +87,7 @@ python3 -m venv .venv && .venv/bin/pip install cairosvg pillow
 | 移行先 | 内容 | 元 |
 | --- | --- | --- |
 | 第7回 7.2 | ファイル記述子、pipe、dup、シェルの `\|` の仕組み（図 7-6） | network2026 slide 537–550 |
-| 第10回 10.2 | socket / bind / listen / accept / connect の順序（図 10-6） | network2026 slide 551–570 |
+| 第10回 10.1 | socket / bind / listen / accept / connect の順序（図 10-1） | network2026 slide 551–570 |
 
 ## 執筆上の約束
 

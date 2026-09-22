@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" width="760" height="360" role="img"><style>
+svg { font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif; }
+.bg   { fill: #ffffff; }
+.ink  { fill: #16191d; }
+.mut  { fill: #5f6672; }
+.tint { fill: #eef1f5; }
+.tint2{ fill: #dde4ec; }
+.acc  { fill: #0b5cad; }
+.accT { fill: #d9e6f4; }
+.none { fill: none; }
+.s    { stroke: #16191d; stroke-width: 1.6; fill: none; }
+.s2   { stroke: #16191d; stroke-width: 2.6; fill: none; }
+.sm   { stroke: #5f6672; stroke-width: 1.2; fill: none; }
+.sa   { stroke: #0b5cad; stroke-width: 2.2; fill: none; }
+.dash { stroke-dasharray: 5 4; }
+.dot  { stroke-dasharray: 1.5 3; }
+text  { fill: #16191d; font-size: 14px; }
+.t-s  { font-size: 12px; }
+.t-xs { font-size: 10.5px; }
+.t-l  { font-size: 17px; }
+.t-xl { font-size: 21px; }
+.b    { font-weight: 700; }
+.i    { font-style: italic; }
+.m    { font-family: "SF Mono", Menlo, Consolas, monospace; }
+.lbl  { fill: #5f6672; }
+@media (prefers-color-scheme: dark) {
+  .bg   { fill: #14171b; }
+  .ink  { fill: #e8ebef; }
+  .mut  { fill: #9aa3b0; }
+  .tint { fill: #232830; }
+  .tint2{ fill: #2e343d; }
+  .acc  { fill: #6ab0f3; }
+  .accT { fill: #1e2c3c; }
+  .s, .s2 { stroke: #e8ebef; }
+  .sm   { stroke: #9aa3b0; }
+  .sa   { stroke: #6ab0f3; }
+  text  { fill: #e8ebef; }
+  .lbl  { fill: #9aa3b0; }
+}
+</style>
+<defs>
+ <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ink"/></marker>
+ <marker id="aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="acc"/></marker>
+ <marker id="am" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+   orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="mut"/></marker>
+ <marker id="o" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6">
+   <circle cx="5" cy="5" r="3.5" class="bg s"/></marker>
+</defs>
+<rect width="760" height="360" class="bg"/><rect x="8.0" y="60" width="120" height="52" class="tint s"/><text x="68.0" y="78.5" text-anchor="middle" dominant-baseline="middle" class="t-xs">送信元</text><text x="68.0" y="93.5" text-anchor="middle" dominant-baseline="middle" class="t-xs">192.0.2.10</text><rect x="188.0" y="60" width="88" height="52" class="tint2 s"/><text x="232.0" y="86.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">ルータ1</text><rect x="336.0" y="60" width="88" height="52" class="tint2 s"/><text x="380.0" y="86.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">ルータ2</text><rect x="484.0" y="60" width="88" height="52" class="tint2 s"/><text x="528.0" y="86.0" text-anchor="middle" dominant-baseline="middle" class="t-xs">ルータ3</text><rect x="632.0" y="60" width="120" height="52" class="tint s"/><text x="692.0" y="78.5" text-anchor="middle" dominant-baseline="middle" class="t-xs">宛先</text><text x="692.0" y="93.5" text-anchor="middle" dominant-baseline="middle" class="t-xs">198.51.100.5</text><line x1="120" y1="86" x2="180" y2="86" class="sa" marker-end="url(#a)"/><rect x="82.0" y="138" width="136" height="66" class="bg s"/><text x="150.0" y="154" text-anchor="middle" dominant-baseline="middle" class="t-xs">送信元IP 192.0.2.10</text><text x="150.0" y="170" text-anchor="middle" dominant-baseline="middle" class="t-xs">宛先IP 198.51.100.5</text><line x1="82.0" y1="180" x2="218.0" y2="180" class="sm"/><text x="150.0" y="193" text-anchor="middle" dominant-baseline="middle" class="t-xs acc b">MAC：区間1用</text><line x1="150.0" y1="112" x2="150.0" y2="136" class="sm dot"/><line x1="284" y1="86" x2="328" y2="86" class="sa" marker-end="url(#a)"/><rect x="238.0" y="138" width="136" height="66" class="bg s"/><text x="306.0" y="154" text-anchor="middle" dominant-baseline="middle" class="t-xs">送信元IP 192.0.2.10</text><text x="306.0" y="170" text-anchor="middle" dominant-baseline="middle" class="t-xs">宛先IP 198.51.100.5</text><line x1="238.0" y1="180" x2="374.0" y2="180" class="sm"/><text x="306.0" y="193" text-anchor="middle" dominant-baseline="middle" class="t-xs acc b">MAC：区間2用</text><line x1="306.0" y1="112" x2="306.0" y2="136" class="sm dot"/><line x1="432" y1="86" x2="476" y2="86" class="sa" marker-end="url(#a)"/><rect x="386.0" y="138" width="136" height="66" class="bg s"/><text x="454.0" y="154" text-anchor="middle" dominant-baseline="middle" class="t-xs">送信元IP 192.0.2.10</text><text x="454.0" y="170" text-anchor="middle" dominant-baseline="middle" class="t-xs">宛先IP 198.51.100.5</text><line x1="386.0" y1="180" x2="522.0" y2="180" class="sm"/><text x="454.0" y="193" text-anchor="middle" dominant-baseline="middle" class="t-xs acc b">MAC：区間3用</text><line x1="454.0" y1="112" x2="454.0" y2="136" class="sm dot"/><line x1="580" y1="86" x2="640" y2="86" class="sa" marker-end="url(#a)"/><rect x="542.0" y="138" width="136" height="66" class="bg s"/><text x="610.0" y="154" text-anchor="middle" dominant-baseline="middle" class="t-xs">送信元IP 192.0.2.10</text><text x="610.0" y="170" text-anchor="middle" dominant-baseline="middle" class="t-xs">宛先IP 198.51.100.5</text><line x1="542.0" y1="180" x2="678.0" y2="180" class="sm"/><text x="610.0" y="193" text-anchor="middle" dominant-baseline="middle" class="t-xs acc b">MAC：区間4用</text><line x1="610.0" y1="112" x2="610.0" y2="136" class="sm dot"/><text x="60" y="162" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">IP は</text><text x="60" y="178" text-anchor="end" dominant-baseline="middle" class="t-xs lbl">変わらない</text><text x="60" y="196" text-anchor="end" dominant-baseline="middle" class="t-xs acc b">MAC は毎回</text><text x="60" y="212" text-anchor="end" dominant-baseline="middle" class="t-xs acc b">書き換わる</text><text x="380" y="272" text-anchor="middle" dominant-baseline="middle" class="t-s b">IP は最終目的地、MAC は次の1ホップを表す</text><text x="380" y="298" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">中継のたびに MAC は書き換わるが、IP は最初から最後まで変わらない</text><text x="380" y="324" text-anchor="middle" dominant-baseline="middle" class="t-xs lbl">TTL はルータを通るたびに1減り、0で破棄される（経路が輪でも回り続けない）</text></svg>
