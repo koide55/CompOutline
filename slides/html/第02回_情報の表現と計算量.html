@@ -248,7 +248,9 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <li><span class="num">4</span>
         <span class="g-h">O記法</span><span class="g-b">で計算量を表し、入力規模に対する伸び方を比較できる</span></li>
       <li><span class="num">5</span>
-        <span class="g-h">P と NP</span><span class="g-b">の区別、NP完全性の意味を説明できる</span></li></ol></div>
+        <span class="g-h">P と NP</span><span class="g-b">の区別、NP完全性の意味を説明できる</span></li>
+      <li><span class="num">6</span>
+        <span class="g-h">量子計算機</span><span class="g-b">が計算量のクラスをどう変え、何を変えないかを説明できる</span></li></ol></div>
         <div class="pageno">3</div>
       </section>
 <section class="slide dark ">
@@ -418,6 +420,33 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       </section>
 <section class="slide light">
         <header>
+        <div class="kicker">2.4　量子計算機</div>
+        <h2>量子計算機は、この分類をどう変えるか</h2>
+      </header><div class="body"><p class="lead">第1回で「範囲は変えないが速さを変える」と述べた。計算量の言葉が揃ったので正確に言い直す。古典的な計算機で多項式時間で解けるクラスが P、量子計算機で多項式時間で解けるクラスが BQP である。</p>
+      <div class="callout solid big">P ⊆ BQP。量子計算機でできることは、古典的な計算機でも（遅いが）できる</div>
+      <ul class="map">
+      <li><span class="m-a">計算できる範囲</span><span class="m-arrow"></span>
+        <span class="m-b">変わらない</span></li>
+      <li><span class="m-a">素因数分解</span><span class="m-arrow"></span>
+        <span class="m-b">BQP には入る</span></li></ul>
+      <p class="sub">だから第1回の「計算できる範囲は広がらない」が成り立つ。素因数分解は P に入るとは知られていないが、<br>Shor のアルゴリズムは量子計算機でこれを多項式時間で解く。</p><p class="note">ここが最も誤解されるところである ——「量子計算機があれば NP完全問題も解ける」は誤りである。</p></div>
+        <div class="pageno">19</div>
+      </section>
+<section class="slide light">
+        <header>
+        <div class="kicker">2.4　量子計算機</div>
+        <h2>NP完全は、量子計算機でも解けない</h2>
+      </header><div class="body"><p class="lead">しらみつぶし探索を速くする Grover のアルゴリズムは、n 通りの探索を √n 回に減らす。しかし指数時間の問題では n が 2ᵏ である。</p>
+      <div class="split"><div class="col"><div class="col-h">加速の程度</div><pre class="code small">探索の手数    n    →  √n
+
+指数時間なら  2^k  →  2^(k/2)
+
+              指数時間のまま</pre><p class="col-n">鍵を1ビット伸ばせば元の強度に戻る</p></div><div class="col"><div class="col-h">では Shor はなぜ効くのか</div><p class="col-b">素因数分解が NP完全ではないからである。NP には属するが、P と NP完全の中間にあると見られている。量子計算機が効くと分かっているのは、この中間の領域である。</p><p class="col-n">素因数分解と離散対数には「周期を見つける」構造がある</p></div></div>
+      <p class="note">強みは「難しい問題を何でも速く解く」ことではなく、特定の構造を持つ問題に刺さること。第12回の暗号に効いてくる。</p></div>
+        <div class="pageno">20</div>
+      </section>
+<section class="slide light">
+        <header>
         <div class="kicker">2.4　計算量</div>
         <h2>第1回との関係</h2>
       </header><div class="body">
@@ -430,7 +459,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <li><span class="m-a">多項式時間で解ける</span><span class="m-arrow"></span>
         <span class="m-b">クラス P</span></li></ul>
       <p class="sub">この2段階の壁が、以降の講義に何度も顔を出す。第12回の公開鍵暗号は「素因数分解が P に属すると<br>知られていない」ことに安全性を託しているし、第13回の機械学習は「厳密に解けない問題を近似で押し切る」道具立てである。</p></div>
-        <div class="pageno">19</div>
+        <div class="pageno">21</div>
       </section>
 <section class="slide light">
         <header>
@@ -441,13 +470,14 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
       <li><span class="ex-n">2-2</span><span class="ex-t">2TB と表示されたSSDを買った。OS が 2⁴⁰ を1TBとして表示する場合、何TBと表示されるか。</span></li>
       <li><span class="ex-n">2-3</span><span class="ex-t">ある処理が n=1,000 のとき 1秒かかった。O(n²) だとすると n=10,000 では何秒か。O(n log n) ならどうか。</span></li>
       <li><span class="ex-n">2-4</span><span class="ex-t">次のうち NP完全と知られているものはどれか。(a) 配列のソート (b) 数独（n×n に一般化） (c) 二分探索 (d) グラフの最短経路</span></li></ul></div>
-        <div class="pageno">20</div>
+        <div class="pageno">22</div>
       </section>
 <section class="slide dark ">
       <div class="sum-wrap">
         <h1 class="sum-t">まとめ</h1>
         <ul class="sum">
       <li><span class="s-h">2進数を使う理由</span><span class="s-b">ノイズに強いから。デジタル情報が劣化しないのはこの性質による</span></li>
+      <li><span class="s-h">量子計算機</span><span class="s-b">P ⊆ BQP で範囲は変わらない。NP完全も指数時間のまま。効くのは中間の問題</span></li>
       <li><span class="s-h">2の補数</span><span class="s-b">減算が加算回路だけで済む。だから負数はこの形式で表す</span></li>
       <li><span class="s-h">浮動小数点数</span><span class="s-b">原理的な誤差がある。等値比較をしない、金額に使わない</span></li>
       <li><span class="s-h">接頭辞</span><span class="s-b">SI（10³）と2進（2¹⁰）の違いが、容量表示のずれを生む</span></li>
@@ -456,7 +486,7 @@ body.check .slide.overflow::after{content:"組版あふれ";position:absolute;
         <p class="next"><b>次回</b>　ここまでは数学の話だった。これを電気回路でどう作るのか。</p>
       </div></section>
 </div>
-<div id="hud"><span id="cur">1</span> / <span id="total">21</span></div>
+<div id="hud"><span id="cur">1</span> / <span id="total">23</span></div>
 <div id="help" hidden>
   <h3>操作</h3>
   <table>
