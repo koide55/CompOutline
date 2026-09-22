@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- コンピュータシステム通論 演習
+     moodle/build-xml.js が生成。手で直さないこと -->
+<quiz>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第02回 情報の表現と計算量</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="cloze">
+    <name><text>2-1 2進数と2の補数</text></name>
+    <questiontext format="html"><text><![CDATA[<p>10進数 173 を8ビットの2進数で表せ。また、8ビットの2の補数表現で−45 を表せ。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">173 を8ビットの2進数で</td><td style="padding:4px 0">{1:SHORTANSWER:=10101101}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">−45 を8ビットの2の補数で</td><td style="padding:4px 0">{1:SHORTANSWER:=11010011}</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="numerical">
+    <name><text>2-2 容量表示のずれ</text></name>
+    <questiontext format="html"><text><![CDATA[<p>2TB と表示されたSSDを買った。OS が 2⁴⁰ を1TBとして表示する場合、何TBと表示されるか。小数第2位まで求めよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <answer fraction="100" format="moodle_auto_format">
+      <text>1.82</text>
+      <tolerance>0.005</tolerance>
+      <feedback format="html"><text></text></feedback>
+    </answer>
+    <unitgradingtype>0</unitgradingtype>
+    <unitpenalty>0.1000000</unitpenalty>
+    <showunits>3</showunits>
+    <unitsleft>0</unitsleft>
+  </question>
+  <question type="essay">
+    <name><text>2-3 浮動小数点の等値比較</text></name>
+    <questiontext format="html"><text><![CDATA[<p><code>0.1 + 0.2 == 0.3</code> が偽になる理由を、2進数の表現に触れて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="cloze">
+    <name><text>2-4 オーダと実行時間</text></name>
+    <questiontext format="html"><text><![CDATA[<p>ある処理が n=1,000 のとき 1秒かかった。この処理が O(n²) だとすると、n=10,000 では何秒かかるか。O(n log n) だとすればどうか。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">O(n²) のとき</td><td style="padding:4px 0">{1:NUMERICAL:=100:0.5} 秒</td></tr>
+<tr><td style="padding:4px 12px 4px 0">O(n log n) のとき</td><td style="padding:4px 0">{1:NUMERICAL:=13.3:0.4} 秒</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="essay">
+    <name><text>2-5 NP完全でないものの理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>次の4つのうち、NP完全と知られているものは <strong>(b) の数独</strong>（n×n に一般化したもの）である。残る3つが NP完全でない理由を、それぞれ「入力の大きさ n に対してどのくらいの時間で解けるか」に触れて述べよ。</p>
+<p>(a) 配列のソート (c) 二分探索<br>(d) グラフの最短経路（ダイクストラ法で解けるもの）</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>2-6 Grover のアルゴリズムと巡回セールスマン問題</text></name>
+    <questiontext format="html"><text><![CDATA[<p>「量子計算機が実用化されれば、巡回セールスマン問題も現実的な時間で解けるようになる」という主張は正しいか。Grover のアルゴリズムがどの程度の加速をもたらすかに触れて答えよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>2-7 近似解を返しているサービス</text></name>
+    <questiontext format="html"><text><![CDATA[<p>あなたが使っているサービスで「厳密な最適解ではなく、近似解を返している」と思われるものを1つ挙げ、なぜそう考えるか説明せよ。（例: 経路案内、商品推薦、配車のマッチング）</p>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+</quiz>

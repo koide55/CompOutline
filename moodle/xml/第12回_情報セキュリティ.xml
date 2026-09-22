@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- コンピュータシステム通論 演習
+     moodle/build-xml.js が生成。手で直さないこと -->
+<quiz>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第12回 情報セキュリティ</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="essay">
+    <name><text>12-1 情報セキュリティの3要素</text></name>
+    <questiontext format="html"><text><![CDATA[<p>情報セキュリティの3要素を挙げ、それぞれが破られた場合に大学の成績システムで何が起きるか具体的に述べよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="cloze">
+    <name><text>12-2 必要な鍵の数</text></name>
+    <questiontext format="html"><text><![CDATA[<p>共通鍵暗号における鍵配送問題とは何か。n 人が互いに通信する場合に必要な鍵の数を、共通鍵暗号と公開鍵暗号でそれぞれ求め、n=1000 で比較せよ。</p>
+<p><em>この問題では n=1000 のときの鍵の数のみ を答える。残りは別の問題で答えること。</em></p><p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">共通鍵暗号</td><td style="padding:4px 0">{1:NUMERICAL:=499500:0} 個</td></tr>
+<tr><td style="padding:4px 12px 4px 0">公開鍵暗号</td><td style="padding:4px 0">{1:NUMERICAL:=2000:0} 個</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="essay">
+    <name><text>12-2 鍵配送問題</text></name>
+    <questiontext format="html"><text><![CDATA[<p>共通鍵暗号における鍵配送問題とは何か。n 人が互いに通信する場合に必要な鍵の数を、共通鍵暗号と公開鍵暗号でそれぞれ求め、n=1000 で比較せよ。</p><p><em>この問題では 前半（鍵配送問題とは何か、および n 人のときの鍵の数の式）のみ を答える。残りは別の問題で答えること。</em></p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>12-3 TLS が両方の暗号を使う理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>TLS が共通鍵暗号と公開鍵暗号の両方を使うのはなぜか。それぞれをどの場面で使うか説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>12-4 ディジタル署名の検証手順</text></name>
+    <questiontext format="html"><text><![CDATA[<p>ディジタル署名の検証手順を述べ、検証が成功したときに何が保証されるか2つ挙げよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>12-5 証明書の警告が出る場合</text></name>
+    <questiontext format="html"><text><![CDATA[<p>ブラウザが証明書の警告を出すのはどのような場合か3つ挙げよ。また、警告を無視して接続することがなぜ危険か説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>12-6 認証と認可の違い</text></name>
+    <questiontext format="html"><text><![CDATA[<p>認証と認可の違いを説明し、「認証は正しく行われているが認可に欠陥がある」システムの例を挙げよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>12-7 パスキーがフィッシングに強い理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>パスキーがパスワード＋SMS認証よりフィッシングに強い理由を、署名の対象に何が含まれるかに触れて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>12-8 SQL インジェクションの修正</text></name>
+    <questiontext format="html"><text><![CDATA[<p>次のコードには SQL インジェクションの脆弱性がある。攻撃者が <code>name</code> に何を入力すると何が起きるか説明し、修正せよ。</p>
+<pre style="font-family:monospace">name = request.get("name")
+cursor.execute("SELECT * FROM users WHERE name = '" + name + "'")</pre>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>monospaced</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>12-9 store now, decrypt later</text></name>
+    <questiontext format="html"><text><![CDATA[<p>実用的な量子計算機はまだ存在しないのに、耐量子計算機暗号への移行が急がれているのはなぜか。「store now, decrypt later」に触れて説明せよ。また、共通鍵暗号と公開鍵暗号で影響の大きさが違う理由も述べよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>12-10 ランサムウェアへの備え</text></name>
+    <questiontext format="html"><text><![CDATA[<p>ランサムウェアの被害を最小化するために最も重要な備えは何か。第6回の内容に触れて説明せよ。</p>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+</quiz>

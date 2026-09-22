@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- コンピュータシステム通論 演習
+     moodle/build-xml.js が生成。手で直さないこと -->
+<quiz>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第05回 記憶階層とプロセッサの並列性</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="essay">
+    <name><text>5-1 SRAM と DRAM の素子構成</text></name>
+    <questiontext format="html"><text><![CDATA[<p>SRAM と DRAM について、1ビットあたりの素子構成の違いが「速度」と「集積度」にどう効くか説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="cloze">
+    <name><text>5-2 実効アクセス時間</text></name>
+    <questiontext format="html"><text><![CDATA[<p>キャッシュ参照時間 2ns、主記憶参照時間 100ns のシステムがある。ヒット率が (a) 98% (b) 90% のとき、実効アクセス時間をそれぞれ求めよ。また (a) から (b) になると何倍遅くなるか。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">(a) ヒット率 98%</td><td style="padding:4px 0">{1:NUMERICAL:=3.96:0.02} ns</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(b) ヒット率 90%</td><td style="padding:4px 0">{1:NUMERICAL:=11.8:0.05} ns</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(a) から (b) で何倍遅くなるか</td><td style="padding:4px 0">{1:NUMERICAL:=2.98:0.06} 倍</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="cloze">
+    <name><text>5-3 ループの向きとキャッシュミス</text></name>
+    <questiontext format="html"><text><![CDATA[<p>5.2 の (a)(b) 2つのループについて、N=1024、1要素8バイト、キャッシュライン64バイトとする。それぞれ何回のキャッシュミスが起きるか概算せよ（キャッシュは配列全体を保持できないほど小さいとする）。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">(a) 行を内側で回したとき</td><td style="padding:4px 0">{1:NUMERICAL:=131072:13000} 回</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(b) 列を内側で回したとき</td><td style="padding:4px 0">{1:NUMERICAL:=1048576:105000} 回</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="essay">
+    <name><text>5-4 仮想記憶の利点</text></name>
+    <questiontext format="html"><text><![CDATA[<p>仮想記憶がもたらす利点を3つ挙げ、それぞれについて「もし仮想記憶がなかったら何が困るか」を述べよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="cloze">
+    <name><text>5-5 アムダールの法則</text></name>
+    <questiontext format="html"><text><![CDATA[<p>あるプログラムの実行時間のうち、80% は並列化でき、20% は逐次実行しかできない。<br>(a) 4コアで実行したときの高速化率は何倍か。<br>(b) コア数を無限にしたときの上限は何倍か。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">(a) 4コアでの高速化率</td><td style="padding:4px 0">{1:NUMERICAL:=2.5:0.05} 倍</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(b) コア数を無限にしたときの上限</td><td style="padding:4px 0">{1:NUMERICAL:=5:0.05} 倍</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="essay">
+    <name><text>5-6 取り消された実行から情報が漏れる理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Spectre の攻撃では、予測が外れて実行結果が取り消されるのに、なぜ情報が漏れるのか。キャッシュのどの性質が使われているか述べよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>5-7 投機実行を止められない理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>投機実行を完全に止めれば Spectre は防げる。それが現実的な対策とされないのはなぜか。第3回の内容に触れて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>5-8 コア数を2倍にしても半分にならない理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>「CPU のコア数を2倍にすれば処理時間は半分になる」という主張はなぜ一般に成り立たないか。理由を2つ挙げよ。</p>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+</quiz>

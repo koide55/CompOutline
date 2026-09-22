@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- コンピュータシステム通論 演習
+     moodle/build-xml.js が生成。手で直さないこと -->
+<quiz>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第13回 機械学習からLLM・エージェントAIへ</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="essay">
+    <name><text>13-1 プログラミングと機械学習の違い</text></name>
+    <questiontext format="html"><text><![CDATA[<p>従来のプログラミングと機械学習の違いを、「人間が与えるもの」と「計算機が出すもの」の観点から説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>13-2 自己教師あり学習と正解ラベル</text></name>
+    <questiontext format="html"><text><![CDATA[<p>自己教師あり学習が LLM の事前学習に適している理由を、「正解ラベルをどう用意するか」に触れて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>13-3 活性化関数が必要な理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>ニューラルネットワークで活性化関数が必要な理由を説明せよ。活性化関数がない場合、層を何層重ねても何と等価になるか。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>13-4 深層学習が2010年代に実用化した理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>深層学習の実用化が2010年代になった理由を3つ挙げ、それぞれが本講義のどの回の内容と関係するか示せ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>13-5 トランスフォーマと並列性</text></name>
+    <questiontext format="html"><text><![CDATA[<p>トランスフォーマが RNN より大規模化に適している理由を、第5回の並列性の内容に触れて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>13-6 ハルシネーションが仕組みの帰結である理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>LLM のハルシネーションが「バグではなく仕組みの帰結」である理由を、LLM が実際に計算していることに基づいて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>13-7 RAG の効果と限界</text></name>
+    <questiontext format="html"><text><![CDATA[<p>RAG がハルシネーションを軽減しうる理由を説明せよ。また、RAG でも防げない誤りの例を1つ挙げよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>13-8 プロンプトインジェクションと SQL インジェクション</text></name>
+    <questiontext format="html"><text><![CDATA[<p>プロンプトインジェクションと SQL インジェクションの共通する構造を述べよ。また、SQL インジェクションには確実な対策があるのにプロンプトインジェクションには無いのはなぜか説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>13-9 エージェントAI の安全策</text></name>
+    <questiontext format="html"><text><![CDATA[<p>エージェントAI に不可逆な操作（メール送信、ファイル削除、決済）を行わせる場合、どのような安全策を設けるべきか3つ挙げよ。第12回の「最小権限」「多層防御」に触れること。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>13-10 総括：2つの話題に共通する考え方</text></name>
+    <questiontext format="html"><text><![CDATA[<p>（総括）本講義で扱った13の話題のうち、2つを選び、それらが共通して使っている考え方を1つ挙げて論じよ。</p>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+</quiz>

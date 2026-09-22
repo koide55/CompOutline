@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- コンピュータシステム通論 演習
+     moodle/build-xml.js が生成。手で直さないこと -->
+<quiz>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第08回 入出力・仮想化・クラウド</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="essay">
+    <name><text>8-1 ポーリングと割り込みの比較</text></name>
+    <questiontext format="html"><text><![CDATA[<p>ポーリングと割り込みについて、<br>(a) 仕組み (b) CPU の利用効率 (c) それぞれが適する場面を比較して説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>8-2 タイマ割り込みが無いと失われる機能</text></name>
+    <questiontext format="html"><text><![CDATA[<p>タイマ割り込みが存在しなかった場合、OS のどの機能が成立しなくなるか。第7回の内容に触れて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>8-3 DMA の有無と CPU の作業</text></name>
+    <questiontext format="html"><text><![CDATA[<p>DMA を使わずに 1GB のデータをディスクから主記憶へ転送する場合と、DMA を使う場合とで、CPU が行う作業の違いを説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="cloze">
+    <name><text>8-4 キーマトリクスの配線数</text></name>
+    <questiontext format="html"><text><![CDATA[<p>キーマトリクスでは、縦 n 本・横 m 本の配線で n×m 個のキーを読める。</p>
+<p>(a) <strong>256個</strong>のキーを読むとき、配線の本数をもっとも少なくできる n と m を<br>求めよ。そのときの本数も答えよ。<br>(b) 同じ256個を「1キーにつき1本」で配線した場合と比べ、<br>本数は何分の1になるか。<br>(c) マトリクス方式は、配線を減らす代わりに何を支払っているか。<br>キーを押してからそれが検出されるまでに何が起きるかに触れて述べよ。</p>
+<p><em>この問題では (a) と (b) のみ を答える。残りは別の問題で答えること。</em></p><p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">(a) n</td><td style="padding:4px 0">{1:NUMERICAL:=16:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(a) m</td><td style="padding:4px 0">{1:NUMERICAL:=16:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(a) 配線の本数</td><td style="padding:4px 0">{1:NUMERICAL:=32:0} 本</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(b) 1キー1本と比べて何分の1か</td><td style="padding:4px 0">{1:NUMERICAL:=8:0}</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="essay">
+    <name><text>8-4 マトリクス方式の代償</text></name>
+    <questiontext format="html"><text><![CDATA[<p>キーマトリクスでは、縦 n 本・横 m 本の配線で n×m 個のキーを読める。</p>
+<p>(a) <strong>256個</strong>のキーを読むとき、配線の本数をもっとも少なくできる n と m を<br>求めよ。そのときの本数も答えよ。<br>(b) 同じ256個を「1キーにつき1本」で配線した場合と比べ、<br>本数は何分の1になるか。<br>(c) マトリクス方式は、配線を減らす代わりに何を支払っているか。<br>キーを押してからそれが検出されるまでに何が起きるかに触れて述べよ。</p><p><em>この問題では (c) のみ を答える。残りは別の問題で答えること。</em></p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>8-5 仮想機械とコンテナの比較</text></name>
+    <questiontext format="html"><text><![CDATA[<p>仮想機械とコンテナについて、<br>(a) 何を分離しているか (b) 起動時間 (c) 分離の強度の3点で比較せよ。また「信頼できない第三者のコードを実行する」用途ではどちらを選ぶべきか、理由とともに述べよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>8-6 スパイクのある負荷と費用構造</text></name>
+    <questiontext format="html"><text><![CDATA[<p>年に3日だけアクセスが平常時の100倍になるシステムがある。自前の設備で運用する場合とクラウドで運用する場合の費用構造の違いを説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>8-7 責任共有モデル</text></name>
+    <questiontext format="html"><text><![CDATA[<p>「クラウド事業者を使っているので、セキュリティ対策は事業者に任せてある」という主張に反論せよ。責任共有モデルに触れること。</p>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+</quiz>

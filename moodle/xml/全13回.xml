@@ -1,0 +1,2041 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- コンピュータシステム通論 演習
+     moodle/build-xml.js が生成。手で直さないこと -->
+<quiz>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第01回 計算とは何か</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="cloze">
+    <name><text>1-1 互除法のステップ</text></name>
+    <questiontext format="html"><text><![CDATA[<p>互除法を a=252, b=105 で実行し、各ステップの (a, b, r) を書け。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">1回目の a</td><td style="padding:4px 0">{1:NUMERICAL:=252:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">1回目の b</td><td style="padding:4px 0">{1:NUMERICAL:=105:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">1回目の r</td><td style="padding:4px 0">{1:NUMERICAL:=42:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">2回目の a</td><td style="padding:4px 0">{1:NUMERICAL:=105:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">2回目の b</td><td style="padding:4px 0">{1:NUMERICAL:=42:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">2回目の r</td><td style="padding:4px 0">{1:NUMERICAL:=21:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">3回目の a</td><td style="padding:4px 0">{1:NUMERICAL:=42:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">3回目の b</td><td style="padding:4px 0">{1:NUMERICAL:=21:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">3回目の r</td><td style="padding:4px 0">{1:NUMERICAL:=0:0}</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="essay">
+    <name><text>1-2 チューリングマシンの遷移規則</text></name>
+    <questiontext format="html"><text><![CDATA[<p>テープに <code>0</code> と <code>1</code> からなる文字列が書かれている。この文字列に含まれる<code>1</code> の個数が偶数なら <code>Y</code> を、奇数なら <code>N</code> を書いて停止するチューリングマシンの遷移規則表を作れ。ヘッドは文字列の左端から始まり、右へ進むものとする。<strong>文字列の右端の次にある空白のマスに <code>Y</code> または <code>N</code> を書いて停止する</strong>ものとする。（ヒント: 状態は「これまでに読んだ 1 が偶数個」「奇数個」の2つで足りる。表の形は 1.2 の「1を足す機械」と同じでよい。）</p>
+<p><strong>解答形式</strong>: 1行に1つの規則を、次の形で書け。<code>(偶数, 0) → 0 を書く, 右へ, 偶数</code></p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>monospaced</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>1-3 量子計算機と停止問題</text></name>
+    <questiontext format="html"><text><![CDATA[<p>次の主張は正しいか。理由とともに答えよ。「量子コンピュータが実用化されれば、停止問題も解けるようになる。」</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>1-4 決定不能性を回避している挙動</text></name>
+    <questiontext format="html"><text><![CDATA[<p>あなたが普段使っているソフトウェアで、「決定不能性を回避するために安全側に倒している」と思われる挙動を1つ挙げ、なぜそう考えるか説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>1-5 生成AIは停止問題を解いたのか</text></name>
+    <questiontext format="html"><text><![CDATA[<p>「このプログラムは停止しますか」と生成AIに尋ねると、答えが返ってくる。これは停止問題が解けたことを意味するか。理由とともに答えよ。</p>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第02回 情報の表現と計算量</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="cloze">
+    <name><text>2-1 2進数と2の補数</text></name>
+    <questiontext format="html"><text><![CDATA[<p>10進数 173 を8ビットの2進数で表せ。また、8ビットの2の補数表現で−45 を表せ。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">173 を8ビットの2進数で</td><td style="padding:4px 0">{1:SHORTANSWER:=10101101}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">−45 を8ビットの2の補数で</td><td style="padding:4px 0">{1:SHORTANSWER:=11010011}</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="numerical">
+    <name><text>2-2 容量表示のずれ</text></name>
+    <questiontext format="html"><text><![CDATA[<p>2TB と表示されたSSDを買った。OS が 2⁴⁰ を1TBとして表示する場合、何TBと表示されるか。小数第2位まで求めよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <answer fraction="100" format="moodle_auto_format">
+      <text>1.82</text>
+      <tolerance>0.005</tolerance>
+      <feedback format="html"><text></text></feedback>
+    </answer>
+    <unitgradingtype>0</unitgradingtype>
+    <unitpenalty>0.1000000</unitpenalty>
+    <showunits>3</showunits>
+    <unitsleft>0</unitsleft>
+  </question>
+  <question type="essay">
+    <name><text>2-3 浮動小数点の等値比較</text></name>
+    <questiontext format="html"><text><![CDATA[<p><code>0.1 + 0.2 == 0.3</code> が偽になる理由を、2進数の表現に触れて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="cloze">
+    <name><text>2-4 オーダと実行時間</text></name>
+    <questiontext format="html"><text><![CDATA[<p>ある処理が n=1,000 のとき 1秒かかった。この処理が O(n²) だとすると、n=10,000 では何秒かかるか。O(n log n) だとすればどうか。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">O(n²) のとき</td><td style="padding:4px 0">{1:NUMERICAL:=100:0.5} 秒</td></tr>
+<tr><td style="padding:4px 12px 4px 0">O(n log n) のとき</td><td style="padding:4px 0">{1:NUMERICAL:=13.3:0.4} 秒</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="essay">
+    <name><text>2-5 NP完全でないものの理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>次の4つのうち、NP完全と知られているものは <strong>(b) の数独</strong>（n×n に一般化したもの）である。残る3つが NP完全でない理由を、それぞれ「入力の大きさ n に対してどのくらいの時間で解けるか」に触れて述べよ。</p>
+<p>(a) 配列のソート (c) 二分探索<br>(d) グラフの最短経路（ダイクストラ法で解けるもの）</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>2-6 Grover のアルゴリズムと巡回セールスマン問題</text></name>
+    <questiontext format="html"><text><![CDATA[<p>「量子計算機が実用化されれば、巡回セールスマン問題も現実的な時間で解けるようになる」という主張は正しいか。Grover のアルゴリズムがどの程度の加速をもたらすかに触れて答えよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>2-7 近似解を返しているサービス</text></name>
+    <questiontext format="html"><text><![CDATA[<p>あなたが使っているサービスで「厳密な最適解ではなく、近似解を返している」と思われるものを1つ挙げ、なぜそう考えるか説明せよ。（例: 経路案内、商品推薦、配車のマッチング）</p>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第03回 論理回路からプロセッサへ</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="essay">
+    <name><text>3-1 NAND で XOR を構成する</text></name>
+    <questiontext format="html"><text><![CDATA[<p>NAND ゲートだけを使って XOR を構成せよ。ゲートは4個で足りる。</p>
+<p><strong>解答形式</strong>: 1行に1つのゲートを、<code>n1 = NAND(a, b)</code> の形で書け。中間の信号には <code>n1</code>, <code>n2</code>… と名前を付け、最後の行の左辺を <code>out</code> とせよ。手で図を描いて写真を添付してもよい。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>monospaced</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>1</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>3-2 4ビット加算器の各段</text></name>
+    <questiontext format="html"><text><![CDATA[<p>全加算器を4個つないだ4ビット加算器で、<code>0110 + 1011</code> を計算せよ。各段の Cin, S, Cout を示せ。結果は4ビットに収まるか。</p>
+<p><strong>解答形式</strong>: 1行に1段を、<code>第0段: Cin=0, S=1, Cout=1</code> の形で4行書け。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>3-3 SRラッチの禁止入力</text></name>
+    <questiontext format="html"><text><![CDATA[<p>SRラッチで S=1, R=1 としたときに何が起こるか。真理値表から考察し、なぜこの入力が禁止されるか説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="cloze">
+    <name><text>3-4 信号が1周期で進む距離</text></name>
+    <questiontext format="html"><text><![CDATA[<p>配線の中を信号が進む速さは、真空中の光速の約6割（<strong>1.8×10⁸ m/s</strong>）である。</p>
+<p>(a) クロック周波数 <strong>5GHz</strong> のプロセッサで、1周期のあいだに信号が<br>進める距離を求めよ（mm 単位でよい）。<br>(b) このチップが一辺 20mm の正方形だとする。対角線の両端にある回路の間<br>（約 <strong>28mm</strong>）に、信号は1周期のうちに届くか。計算して答えよ。<br>(c) 周波数を上げていくと、いずれ (b) が成り立たなくなる。<br><strong>何 GHz を超えたとき</strong>に届かなくなるか求めよ。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">(a) 1周期で進む距離</td><td style="padding:4px 0">{1:NUMERICAL:=36:0.6} mm</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(b) 28mm 先に届くか</td><td style="padding:4px 0">{1:MULTICHOICE:=届く~届かない}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(c) 届かなくなる周波数</td><td style="padding:4px 0">{1:NUMERICAL:=6.43:0.15} GHz</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="essay">
+    <name><text>3-5 命令列を書く</text></name>
+    <questiontext format="html"><text><![CDATA[<p>3.3 の実行例で、<code>c = a + b</code> に5命令かかった。<code>d = (a + b) * (a - b)</code> を同じ命令セットで書くと何命令になるか。命令列を書き、命令数を答えよ。前提は次のとおりとする。</p>
+<ul><li>a は 200番地、b は 201番地にあり、結果 d は 202番地に書く</li><li>汎用レジスタは <strong>R1〜R4 の4本</strong></li><li>演算命令は任意の2本に対して使える（<code>ADD Rx, Ry</code> は Rx ← Rx + Ry）。 乗算 <code>MUL</code>、減算 <code>SUB</code> も同じ形で使える</li><li><code>HALT</code> も1命令として数える</li></ul>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>monospaced</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>3-6 ムーアの法則のあとに向上しているもの</text></name>
+    <questiontext format="html"><text><![CDATA[<p>「ムーアの法則が終わった」と言われる一方で、計算機の性能は今も向上している。何が向上しているのか、3つ挙げよ。</p>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第04回 プログラムが動くまで</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="essay">
+    <name><text>4-1 高級言語が直接実行できない理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>高級言語で書いたプログラムが、そのままでは CPU で実行できないのはなぜか。第3回の内容に触れて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>4-2 コンパイラ方式とインタプリタ方式の比較</text></name>
+    <questiontext format="html"><text><![CDATA[<p>コンパイラ方式とインタプリタ方式について、<br>(a) 実行速度 (b) 開発時の試行錯誤のしやすさ (c) 誤りの発見時期の3点で比較せよ。</p>
+<p><strong>解答形式</strong>: 観点ごとに1行で、次の形で書け。<code>(a) 実行速度: コンパイラ方式は… / インタプリタ方式は…</code></p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>4-3 JIT が事前コンパイルより有利になる場合</text></name>
+    <questiontext format="html"><text><![CDATA[<p>JIT コンパイルが、事前コンパイルより有利になりうる理由を1つ挙げよ。「実行時にしか分からない情報」の具体例を含めること。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>4-4 静的リンクと動的リンクの使い分け</text></name>
+    <questiontext format="html"><text><![CDATA[<p>静的リンクと動的リンクについて、それぞれが有利になる状況を1つずつ挙げよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>4-5 スタック上の配列を返す誤り</text></name>
+    <questiontext format="html"><text><![CDATA[<p>次のC言語の関数には誤りがある。何が問題か、4.3 のメモリ配置の表を参照して説明せよ。</p>
+<pre style="font-family:monospace">char *make_message(void) {
+    char buf[64];
+    sprintf(buf, "hello");
+    return buf;
+}</pre>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>monospaced</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>4-6 テストとバグの不在</text></name>
+    <questiontext format="html"><text><![CDATA[<p>「テストが全部通ったので、このプログラムにバグは無い」という主張に反論せよ。第1回の内容に触れること。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="numerical">
+    <name><text>4-7 二分探索で原因を特定する回数</text></name>
+    <questiontext format="html"><text><![CDATA[<p>1か月前は動いていたプログラムが、いま動かない。その間にコミットが100個ある。原因のコミットを特定するのに、最小で何回試せばよいか。またその方法を述べよ。</p><p><em>この問題では 前半（最小の試行回数）のみ を答える。残りは別の問題で答えること。</em></p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+    <answer fraction="100" format="moodle_auto_format">
+      <text>7</text>
+      <tolerance>0</tolerance>
+      <feedback format="html"><text></text></feedback>
+    </answer>
+    <unitgradingtype>0</unitgradingtype>
+    <unitpenalty>0.1000000</unitpenalty>
+    <showunits>3</showunits>
+    <unitsleft>0</unitsleft>
+  </question>
+  <question type="essay">
+    <name><text>4-7 原因を特定する方法</text></name>
+    <questiontext format="html"><text><![CDATA[<p>1か月前は動いていたプログラムが、いま動かない。その間にコミットが100個ある。原因のコミットを特定するのに、最小で何回試せばよいか。またその方法を述べよ。</p><p><em>この問題では 後半（原因のコミットを特定する方法）のみ を答える。残りは別の問題で答えること。</em></p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>4-8 型検査とテストが保証するもの</text></name>
+    <questiontext format="html"><text><![CDATA[<p>静的型付けの言語を使っていれば、テストは要らないか。型検査とテストが「何を保証するか」の違いに触れて答えよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>4-9 次に学ぶ言語の選び方</text></name>
+    <questiontext format="html"><text><![CDATA[<p>あなたが今後1年で1つ言語を学ぶとしたら何を選ぶか。4.4 の3つの問いに沿って理由を述べよ。</p>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第05回 記憶階層とプロセッサの並列性</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="essay">
+    <name><text>5-1 SRAM と DRAM の素子構成</text></name>
+    <questiontext format="html"><text><![CDATA[<p>SRAM と DRAM について、1ビットあたりの素子構成の違いが「速度」と「集積度」にどう効くか説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="cloze">
+    <name><text>5-2 実効アクセス時間</text></name>
+    <questiontext format="html"><text><![CDATA[<p>キャッシュ参照時間 2ns、主記憶参照時間 100ns のシステムがある。ヒット率が (a) 98% (b) 90% のとき、実効アクセス時間をそれぞれ求めよ。また (a) から (b) になると何倍遅くなるか。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">(a) ヒット率 98%</td><td style="padding:4px 0">{1:NUMERICAL:=3.96:0.02} ns</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(b) ヒット率 90%</td><td style="padding:4px 0">{1:NUMERICAL:=11.8:0.05} ns</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(a) から (b) で何倍遅くなるか</td><td style="padding:4px 0">{1:NUMERICAL:=2.98:0.06} 倍</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="cloze">
+    <name><text>5-3 ループの向きとキャッシュミス</text></name>
+    <questiontext format="html"><text><![CDATA[<p>5.2 の (a)(b) 2つのループについて、N=1024、1要素8バイト、キャッシュライン64バイトとする。それぞれ何回のキャッシュミスが起きるか概算せよ（キャッシュは配列全体を保持できないほど小さいとする）。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">(a) 行を内側で回したとき</td><td style="padding:4px 0">{1:NUMERICAL:=131072:13000} 回</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(b) 列を内側で回したとき</td><td style="padding:4px 0">{1:NUMERICAL:=1048576:105000} 回</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="essay">
+    <name><text>5-4 仮想記憶の利点</text></name>
+    <questiontext format="html"><text><![CDATA[<p>仮想記憶がもたらす利点を3つ挙げ、それぞれについて「もし仮想記憶がなかったら何が困るか」を述べよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="cloze">
+    <name><text>5-5 アムダールの法則</text></name>
+    <questiontext format="html"><text><![CDATA[<p>あるプログラムの実行時間のうち、80% は並列化でき、20% は逐次実行しかできない。<br>(a) 4コアで実行したときの高速化率は何倍か。<br>(b) コア数を無限にしたときの上限は何倍か。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">(a) 4コアでの高速化率</td><td style="padding:4px 0">{1:NUMERICAL:=2.5:0.05} 倍</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(b) コア数を無限にしたときの上限</td><td style="padding:4px 0">{1:NUMERICAL:=5:0.05} 倍</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="essay">
+    <name><text>5-6 取り消された実行から情報が漏れる理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>Spectre の攻撃では、予測が外れて実行結果が取り消されるのに、なぜ情報が漏れるのか。キャッシュのどの性質が使われているか述べよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>5-7 投機実行を止められない理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>投機実行を完全に止めれば Spectre は防げる。それが現実的な対策とされないのはなぜか。第3回の内容に触れて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>5-8 コア数を2倍にしても半分にならない理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>「CPU のコア数を2倍にすれば処理時間は半分になる」という主張はなぜ一般に成り立たないか。理由を2つ挙げよ。</p>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第06回 ストレージとファイルシステム</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="cloze">
+    <name><text>6-1 HDD の平均アクセス時間</text></name>
+    <questiontext format="html"><text><![CDATA[<p>回転数 10,000 rpm、平均シーク時間 5ms、転送速度 250 MB/s の HDD から8KB を読む。平均アクセス時間を求めよ。またそのうち転送時間の占める割合を求めよ。（1KB = 1000バイト、1MB = 10⁶バイトとする。以下 6-2 も同じ）</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">平均アクセス時間</td><td style="padding:4px 0">{1:NUMERICAL:=8.03:0.06} ms</td></tr>
+<tr><td style="padding:4px 12px 4px 0">転送時間の占める割合</td><td style="padding:4px 0">{1:NUMERICAL:=0.4:0.06} %</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="cloze">
+    <name><text>6-2 ランダムアクセスと連続アクセス</text></name>
+    <questiontext format="html"><text><![CDATA[<p>同じ HDD で、8KB のブロックを 500 個読む。<br>(a) 500 箇所にばらばらに置かれている場合<br>(b) 4MB の連続領域に置かれている場合それぞれの所要時間を求め、比を示せ。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">(a) ばらばらに置かれている場合</td><td style="padding:4px 0">{1:NUMERICAL:=4.02:0.06} 秒</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(b) 連続領域に置かれている場合</td><td style="padding:4px 0">{1:NUMERICAL:=24:0.5} ms</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(a) は (b) の何倍か</td><td style="padding:4px 0">{1:NUMERICAL:=167:12} 倍</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="cloze">
+    <name><text>6-3 RAID 5 と RAID 6 の容量</text></name>
+    <questiontext format="html"><text><![CDATA[<p>4TB のディスク6台で RAID 5 と RAID 6 を組んだ場合、それぞれ使える容量と、耐えられる故障台数を示せ。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">RAID 5 で使える容量</td><td style="padding:4px 0">{1:NUMERICAL:=20:0} TB</td></tr>
+<tr><td style="padding:4px 12px 4px 0">RAID 5 が耐えられる故障</td><td style="padding:4px 0">{1:NUMERICAL:=1:0} 台</td></tr>
+<tr><td style="padding:4px 12px 4px 0">RAID 6 で使える容量</td><td style="padding:4px 0">{1:NUMERICAL:=16:0} TB</td></tr>
+<tr><td style="padding:4px 12px 4px 0">RAID 6 が耐えられる故障</td><td style="padding:4px 0">{1:NUMERICAL:=2:0} 台</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="cloze">
+    <name><text>6-4 パリティの計算</text></name>
+    <questiontext format="html"><text><![CDATA[<p>RAID 5 のディスク3台に、データ A=<code>1011</code>, B=<code>0110</code>, C=<code>1100</code> が置かれている。パリティ P を求めよ。その後 B が失われたとして、A, C, P から B を復元する計算を示せ。</p>
+<p><em>この問題では パリティ P のみ を答える。残りは別の問題で答えること。</em></p><p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">パリティ P</td><td style="padding:4px 0">{1:SHORTANSWER:=0001}</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="essay">
+    <name><text>6-4 パリティからの復元</text></name>
+    <questiontext format="html"><text><![CDATA[<p>RAID 5 のディスク3台に、データ A=<code>1011</code>, B=<code>0110</code>, C=<code>1100</code> が置かれている。パリティ P を求めよ。その後 B が失われたとして、A, C, P から B を復元する計算を示せ。</p><p><em>この問題では A, C, P から B を復元する計算のみ を答える。残りは別の問題で答えること。</em></p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>monospaced</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>6-5 RAID とバックアップの違い</text></name>
+    <questiontext format="html"><text><![CDATA[<p>「RAID を組んでいるのでバックアップは不要」という主張に反論せよ。RAID で守れない事態を3つ挙げること。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>6-6 SSD にデフラグをしない理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>SSD に対してデフラグを行うべきでない理由を、6.2 のフラッシュの制約に触れて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="cloze">
+    <name><text>6-7 イレイジャーコーディング</text></name>
+    <questiontext format="html"><text><![CDATA[<p>イレイジャーコーディングで k=8, m=4 とした。<br>(a) 容量効率は何%か (b) 何台までの同時故障に耐えるか<br>(c) 3重レプリケーションと比べて、容量効率はどれだけ改善するか</p>
+<p>---</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">(a) 容量効率</td><td style="padding:4px 0">{1:NUMERICAL:=66.7:0.5} %</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(b) 耐えられる同時故障</td><td style="padding:4px 0">{1:NUMERICAL:=4:0} 台</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(c) 3重レプリケーションの何倍か</td><td style="padding:4px 0">{1:NUMERICAL:=2:0.1} 倍</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第07回 オペレーティングシステムとプロセス</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="essay">
+    <name><text>7-1 ハードウェアを直接操作させない理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>アプリケーションがハードウェアを直接操作できないようになっているのはなぜか。そうなっていない場合に起きる問題を2つ挙げよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>7-2 システムコールが高価な理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>関数呼び出しに比べてシステムコールが高価なのはなぜか。3つの要因を挙げよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>7-3 プロセスとスレッドの比較</text></name>
+    <questiontext format="html"><text><![CDATA[<p>プロセスとスレッドについて、次の観点で違いを説明せよ。<br>(a) メモリ空間 (b) 生成・切替のコスト (c) 一方が異常終了したときの影響<br>(d) データ共有のしやすさと危険さ</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>7-4 fork とコピーオンライト</text></name>
+    <questiontext format="html"><text><![CDATA[<p><code>fork</code> が全メモリを複製しないで済む仕組みを説明せよ。また、その仕組みが特に効果的になる典型的な使い方を述べよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>7-5 パイプラインが呼ぶシステムコール</text></name>
+    <questiontext format="html"><text><![CDATA[<p>シェルで <code>cat data.txt | sort | uniq -c</code> を実行したとき、シェルが呼ぶシステムコールを順に挙げよ。パイプが何本必要かも答えよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>7-6 ls と wc がつながる設計</text></name>
+    <questiontext format="html"><text><![CDATA[<p><code>ls</code> と <code>wc</code> は互いの存在を知らないのに、<code>ls | wc</code> でつながる。これを可能にしている設計上の工夫を2つ挙げよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>7-7 競合状態と最終値</text></name>
+    <questiontext format="html"><text><![CDATA[<p>共有変数 <code>count</code>（初期値 10）を、2つのスレッド A, B がそれぞれ5回ずつインクリメントする。排他制御はない。インクリメントが「<strong>読む → 1 足す → 書き戻す</strong>」の3段階に分かれることを踏まえて答えよ（7.4 の表を参照）。</p>
+<p>(a) すべて正しく反映された場合、最終値はいくつか。</p>
+<p>(b) 次の実行順序について、<strong>時刻5のあと</strong>と<strong>時刻6のあと</strong>の <code>count</code> の値を<br>それぞれ答えよ。また、A と B が1回ずつインクリメントしたのに、<br><code>count</code> はいくつ増えたかを答えよ。</p>
+<table style="border-collapse:collapse;margin:8px 0">
+<tr><th style="padding:4px 10px;border:1px solid #ccc">時刻</th><th style="padding:4px 10px;border:1px solid #ccc">A</th><th style="padding:4px 10px;border:1px solid #ccc">B</th><th style="padding:4px 10px;border:1px solid #ccc">count</th></tr>
+<tr><td style="padding:4px 10px;border:1px solid #ccc">1</td><td style="padding:4px 10px;border:1px solid #ccc">読む（10 を得る）</td><td style="padding:4px 10px;border:1px solid #ccc"></td><td style="padding:4px 10px;border:1px solid #ccc">10</td></tr>
+<tr><td style="padding:4px 10px;border:1px solid #ccc">2</td><td style="padding:4px 10px;border:1px solid #ccc"></td><td style="padding:4px 10px;border:1px solid #ccc">読む（10 を得る）</td><td style="padding:4px 10px;border:1px solid #ccc">10</td></tr>
+<tr><td style="padding:4px 10px;border:1px solid #ccc">3</td><td style="padding:4px 10px;border:1px solid #ccc">1 足す（手元は 11）</td><td style="padding:4px 10px;border:1px solid #ccc"></td><td style="padding:4px 10px;border:1px solid #ccc">10</td></tr>
+<tr><td style="padding:4px 10px;border:1px solid #ccc">4</td><td style="padding:4px 10px;border:1px solid #ccc"></td><td style="padding:4px 10px;border:1px solid #ccc">1 足す（手元は 11）</td><td style="padding:4px 10px;border:1px solid #ccc">10</td></tr>
+<tr><td style="padding:4px 10px;border:1px solid #ccc">5</td><td style="padding:4px 10px;border:1px solid #ccc">書き戻す</td><td style="padding:4px 10px;border:1px solid #ccc"></td><td style="padding:4px 10px;border:1px solid #ccc">?</td></tr>
+<tr><td style="padding:4px 10px;border:1px solid #ccc">6</td><td style="padding:4px 10px;border:1px solid #ccc"></td><td style="padding:4px 10px;border:1px solid #ccc">書き戻す</td><td style="padding:4px 10px;border:1px solid #ccc">?</td></tr>
+</table>
+<p>(c) (b) と同じ食い違いが5回とも起きたとすると、最終値はいくつになるか。</p>
+<p>（なお実際には、片方が古い値をさらに長く持ち続けることで 12 まで下がりうる。ここでは (b) の形が繰り返される場合だけを考えればよい。）</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>7-8 デッドロックの4条件を崩す</text></name>
+    <questiontext format="html"><text><![CDATA[<p>デッドロックの4条件を挙げ、それぞれを崩す具体的な方法を1つずつ述べよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>7-9 残高が負になる競合状態</text></name>
+    <questiontext format="html"><text><![CDATA[<p>残高 1000 の口座に対して、2つのスレッドが同時に <code>withdraw(600)</code> を呼んだところ、<strong>両方が <code>True</code> を返し、残高が −200 になった。</strong>どの行の直後に別のスレッドが割り込むとこうなるかを示し、修正方針を述べよ。</p>
+<pre style="font-family:monospace">balance = 1000
+
+def withdraw(amount):
+    global balance
+    if balance &gt;= amount:            # (1) 残高を確認
+        balance = balance - amount   # (2) 引き出す
+        return True
+    return False</pre>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>monospaced</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第08回 入出力・仮想化・クラウド</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="essay">
+    <name><text>8-1 ポーリングと割り込みの比較</text></name>
+    <questiontext format="html"><text><![CDATA[<p>ポーリングと割り込みについて、<br>(a) 仕組み (b) CPU の利用効率 (c) それぞれが適する場面を比較して説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>8-2 タイマ割り込みが無いと失われる機能</text></name>
+    <questiontext format="html"><text><![CDATA[<p>タイマ割り込みが存在しなかった場合、OS のどの機能が成立しなくなるか。第7回の内容に触れて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>8-3 DMA の有無と CPU の作業</text></name>
+    <questiontext format="html"><text><![CDATA[<p>DMA を使わずに 1GB のデータをディスクから主記憶へ転送する場合と、DMA を使う場合とで、CPU が行う作業の違いを説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="cloze">
+    <name><text>8-4 キーマトリクスの配線数</text></name>
+    <questiontext format="html"><text><![CDATA[<p>キーマトリクスでは、縦 n 本・横 m 本の配線で n×m 個のキーを読める。</p>
+<p>(a) <strong>256個</strong>のキーを読むとき、配線の本数をもっとも少なくできる n と m を<br>求めよ。そのときの本数も答えよ。<br>(b) 同じ256個を「1キーにつき1本」で配線した場合と比べ、<br>本数は何分の1になるか。<br>(c) マトリクス方式は、配線を減らす代わりに何を支払っているか。<br>キーを押してからそれが検出されるまでに何が起きるかに触れて述べよ。</p>
+<p><em>この問題では (a) と (b) のみ を答える。残りは別の問題で答えること。</em></p><p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">(a) n</td><td style="padding:4px 0">{1:NUMERICAL:=16:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(a) m</td><td style="padding:4px 0">{1:NUMERICAL:=16:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(a) 配線の本数</td><td style="padding:4px 0">{1:NUMERICAL:=32:0} 本</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(b) 1キー1本と比べて何分の1か</td><td style="padding:4px 0">{1:NUMERICAL:=8:0}</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="essay">
+    <name><text>8-4 マトリクス方式の代償</text></name>
+    <questiontext format="html"><text><![CDATA[<p>キーマトリクスでは、縦 n 本・横 m 本の配線で n×m 個のキーを読める。</p>
+<p>(a) <strong>256個</strong>のキーを読むとき、配線の本数をもっとも少なくできる n と m を<br>求めよ。そのときの本数も答えよ。<br>(b) 同じ256個を「1キーにつき1本」で配線した場合と比べ、<br>本数は何分の1になるか。<br>(c) マトリクス方式は、配線を減らす代わりに何を支払っているか。<br>キーを押してからそれが検出されるまでに何が起きるかに触れて述べよ。</p><p><em>この問題では (c) のみ を答える。残りは別の問題で答えること。</em></p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>8-5 仮想機械とコンテナの比較</text></name>
+    <questiontext format="html"><text><![CDATA[<p>仮想機械とコンテナについて、<br>(a) 何を分離しているか (b) 起動時間 (c) 分離の強度の3点で比較せよ。また「信頼できない第三者のコードを実行する」用途ではどちらを選ぶべきか、理由とともに述べよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>8-6 スパイクのある負荷と費用構造</text></name>
+    <questiontext format="html"><text><![CDATA[<p>年に3日だけアクセスが平常時の100倍になるシステムがある。自前の設備で運用する場合とクラウドで運用する場合の費用構造の違いを説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>8-7 責任共有モデル</text></name>
+    <questiontext format="html"><text><![CDATA[<p>「クラウド事業者を使っているので、セキュリティ対策は事業者に任せてある」という主張に反論せよ。責任共有モデルに触れること。</p>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第09回 ネットワークの基礎</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="essay">
+    <name><text>9-1 回線交換とパケット交換の比較</text></name>
+    <questiontext format="html"><text><![CDATA[<p>回線交換とパケット交換について、<br>(a) 帯域の使われ方 (b) 遅延の安定性 (c) 障害への強さの3点で比較せよ。計算機の通信でパケット交換が選ばれた理由を述べよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>9-2 ネットワークを階層に分ける利点</text></name>
+    <questiontext format="html"><text><![CDATA[<p>ネットワークを階層に分ける利点を3つ挙げよ。また「光ファイバに置き換えても Web ブラウザを書き直さなくてよい」のはどの利点によるか説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>9-3 ヘッダが付加される順序</text></name>
+    <questiontext format="html"><text><![CDATA[<p>HTTP メッセージが Ethernet フレームとして送出されるまでに、どのヘッダがどの順に付加されるか示せ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>9-4 MAC アドレスと IP アドレスの違い</text></name>
+    <questiontext format="html"><text><![CDATA[<p>MAC アドレスと IP アドレスの役割の違いを、<br>(a) 有効範囲 (b) 割り当て方 (c) 階層構造の有無 の3点で説明せよ。また両方が必要な理由を述べよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>9-5 学習していない宛先への転送</text></name>
+    <questiontext format="html"><text><![CDATA[<p>図 9-5 の続きとして、A が D 宛にフレームを送ったときのスイッチの動作を述べよ。表には A と B のみ記録されているものとする。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>9-6 ツイストペアが撚られている理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>ツイストペアケーブルで銅線を撚り合わせる理由を、ノイズの打ち消しの仕組みに触れて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>9-7 Wi-Fi に媒体アクセス制御が要る理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>有線 Ethernet では衝突が起きなくなったのに、Wi-Fi では今も媒体アクセス制御が必要なのはなぜか。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="cloze">
+    <name><text>9-8 サブネットの計算</text></name>
+    <questiontext format="html"><text><![CDATA[<p><code>198.51.100.130/26</code> について、<br>(a) ネットワークアドレス (b) ブロードキャストアドレス<br>(c) 機器に割り当てられるアドレスの個数 を求めよ。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">(a) ネットワークアドレス</td><td style="padding:4px 0">{1:SHORTANSWER:=198.51.100.128}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(b) ブロードキャストアドレス</td><td style="padding:4px 0">{1:SHORTANSWER:=198.51.100.191}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(c) 割り当てられるアドレスの個数</td><td style="padding:4px 0">{1:NUMERICAL:=62:0} 個</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="essay">
+    <name><text>9-9 最長一致による経路選択</text></name>
+    <questiontext format="html"><text><![CDATA[<p>次の経路表を持つルータが、宛先 <code>192.0.2.130</code> のパケットを受け取った。どの行が使われるか、理由とともに答えよ。</p>
+<table style="border-collapse:collapse;margin:8px 0">
+<tr><th style="padding:4px 10px;border:1px solid #ccc">宛先</th><th style="padding:4px 10px;border:1px solid #ccc">転送先</th></tr>
+<tr><td style="padding:4px 10px;border:1px solid #ccc">0.0.0.0/0</td><td style="padding:4px 10px;border:1px solid #ccc">A</td></tr>
+<tr><td style="padding:4px 10px;border:1px solid #ccc">192.0.2.0/24</td><td style="padding:4px 10px;border:1px solid #ccc">B</td></tr>
+<tr><td style="padding:4px 10px;border:1px solid #ccc">192.0.2.128/25</td><td style="padding:4px 10px;border:1px solid #ccc">C</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>9-10 IP と MAC の書き換わり方の違い</text></name>
+    <questiontext format="html"><text><![CDATA[<p>パケットがルータを通過するとき、IP ヘッダの送信元・宛先アドレスは変化しないが、Ethernet ヘッダの MAC アドレスは書き換えられる。この違いが何を意味するか説明せよ。</p>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第10回 インターネットとWeb</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="essay">
+    <name><text>10-1 ビデオ通話に UDP を使う理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>ビデオ通話に TCP ではなく UDP が使われることが多い理由を、再送の意味に触れて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>10-2 TCP サーバのシステムコール</text></name>
+    <questiontext format="html"><text><![CDATA[<p>TCP サーバが呼ぶシステムコールを順に並べ、それぞれが何をするか述べよ。また <code>accept</code> が新しいソケットを返す設計になっている理由を説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>10-3 輻輳制御が無かった場合</text></name>
+    <questiontext format="html"><text><![CDATA[<p>TCP の輻輳制御がなかった場合、インターネット全体に何が起きるか。1986年の輻輳崩壊に触れて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>10-4 DNS の階層的な問い合わせ</text></name>
+    <questiontext format="html"><text><![CDATA[<p><code>www.example.com</code> にアクセスするとき、DNS の問い合わせが階層的にたどる順序を書け。また、この仕組みで「誰も全体を知らないのに答えに着ける」のはなぜか説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>10-5 HTTP/3 が UDP の上に作られた理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>HTTP/3 が TCP ではなく UDP の上に作られた理由を2つ挙げよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>10-6 真正性が無ければ他が無意味になる理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>TLS が保証する3つのこと（機密性・完全性・真正性）のうち、「真正性がなければ他の2つは無意味になる」のはなぜか説明せよ。</p>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第11回 データベースとデータ処理</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="essay">
+    <name><text>11-1 CSV での管理の問題と DBMS の機能</text></name>
+    <questiontext format="html"><text><![CDATA[<p>CSV ファイルで学生名簿を管理する場合の問題を4つ挙げ、それぞれ DBMS のどの機能が解決するか対応づけよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>11-2 正規化と3つの異常</text></name>
+    <questiontext format="html"><text><![CDATA[<p>次の表は正規化されていない（主キーは <strong>注文番号＋商品名</strong>）。</p>
+<table style="border-collapse:collapse;margin:8px 0">
+<tr><th style="padding:4px 10px;border:1px solid #ccc">注文番号</th><th style="padding:4px 10px;border:1px solid #ccc">顧客名</th><th style="padding:4px 10px;border:1px solid #ccc">顧客住所</th><th style="padding:4px 10px;border:1px solid #ccc">商品名</th><th style="padding:4px 10px;border:1px solid #ccc">単価</th><th style="padding:4px 10px;border:1px solid #ccc">数量</th></tr>
+<tr><td style="padding:4px 10px;border:1px solid #ccc">1001</td><td style="padding:4px 10px;border:1px solid #ccc">山田</td><td style="padding:4px 10px;border:1px solid #ccc">福岡市</td><td style="padding:4px 10px;border:1px solid #ccc">キーボード</td><td style="padding:4px 10px;border:1px solid #ccc">3,000</td><td style="padding:4px 10px;border:1px solid #ccc">1</td></tr>
+<tr><td style="padding:4px 10px;border:1px solid #ccc">1001</td><td style="padding:4px 10px;border:1px solid #ccc">山田</td><td style="padding:4px 10px;border:1px solid #ccc">福岡市</td><td style="padding:4px 10px;border:1px solid #ccc">マウス</td><td style="padding:4px 10px;border:1px solid #ccc">1,500</td><td style="padding:4px 10px;border:1px solid #ccc">2</td></tr>
+<tr><td style="padding:4px 10px;border:1px solid #ccc">1002</td><td style="padding:4px 10px;border:1px solid #ccc">田中</td><td style="padding:4px 10px;border:1px solid #ccc">北九州市</td><td style="padding:4px 10px;border:1px solid #ccc">モニタ</td><td style="padding:4px 10px;border:1px solid #ccc">25,000</td><td style="padding:4px 10px;border:1px solid #ccc">1</td></tr>
+</table>
+<p>(a) 更新異常・挿入異常・削除異常の具体例を、<strong>上の3行を使って</strong><br>それぞれ1つずつ挙げよ。<br>(b) 第3正規形になるよう表を分割し、各表の<strong>主キーと外部キー</strong>を示せ。<br>識別のための番号（顧客番号・商品番号など）は新たに設けてよい。</p>
+<p><strong>解答形式</strong>: (b) は1行に1つの表を、次の形で書け。<code>顧客(顧客番号, 顧客名, 顧客住所)　主キー: 顧客番号</code><code>注文明細(注文番号, 商品番号, 数量)　主キー: 注文番号+商品番号　外部キー: 注文番号→注文, 商品番号→商品</code></p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>monospaced</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>11-3 結合を使った SQL</text></name>
+    <questiontext format="html"><text><![CDATA[<p>11.2 の3つの表を使って、次の SQL を書け。<br>(a) 工学部の学生の氏名一覧<br>(b) 佐藤教員が担当する科目の受講者の氏名と成績<br>(c) 学生ごとの平均点（氏名とともに）</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>monospaced</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>11-4 WHERE と HAVING の違い</text></name>
+    <questiontext format="html"><text><![CDATA[<p><code>WHERE</code> と <code>HAVING</code> の違いを説明し、両方を使う SQL の例を1つ書け。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>monospaced</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>11-5 インデックスを常に作らない理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>インデックスを作ると検索が速くなるが、常に作るべきではない。理由を2つ挙げよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>11-6 ACID が無かった場合の振込</text></name>
+    <questiontext format="html"><text><![CDATA[<p>ACID の各特性について、「その特性がなかったら、銀行の振込で何が起きるか」を1つずつ述べよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>11-7 類似検索とベクトル検索</text></name>
+    <questiontext format="html"><text><![CDATA[<p>「この文書と似た内容の文書を探せ」という検索が、<code>WHERE</code> や <code>LIKE</code> では書けないのはなぜか。ベクトル検索がそれをどう解くか説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>11-8 CAP 定理と C／A の選択</text></name>
+    <questiontext format="html"><text><![CDATA[<p>CAP 定理において、分断耐性 (P) を諦められないのはなぜか。また、次の各システムは C と A のどちらを優先すべきか、理由とともに答えよ。<br>(a) 銀行の残高照会 (b) SNS の「いいね」の数 (c) 航空券の座席予約</p>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第12回 情報セキュリティ</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="essay">
+    <name><text>12-1 情報セキュリティの3要素</text></name>
+    <questiontext format="html"><text><![CDATA[<p>情報セキュリティの3要素を挙げ、それぞれが破られた場合に大学の成績システムで何が起きるか具体的に述べよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="cloze">
+    <name><text>12-2 必要な鍵の数</text></name>
+    <questiontext format="html"><text><![CDATA[<p>共通鍵暗号における鍵配送問題とは何か。n 人が互いに通信する場合に必要な鍵の数を、共通鍵暗号と公開鍵暗号でそれぞれ求め、n=1000 で比較せよ。</p>
+<p><em>この問題では n=1000 のときの鍵の数のみ を答える。残りは別の問題で答えること。</em></p><p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">共通鍵暗号</td><td style="padding:4px 0">{1:NUMERICAL:=499500:0} 個</td></tr>
+<tr><td style="padding:4px 12px 4px 0">公開鍵暗号</td><td style="padding:4px 0">{1:NUMERICAL:=2000:0} 個</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="essay">
+    <name><text>12-2 鍵配送問題</text></name>
+    <questiontext format="html"><text><![CDATA[<p>共通鍵暗号における鍵配送問題とは何か。n 人が互いに通信する場合に必要な鍵の数を、共通鍵暗号と公開鍵暗号でそれぞれ求め、n=1000 で比較せよ。</p><p><em>この問題では 前半（鍵配送問題とは何か、および n 人のときの鍵の数の式）のみ を答える。残りは別の問題で答えること。</em></p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>12-3 TLS が両方の暗号を使う理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>TLS が共通鍵暗号と公開鍵暗号の両方を使うのはなぜか。それぞれをどの場面で使うか説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>12-4 ディジタル署名の検証手順</text></name>
+    <questiontext format="html"><text><![CDATA[<p>ディジタル署名の検証手順を述べ、検証が成功したときに何が保証されるか2つ挙げよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>12-5 証明書の警告が出る場合</text></name>
+    <questiontext format="html"><text><![CDATA[<p>ブラウザが証明書の警告を出すのはどのような場合か3つ挙げよ。また、警告を無視して接続することがなぜ危険か説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>12-6 認証と認可の違い</text></name>
+    <questiontext format="html"><text><![CDATA[<p>認証と認可の違いを説明し、「認証は正しく行われているが認可に欠陥がある」システムの例を挙げよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>12-7 パスキーがフィッシングに強い理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>パスキーがパスワード＋SMS認証よりフィッシングに強い理由を、署名の対象に何が含まれるかに触れて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>12-8 SQL インジェクションの修正</text></name>
+    <questiontext format="html"><text><![CDATA[<p>次のコードには SQL インジェクションの脆弱性がある。攻撃者が <code>name</code> に何を入力すると何が起きるか説明し、修正せよ。</p>
+<pre style="font-family:monospace">name = request.get("name")
+cursor.execute("SELECT * FROM users WHERE name = '" + name + "'")</pre>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>monospaced</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>12-9 store now, decrypt later</text></name>
+    <questiontext format="html"><text><![CDATA[<p>実用的な量子計算機はまだ存在しないのに、耐量子計算機暗号への移行が急がれているのはなぜか。「store now, decrypt later」に触れて説明せよ。また、共通鍵暗号と公開鍵暗号で影響の大きさが違う理由も述べよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>12-10 ランサムウェアへの備え</text></name>
+    <questiontext format="html"><text><![CDATA[<p>ランサムウェアの被害を最小化するために最も重要な備えは何か。第6回の内容に触れて説明せよ。</p>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第13回 機械学習からLLM・エージェントAIへ</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="essay">
+    <name><text>13-1 プログラミングと機械学習の違い</text></name>
+    <questiontext format="html"><text><![CDATA[<p>従来のプログラミングと機械学習の違いを、「人間が与えるもの」と「計算機が出すもの」の観点から説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>13-2 自己教師あり学習と正解ラベル</text></name>
+    <questiontext format="html"><text><![CDATA[<p>自己教師あり学習が LLM の事前学習に適している理由を、「正解ラベルをどう用意するか」に触れて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>13-3 活性化関数が必要な理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>ニューラルネットワークで活性化関数が必要な理由を説明せよ。活性化関数がない場合、層を何層重ねても何と等価になるか。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>13-4 深層学習が2010年代に実用化した理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>深層学習の実用化が2010年代になった理由を3つ挙げ、それぞれが本講義のどの回の内容と関係するか示せ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>13-5 トランスフォーマと並列性</text></name>
+    <questiontext format="html"><text><![CDATA[<p>トランスフォーマが RNN より大規模化に適している理由を、第5回の並列性の内容に触れて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>13-6 ハルシネーションが仕組みの帰結である理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>LLM のハルシネーションが「バグではなく仕組みの帰結」である理由を、LLM が実際に計算していることに基づいて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>13-7 RAG の効果と限界</text></name>
+    <questiontext format="html"><text><![CDATA[<p>RAG がハルシネーションを軽減しうる理由を説明せよ。また、RAG でも防げない誤りの例を1つ挙げよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>13-8 プロンプトインジェクションと SQL インジェクション</text></name>
+    <questiontext format="html"><text><![CDATA[<p>プロンプトインジェクションと SQL インジェクションの共通する構造を述べよ。また、SQL インジェクションには確実な対策があるのにプロンプトインジェクションには無いのはなぜか説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>13-9 エージェントAI の安全策</text></name>
+    <questiontext format="html"><text><![CDATA[<p>エージェントAI に不可逆な操作（メール送信、ファイル削除、決済）を行わせる場合、どのような安全策を設けるべきか3つ挙げよ。第12回の「最小権限」「多層防御」に触れること。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>13-10 総括：2つの話題に共通する考え方</text></name>
+    <questiontext format="html"><text><![CDATA[<p>（総括）本講義で扱った13の話題のうち、2つを選び、それらが共通して使っている考え方を1つ挙げて論じよ。</p>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+</quiz>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- コンピュータシステム通論 演習
+     moodle/build-xml.js が生成。手で直さないこと -->
+<quiz>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第01回 計算とは何か</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="cloze">
+    <name><text>1-1 互除法のステップ</text></name>
+    <questiontext format="html"><text><![CDATA[<p>互除法を a=252, b=105 で実行し、各ステップの (a, b, r) を書け。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">1回目の a</td><td style="padding:4px 0">{1:NUMERICAL:=252:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">1回目の b</td><td style="padding:4px 0">{1:NUMERICAL:=105:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">1回目の r</td><td style="padding:4px 0">{1:NUMERICAL:=42:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">2回目の a</td><td style="padding:4px 0">{1:NUMERICAL:=105:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">2回目の b</td><td style="padding:4px 0">{1:NUMERICAL:=42:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">2回目の r</td><td style="padding:4px 0">{1:NUMERICAL:=21:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">3回目の a</td><td style="padding:4px 0">{1:NUMERICAL:=42:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">3回目の b</td><td style="padding:4px 0">{1:NUMERICAL:=21:0}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">3回目の r</td><td style="padding:4px 0">{1:NUMERICAL:=0:0}</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="essay">
+    <name><text>1-2 チューリングマシンの遷移規則</text></name>
+    <questiontext format="html"><text><![CDATA[<p>テープに <code>0</code> と <code>1</code> からなる文字列が書かれている。この文字列に含まれる<code>1</code> の個数が偶数なら <code>Y</code> を、奇数なら <code>N</code> を書いて停止するチューリングマシンの遷移規則表を作れ。ヘッドは文字列の左端から始まり、右へ進むものとする。<strong>文字列の右端の次にある空白のマスに <code>Y</code> または <code>N</code> を書いて停止する</strong>ものとする。（ヒント: 状態は「これまでに読んだ 1 が偶数個」「奇数個」の2つで足りる。表の形は 1.2 の「1を足す機械」と同じでよい。）</p>
+<p><strong>解答形式</strong>: 1行に1つの規則を、次の形で書け。<code>(偶数, 0) → 0 を書く, 右へ, 偶数</code></p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>monospaced</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>1-3 量子計算機と停止問題</text></name>
+    <questiontext format="html"><text><![CDATA[<p>次の主張は正しいか。理由とともに答えよ。「量子コンピュータが実用化されれば、停止問題も解けるようになる。」</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>1-4 決定不能性を回避している挙動</text></name>
+    <questiontext format="html"><text><![CDATA[<p>あなたが普段使っているソフトウェアで、「決定不能性を回避するために安全側に倒している」と思われる挙動を1つ挙げ、なぜそう考えるか説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>1-5 生成AIは停止問題を解いたのか</text></name>
+    <questiontext format="html"><text><![CDATA[<p>「このプログラムは停止しますか」と生成AIに尋ねると、答えが返ってくる。これは停止問題が解けたことを意味するか。理由とともに答えよ。</p>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+</quiz>

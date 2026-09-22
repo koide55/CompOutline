@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- コンピュータシステム通論 演習
+     moodle/build-xml.js が生成。手で直さないこと -->
+<quiz>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第06回 ストレージとファイルシステム</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="cloze">
+    <name><text>6-1 HDD の平均アクセス時間</text></name>
+    <questiontext format="html"><text><![CDATA[<p>回転数 10,000 rpm、平均シーク時間 5ms、転送速度 250 MB/s の HDD から8KB を読む。平均アクセス時間を求めよ。またそのうち転送時間の占める割合を求めよ。（1KB = 1000バイト、1MB = 10⁶バイトとする。以下 6-2 も同じ）</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">平均アクセス時間</td><td style="padding:4px 0">{1:NUMERICAL:=8.03:0.06} ms</td></tr>
+<tr><td style="padding:4px 12px 4px 0">転送時間の占める割合</td><td style="padding:4px 0">{1:NUMERICAL:=0.4:0.06} %</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="cloze">
+    <name><text>6-2 ランダムアクセスと連続アクセス</text></name>
+    <questiontext format="html"><text><![CDATA[<p>同じ HDD で、8KB のブロックを 500 個読む。<br>(a) 500 箇所にばらばらに置かれている場合<br>(b) 4MB の連続領域に置かれている場合それぞれの所要時間を求め、比を示せ。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">(a) ばらばらに置かれている場合</td><td style="padding:4px 0">{1:NUMERICAL:=4.02:0.06} 秒</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(b) 連続領域に置かれている場合</td><td style="padding:4px 0">{1:NUMERICAL:=24:0.5} ms</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(a) は (b) の何倍か</td><td style="padding:4px 0">{1:NUMERICAL:=167:12} 倍</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="cloze">
+    <name><text>6-3 RAID 5 と RAID 6 の容量</text></name>
+    <questiontext format="html"><text><![CDATA[<p>4TB のディスク6台で RAID 5 と RAID 6 を組んだ場合、それぞれ使える容量と、耐えられる故障台数を示せ。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">RAID 5 で使える容量</td><td style="padding:4px 0">{1:NUMERICAL:=20:0} TB</td></tr>
+<tr><td style="padding:4px 12px 4px 0">RAID 5 が耐えられる故障</td><td style="padding:4px 0">{1:NUMERICAL:=1:0} 台</td></tr>
+<tr><td style="padding:4px 12px 4px 0">RAID 6 で使える容量</td><td style="padding:4px 0">{1:NUMERICAL:=16:0} TB</td></tr>
+<tr><td style="padding:4px 12px 4px 0">RAID 6 が耐えられる故障</td><td style="padding:4px 0">{1:NUMERICAL:=2:0} 台</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="cloze">
+    <name><text>6-4 パリティの計算</text></name>
+    <questiontext format="html"><text><![CDATA[<p>RAID 5 のディスク3台に、データ A=<code>1011</code>, B=<code>0110</code>, C=<code>1100</code> が置かれている。パリティ P を求めよ。その後 B が失われたとして、A, C, P から B を復元する計算を示せ。</p>
+<p><em>この問題では パリティ P のみ を答える。残りは別の問題で答えること。</em></p><p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">パリティ P</td><td style="padding:4px 0">{1:SHORTANSWER:=0001}</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="essay">
+    <name><text>6-4 パリティからの復元</text></name>
+    <questiontext format="html"><text><![CDATA[<p>RAID 5 のディスク3台に、データ A=<code>1011</code>, B=<code>0110</code>, C=<code>1100</code> が置かれている。パリティ P を求めよ。その後 B が失われたとして、A, C, P から B を復元する計算を示せ。</p><p><em>この問題では A, C, P から B を復元する計算のみ を答える。残りは別の問題で答えること。</em></p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>monospaced</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>6-5 RAID とバックアップの違い</text></name>
+    <questiontext format="html"><text><![CDATA[<p>「RAID を組んでいるのでバックアップは不要」という主張に反論せよ。RAID で守れない事態を3つ挙げること。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>6-6 SSD にデフラグをしない理由</text></name>
+    <questiontext format="html"><text><![CDATA[<p>SSD に対してデフラグを行うべきでない理由を、6.2 のフラッシュの制約に触れて説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="cloze">
+    <name><text>6-7 イレイジャーコーディング</text></name>
+    <questiontext format="html"><text><![CDATA[<p>イレイジャーコーディングで k=8, m=4 とした。<br>(a) 容量効率は何%か (b) 何台までの同時故障に耐えるか<br>(c) 3重レプリケーションと比べて、容量効率はどれだけ改善するか</p>
+<p>---</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">(a) 容量効率</td><td style="padding:4px 0">{1:NUMERICAL:=66.7:0.5} %</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(b) 耐えられる同時故障</td><td style="padding:4px 0">{1:NUMERICAL:=4:0} 台</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(c) 3重レプリケーションの何倍か</td><td style="padding:4px 0">{1:NUMERICAL:=2:0.1} 倍</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+</quiz>

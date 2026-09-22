@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- コンピュータシステム通論 演習
+     moodle/build-xml.js が生成。手で直さないこと -->
+<quiz>
+  <question type="category">
+    <category><text>$course$/top/コンピュータシステム通論/第03回 論理回路からプロセッサへ</text></category>
+    <info format="html"><text></text></info>
+  </question>
+  <question type="essay">
+    <name><text>3-1 NAND で XOR を構成する</text></name>
+    <questiontext format="html"><text><![CDATA[<p>NAND ゲートだけを使って XOR を構成せよ。ゲートは4個で足りる。</p>
+<p><strong>解答形式</strong>: 1行に1つのゲートを、<code>n1 = NAND(a, b)</code> の形で書け。中間の信号には <code>n1</code>, <code>n2</code>… と名前を付け、最後の行の左辺を <code>out</code> とせよ。手で図を描いて写真を添付してもよい。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>monospaced</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>1</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>3-2 4ビット加算器の各段</text></name>
+    <questiontext format="html"><text><![CDATA[<p>全加算器を4個つないだ4ビット加算器で、<code>0110 + 1011</code> を計算せよ。各段の Cin, S, Cout を示せ。結果は4ビットに収まるか。</p>
+<p><strong>解答形式</strong>: 1行に1段を、<code>第0段: Cin=0, S=1, Cout=1</code> の形で4行書け。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>3-3 SRラッチの禁止入力</text></name>
+    <questiontext format="html"><text><![CDATA[<p>SRラッチで S=1, R=1 としたときに何が起こるか。真理値表から考察し、なぜこの入力が禁止されるか説明せよ。</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="cloze">
+    <name><text>3-4 信号が1周期で進む距離</text></name>
+    <questiontext format="html"><text><![CDATA[<p>配線の中を信号が進む速さは、真空中の光速の約6割（<strong>1.8×10⁸ m/s</strong>）である。</p>
+<p>(a) クロック周波数 <strong>5GHz</strong> のプロセッサで、1周期のあいだに信号が<br>進める距離を求めよ（mm 単位でよい）。<br>(b) このチップが一辺 20mm の正方形だとする。対角線の両端にある回路の間<br>（約 <strong>28mm</strong>）に、信号は1周期のうちに届くか。計算して答えよ。<br>(c) 周波数を上げていくと、いずれ (b) が成り立たなくなる。<br><strong>何 GHz を超えたとき</strong>に届かなくなるか求めよ。</p>
+<p><strong>解答欄</strong></p>
+<table>
+<tr><td style="padding:4px 12px 4px 0">(a) 1周期で進む距離</td><td style="padding:4px 0">{1:NUMERICAL:=36:0.6} mm</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(b) 28mm 先に届くか</td><td style="padding:4px 0">{1:MULTICHOICE:=届く~届かない}</td></tr>
+<tr><td style="padding:4px 12px 4px 0">(c) 届かなくなる周波数</td><td style="padding:4px 0">{1:NUMERICAL:=6.43:0.15} GHz</td></tr>
+</table>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <penalty>0.3333333</penalty>
+    <hidden>0</hidden>
+  </question>
+  <question type="essay">
+    <name><text>3-5 命令列を書く</text></name>
+    <questiontext format="html"><text><![CDATA[<p>3.3 の実行例で、<code>c = a + b</code> に5命令かかった。<code>d = (a + b) * (a - b)</code> を同じ命令セットで書くと何命令になるか。命令列を書き、命令数を答えよ。前提は次のとおりとする。</p>
+<ul><li>a は 200番地、b は 201番地にあり、結果 d は 202番地に書く</li><li>汎用レジスタは <strong>R1〜R4 の4本</strong></li><li>演算命令は任意の2本に対して使える（<code>ADD Rx, Ry</code> は Rx ← Rx + Ry）。 乗算 <code>MUL</code>、減算 <code>SUB</code> も同じ形で使える</li><li><code>HALT</code> も1命令として数える</li></ul>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>monospaced</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+  <question type="essay">
+    <name><text>3-6 ムーアの法則のあとに向上しているもの</text></name>
+    <questiontext format="html"><text><![CDATA[<p>「ムーアの法則が終わった」と言われる一方で、計算機の性能は今も向上している。何が向上しているのか、3つ挙げよ。</p>
+<p>---</p>]]></text></questiontext>
+    <generalfeedback format="html"><text></text></generalfeedback>
+    <defaultgrade>1.0000000</defaultgrade>
+    <penalty>0.0000000</penalty>
+    <hidden>0</hidden>
+    <responseformat>editor</responseformat>
+    <responserequired>1</responserequired>
+    <responsefieldlines>12</responsefieldlines>
+    <minwordlimit></minwordlimit>
+    <maxwordlimit></maxwordlimit>
+    <attachments>0</attachments>
+    <attachmentsrequired>0</attachmentsrequired>
+    <maxbytes>0</maxbytes>
+    <filetypeslist></filetypeslist>
+    <graderinfo format="html"><text></text></graderinfo>
+    <responsetemplate format="html"><text></text></responsetemplate>
+  </question>
+</quiz>
