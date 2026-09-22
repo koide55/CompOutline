@@ -86,7 +86,6 @@ module.exports = {
     {
       kind: 'figure', kicker: '12.2　署名', title: 'ディジタル署名', fig: '12-02',
       lead: '公開鍵暗号を逆向きに使う。秘密鍵で処理したものは、対応する公開鍵で検証できる。',
-      caption: '秘密鍵を持つのは本人だけなので、それを作れたのは本人しかいない。',
     },
     { kind: 'section', n: '12.3', name: '証明書と信頼の連鎖', tagline: 'その公開鍵は、本当にその相手のものか' },
     {
@@ -100,7 +99,6 @@ module.exports = {
     },
     {
       kind: 'figure', kicker: '12.3　証明書', title: '信頼の連鎖', fig: '12-03',
-      caption: '最終的な信頼の根拠は「ブラウザや OS の開発元が、この CA を信頼できると判断した」ことである。',
     },
     {
       kind: 'cards', kicker: '12.3　証明書', title: 'この仕組みの弱点',

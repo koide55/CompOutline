@@ -34,7 +34,6 @@ module.exports = {
     {
       kind: 'figure', kicker: '4.2　処理系', title: '処理系の3方式', fig: '04-02',
       lead: '高級言語を実行するには、機械語に翻訳するか、解釈しながら実行するかのどちらかが要る。',
-      caption: 'どこまでを実行前に済ませるかが違う。',
     },
     {
       kind: 'split', kicker: '4.2　処理系', title: 'コンパイラとインタプリタ',
@@ -66,7 +65,6 @@ module.exports = {
     { kind: 'section', n: '4.3', name: '実行ファイルができるまで', tagline: 'ソースから実行までに、何段階あるのか' },
     {
       kind: 'figure', kicker: '4.3　ビルド', title: 'ビルドの各段階', fig: '04-03',
-      caption: 'リンクの段階で、複数の .o とライブラリが1つに合流する。',
     },
     {
       kind: 'bullets', kicker: '4.3　ビルド', title: 'コンパイルの中身',

@@ -98,7 +98,6 @@ module.exports = {
     {
       kind: 'figure', kicker: '6.3　RAID', title: 'RAID 0/1/5/6 のデータ配置', fig: '06-03',
       lead: 'ストライピング（分散して置く。速い）とミラーリング（重複して置く。壊れても残る）の組み合わせ。',
-      caption: 'パリティは XOR。A ⊕ P ⊕ C = B のように、残りから復元できる。',
     },
     {
       kind: 'table', kicker: '6.3　RAID', title: 'どれを選ぶか',

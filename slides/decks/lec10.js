@@ -46,7 +46,6 @@ module.exports = {
     },
     {
       kind: 'figure', kicker: '10.1　IP', title: 'パケットの中継', fig: '10-01',
-      caption: 'IP は最終目的地、MAC は次の1ホップを表す。',
     },
     {
       kind: 'figure', kicker: '10.1　IP', title: 'アドレスの枯渇と NAT', fig: '10-02',
@@ -76,7 +75,6 @@ module.exports = {
     {
       kind: 'figure', kicker: '10.2　ソケット', title: 'プログラムから見た通信：ソケット', fig: '10-06',
       lead: 'ソケットは通信の端点を表す抽象で、アプリケーションからはファイル記述子として扱える（第7回）。',
-      caption: 'accept は新しいソケットを返す。元のソケットは受付専用として残り、次の接続を待ち続けられる。',
     },
     {
       kind: 'split', kicker: '10.2　TCP と UDP', title: '保証しないことが利点になる場面',
