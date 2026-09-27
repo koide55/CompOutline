@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 // 講演スライドを組む。  node talks/2026-10-16-secd-fukuoka/build.js
 //
-// 体裁は過去の講演資料「沈まないための備え」に合わせた（深緑・墨・琥珀、Yu Gothic、16:9）。
+// 白基調。配色は深緑・墨・琥珀、書体は Yu Gothic、16:9。
+// 話す内容（script）は発表者ノートに入れ、台本.md にも書き出す。
 // pptxgenjs は slides/node_modules から読む（cd slides && npm install pptxgenjs）。
 const path = require('path');
+const fs = require('fs');
 const PptxGenJS = require(path.join(__dirname, '..', '..', 'slides', 'node_modules', 'pptxgenjs'));
 const spec = require('./deck');
 
@@ -36,16 +38,24 @@ pres.title = spec.title.replace('\n', '');
 const S = pres.ShapeType;
 const TOTAL = spec.slides.length + 2;
 let page = 0;
+const script = [];     // [見出し, 時刻, 話す内容, 頁]
+
+function notes(s, body, time) {
+  if (body) s.addNotes((time ? `〔${time}〕\n` : '') + body);
+}
 
 function txt(s, text, o) {
   s.addText(text, { fontFace: JA, margin: 0, ...o });
   if (o.h && o.fontSize) fit(text, o.w, o.h, o.fontSize, `p${page} 「${String(text).slice(0, 14)}…」`);
 }
 
-function dark() {
+// 表紙・区切り・結び。白地に深緑の帯
+function plain() {
   const s = pres.addSlide();
-  s.background = { color: C.deep };
+  s.background = { color: C.paper };
   page += 1;
+  s.addShape(S.rect, { x: 0, y: 0, w: 0.22, h: 7.5, fill: { color: C.acc }, line: { type: 'none' } });
+  s.addShape(S.rect, { x: 0.9, y: 6.55, w: 11.5, h: 0.03, fill: { color: C.tint2 }, line: { type: 'none' } });
   return s;
 }
 
@@ -70,33 +80,32 @@ function note(s, text, y) {
 }
 
 function card(s, x, y, w, h, head, body, o = {}) {
-  const fill = o.dark ? C.acc : (o.pale ? C.pale : C.tint);
-  s.addShape(S.roundRect, { x, y, w, h, rectRadius: 0.05, fill: { color: fill }, line: { color: o.dark ? C.acc : C.tint2, width: 0.75 } });
-  txt(s, head, { x: x + 0.2, y: y + 0.16, w: w - 0.4, h: o.headH || 0.45, fontSize: o.headSize || 16, bold: true, color: o.dark ? C.paper : C.acc, valign: 'top' });
+  const fill = o.dark ? C.paper : (o.pale ? C.pale : C.tint);
+  s.addShape(S.roundRect, { x, y, w, h, rectRadius: 0.05, fill: { color: fill }, line: { color: o.dark ? C.acc : C.tint2, width: o.dark ? 2 : 0.75 } });
+  txt(s, head, { x: x + 0.2, y: y + 0.16, w: w - 0.4, h: o.headH || 0.45, fontSize: o.headSize || 16, bold: true, color: C.acc, valign: 'top' });
   if (body) {
     const by = y + 0.18 + (o.headH || 0.45) + 0.08;
-    txt(s, body, { x: x + 0.2, y: by, w: w - 0.4, h: y + h - by - 0.12, fontSize: o.bodySize || 13, color: o.dark ? C.light : C.ink, valign: 'top', lineSpacingMultiple: 1.15 });
+    txt(s, body, { x: x + 0.2, y: by, w: w - 0.4, h: y + h - by - 0.12, fontSize: o.bodySize || 13, color: C.ink, valign: 'top', lineSpacingMultiple: 1.15 });
   }
 }
 
 // ------------------------------------------------------------------ 定型
 function titleSlide() {
-  const s = dark();
-  s.addShape(S.rect, { x: 0, y: 0, w: 0.22, h: 7.5, fill: { color: C.acc }, line: { type: 'none' } });
-  txt(s, spec.event, { x: 0.9, y: 1.1, w: 11.8, h: 0.35, fontSize: 14, color: C.dim });
-  txt(s, spec.title, { x: 0.9, y: 1.8, w: 11.8, h: 2.1, fontSize: 40, bold: true, color: C.paper, lineSpacingMultiple: 1.1 });
-  txt(s, spec.subtitle, { x: 0.9, y: 4.05, w: 11.8, h: 0.6, fontSize: 24, color: C.amber });
-  txt(s, spec.speaker, { x: 0.9, y: 5.6, w: 11.8, h: 0.4, fontSize: 16, color: C.light });
-  if (spec.titleNotes) s.addNotes(spec.titleNotes);
+  const s = plain();
+  txt(s, spec.event, { x: 0.9, y: 1.1, w: 11.8, h: 0.35, fontSize: 14, color: C.mut });
+  txt(s, spec.title, { x: 0.9, y: 1.8, w: 11.8, h: 2.1, fontSize: 40, bold: true, color: C.ink, lineSpacingMultiple: 1.1 });
+  txt(s, spec.subtitle, { x: 0.9, y: 4.05, w: 11.8, h: 0.6, fontSize: 24, color: C.acc });
+  txt(s, spec.speaker, { x: 0.9, y: 5.6, w: 11.8, h: 0.4, fontSize: 16, color: C.ink });
+  notes(s, spec.titleScript, spec.titleTime);
+  script.push(['表紙', spec.titleTime, spec.titleScript]);
 }
 
 const render = {
   section(sl) {
-    const s = dark();
-    s.addShape(S.rect, { x: 0, y: 0, w: 0.22, h: 7.5, fill: { color: C.acc }, line: { type: 'none' } });
+    const s = plain();
     txt(s, sl.n, { x: 0.9, y: 2.3, w: 4, h: 0.6, fontSize: 24, bold: true, color: C.amber });
-    txt(s, sl.name, { x: 0.9, y: 2.95, w: 11.6, h: 0.9, fontSize: 38, bold: true, color: C.paper });
-    if (sl.tagline) txt(s, sl.tagline, { x: 0.9, y: 4.0, w: 11.6, h: 0.5, fontSize: 18, color: C.dim });
+    txt(s, sl.name, { x: 0.9, y: 2.95, w: 11.6, h: 0.9, fontSize: 38, bold: true, color: C.acc });
+    if (sl.tagline) txt(s, sl.tagline, { x: 0.9, y: 4.0, w: 11.6, h: 0.5, fontSize: 18, color: C.mut });
     return s;
   },
 
@@ -145,8 +154,9 @@ const render = {
     const n = sl.flow.length, arrow = 0.5, w = (CW - arrow * (n - 1)) / n, h = 1.55, y = 1.65;
     sl.flow.forEach(([head, body, tone], i) => {
       const x = M + i * (w + arrow);
-      const fill = tone === 'acc' ? C.acc : tone === 'ink' ? C.ink : C.tint;
-      const fg = tone === 'tint' ? C.ink : C.paper;
+      const last = i === n - 1;
+      const fill = last ? C.acc : C.tint;
+      const fg = last ? C.paper : C.ink;
       s.addShape(S.roundRect, { x, y, w, h, rectRadius: 0.05, fill: { color: fill }, line: { type: 'none' } });
       txt(s, head, { x: x + 0.2, y: y + 0.18, w: w - 0.4, h: 0.4, fontSize: 17, bold: true, color: fg, align: 'center' });
       txt(s, body, { x: x + 0.2, y: y + 0.62, w: w - 0.4, h: 0.8, fontSize: 14, color: fg, align: 'center', valign: 'top' });
@@ -206,7 +216,7 @@ const render = {
       txt(s, k, { x: rx + 0.18, y: y + 0.27, w: 0.55, h: 0.55, fontSize: 18, bold: true, color: C.paper, align: 'center', valign: 'middle' });
       txt(s, t, { x: rx + 0.9, y: y + 0.1, w: rw - 1.05, h: 0.88, fontSize: 15, color: C.ink, valign: 'middle' });
     });
-    txt(s, '5月（鹿児島）のミニ演習の続編です。前提は同じで、途中でAIの調査結果が届きます。', { x: M, y: 5.95, w: CW, h: 0.35, fontSize: 12, color: C.mut });
+    if (sl.footer) txt(s, sl.footer, { x: M, y: 5.95, w: CW, h: 0.35, fontSize: 13, bold: true, color: C.mut });
     return s;
   },
 
@@ -246,13 +256,28 @@ for (const sl of spec.slides) {
   const fn = render[sl.kind];
   if (!fn) throw new Error(`未知の kind: ${sl.kind}`);
   const s = fn(sl);
-  if (sl.notes) s.addNotes(sl.notes);
+  notes(s, sl.script, sl.time);
+  script.push([sl.kind === 'section' ? `${sl.n}　${sl.name}（区切り）` : sl.title, sl.time, sl.script, page]);
 }
 {
-  const s = dark();
-  s.addShape(S.rect, { x: 0, y: 0, w: 0.22, h: 7.5, fill: { color: C.acc }, line: { type: 'none' } });
-  txt(s, 'ご清聴ありがとうございました', { x: 0.9, y: 2.6, w: 11.6, h: 0.9, fontSize: 36, bold: true, color: C.paper });
-  txt(s, spec.speaker, { x: 0.9, y: 3.7, w: 11.6, h: 0.5, fontSize: 18, color: C.dim });
+  const s = plain();
+  txt(s, 'ご清聴ありがとうございました', { x: 0.9, y: 2.6, w: 11.6, h: 0.9, fontSize: 36, bold: true, color: C.ink });
+  txt(s, spec.speaker, { x: 0.9, y: 3.7, w: 11.6, h: 0.5, fontSize: 18, color: C.mut });
+}
+
+// 台本（話す内容）を書き出す
+{
+  const lines = [`# 台本：${spec.title.replace('\n', '')}${spec.subtitle}`, '', spec.event, '',
+    '発表者ノートと同じ内容です。（ ）内は状況に応じて話す部分。時刻は経過時間の目安。', ''];
+  script.forEach(([t, time, body, pg], i) => {
+    if (!body) return;
+    lines.push(`## ${pg ? `p${pg}　` : 'p1　'}${t}${time ? `　〔${time}〕` : ''}`, '');
+    body.split('\n').forEach((l) => lines.push(l, ''));
+  });
+  const chars = script.filter((x) => x[1]).reduce((a, x) => a + (x[2] || '').length, 0);
+  lines.push('---', '', `本編の台本は約 ${chars} 字（1分あたり300字として約 ${Math.round(chars / 300)} 分）。`);
+  fs.writeFileSync(path.join(__dirname, spec.scriptFile), lines.join('\n'));
+  console.log(`台本 約${chars}字（約${Math.round(chars / 300)}分）  ${spec.scriptFile}`);
 }
 
 const out = path.join(__dirname, spec.file);
