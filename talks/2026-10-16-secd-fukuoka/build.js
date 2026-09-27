@@ -186,6 +186,30 @@ const render = {
     return s;
   },
 
+  exercise(sl) {
+    const s = content(sl);
+    const lw = 6.3;
+    txt(s, '前提', { x: M, y: 1.55, w: lw, h: 0.3, fontSize: 13, bold: true, color: C.acc });
+    txt(s, sl.premise.map((p) => '・' + p).join('\n'), { x: M, y: 1.9, w: lw, h: 2.2, fontSize: 14, color: C.ink, valign: 'top', lineSpacingMultiple: 1.25 });
+    // 途中で届く AI の結果
+    const ty = 4.2;
+    s.addShape(S.roundRect, { x: M, y: ty, w: lw, h: 1.45, rectRadius: 0.05, fill: { color: C.amberT }, line: { color: C.amber, width: 1 } });
+    txt(s, sl.twist[0], { x: M + 0.2, y: ty + 0.12, w: lw - 0.4, h: 0.35, fontSize: 14, bold: true, color: C.amber });
+    txt(s, sl.twist[1], { x: M + 0.2, y: ty + 0.5, w: lw - 0.4, h: 0.85, fontSize: 13.5, color: C.ink, valign: 'top' });
+    // 選択肢
+    const rx = M + lw + 0.35, rw = CW - lw - 0.35;
+    txt(s, '判断してください', { x: rx, y: 1.55, w: rw, h: 0.3, fontSize: 13, bold: true, color: C.acc });
+    sl.choices.forEach(([k, t], i) => {
+      const y = 1.95 + i * 1.25;
+      s.addShape(S.roundRect, { x: rx, y, w: rw, h: 1.08, rectRadius: 0.05, fill: { color: C.tint }, line: { color: C.tint2, width: 0.75 } });
+      s.addShape(S.ellipse, { x: rx + 0.18, y: y + 0.27, w: 0.55, h: 0.55, fill: { color: C.acc }, line: { type: 'none' } });
+      txt(s, k, { x: rx + 0.18, y: y + 0.27, w: 0.55, h: 0.55, fontSize: 18, bold: true, color: C.paper, align: 'center', valign: 'middle' });
+      txt(s, t, { x: rx + 0.9, y: y + 0.1, w: rw - 1.05, h: 0.88, fontSize: 15, color: C.ink, valign: 'middle' });
+    });
+    txt(s, '5月（鹿児島）のミニ演習の続編です。前提は同じで、途中でAIの調査結果が届きます。', { x: M, y: 5.95, w: CW, h: 0.35, fontSize: 12, color: C.mut });
+    return s;
+  },
+
   split(sl) {
     const s = content(sl);
     const w = (CW - 0.3) / 2, h = 3.55;
