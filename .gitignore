@@ -31,3 +31,6 @@ slides/.render-*
 
 __pycache__/
 *.pyc
+
+# pico-basic: PC 用テストのビルド結果
+pico-basic/test/basic
