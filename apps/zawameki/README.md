@@ -29,6 +29,10 @@ arena とは別のコンテナとして、ポート **8100** で動かす。
 **arena.koidelab.net では、arena の Caddy に HTTPS を任せる**（次の節）。ファイアウォールで 8100/tcp を開けておくこと（AWS の EC2 なら、インスタンスのセキュリティグループのインバウンドルールに 8100/tcp を足す）。
 教員の入口（`/teacher`）は Basic 認証で守ってある。
 
+教員パスワードを設定し直すときは、`sudo sh tools/reset-password.sh`（自動で作る）か
+`sudo sh tools/reset-password.sh 'パスワード'`（指定する）。`.env` を書き換え、コンテナを作り直し、
+新しいパスワードで入れることまで確かめる。
+
 ### 講義の流れ
 
 1. `/teacher` で部屋を開く → 操作画面に移る
@@ -258,6 +262,7 @@ CPU 0.2%、メモリ 56 MB。目標（2秒以内）を十分に満たす。
 | `zawameki/report.py` | 迷子の地図（HTML／Markdown） |
 | `zawameki/static/` | 画面（素の HTML と JavaScript。ビルド工程なし） |
 | `tools/loadtest.py` | 負荷試験 |
+| `tools/reset-password.sh` | 教員パスワードを設定し直す |
 | `caddy/zawameki.Caddyfile` | arena の Caddy に足す設定 |
 | `docker-compose.caddy.yml` | arena の Caddy に HTTPS を任せるときに重ねる設定 |
 | `nginx/` | Caddy の無いサーバ用。HTTPS の終端（コンテナ用・ホスト用）と、証明書更新のフック |
