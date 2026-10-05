@@ -48,6 +48,7 @@
 | `docs/legacy-slides-2024.json` | 旧版の全文（タイトル・本文・ノート）の控え |
 | `slides/` | 全13回の pptx（311枚）とその生成スクリプト |
 | `tools/` | 下記のツール群 |
+| `apps/zawameki/` | 講義中の理解度と質問をリアルタイムに集める Web アプリ「ざわめき」の[仕様書](apps/zawameki/SPEC.md)（実装前） |
 
 ## ツール
 
