@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>部屋の一覧 — ざわめき</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/static/common.css">
+<style>
+  main { max-width: 860px; margin: 0 auto; padding: 16px; }
+  form.card { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  form.card input { flex: 1; min-width: 200px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 10px; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); }
+  td.code { font-variant-numeric: tabular-nums; font-weight: 700; }
+  .open { color: var(--got); }
+  @media (max-width: 600px) { .wide { display: none; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>ざわめき — 部屋の一覧</h1>
+  <p class="muted">講義のたびに部屋を開きます。部屋コードは講義ごとに変わります。</p>
+  <form class="card" id="create">
+    <input type="text" id="title" maxlength="80" placeholder="例: 第3回 論理回路からプロセッサへ" required>
+    <button class="primary" type="submit">部屋を開く</button>
+  </form>
+  <table>
+    <thead><tr><th>コード</th><th>題名</th><th class="wide">開いた日時</th><th>入室</th><th class="wide">質問・意見</th><th class="wide">コメント</th><th></th></tr></thead>
+    <tbody id="rooms"></tbody>
+  </table>
+</main>
+<script src="/static/shared.js"></script>
+<script src="/static/teacher.js"></script>
+</body>
+</html>

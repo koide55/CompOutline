@@ -1,0 +1,67 @@
+/* ざわめき 共通の体裁。暗い教室で眩しくないよう、暗い配色を既定にする（SPEC §7） */
+:root {
+  --bg: #11141a; --panel: #1b2029; --panel2: #232a35; --line: #2f3845;
+  --text: #e9edf2; --muted: #93a0b0; --accent: #6cb6ff;
+  --sunny: #f5c542; --fair: #9fd36b; --cloudy: #a7b2c0; --rain: #5aa0e6; --storm: #f06b6b;
+  --lost: #f0866b; --got: #5fd39a; --slow: #c39bff; --fast: #ffb05c;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f6f7f9; --panel: #ffffff; --panel2: #eef1f5; --line: #d9dee6;
+    --text: #18202b; --muted: #5d6877; --accent: #1f6fd1;
+    --cloudy: #7d8896; --rain: #2a78c9; --storm: #d6403f; --fair: #5a9e2e; --sunny: #c99400;
+    --lost: #d9573a; --got: #19935a; --slow: #7d4fd6; --fast: #c96f0a;
+    color-scheme: light;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text); }
+body { font-family: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif; line-height: 1.5;
+       -webkit-text-size-adjust: 100%; }
+a { color: var(--accent); }
+h1 { font-size: 22px; margin: 8px 0; } h2 { font-size: 17px; margin: 22px 0 8px; }
+.muted { color: var(--muted); }
+.hidden { display: none !important; }
+button, input, textarea, select { font: inherit; color: inherit; }
+button { cursor: pointer; border: 1px solid var(--line); background: var(--panel2); border-radius: 10px;
+         padding: 8px 14px; touch-action: manipulation; }
+button:disabled { opacity: .45; cursor: default; }
+button.primary { background: var(--accent); color: #fff; border-color: transparent; font-weight: 600; }
+input[type=text], input[type=password], textarea { width: 100%; background: var(--panel2); border: 1px solid var(--line);
+         border-radius: 10px; padding: 10px 12px; }
+textarea { resize: vertical; min-height: 44px; }
+input:focus-visible, textarea:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+.row { display: flex; gap: 8px; align-items: center; }
+.grow { flex: 1; min-width: 0; }
+.badge { display: inline-block; font-size: 12px; padding: 1px 8px; border-radius: 99px; background: var(--panel2);
+         border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+.badge.answered { color: var(--got); border-color: var(--got); }
+.badge.later { color: var(--fast); border-color: var(--fast); }
+.badge.hidden-q { color: var(--storm); border-color: var(--storm); }
+.toast { position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%); background: var(--panel2);
+         border: 1px solid var(--line); padding: 8px 14px; border-radius: 10px; z-index: 50; max-width: 92vw;
+         box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+.conn { font-size: 12px; } .conn.off { color: var(--storm); }
+
+/* 天気 */
+.w-sunny { color: var(--sunny); } .w-fair { color: var(--fair); } .w-cloudy { color: var(--cloudy); }
+.w-rain { color: var(--rain); } .w-storm { color: var(--storm); }
+
+/* 花火 */
+.fireworks { position: fixed; inset: 0; pointer-events: none; z-index: 40; display: flex; align-items: center;
+             justify-content: center; }
+.fireworks .msg { background: rgba(0,0,0,.65); color: #fff; padding: 14px 22px; border-radius: 14px; font-size: min(22px, 5vw); max-width: 92vw;
+                  font-weight: 700; animation: pop 3.6s ease forwards; text-align: center; }
+.fireworks i { position: absolute; width: 8px; height: 8px; border-radius: 50%; animation: burst 1.6s ease-out forwards; }
+@keyframes pop { 0% { transform: scale(.6); opacity: 0 } 12% { transform: scale(1.05); opacity: 1 }
+                 80% { opacity: 1 } 100% { opacity: 0 } }
+@keyframes burst { 0% { transform: translate(0,0) scale(1); opacity: 1 }
+                   100% { transform: translate(var(--dx), var(--dy)) scale(.3); opacity: 0 } }
+@media (prefers-reduced-motion: reduce) { .fireworks i { display: none; } .fireworks .msg { animation: none; } }
+
+/* 投稿の種類 */
+.k-comment { --k: var(--muted); } .k-question { --k: var(--accent); }
+.k-opinion { --k: var(--fast); } .k-naive { --k: var(--got); }
+.badge[class*="k-"] { color: var(--k); border-color: var(--k); }

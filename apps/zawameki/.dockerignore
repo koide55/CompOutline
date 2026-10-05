@@ -1,0 +1,5 @@
+tests
+tools
+.env
+**/__pycache__
+*.sqlite3*

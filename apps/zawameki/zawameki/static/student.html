@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#11141a">
+<title>ざわめき</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/static/common.css">
+<style>
+  main { max-width: 560px; margin: 0 auto; padding: 12px 16px calc(16px + env(safe-area-inset-bottom)); }
+  header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  header h1 { font-size: 18px; margin: 0; }
+  .note { font-size: 14px; background: var(--panel2); border-radius: 12px; padding: 10px 12px; }
+  .note b { color: var(--got); }
+  label.f { display: block; font-size: 14px; color: var(--muted); margin: 12px 0 4px; }
+  #join input { font-size: 20px; letter-spacing: .06em; }
+  #join button.primary { width: 100%; margin-top: 16px; padding: 14px; font-size: 18px; }
+
+  .weather { display: flex; align-items: center; gap: 10px; padding: 10px 14px; }
+  .weather .icon { font-size: 34px; line-height: 1; }
+  .weather .label { font-weight: 700; font-size: 18px; }
+  .big { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+  .big button { padding: 18px 8px; font-size: 20px; font-weight: 700; border-radius: 16px; min-height: 96px;
+                display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+  .big .emoji { font-size: 34px; line-height: 1; }
+  #lost.on { background: color-mix(in srgb, var(--lost) 28%, var(--panel2)); border-color: var(--lost); }
+  #got { border-color: color-mix(in srgb, var(--got) 50%, var(--line)); }
+  .sub { font-size: 13px; font-weight: 400; color: var(--muted); min-height: 1.4em; }
+  #lost.on .sub { color: var(--text); }
+  .pace { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pace button { padding: 10px; }
+  .pace button.on { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 22%, var(--panel2)); }
+  .tabs { display: grid; grid-template-columns: 1fr 1fr; margin: 16px 0 8px; border-bottom: 1px solid var(--line); }
+  .tabs button { border: 0; border-radius: 0; background: none; padding: 10px; color: var(--muted);
+                 border-bottom: 3px solid transparent; }
+  .tabs button.on { color: var(--text); border-bottom-color: var(--accent); font-weight: 700; }
+  .compose { display: grid; gap: 8px; margin: 14px 0 4px; }
+  .compose .row label { font-size: 13px; color: var(--muted); display: flex; gap: 6px; align-items: center; }
+  .kinds { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .kinds button { padding: 11px 6px; font-weight: 700; border-color: color-mix(in srgb, var(--k) 55%, var(--line));
+                  color: var(--k); }
+  .kinds button.k-comment { color: var(--text); }
+  .kinds button:active { background: color-mix(in srgb, var(--k) 25%, var(--panel2)); }
+  .list { list-style: none; padding: 0; margin: 0; }
+  #stream { max-height: 52vh; overflow-y: auto; }
+  .list li { display: flex; gap: 10px; padding: 8px 2px; border-bottom: 1px solid var(--line); align-items: flex-start; }
+  .list li .text { flex: 1; overflow-wrap: anywhere; }
+  .list li .text .badge { margin-right: 6px; }
+  .list li.me .text { color: var(--accent); }
+  .list li.done .text { color: var(--muted); }
+  .metoo { min-width: 64px; padding: 4px 6px; font-size: 13px; display: flex; flex-direction: column; align-items: center; }
+  .metoo b { font-size: 17px; }
+  .metoo.on { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 22%, var(--panel2)); }
+  .count { font-size: 12px; color: var(--muted); margin-left: 4px; }
+  #ended { text-align: center; padding: 40px 0; }
+  footer { margin-top: 22px; text-align: center; font-size: 13px; }
+  footer button { background: none; border: 0; color: var(--muted); text-decoration: underline; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1 class="grow" id="title">ざわめき</h1>
+    <span class="conn muted" id="conn"></span>
+  </header>
+
+  <!-- 入室 -->
+  <section id="join" class="hidden">
+    <div class="note">
+      学生番号は<b>出席の記録にだけ</b>使います。<br>
+      迷子ボタン・発言・質問は<b>匿名</b>で、教員にも誰のものか分かりません（自分で学生番号を添えたときを除く）。<br>
+      ここでの記録は<b>成績には使いません</b>。わからなければ、遠慮なく押してください。
+    </div>
+    <form id="joinForm" autocomplete="on">
+      <label class="f" for="code">部屋コード（4桁）</label>
+      <input type="text" id="code" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" required autocomplete="off">
+      <label class="f" for="sid">学生番号</label>
+      <input type="text" id="sid" autocapitalize="characters" autocomplete="username" spellcheck="false" maxlength="20" required>
+      <p class="muted" id="joinError" role="alert"></p>
+      <button class="primary" type="submit">入る</button>
+    </form>
+  </section>
+
+  <!-- 講義中 -->
+  <section id="live" class="hidden">
+    <div class="card weather" id="weather">
+      <span class="icon" id="wIcon">☀️</span>
+      <div class="grow">
+        <div class="label" id="wLabel">快晴</div>
+        <div class="muted" id="wSub">教室の天気</div>
+      </div>
+      <span class="badge" id="slideNo"></span>
+    </div>
+
+    <div class="big">
+      <button id="lost" type="button" aria-pressed="false">
+        <span class="emoji">😵</span>迷子<span class="sub" id="lostSub">わからなくなったら</span>
+      </button>
+      <button id="got" type="button">
+        <span class="emoji">💡</span>わかった！<span class="sub">迷子が解けたら</span>
+      </button>
+    </div>
+    <div class="pace">
+      <button id="slow" type="button" aria-pressed="false">🐢 遅くして</button>
+      <button id="fast" type="button" aria-pressed="false">🐇 速くてよい</button>
+    </div>
+
+    <form class="compose card" id="postForm">
+      <textarea id="postText" maxlength="200" rows="2" placeholder="書いてから、下のボタンで送ります（匿名）" aria-label="投稿の本文"></textarea>
+      <div class="kinds">
+        <button type="submit" value="comment" class="k-comment">💬 コメント</button>
+        <button type="submit" value="question" class="k-question">❓ 質問</button>
+        <button type="submit" value="opinion" class="k-opinion">📣 ご意見申す</button>
+        <button type="submit" value="naive" class="k-naive">🔰 素人質問ですが</button>
+      </div>
+      <div class="row"><label><input type="checkbox" id="postNamed"> 学生番号を添える（教員にだけ見えます）</label></div>
+      <p class="muted hidden" id="commentsClosed">いまはコメントを止めています。質問・意見は送れます。</p>
+    </form>
+
+    <div class="tabs" role="tablist">
+      <button id="tabStream" class="on" role="tab" type="button">🌊 流れ<span class="count" id="nAll"></span></button>
+      <button id="tabBoard" role="tab" type="button">🙋 質問・意見<span class="count" id="nVoices"></span></button>
+    </div>
+    <ul class="list" id="stream" aria-live="polite"></ul>
+    <div id="boardPane" class="hidden">
+      <p class="muted" style="font-size:13px;margin:4px 0">同じことを聞きたい・思う投稿には「同じく」「同感」を押してください。多い順に教員に届きます。</p>
+      <ul class="list" id="board"></ul>
+    </div>
+
+    <footer><span class="muted" id="who"></span> <button type="button" id="leave">退出する</button></footer>
+  </section>
+
+  <section id="ended" class="hidden">
+    <p style="font-size:40px">🌙</p>
+    <p>この講義の部屋は閉じました。おつかれさまでした。</p>
+    <p><button type="button" id="again">別の部屋に入る</button></p>
+  </section>
+</main>
+<script src="/static/shared.js"></script>
+<script src="/static/student.js"></script>
+</body>
+</html>

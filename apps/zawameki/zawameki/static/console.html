@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>操作画面 — ざわめき</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/static/common.css">
+<style>
+  main { max-width: 1280px; margin: 0 auto; padding: 12px 16px 24px; }
+  .top { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .top h1 { margin: 0; font-size: 20px; }
+  .code { font-size: 28px; font-weight: 800; letter-spacing: .08em; font-variant-numeric: tabular-nums; }
+  .url { font-size: 13px; overflow-wrap: anywhere; }
+  .grid { display: grid; grid-template-columns: 360px 1fr; gap: 14px; margin-top: 12px; align-items: start; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+  .stack { display: grid; gap: 12px; }
+  .wx { display: flex; align-items: center; gap: 14px; transition: background .3s; }
+  .wx .icon { font-size: 64px; line-height: 1; }
+  .wx .label { font-size: 30px; font-weight: 800; }
+  .wx .nums { font-size: 15px; }
+  .wx.alert { animation: flash 1s ease 3; }
+  @keyframes flash { 50% { background: color-mix(in srgb, var(--storm) 35%, var(--panel)); } }
+  canvas { width: 100%; height: 90px; display: block; }
+  .pace { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+  .tug { flex: 1; height: 12px; background: var(--panel2); border-radius: 6px; position: relative; overflow: hidden; }
+  .tug span { position: absolute; top: 0; bottom: 0; }
+  .tug .s { right: 50%; background: var(--slow); } .tug .f { left: 50%; background: var(--fast); }
+  .tug::after { content: ''; position: absolute; left: 50%; top: -2px; bottom: -2px; width: 2px; background: var(--muted); }
+  .slide { display: flex; align-items: center; gap: 8px; }
+  .slide input { width: 80px; text-align: center; font-size: 20px; font-weight: 700; }
+  .slide button { font-size: 18px; padding: 6px 16px; }
+  .seg { display: flex; flex-wrap: wrap; gap: 6px; }
+  .seg button.on { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 22%, var(--panel2)); }
+  .settings label { display: flex; gap: 8px; align-items: center; font-size: 14px; margin: 6px 0; }
+  .settings select { background: var(--panel2); border: 1px solid var(--line); border-radius: 8px; padding: 4px 6px; }
+  h2 { margin: 0 0 8px; display: flex; align-items: center; gap: 8px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .filters button { font-size: 13px; padding: 4px 10px; }
+  .filters button.on { border-color: var(--accent); color: var(--accent); }
+  .list { list-style: none; margin: 0; padding: 0; }
+  .list li { display: flex; gap: 10px; padding: 10px 4px; border-bottom: 1px solid var(--line); align-items: flex-start; }
+  .list li.done { opacity: .55; }
+  .list li.hid { opacity: .4; text-decoration: line-through; }
+  .votes { min-width: 46px; text-align: center; font-size: 22px; font-weight: 800; line-height: 1.1; }
+  .votes small { display: block; font-size: 11px; font-weight: 400; color: var(--muted); }
+  .body { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+  .meta { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .acts { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+  .acts button { font-size: 12px; padding: 4px 8px; }
+  #voices { max-height: 62vh; overflow-y: auto; }
+  #comments { max-height: 40vh; overflow-y: auto; }
+  #comments li { padding: 6px 4px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="top">
+    <h1 class="grow" id="title">ざわめき</h1>
+    <span class="muted">部屋</span><span class="code" id="code"></span>
+    <a id="projLink" target="zawameki-projector"><button type="button">📽 投影画面を開く</button></a>
+    <a id="reportLink" target="_blank"><button type="button">📊 レポート</button></a>
+    <button type="button" id="close">部屋を閉じる</button>
+    <span class="conn muted" id="conn"></span>
+  </div>
+  <div class="url muted">入室: <span id="joinUrl"></span></div>
+
+  <div class="grid">
+    <div class="stack">
+      <div class="card wx" id="wx">
+        <span class="icon" id="wIcon">☀️</span>
+        <div>
+          <div class="label" id="wLabel">快晴</div>
+          <div class="nums" id="wNums"></div>
+          <div class="nums muted" id="wJoined"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="muted" style="font-size:12px">迷子率（直近10分）</div>
+        <canvas id="spark" width="640" height="160"></canvas>
+      </div>
+      <div class="card pace">
+        🐢 <b id="nSlow">0</b>
+        <div class="tug"><span class="s" id="tugS"></span><span class="f" id="tugF"></span></div>
+        <b id="nFast">0</b> 🐇
+      </div>
+      <div class="card">
+        <div class="muted" style="font-size:12px;margin-bottom:4px">いまのスライド（← → キーでも送れます）</div>
+        <div class="slide">
+          <button type="button" id="prev">◀</button>
+          <input type="text" inputmode="numeric" id="slideNo" value="1" aria-label="スライド番号">
+          <button type="button" id="next">▶</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="muted" style="font-size:12px;margin-bottom:6px">投影画面に出すもの</div>
+        <div class="seg" id="projModes">
+          <button type="button" data-mode="join">🔳 入室 QR</button>
+          <button type="button" data-mode="board">🙋 質問・意見</button>
+          <button type="button" data-mode="stream">🌊 流れるコメント</button>
+        </div>
+      </div>
+      <div class="card settings">
+        <label><input type="checkbox" id="sComments"> コメントを受け付ける</label>
+        <label>コメントの間隔 <select id="sInterval">
+          <option value="0">制限なし</option><option value="5">5秒</option><option value="10">10秒</option>
+          <option value="30">30秒</option><option value="60">60秒</option></select> に1件まで</label>
+        <label><input type="checkbox" id="sWeather"> 学生の画面にも天気を見せる</label>
+        <label><input type="checkbox" id="sAlert" checked> くもり以上が30秒続いたら知らせる</label>
+      </div>
+    </div>
+
+    <div class="stack">
+      <section class="card">
+        <h2>🙋 質問・意見 <span class="badge" id="nOpen"></span></h2>
+        <div class="filters" id="filters">
+          <button type="button" data-k="all" class="on">すべて</button>
+          <button type="button" data-k="question">❓ 質問</button>
+          <button type="button" data-k="naive">🔰 素人質問ですが</button>
+          <button type="button" data-k="opinion">📣 ご意見申す</button>
+          <button type="button" data-k="open" class="on" id="onlyOpen">未対応だけ</button>
+        </div>
+        <ul class="list" id="voices"></ul>
+      </section>
+      <section class="card">
+        <h2>💬 コメント <span class="badge" id="nComments"></span></h2>
+        <ul class="list" id="comments"></ul>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="/static/shared.js"></script>
+<script src="/static/console.js"></script>
+</body>
+</html>

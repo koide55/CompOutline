@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>投影 — ざわめき</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/static/common.css">
+<style>
+  html, body { height: 100%; overflow: hidden; }
+  body { font-size: 2.4vh; }
+  .corner { position: fixed; top: 1.6vh; right: 2vw; display: flex; gap: 1.2vw; align-items: center; font-size: 2.6vh; z-index: 5; }
+  .corner .w { font-size: 4.4vh; }
+  .mode { position: absolute; inset: 0; padding: 4vh 5vw; }
+  /* 入室 */
+  #join { display: flex; align-items: center; justify-content: center; gap: 6vw; }
+  #join img { height: 70vh; width: 70vh; background: #fff; border-radius: 2vh; padding: 1.4vh; }
+  #join .code { font-size: 14vh; font-weight: 800; letter-spacing: .1em; line-height: 1; }
+  #join .title { font-size: 4vh; font-weight: 700; margin-bottom: 3vh; }
+  #join .url { font-size: 3vh; overflow-wrap: anywhere; max-width: 40vw; }
+  #join .lead { font-size: 3vh; margin-top: 4vh; }
+  /* 質問・意見ボード */
+  #board h1 { font-size: 4.4vh; margin: 0 0 2.4vh; }
+  #board ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.8vh; }
+  #board li { display: flex; gap: 2vw; align-items: flex-start; background: var(--panel); border-radius: 1.6vh; padding: 1.8vh 2vw; }
+  #board .v { min-width: 7vh; text-align: center; font-size: 5.4vh; font-weight: 800; line-height: 1; }
+  #board .v small { display: block; font-size: 1.8vh; font-weight: 400; color: var(--muted); margin-top: .6vh; }
+  #board .t { font-size: 3.6vh; line-height: 1.35; overflow-wrap: anywhere; }
+  #board .badge { font-size: 2vh; margin-right: 1vw; vertical-align: middle; }
+  #board .naive-lead { color: var(--got); font-size: 2.6vh; display: block; }
+  /* 流れるコメント */
+  #stream { overflow: hidden; }
+  #stream .hint { position: absolute; left: 5vw; bottom: 3vh; color: var(--muted); font-size: 2.4vh; }
+  .fly { position: absolute; white-space: nowrap; font-size: 5.6vh; font-weight: 700; left: 100vw;
+         text-shadow: 0 0 .5vh #000, 0 0 1vh #000; color: #fff; will-change: transform; animation: fly linear forwards; }
+  .fly.k-question { color: #9fd0ff; } .fly.k-opinion { color: #ffcf8a; } .fly.k-naive { color: #9ff0c4; }
+  @keyframes fly { to { transform: translateX(calc(-100vw - 100%)); } }
+</style>
+</head>
+<body>
+  <div class="corner"><span class="w" id="wIcon"></span><span id="wText"></span><span class="badge" id="present"></span></div>
+
+  <section class="mode" id="join">
+    <img id="qr" alt="入室用の QR コード">
+    <div>
+      <div class="title" id="title"></div>
+      <div class="muted">部屋コード</div>
+      <div class="code" id="code"></div>
+      <div class="url muted" id="url"></div>
+      <div class="lead">スマホで読み取って、学生番号を入れてください。<br>迷子ボタン・コメント・質問は<b>匿名</b>です。</div>
+    </div>
+  </section>
+
+  <section class="mode hidden" id="board">
+    <h1>🙋 質問・意見（同じく の多い順）</h1>
+    <ol id="boardList"></ol>
+  </section>
+
+  <section class="mode hidden" id="stream">
+    <div class="hint" id="streamHint"></div>
+  </section>
+
+<script src="/static/shared.js"></script>
+<script src="/static/projector.js"></script>
+</body>
+</html>

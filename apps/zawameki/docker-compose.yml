@@ -1,0 +1,23 @@
+# arena.koidelab.net の別ポート（既定 8100）で動かす。arena（8000）とは独立したコンテナ。
+#
+#   cp .env.example .env    # ZAWAMEKI_TEACHER_PASSWORD と ZAWAMEKI_PUBLIC_URL を必ず設定
+#   docker compose up -d --build
+#
+#   学生:  http://arena.koidelab.net:8100/
+#   教員:  http://arena.koidelab.net:8100/teacher
+services:
+  zawameki:
+    build: .
+    image: zawameki:latest
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "${ZAWAMEKI_PUBLISH:-8100}:8100"
+    volumes:
+      # 部屋・出席・投稿・時系列の SQLite と、票のハッシュ鍵（secret.key）の置き場。消さないこと
+      - zawameki_data:/data
+      # HTTPS を直接出す場合は証明書を読み取り専用で渡す（.env の ZAWAMEKI_SSL_* と合わせる）
+      # - /etc/letsencrypt:/etc/letsencrypt:ro
+
+volumes:
+  zawameki_data:
