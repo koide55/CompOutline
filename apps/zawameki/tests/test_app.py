@@ -8,6 +8,7 @@ from zawameki.app import create_app
 from zawameki.config import Config
 
 AUTH = ("teacher", "pw")
+H = {"X-Zawameki": "1"}
 
 
 @pytest.fixture
@@ -22,7 +23,7 @@ def client(tmp_path):
 
 
 def open_room(client):
-    code = client.post("/api/teacher/rooms", json={"title": "第3回"}, auth=AUTH).json()["code"]
+    code = client.post("/api/teacher/rooms", json={"title": "第3回"}, auth=AUTH, headers=H).json()["code"]
     key = client.get(f"/api/teacher/rooms/{code}", auth=AUTH).json()["key"]
     return code, key
 
@@ -42,6 +43,16 @@ def test_teacher_pages_need_password(client):
     assert client.get("/api/teacher/rooms").status_code == 401
     assert client.get("/api/teacher/rooms", auth=("teacher", "wrong")).status_code == 401
     assert client.get("/teacher", auth=AUTH).status_code == 200
+
+
+def test_teacher_post_needs_custom_header(client):
+    # 他サイトのフォームからは独自ヘッダを付けられない。Basic 認証が通っていても断る
+    r = client.post("/api/teacher/rooms", content='{"title": "x"}', auth=AUTH,
+                    headers={"Content-Type": "text/plain"})
+    assert r.status_code == 403
+    code, _ = open_room(client)
+    assert client.post(f"/api/teacher/rooms/{code}/close", auth=AUTH).status_code == 403
+    assert code in [r["code"] for r in client.get("/api/teacher/rooms", auth=AUTH).json()["rooms"] if r["open"]]
 
 
 def test_security_headers(client):
@@ -145,7 +156,7 @@ def test_close_room_and_report(client):
         recv_until(a, "welcome")
         a.send_json({"type": "post", "kind": "question", "text": "<b>太字</b>?"})
         recv_until(a, "ok")
-        assert client.post(f"/api/teacher/rooms/{code}/close", auth=AUTH).status_code == 200
+        assert client.post(f"/api/teacher/rooms/{code}/close", auth=AUTH, headers=H).status_code == 200
         recv_until(a, "closed")
     html = client.get(f"/teacher/{code}/report", auth=AUTH).text
     assert "&lt;b&gt;太字&lt;/b&gt;" in html and "<b>太字</b>" not in html

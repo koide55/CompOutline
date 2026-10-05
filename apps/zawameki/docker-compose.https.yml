@@ -1,0 +1,26 @@
+# HTTPS で動かすときに重ねる設定。nginx コンテナが 8100 番で TLS を受け、zawameki へ渡す。
+#
+#   docker compose -f docker-compose.yml -f docker-compose.https.yml up -d --build
+#
+#   学生:  https://arena.koidelab.net:8100/
+#   教員:  https://arena.koidelab.net:8100/teacher
+#
+# 前提: ホストの /etc/letsencrypt/live/arena.koidelab.net/ に証明書がある（README の「HTTPS」）
+services:
+  zawameki:
+    # ホストへは出さない。nginx からだけ見える
+    ports: !reset []
+    environment:
+      ZAWAMEKI_TRUSTED_PROXIES: "*"
+
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    depends_on:
+      - zawameki
+    ports:
+      - "${ZAWAMEKI_HTTPS_PORT:-8100}:8100"
+    volumes:
+      - ./nginx/zawameki.conf:/etc/nginx/conf.d/default.conf:ro
+      # live/ は archive/ へのシンボリックリンクなので、/etc/letsencrypt ごと渡す
+      - ${ZAWAMEKI_LETSENCRYPT_DIR:-/etc/letsencrypt}:/etc/letsencrypt:ro

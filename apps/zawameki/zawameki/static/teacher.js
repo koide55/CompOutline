@@ -23,7 +23,7 @@
   $('#create').addEventListener('submit', async (e) => {
     e.preventDefault();
     const r = await fetch('/api/teacher/rooms', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Zawameki': '1' },
       body: JSON.stringify({ title: $('#title').value }),
     });
     if (!r.ok) { Z.toast('部屋を開けませんでした'); return; }

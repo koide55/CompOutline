@@ -94,6 +94,13 @@ def create_app(cfg: config_mod.Config | None = None) -> FastAPI:
             raise HTTPException(401, "unauthorized", headers={"WWW-Authenticate": 'Basic realm="zawameki teacher"'})
         return creds.username
 
+    def teacher_post(request: Request, user: str = Depends(teacher)) -> str:
+        # Basic 認証の資格情報は、ブラウザが他サイトからのフォーム送信にも自動で付ける。
+        # 独自のヘッダを必須にして、他サイトから部屋を開け閉めさせない（CSRF 対策）
+        if request.headers.get("x-zawameki") != "1":
+            raise HTTPException(403, "X-Zawameki ヘッダがありません")
+        return user
+
     def join_url(request: Request, code: str) -> str:
         base = cfg.public_url or str(request.base_url).rstrip("/")
         return f"{base}/r/{code}"
@@ -169,7 +176,7 @@ def create_app(cfg: config_mod.Config | None = None) -> FastAPI:
         return {"rooms": rooms}
 
     @app.post("/api/teacher/rooms")
-    async def create_room(request: Request, _: str = Depends(teacher)):
+    async def create_room(request: Request, _: str = Depends(teacher_post)):
         body = await request.json()
         title = str(body.get("title", "")).strip()[:80] or "講義"
         room = hub.open_room(title)
@@ -182,7 +189,7 @@ def create_app(cfg: config_mod.Config | None = None) -> FastAPI:
                 "join_url": join_url(request, code)}
 
     @app.post("/api/teacher/rooms/{code}/close")
-    def close_room(code: str, _: str = Depends(teacher)):
+    def close_room(code: str, _: str = Depends(teacher_post)):
         live_or_404(code)
         hub.close_room(code)
         return {"ok": True}

@@ -144,7 +144,7 @@
 
   $('#close').addEventListener('click', async () => {
     if (!confirm('部屋を閉じますか？ 学生は入れなくなります。')) return;
-    const r = await fetch('/api/teacher/rooms/' + code + '/close', { method: 'POST' });
+    const r = await fetch('/api/teacher/rooms/' + code + '/close', { method: 'POST', headers: { 'X-Zawameki': '1' } });
     if (r.ok) location.href = '/teacher/' + code + '/report';
   });
 

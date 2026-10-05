@@ -23,7 +23,7 @@ KINDS = ["comment"] * 6 + ["question", "opinion", "naive"]
 
 def api(base: str, path: str, auth: str, body: dict | None = None) -> dict:
     req = urllib.request.Request(base + path, data=json.dumps(body).encode() if body is not None else None,
-                                 headers={"Authorization": "Basic " + auth, "Content-Type": "application/json"},
+                                 headers={"Authorization": "Basic " + auth, "Content-Type": "application/json", "X-Zawameki": "1"},
                                  method="POST" if body is not None else "GET")
     with urllib.request.urlopen(req, timeout=10) as r:
         return json.loads(r.read())
