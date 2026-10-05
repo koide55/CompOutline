@@ -188,3 +188,22 @@ def test_rooms_survive_restart(tmp_path):
             a.send_json({"type": "hello", "code": code, "sid": "1TE24001X"})
             w = recv_until(a, "welcome")
             assert [p["text"] for p in w["posts"]] == ["再起動しても残る?"]
+
+
+def test_attendance_export_all_rooms(client, capsys):
+    from zawameki import attendance
+    rooms = []
+    for _ in range(2):
+        code, _ = open_room(client)
+        rooms.append(code)
+    for code, sids in zip(rooms, (["1TE24001X", "1TE24002Y"], ["1TE24001X"])):
+        for sid in sids:
+            with client.websocket_connect("/ws") as ws:
+                ws.send_json({"type": "hello", "code": code, "sid": sid})
+                recv_until(ws, "welcome")
+    attendance.main(["--db", client.db_path])
+    lines = capsys.readouterr().out.lstrip("﻿").splitlines()
+    assert lines[0] == "lecture_date,title,code,student_id,joined_at" and len(lines) == 4
+    attendance.main(["--db", client.db_path, "--matrix"])
+    m = capsys.readouterr().out.lstrip("﻿").splitlines()
+    assert m[1] == "1TE24001X,1,1,2" and m[2] == "1TE24002Y,1,0,1"

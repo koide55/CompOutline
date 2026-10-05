@@ -3,7 +3,8 @@ FROM python:3.13-slim
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     ZAWAMEKI_DB=/data/zawameki.sqlite3 \
-    ZAWAMEKI_PORT=8100
+    ZAWAMEKI_PORT=8100 \
+    TZ=Asia/Tokyo
 
 LABEL org.opencontainers.image.title="Zawameki" \
       org.opencontainers.image.description="講義中の理解度・コメント・質問をリアルタイムに集める Web アプリ" \

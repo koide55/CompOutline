@@ -223,6 +223,35 @@ docker compose up -d --build
 
 `docker compose up -d --build`（`docker-compose.yml` だけ）で、`http://arena.koidelab.net:8100/` で動く。
 
+## 出席の記録
+
+学生が入室すると、**その回で最初に入室した時刻**を学生番号と一緒に残す
+（SQLite の `attendance` 表。Docker ボリューム `zawameki_zawameki_data` の `/data/zawameki.sqlite3`）。
+退室や滞在時間は残らない。部屋を閉じても消えない。時刻は日本時間で出る（Dockerfile の `TZ=Asia/Tokyo`）。
+
+| 欲しいもの | 出し方 |
+| --- | --- |
+| 1回ぶん | レポート（`/teacher/部屋コード/report`）の「出席 CSV」 |
+| 全回を1行1件で | 下のコマンド |
+| 全回を出席簿の形（学生番号 × 回、出席回数つき）で | 下のコマンドに `--matrix` |
+
+```bash
+cd ~/CompOutline/apps/zawameki
+C="sudo docker compose -f docker-compose.yml -f docker-compose.caddy.yml"
+$C exec -T zawameki python -m zawameki.attendance          > 出席.csv
+$C exec -T zawameki python -m zawameki.attendance --matrix > 出席簿.csv
+```
+
+**入室では本人確認をしない。** 部屋コードと他人の学生番号が分かれば、教室の外からでも入室できる
+（部屋コードは講義ごとに変わるが、LINE などで回せば届く）。出席を成績に使うなら、この記録だけに頼らないこと。
+
+バックアップ（講義のない時間に。DB の一貫した写しを取る）:
+
+```bash
+$C exec -T zawameki python -c "import sqlite3; s=sqlite3.connect('/data/zawameki.sqlite3'); d=sqlite3.connect('/data/backup.sqlite3'); s.backup(d); d.close()"
+sudo docker cp zawameki-zawameki-1:/data/backup.sqlite3 ./zawameki-$(date +%F).sqlite3
+```
+
 ## 匿名について
 
 - 保存するのは「部屋」「出席（学生番号と入室時刻）」「投稿」「集計した時系列」だけ。
@@ -263,6 +292,7 @@ CPU 0.2%、メモリ 56 MB。目標（2秒以内）を十分に満たす。
 | `zawameki/static/` | 画面（素の HTML と JavaScript。ビルド工程なし） |
 | `tools/loadtest.py` | 負荷試験 |
 | `tools/reset-password.sh` | 教員パスワードを設定し直す |
+| `zawameki/attendance.py` | 全回の出席を CSV で書き出す |
 | `caddy/zawameki.Caddyfile` | arena の Caddy に足す設定 |
 | `docker-compose.caddy.yml` | arena の Caddy に HTTPS を任せるときに重ねる設定 |
 | `nginx/` | Caddy の無いサーバ用。HTTPS の終端（コンテナ用・ホスト用）と、証明書更新のフック |
