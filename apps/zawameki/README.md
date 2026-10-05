@@ -26,7 +26,7 @@
 ## 動かす（arena.koidelab.net の別ポート）
 
 arena（ポート 8000）とは別のコンテナとして、ポート **8100** で動かす。
-**HTTPS で動かす手順は下の「HTTPS で動かす」**。ファイアウォールで 8100/tcp を開けておくこと。
+**HTTPS で動かす手順は下の「HTTPS で動かす」**。ファイアウォールで 8100/tcp を開けておくこと（AWS の EC2 なら、インスタンスのセキュリティグループのインバウンドルールに 8100/tcp を足す）。
 教員の入口（`/teacher`）は Basic 認証で守ってある。
 
 ### 講義の流れ
@@ -58,7 +58,36 @@ sudo certbot certonly --standalone -d arena.koidelab.net
 #   → /etc/letsencrypt/live/arena.koidelab.net/{fullchain,privkey}.pem
 ```
 
-80 番を既に別の Web サーバが使っているなら、`--standalone` の代わりに
+#### 80 番を別の Docker コンテナが使っているとき
+
+`sudo ss -ltnp | grep ':80 '` に `docker-proxy` が出るなら、80 番は別のコンテナ（arena など）が使っている。
+certbot が80番を使うあいだだけ、そのコンテナを止める。止まるのは十数秒である。
+
+```bash
+# 80 番を使っているコンテナの名前を調べる
+sudo docker ps --format '{{.Names}}\t{{.Ports}}' | grep ':80->'
+
+# 取る前に止め、取ったら戻す。フックは certbot が覚えるので、自動更新でも同じことをする
+sudo certbot certonly --standalone -d arena.koidelab.net \
+  --pre-hook  "docker stop <コンテナ名>" \
+  --post-hook "docker start <コンテナ名>"
+```
+
+**自動更新は講義のない時間に寄せる。** certbot の自動更新は1日2回、時刻をばらして走るので、
+そのままだと講義中にそのコンテナが十数秒止まりうる。夜中の決まった時刻だけにする。
+
+```bash
+sudo systemctl edit certbot.timer      # snap 版の certbot なら snap.certbot.renew.timer
+#   [Timer]
+#   OnCalendar=
+#   OnCalendar=*-*-* 04:00
+#   RandomizedDelaySec=0
+sudo systemctl list-timers | grep certbot   # 次に走る時刻を確かめる
+```
+
+#### その他の場合
+
+80 番を同じホストの Web サーバ（nginx など）が使っているなら、`--standalone` の代わりに
 `--webroot -w <そのサーバの公開ディレクトリ>` で取る。学内の証明書（NII のサーバ証明書など）を使う場合は、
 同じ名前（`fullchain.pem` と `privkey.pem`）で `.env` の `ZAWAMEKI_LETSENCRYPT_DIR` 配下の
 `live/arena.koidelab.net/` に置けばよい。
