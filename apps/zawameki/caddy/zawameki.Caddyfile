@@ -1,0 +1,7 @@
+# ざわめき — arena の Caddy に足す設定（Caddyfile の末尾に貼る）
+#
+# 証明書はホスト名に付くので、arena.koidelab.net の証明書を Caddy がそのまま使う。
+# WebSocket・X-Forwarded-*・Host（ポートつき）の受け渡しは reverse_proxy が自動でする。
+arena.koidelab.net:8100 {
+	reverse_proxy zawameki:8100
+}

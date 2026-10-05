@@ -25,8 +25,8 @@
 
 ## 動かす（arena.koidelab.net の別ポート）
 
-arena（ポート 8000）とは別のコンテナとして、ポート **8100** で動かす。
-**HTTPS で動かす手順は下の「HTTPS で動かす」**。ファイアウォールで 8100/tcp を開けておくこと（AWS の EC2 なら、インスタンスのセキュリティグループのインバウンドルールに 8100/tcp を足す）。
+arena とは別のコンテナとして、ポート **8100** で動かす。
+**arena.koidelab.net では、arena の Caddy に HTTPS を任せる**（次の節）。ファイアウォールで 8100/tcp を開けておくこと（AWS の EC2 なら、インスタンスのセキュリティグループのインバウンドルールに 8100/tcp を足す）。
 教員の入口（`/teacher`）は Basic 認証で守ってある。
 
 ### 講義の流れ
@@ -39,9 +39,100 @@ arena（ポート 8000）とは別のコンテナとして、ポート **8100** 
 
 部屋は4時間たつと自動で閉じる（`ZAWAMEKI_ROOM_HOURS`）。
 
-## HTTPS で動かす（推奨）
+## arena.koidelab.net で動かす（arena の Caddy に HTTPS を任せる）
 
-nginx コンテナを前に置き、**8100 番で HTTPS を受けて**アプリへ渡す。アプリのコンテナはホストへ出さない。
+arena.koidelab.net では、arena の **Caddy**（コンテナ `cyber-arena-caddy-1`）が 80・443 番を持ち、
+Let's Encrypt の証明書を取って更新している。証明書はポートではなくホスト名に付くので、
+**Caddy に「8100 番で受けて、ざわめきへ渡す」設定を足すだけでよい**。certbot も nginx も要らない。
+
+```
+ 学生のスマホ ── https://arena.koidelab.net:8100 ──▶ Caddy（arena と共用）──▶ zawameki（arena の Docker ネットワーク内だけ）
+```
+
+> **certbot の `--standalone` は使わないこと。** 80 番を空けるために Caddy を止めることになり、
+> そのあいだ arena も止まる。証明書は Caddy がすでに持っている。
+
+### 1. Caddy の置き場所とネットワークを調べる
+
+```bash
+# arena の compose を置いたディレクトリ（ここに Caddyfile と docker-compose.yml がある）
+sudo docker inspect cyber-arena-caddy-1 --format '{{ index .Config.Labels "com.docker.compose.project.working_dir" }}'
+# Caddyfile のホスト側の場所と、証明書の置き場（/data）がボリュームになっているか
+sudo docker inspect cyber-arena-caddy-1 --format '{{range .Mounts}}{{.Source}} -> {{.Destination}}{{println}}{{end}}'
+# Caddy がつながっている Docker ネットワーク（ふつうは cyber-arena_default）
+sudo docker inspect cyber-arena-caddy-1 --format '{{range $k, $v := .NetworkSettings.Networks}}{{$k}}{{println}}{{end}}'
+```
+
+`/data` がボリュームになっていることを確かめる。なっていないと、手順 3 で Caddy を作り直したときに証明書を取り直すことになる。
+
+### 2. ざわめきを起動する
+
+```bash
+cd apps/zawameki
+cp .env.example .env
+#   ZAWAMEKI_TEACHER_PASSWORD を設定
+#   ZAWAMEKI_PUBLIC_URL=https://arena.koidelab.net:8100
+#   ZAWAMEKI_CADDY_NETWORK=cyber-arena_default   ← 手順 1 の3つ目で出た名前
+docker compose -f docker-compose.yml -f docker-compose.caddy.yml up -d --build
+```
+
+ざわめきは arena のネットワークに入り、Caddy から `zawameki:8100` で届く。ホストへはポートを出さない。
+arena のネットワークが先にできている必要があるので、**arena を先に起動しておく**。
+
+### 3. Caddy に足す
+
+手順 1 で分かった arena のディレクトリで、2か所を直す。
+
+**Caddyfile の末尾**に [`caddy/zawameki.Caddyfile`](caddy/zawameki.Caddyfile) の中身を貼る。
+
+```caddyfile
+arena.koidelab.net:8100 {
+	reverse_proxy zawameki:8100
+}
+```
+
+**arena の docker-compose.yml** の `caddy` サービスの `ports:` に1行足す。
+
+```yaml
+    ports:
+      # （いまある 80 と 443 の行はそのまま残す）
+      - "8100:8100"     # ← 足す（ざわめき）
+```
+
+Caddy を作り直す（ポートを足したので reload では足りない）。**arena が数秒止まるので、講義のない時間に。**
+
+```bash
+sudo docker compose up -d caddy
+sudo docker compose logs --tail 20 caddy     # エラーが無いこと
+curl -s https://arena.koidelab.net:8100/healthz   # {"ok":true,...}
+```
+
+あとで Caddyfile だけを直したときは、作り直さずに読み直せばよい。
+
+```bash
+sudo docker compose exec caddy caddy reload --config /etc/caddy/Caddyfile
+```
+
+EC2 のセキュリティグループで 8100/tcp を開けておくこと。
+
+| 誰が | URL |
+| --- | --- |
+| 教員 | `https://arena.koidelab.net:8100/teacher` |
+| 学生 | `https://arena.koidelab.net:8100/r/部屋コード`（投影の QR から） |
+
+`http://arena.koidelab.net:8100/` と打つと Caddy は「HTTP request to an HTTPS server」を返す（転送はしない）。
+学生は QR から入るので困らない。
+
+### 確かめたこと（2026-10-05、Caddy の内部 CA の証明書で同じ構成を組んで）
+
+- `cyber-arena` という名前の compose で Caddy を立て、ざわめきをそのネットワークに入れた
+- `https://` で入室から投稿・「同じく」・隠す・部屋を閉じるまでブラウザで通し、エラー無し。
+  Caddy は Host をポートつきで渡すので、CSP の `wss://arena.koidelab.net:8100` もそのまま通る
+- 200人を `wss://` で60秒: 全員接続、教員に届くまで 中央値 167 ms／95% 260 ms。Caddy は CPU 0.2%・メモリ 31 MB
+
+## Caddy の無いサーバで HTTPS にする（nginx）
+
+前に何も無いサーバでは、nginx コンテナを前に置き、**8100 番で HTTPS を受けて**アプリへ渡す。アプリのコンテナはホストへ出さない。
 
 ```
  学生のスマホ ── https://arena.koidelab.net:8100 ──▶ nginx（TLS 終端）──▶ zawameki（平文、コンテナ間だけ）
@@ -57,35 +148,6 @@ sudo apt install certbot
 sudo certbot certonly --standalone -d arena.koidelab.net
 #   → /etc/letsencrypt/live/arena.koidelab.net/{fullchain,privkey}.pem
 ```
-
-#### 80 番を別の Docker コンテナが使っているとき
-
-`sudo ss -ltnp | grep ':80 '` に `docker-proxy` が出るなら、80 番は別のコンテナ（arena など）が使っている。
-certbot が80番を使うあいだだけ、そのコンテナを止める。止まるのは十数秒である。
-
-```bash
-# 80 番を使っているコンテナの名前を調べる
-sudo docker ps --format '{{.Names}}\t{{.Ports}}' | grep ':80->'
-
-# 取る前に止め、取ったら戻す。フックは certbot が覚えるので、自動更新でも同じことをする
-sudo certbot certonly --standalone -d arena.koidelab.net \
-  --pre-hook  "docker stop <コンテナ名>" \
-  --post-hook "docker start <コンテナ名>"
-```
-
-**自動更新は講義のない時間に寄せる。** certbot の自動更新は1日2回、時刻をばらして走るので、
-そのままだと講義中にそのコンテナが十数秒止まりうる。夜中の決まった時刻だけにする。
-
-```bash
-sudo systemctl edit certbot.timer      # snap 版の certbot なら snap.certbot.renew.timer
-#   [Timer]
-#   OnCalendar=
-#   OnCalendar=*-*-* 04:00
-#   RandomizedDelaySec=0
-sudo systemctl list-timers | grep certbot   # 次に走る時刻を確かめる
-```
-
-#### その他の場合
 
 80 番を同じホストの Web サーバ（nginx など）が使っているなら、`--standalone` の代わりに
 `--webroot -w <そのサーバの公開ディレクトリ>` で取る。学内の証明書（NII のサーバ証明書など）を使う場合は、
@@ -196,7 +258,9 @@ CPU 0.2%、メモリ 56 MB。目標（2秒以内）を十分に満たす。
 | `zawameki/report.py` | 迷子の地図（HTML／Markdown） |
 | `zawameki/static/` | 画面（素の HTML と JavaScript。ビルド工程なし） |
 | `tools/loadtest.py` | 負荷試験 |
-| `nginx/` | HTTPS の終端（コンテナ用・ホスト用）と、証明書更新のフック |
+| `caddy/zawameki.Caddyfile` | arena の Caddy に足す設定 |
+| `docker-compose.caddy.yml` | arena の Caddy に HTTPS を任せるときに重ねる設定 |
+| `nginx/` | Caddy の無いサーバ用。HTTPS の終端（コンテナ用・ホスト用）と、証明書更新のフック |
 | `docker-compose.https.yml` | HTTPS で動かすときに重ねる設定 |
 
 状態は1プロセスのメモリに持つので、**ワーカーは1つ**で動かす（`python -m zawameki` がそうしている）。

@@ -1,0 +1,20 @@
+# arena の Caddy に HTTPS を任せるときに重ねる設定（arena.koidelab.net の構成）
+#
+#   docker compose -f docker-compose.yml -f docker-compose.caddy.yml up -d --build
+#
+# ざわめきを arena の Docker ネットワークに入れ、Caddy から zawameki:8100 で届くようにする。
+# ホストへはポートを出さない（外からは Caddy の 8100 番だけ）。
+services:
+  zawameki:
+    ports: !reset []
+    environment:
+      ZAWAMEKI_TRUSTED_PROXIES: "*"
+    networks:
+      - default
+      - arena
+
+networks:
+  arena:
+    external: true
+    # Caddy がつながっているネットワーク名（README の「arena の Caddy を使う」で調べる）
+    name: ${ZAWAMEKI_CADDY_NETWORK:-cyber-arena_default}
